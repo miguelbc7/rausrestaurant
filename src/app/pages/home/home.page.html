@@ -88,7 +88,7 @@
               </ion-col>
           </ion-row>
           <ion-row class="ion-no-padding font8">
-            <ion-col class="ion-text-center bgHorarios mHorarios">
+            <ion-col class="ion-text-center bgHorarios mHorarios" (click)="openHorarios()">
               Lun <br>
               11 a 16
             </ion-col>
@@ -121,20 +121,30 @@
               11 a 16
             </ion-col>
           </ion-row>
+          <ion-row>
+            <ion-col class="font12 ion-text-center blue-dark2">
+                <ion-icon color="bluedark" name="add-circle-outline"></ion-icon> Agregar productos
+            </ion-col>
+          </ion-row>
   </ion-grid>
-  <ion-text color="bluelight" class="font16">
+  <!-- <ion-text color="bluelight" class="font16">
       <p class="ion-text-center">Tus promociones</p>
-  </ion-text>
+  </ion-text> -->
   <ion-grid class="px-0">
     <ion-row>
-      <ion-col class="px-0">
-          <ion-card>
-              <img class="imgCarta" src="assets/img/pasta1.jpg" alt="avatar perfil">    
+      <ion-col class="px-0" size="6">
+          <ion-card class="customCard">
+              <div class="boxBanner">
+                <img class="imgCarta" src="assets/img/pasta2.jpg" alt="avatar perfil">
+                <div class="divEditCard" color="bluelight">
+                    <ion-icon class="iconEditCard" color="white" name="create"></ion-icon>
+                </div>
+              </div>
               <ion-card-content>
                 <ion-row>
                   <ion-col class="ion-no-padding ion-align-self-center " size="6">
                    <p class="hgPCarta my-0 customDarkText font14">
-                      Rao Rest...
+                      Ikibana S...
                    </p> 
                   </ion-col>
                   <ion-col class="ion-no-padding" size="6">
@@ -145,18 +155,29 @@
                   </ion-col>
                 </ion-row>
                 <ion-row>
-                    <ion-col class="ion-no-padding ion-align-self-center ">
-                     <p class="hgPCarta my-0 customDarkText font14">
-                        Menú Pasta con...
+                    <ion-col class="ion-no-padding ion-align-self-center" size="8">
+                     <p class="hgPCarta my-0 customDarkText font10">
+                        Arroz con setas y...
                      </p> 
+                    </ion-col>
+                    <ion-col class="ion-no-padding ion-align-self-center ion-text-right" size="2">
+                        <ion-icon color="bluedark" name="share"></ion-icon>
+                    </ion-col>
+                    <ion-col class="ion-no-padding ion-align-self-center ion-text-right" size="2">
+                        <ion-icon color="bluedark" name="megaphone"></ion-icon>
                     </ion-col>
                   </ion-row>
               </ion-card-content>
             </ion-card>
       </ion-col>
-      <ion-col class="px-0">
-          <ion-card>
-              <img class="imgCarta" src="assets/img/pasta2.jpg" alt="avatar perfil">    
+      <ion-col class="px-0" size="6">
+          <ion-card class="customCard">
+              <div class="boxBanner">
+                <img class="imgCarta" src="assets/img/pasta1.jpg" alt="avatar perfil">
+                <div class="divEditCard" color="bluelight">
+                    <ion-icon class="iconEditCard" color="white" name="create"></ion-icon>
+                </div>
+              </div>
               <ion-card-content>
                 <ion-row>
                   <ion-col class="ion-no-padding ion-align-self-center " size="6">
@@ -172,543 +193,98 @@
                   </ion-col>
                 </ion-row>
                 <ion-row>
-                    <ion-col class="ion-no-padding ion-align-self-center ">
-                     <p class="hgPCarta my-0 customDarkText font14">
+                    <ion-col class="ion-no-padding ion-align-self-center" size="8">
+                     <p class="hgPCarta my-0 customDarkText font10">
                         Menú Pasta con...
                      </p> 
                     </ion-col>
+                    <ion-col class="ion-no-padding ion-align-self-center ion-text-right" size="2">
+                        <ion-icon color="bluedark" name="share"></ion-icon>
+                    </ion-col>
+                    <ion-col class="ion-no-padding ion-align-self-center ion-text-right" size="2">
+                        <ion-icon color="bluedark" name="megaphone"></ion-icon>
+                    </ion-col>
                   </ion-row>
               </ion-card-content>
-            </ion-card> 
+            </ion-card>
+      </ion-col>
+      <ion-col class="px-0" size="6">
+          <ion-card class="customCard">
+              <div class="boxBanner">
+                <img class="imgCarta" src="assets/img/pasta1.jpg" alt="avatar perfil">
+                <div class="divEditCard" color="bluelight">
+                    <ion-icon class="iconEditCard" color="white" name="create"></ion-icon>
+                </div>
+              </div>
+              <ion-card-content>
+                <ion-row>
+                  <ion-col class="ion-no-padding ion-align-self-center " size="6">
+                   <p class="hgPCarta my-0 customDarkText font14">
+                      Rao Rest...
+                   </p> 
+                  </ion-col>
+                  <ion-col class="ion-no-padding" size="6">
+                    <p class="my-0 hgPCarta  customDarkText">
+                      <span class="font27">10</span>
+                      <span class="font12 decimalCarta">,50€</span>
+                    </p>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col class="ion-no-padding ion-align-self-center" size="8">
+                     <p class="hgPCarta my-0 customDarkText font10">
+                        Menú Pasta con...
+                     </p> 
+                    </ion-col>
+                    <ion-col class="ion-no-padding ion-align-self-center ion-text-right" size="2">
+                        <ion-icon color="bluedark" name="share"></ion-icon>
+                    </ion-col>
+                    <ion-col class="ion-no-padding ion-align-self-center ion-text-right" size="2">
+                        <ion-icon color="bluedark" name="megaphone"></ion-icon>
+                    </ion-col>
+                  </ion-row>
+              </ion-card-content>
+            </ion-card>
+      </ion-col>
+      <ion-col class="px-0" size="6">
+          <ion-card class="customCard">
+              <div class="boxBanner">
+                <img class="imgCarta" src="assets/img/pasta1.jpg" alt="avatar perfil">
+                <div class="divEditCard" color="bluelight">
+                    <ion-icon class="iconEditCard" color="white" name="create"></ion-icon>
+                </div>
+              </div>
+              <ion-card-content>
+                <ion-row>
+                  <ion-col class="ion-no-padding ion-align-self-center " size="6">
+                   <p class="hgPCarta my-0 customDarkText font14">
+                      Rao Rest...
+                   </p> 
+                  </ion-col>
+                  <ion-col class="ion-no-padding" size="6">
+                    <p class="my-0 hgPCarta  customDarkText">
+                      <span class="font27">10</span>
+                      <span class="font12 decimalCarta">,50€</span>
+                    </p>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col class="ion-no-padding ion-align-self-center" size="8">
+                     <p class="hgPCarta my-0 customDarkText font10">
+                        Menú Pasta con...
+                     </p> 
+                    </ion-col>
+                    <ion-col class="ion-no-padding ion-align-self-center ion-text-right" size="2">
+                        <ion-icon color="bluedark" name="share"></ion-icon>
+                    </ion-col>
+                    <ion-col class="ion-no-padding ion-align-self-center ion-text-right" size="2">
+                        <ion-icon color="bluedark" name="megaphone"></ion-icon>
+                    </ion-col>
+                  </ion-row>
+              </ion-card-content>
+            </ion-card>
       </ion-col>
     </ion-row>
   </ion-grid>
 
-
-  <div class="ion-text-center">
-      <ion-icon class="font24" color="bluelight" name="pin"></ion-icon>
-  </div>
-
-
-  
-
-    <ion-slides>
-
-        <ion-slide>
-          <ion-grid class="px-0">
-    <ion-card>
-        <ion-row>
-            <ion-col class="px-0">
-                <img class="imgCarta2" src="assets/img/rest1.jpg" alt="avatar perfil"> 
-            </ion-col>
-            <ion-col class="px-0">
-                <ion-row class="pt-2">
-                  <ion-col size="7">
-                    <p class="my-0 ion-text-center font10">
-                      Vegetalia Restaurant
-                    </p>
-                  </ion-col>
-                  <ion-col class="ion-align-self-center ion-justify-content-center" size="5">
-                    Ir <ion-icon class="" name="play"></ion-icon>
-                  </ion-col>
-                </ion-row>
-                <ion-row>
-                    <ion-col class="px-0 ion-text-center" >
-                        <ion-icon color="bluelight" name="star"></ion-icon>
-                        <p class="my-0 font10">4/5</p>
-                        <p class="my-0 font8">Sabor</p>
-                    </ion-col>
-                    <ion-col class="px-0 ion-text-center">
-                        <ion-icon color="bluelight" name="star"></ion-icon>
-                        <p class="my-0 font10">4/5</p>
-                        <p class="my-0 font8">Atención</p>
-                    </ion-col>
-                    <ion-col class="px-0 ion-text-center">
-                        <ion-icon color="bluelight" name="star"></ion-icon>
-                        <p class="my-0 font10">4/5</p>
-                        <p class="my-0 font8">Lugar</p>
-                    </ion-col>
-                    <ion-col class="px-0 ion-text-center">
-                        <ion-icon color="bluelight" name="star"></ion-icon>
-                        <p class="my-0 font10">4/5</p>
-                        <p class="my-0 font8">Tiempo</p>
-                    </ion-col>
-                  </ion-row>
-              </ion-col>
-          </ion-row>
-    </ion-card>
-    <ion-card>
-        <ion-row>
-            <ion-col class="px-0">
-                <img class="imgCarta2" src="assets/img/rest2.jpg" alt="avatar perfil"> 
-            </ion-col>
-            <ion-col class="px-0">
-                <ion-row class="pt-2">
-                  <ion-col size="7">
-                    <p class="my-0 ion-text-center font10">
-                      Vegetalia Restaurant
-                    </p>
-                  </ion-col>
-                  <ion-col class="ion-align-self-center ion-justify-content-center ion-text-center" size="5">
-                    Ir <ion-icon class="" name="play"></ion-icon>
-                  </ion-col>
-                </ion-row>
-                <ion-row>
-                    <ion-col class="px-0 ion-text-center" >
-                        <ion-icon color="bluelight" name="star"></ion-icon>
-                        <p class="my-0 font10">4/5</p>
-                        <p class="my-0 font8">Sabor</p>
-                    </ion-col>
-                    <ion-col class="px-0 ion-text-center">
-                        <ion-icon color="bluelight" name="star"></ion-icon>
-                        <p class="my-0 font10">4/5</p>
-                        <p class="my-0 font8">Atención</p>
-                    </ion-col>
-                    <ion-col class="px-0 ion-text-center">
-                        <ion-icon color="bluelight" name="star"></ion-icon>
-                        <p class="my-0 font10">4/5</p>
-                        <p class="my-0 font8">Lugar</p>
-                    </ion-col>
-                    <ion-col class="px-0 ion-text-center">
-                        <ion-icon color="bluelight" name="star"></ion-icon>
-                        <p class="my-0 font10">4/5</p>
-                        <p class="my-0 font8">Tiempo</p>
-                    </ion-col>
-                  </ion-row>
-              </ion-col>
-          </ion-row>
-    </ion-card>
-    <ion-card>
-        <ion-row>
-            <ion-col class="px-0">
-                <img class="imgCarta2" src="assets/img/rest3.jpg" alt="avatar perfil"> 
-            </ion-col>
-            <ion-col class="px-0">
-                <ion-row class="pt-2">
-                  <ion-col size="7">
-                    <p class="my-0 ion-text-center font10">
-                      Vegetalia Restaurant
-                    </p>
-                  </ion-col>
-                  <ion-col class="ion-align-self-center ion-justify-content-center" size="5">
-                    Ir <ion-icon class="" name="play"></ion-icon>
-                  </ion-col>
-                </ion-row>
-                <ion-row>
-                    <ion-col class="px-0 ion-text-center" >
-                        <ion-icon color="bluelight" name="star"></ion-icon>
-                        <p class="my-0 font10">4/5</p>
-                        <p class="my-0 font8">Sabor</p>
-                    </ion-col>
-                    <ion-col class="px-0 ion-text-center">
-                        <ion-icon color="bluelight" name="star"></ion-icon>
-                        <p class="my-0 font10">4/5</p>
-                        <p class="my-0 font8">Atención</p>
-                    </ion-col>
-                    <ion-col class="px-0 ion-text-center">
-                        <ion-icon color="bluelight" name="star"></ion-icon>
-                        <p class="my-0 font10">4/5</p>
-                        <p class="my-0 font8">Lugar</p>
-                    </ion-col>
-                    <ion-col class="px-0 ion-text-center">
-                        <ion-icon color="bluelight" name="star"></ion-icon>
-                        <p class="my-0 font10">4/5</p>
-                        <p class="my-0 font8">Tiempo</p>
-                    </ion-col>
-                  </ion-row>
-              </ion-col>
-          </ion-row>
-    </ion-card>
-      
-    </ion-grid>
-        </ion-slide>
-
-        <ion-slide>
-          <ion-grid class="px-0">
-    <ion-card>
-        <ion-row>
-            <ion-col class="px-0">
-                <img class="imgCarta2" src="assets/img/rest1.jpg" alt="avatar perfil"> 
-            </ion-col>
-            <ion-col class="px-0">
-                <ion-row class="pt-2">
-                  <ion-col size="7">
-                    <p class="my-0 ion-text-center font10">
-                      Vegetalia Restaurant
-                    </p>
-                  </ion-col>
-                  <ion-col class="ion-align-self-center ion-justify-content-center" size="5">
-                    Ir <ion-icon class="" name="play"></ion-icon>
-                  </ion-col>
-                </ion-row>
-                <ion-row>
-                    <ion-col class="px-0 ion-text-center" >
-                        <ion-icon color="bluelight" name="star"></ion-icon>
-                        <p class="my-0 font10">4/5</p>
-                        <p class="my-0 font8">Sabor</p>
-                    </ion-col>
-                    <ion-col class="px-0 ion-text-center">
-                        <ion-icon color="bluelight" name="star"></ion-icon>
-                        <p class="my-0 font10">4/5</p>
-                        <p class="my-0 font8">Atención</p>
-                    </ion-col>
-                    <ion-col class="px-0 ion-text-center">
-                        <ion-icon color="bluelight" name="star"></ion-icon>
-                        <p class="my-0 font10">4/5</p>
-                        <p class="my-0 font8">Lugar</p>
-                    </ion-col>
-                    <ion-col class="px-0 ion-text-center">
-                        <ion-icon color="bluelight" name="star"></ion-icon>
-                        <p class="my-0 font10">4/5</p>
-                        <p class="my-0 font8">Tiempo</p>
-                    </ion-col>
-                  </ion-row>
-              </ion-col>
-          </ion-row>
-    </ion-card>
-    <ion-card>
-        <ion-row>
-            <ion-col class="px-0">
-                <img class="imgCarta2" src="assets/img/rest2.jpg" alt="avatar perfil"> 
-            </ion-col>
-            <ion-col class="px-0">
-                <ion-row class="pt-2">
-                  <ion-col size="7">
-                    <p class="my-0 ion-text-center font10">
-                      Vegetalia Restaurant
-                    </p>
-                  </ion-col>
-                  <ion-col class="ion-align-self-center ion-justify-content-center ion-text-center" size="5">
-                    Ir <ion-icon class="" name="play"></ion-icon>
-                  </ion-col>
-                </ion-row>
-                <ion-row>
-                    <ion-col class="px-0 ion-text-center" >
-                        <ion-icon color="bluelight" name="star"></ion-icon>
-                        <p class="my-0 font10">4/5</p>
-                        <p class="my-0 font8">Sabor</p>
-                    </ion-col>
-                    <ion-col class="px-0 ion-text-center">
-                        <ion-icon color="bluelight" name="star"></ion-icon>
-                        <p class="my-0 font10">4/5</p>
-                        <p class="my-0 font8">Atención</p>
-                    </ion-col>
-                    <ion-col class="px-0 ion-text-center">
-                        <ion-icon color="bluelight" name="star"></ion-icon>
-                        <p class="my-0 font10">4/5</p>
-                        <p class="my-0 font8">Lugar</p>
-                    </ion-col>
-                    <ion-col class="px-0 ion-text-center">
-                        <ion-icon color="bluelight" name="star"></ion-icon>
-                        <p class="my-0 font10">4/5</p>
-                        <p class="my-0 font8">Tiempo</p>
-                    </ion-col>
-                  </ion-row>
-              </ion-col>
-          </ion-row>
-    </ion-card>
-    <ion-card>
-        <ion-row>
-            <ion-col class="px-0">
-                <img class="imgCarta2" src="assets/img/rest3.jpg" alt="avatar perfil"> 
-            </ion-col>
-            <ion-col class="px-0">
-                <ion-row class="pt-2">
-                  <ion-col size="7">
-                    <p class="my-0 ion-text-center font10">
-                      Vegetalia Restaurant
-                    </p>
-                  </ion-col>
-                  <ion-col class="ion-align-self-center ion-justify-content-center" size="5">
-                    Ir <ion-icon class="" name="play"></ion-icon>
-                  </ion-col>
-                </ion-row>
-                <ion-row>
-                    <ion-col class="px-0 ion-text-center" >
-                        <ion-icon color="bluelight" name="star"></ion-icon>
-                        <p class="my-0 font10">4/5</p>
-                        <p class="my-0 font8">Sabor</p>
-                    </ion-col>
-                    <ion-col class="px-0 ion-text-center">
-                        <ion-icon color="bluelight" name="star"></ion-icon>
-                        <p class="my-0 font10">4/5</p>
-                        <p class="my-0 font8">Atención</p>
-                    </ion-col>
-                    <ion-col class="px-0 ion-text-center">
-                        <ion-icon color="bluelight" name="star"></ion-icon>
-                        <p class="my-0 font10">4/5</p>
-                        <p class="my-0 font8">Lugar</p>
-                    </ion-col>
-                    <ion-col class="px-0 ion-text-center">
-                        <ion-icon color="bluelight" name="star"></ion-icon>
-                        <p class="my-0 font10">4/5</p>
-                        <p class="my-0 font8">Tiempo</p>
-                    </ion-col>
-                  </ion-row>
-              </ion-col>
-          </ion-row>
-    </ion-card>
-      
-    </ion-grid>
-        </ion-slide>
-    
-        <ion-slide>
-          <ion-grid class="px-0">
-    <ion-card>
-        <ion-row>
-            <ion-col class="px-0">
-                <img class="imgCarta2" src="assets/img/rest1.jpg" alt="avatar perfil"> 
-            </ion-col>
-            <ion-col class="px-0">
-                <ion-row class="pt-2">
-                  <ion-col size="7">
-                    <p class="my-0 ion-text-center font10">
-                      Vegetalia Restaurant
-                    </p>
-                  </ion-col>
-                  <ion-col class="ion-align-self-center ion-justify-content-center" size="5">
-                    Ir <ion-icon class="" name="play"></ion-icon>
-                  </ion-col>
-                </ion-row>
-                <ion-row>
-                    <ion-col class="px-0 ion-text-center" >
-                        <ion-icon color="bluelight" name="star"></ion-icon>
-                        <p class="my-0 font10">4/5</p>
-                        <p class="my-0 font8">Sabor</p>
-                    </ion-col>
-                    <ion-col class="px-0 ion-text-center">
-                        <ion-icon color="bluelight" name="star"></ion-icon>
-                        <p class="my-0 font10">4/5</p>
-                        <p class="my-0 font8">Atención</p>
-                    </ion-col>
-                    <ion-col class="px-0 ion-text-center">
-                        <ion-icon color="bluelight" name="star"></ion-icon>
-                        <p class="my-0 font10">4/5</p>
-                        <p class="my-0 font8">Lugar</p>
-                    </ion-col>
-                    <ion-col class="px-0 ion-text-center">
-                        <ion-icon color="bluelight" name="star"></ion-icon>
-                        <p class="my-0 font10">4/5</p>
-                        <p class="my-0 font8">Tiempo</p>
-                    </ion-col>
-                  </ion-row>
-              </ion-col>
-          </ion-row>
-    </ion-card>
-    <ion-card>
-        <ion-row>
-            <ion-col class="px-0">
-                <img class="imgCarta2" src="assets/img/rest2.jpg" alt="avatar perfil"> 
-            </ion-col>
-            <ion-col class="px-0">
-                <ion-row class="pt-2">
-                  <ion-col size="7">
-                    <p class="my-0 ion-text-center font10">
-                      Vegetalia Restaurant
-                    </p>
-                  </ion-col>
-                  <ion-col class="ion-align-self-center ion-justify-content-center ion-text-center" size="5">
-                    Ir <ion-icon class="" name="play"></ion-icon>
-                  </ion-col>
-                </ion-row>
-                <ion-row>
-                    <ion-col class="px-0 ion-text-center" >
-                        <ion-icon color="bluelight" name="star"></ion-icon>
-                        <p class="my-0 font10">4/5</p>
-                        <p class="my-0 font8">Sabor</p>
-                    </ion-col>
-                    <ion-col class="px-0 ion-text-center">
-                        <ion-icon color="bluelight" name="star"></ion-icon>
-                        <p class="my-0 font10">4/5</p>
-                        <p class="my-0 font8">Atención</p>
-                    </ion-col>
-                    <ion-col class="px-0 ion-text-center">
-                        <ion-icon color="bluelight" name="star"></ion-icon>
-                        <p class="my-0 font10">4/5</p>
-                        <p class="my-0 font8">Lugar</p>
-                    </ion-col>
-                    <ion-col class="px-0 ion-text-center">
-                        <ion-icon color="bluelight" name="star"></ion-icon>
-                        <p class="my-0 font10">4/5</p>
-                        <p class="my-0 font8">Tiempo</p>
-                    </ion-col>
-                  </ion-row>
-              </ion-col>
-          </ion-row>
-    </ion-card>
-    <ion-card>
-        <ion-row>
-            <ion-col class="px-0">
-                <img class="imgCarta2" src="assets/img/rest3.jpg" alt="avatar perfil"> 
-            </ion-col>
-            <ion-col class="px-0">
-                <ion-row class="pt-2">
-                  <ion-col size="7">
-                    <p class="my-0 ion-text-center font10">
-                      Vegetalia Restaurant
-                    </p>
-                  </ion-col>
-                  <ion-col class="ion-align-self-center ion-justify-content-center" size="5">
-                    Ir <ion-icon class="" name="play"></ion-icon>
-                  </ion-col>
-                </ion-row>
-                <ion-row>
-                    <ion-col class="px-0 ion-text-center" >
-                        <ion-icon color="bluelight" name="star"></ion-icon>
-                        <p class="my-0 font10">4/5</p>
-                        <p class="my-0 font8">Sabor</p>
-                    </ion-col>
-                    <ion-col class="px-0 ion-text-center">
-                        <ion-icon color="bluelight" name="star"></ion-icon>
-                        <p class="my-0 font10">4/5</p>
-                        <p class="my-0 font8">Atención</p>
-                    </ion-col>
-                    <ion-col class="px-0 ion-text-center">
-                        <ion-icon color="bluelight" name="star"></ion-icon>
-                        <p class="my-0 font10">4/5</p>
-                        <p class="my-0 font8">Lugar</p>
-                    </ion-col>
-                    <ion-col class="px-0 ion-text-center">
-                        <ion-icon color="bluelight" name="star"></ion-icon>
-                        <p class="my-0 font10">4/5</p>
-                        <p class="my-0 font8">Tiempo</p>
-                    </ion-col>
-                  </ion-row>
-              </ion-col>
-          </ion-row>
-    </ion-card>
-      
-    </ion-grid>
-        </ion-slide>
-    
-        <ion-slide>
-          <ion-grid class="px-0">
-    <ion-card>
-        <ion-row>
-            <ion-col class="px-0">
-                <img class="imgCarta2" src="assets/img/rest1.jpg" alt="avatar perfil"> 
-            </ion-col>
-            <ion-col class="px-0">
-                <ion-row class="pt-2">
-                  <ion-col size="7">
-                    <p class="my-0 ion-text-center font10">
-                      Vegetalia Restaurant
-                    </p>
-                  </ion-col>
-                  <ion-col class="ion-align-self-center ion-justify-content-center" size="5">
-                    Ir <ion-icon class="" name="play"></ion-icon>
-                  </ion-col>
-                </ion-row>
-                <ion-row>
-                    <ion-col class="px-0 ion-text-center" >
-                        <ion-icon color="bluelight" name="star"></ion-icon>
-                        <p class="my-0 font10">4/5</p>
-                        <p class="my-0 font8">Sabor</p>
-                    </ion-col>
-                    <ion-col class="px-0 ion-text-center">
-                        <ion-icon color="bluelight" name="star"></ion-icon>
-                        <p class="my-0 font10">4/5</p>
-                        <p class="my-0 font8">Atención</p>
-                    </ion-col>
-                    <ion-col class="px-0 ion-text-center">
-                        <ion-icon color="bluelight" name="star"></ion-icon>
-                        <p class="my-0 font10">4/5</p>
-                        <p class="my-0 font8">Lugar</p>
-                    </ion-col>
-                    <ion-col class="px-0 ion-text-center">
-                        <ion-icon color="bluelight" name="star"></ion-icon>
-                        <p class="my-0 font10">4/5</p>
-                        <p class="my-0 font8">Tiempo</p>
-                    </ion-col>
-                  </ion-row>
-              </ion-col>
-          </ion-row>
-    </ion-card>
-    <ion-card>
-        <ion-row>
-            <ion-col class="px-0">
-                <img class="imgCarta2" src="assets/img/rest2.jpg" alt="avatar perfil"> 
-            </ion-col>
-            <ion-col class="px-0">
-                <ion-row class="pt-2">
-                  <ion-col size="7">
-                    <p class="my-0 ion-text-center font10">
-                      Vegetalia Restaurant
-                    </p>
-                  </ion-col>
-                  <ion-col class="ion-align-self-center ion-justify-content-center ion-text-center" size="5">
-                    Ir <ion-icon class="" name="play"></ion-icon>
-                  </ion-col>
-                </ion-row>
-                <ion-row>
-                    <ion-col class="px-0 ion-text-center" >
-                        <ion-icon color="bluelight" name="star"></ion-icon>
-                        <p class="my-0 font10">4/5</p>
-                        <p class="my-0 font8">Sabor</p>
-                    </ion-col>
-                    <ion-col class="px-0 ion-text-center">
-                        <ion-icon color="bluelight" name="star"></ion-icon>
-                        <p class="my-0 font10">4/5</p>
-                        <p class="my-0 font8">Atención</p>
-                    </ion-col>
-                    <ion-col class="px-0 ion-text-center">
-                        <ion-icon color="bluelight" name="star"></ion-icon>
-                        <p class="my-0 font10">4/5</p>
-                        <p class="my-0 font8">Lugar</p>
-                    </ion-col>
-                    <ion-col class="px-0 ion-text-center">
-                        <ion-icon color="bluelight" name="star"></ion-icon>
-                        <p class="my-0 font10">4/5</p>
-                        <p class="my-0 font8">Tiempo</p>
-                    </ion-col>
-                  </ion-row>
-              </ion-col>
-          </ion-row>
-    </ion-card>
-    <ion-card>
-        <ion-row>
-            <ion-col class="px-0">
-                <img class="imgCarta2" src="assets/img/rest3.jpg" alt="avatar perfil"> 
-            </ion-col>
-            <ion-col class="px-0">
-                <ion-row class="pt-2">
-                  <ion-col size="7">
-                    <p class="my-0 ion-text-center font10">
-                      Vegetalia Restaurant
-                    </p>
-                  </ion-col>
-                  <ion-col class="ion-align-self-center ion-justify-content-center" size="5">
-                    Ir <ion-icon class="" name="play"></ion-icon>
-                  </ion-col>
-                </ion-row>
-                <ion-row>
-                    <ion-col class="px-0 ion-text-center" >
-                        <ion-icon color="bluelight" name="star"></ion-icon>
-                        <p class="my-0 font10">4/5</p>
-                        <p class="my-0 font8">Sabor</p>
-                    </ion-col>
-                    <ion-col class="px-0 ion-text-center">
-                        <ion-icon color="bluelight" name="star"></ion-icon>
-                        <p class="my-0 font10">4/5</p>
-                        <p class="my-0 font8">Atención</p>
-                    </ion-col>
-                    <ion-col class="px-0 ion-text-center">
-                        <ion-icon color="bluelight" name="star"></ion-icon>
-                        <p class="my-0 font10">4/5</p>
-                        <p class="my-0 font8">Lugar</p>
-                    </ion-col>
-                    <ion-col class="px-0 ion-text-center">
-                        <ion-icon color="bluelight" name="star"></ion-icon>
-                        <p class="my-0 font10">4/5</p>
-                        <p class="my-0 font8">Tiempo</p>
-                    </ion-col>
-                  </ion-row>
-              </ion-col>
-          </ion-row>
-    </ion-card>
-      
-    </ion-grid>
-        </ion-slide>
-    
-      </ion-slides>
 </ion-content>

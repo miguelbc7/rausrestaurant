@@ -151,6 +151,12 @@
 //     padding-inline-end: 4px;
 // }
 
+.customCard {
+    box-shadow: none !important;
+    border-radius: 0px !important;
+    border: 1px solid #ccc;
+}
+
 .card-content-md {
     padding-left: 5px;
     padding-right: 5px;
@@ -209,6 +215,27 @@
     bottom: 1px;
     margin:auto;
     font-size: 22pt;
+}
+
+.divEditCard {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    right: 10px;
+    top: 70%;
+    border:3px solid #fff;
+    padding: 2px;
+    background-color: #657b97;
+    border-radius: 15px;
+}
+
+.iconEditCard {
+    position: relative;
+    left: 1px;
+    right: 1px;
+    bottom: 1px;
+    margin:auto;
+    font-size: 14pt;
 }
 
 .imgMap {
