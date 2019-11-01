@@ -92,8 +92,9 @@
               <ion-item>
                 <!-- <ion-label position="floating">Lorem ipsum dolor sit amet.</ion-label> -->
                 <tag-input  
-                placeholder="Insert a new item" 
                 formControlName="tags" 
+                [placeholder]="'Ingrese una nueva etiqueta'" 
+                [secondaryPlaceholder]="'Ingrese una nueva etiqueta'" 
                 [editable]='true' 
                 [maxItems]='3'  
                 [separatorKeyCodes]="[32, 138]"
