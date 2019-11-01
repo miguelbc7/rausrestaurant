@@ -1,0 +1,118 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>register1</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content>
+    <div class="ion-text-center boxLogo">
+        <img class="logoImg" src="assets/img/logo-raus.png" alt="logotipo">
+        <p class="blue-dark">..The way you like</p>
+    </div>
+      <form [formGroup]="register1"  (ngSubmit)="onSubmit(register1.value)" class="ion-margin-horizontal">
+          <div class="ion-margin-vertical">
+              <ion-item>
+                <ion-label class="font14" position="floating">Nombre comercial</ion-label>
+                <ion-input formControlName="name" clearInput="true" type="text"></ion-input>
+              </ion-item>
+          </div>
+          <div class="validation-errors">
+              <ng-container *ngFor="let validation of validation_messages.name">
+                <div class="error-message" *ngIf="register1.get('name').hasError(validation.type) && (register1.get('name').dirty || register1.get('name').touched)">
+                  {{ validation.message }}
+                </div>
+              </ng-container>
+            </div>
+          <div class="ion-margin-vertical">
+              <ion-item>
+                <ion-label class="font14" position="floating">Razón social</ion-label>
+                <ion-input formControlName="lastname" clearInput="true" type="text"></ion-input>
+              </ion-item>
+          </div>
+          <div class="validation-errors">
+              <ng-container *ngFor="let validation of validation_messages.name">
+                <div class="error-message" *ngIf="register1.get('lastname').hasError(validation.type) && (register1.get('lastname').dirty || register1.get('lastname').touched)">
+                  {{ validation.message }}
+                </div>
+              </ng-container>
+            </div>
+          <div class="ion-margin-vertical">
+              <ion-item>
+                <ion-label class="font14" position="floating">CIF/NIF</ion-label>
+                <ion-input formControlName="dni" clearInput="true" type="text"></ion-input>
+              </ion-item>
+          </div>
+          <div class="validation-errors">
+              <ng-container *ngFor="let validation of validation_messages.name">
+                <div class="error-message" *ngIf="register1.get('dni').hasError(validation.type) && (register1.get('dni').dirty || register1.get('dni').touched)">
+                  {{ validation.message }}
+                </div>
+              </ng-container>
+            </div>
+            <div class="ion-margin-vertical">
+              <ion-item>
+                  <ion-label class="font14" position="floating">Dirección</ion-label>
+                  <ion-input type="text" required></ion-input>
+                  <ion-icon name="pin" color="bluedark" slot="end" align-self-end></ion-icon>
+                </ion-item>
+          </div>
+          <div class="ion-margin-vertical">
+            <ion-item>
+              <ion-label class="font14" position="floating">Nombre de responsable en el establecimineto</ion-label>
+              <ion-input formControlName="responsable" clearInput="true" type="text"></ion-input>
+            </ion-item>
+        </div>
+        <div class="ion-margin-vertical">
+          <ion-item>
+            <ion-label class="font14" position="floating">Teléfono</ion-label>
+            <ion-input formControlName="phone" clearInput="true" type="tel"></ion-input>
+          </ion-item>
+      </div>
+      <div class="ion-margin-vertical">
+        <ion-item>
+          <ion-label class="font14" position="floating">Email</ion-label>
+          <ion-input formControlName="email" clearInput="true" type="email" required></ion-input>
+        </ion-item>
+    </div>
+    <ion-item>
+      <ion-label class="font14" position="floating">Contraseña</ion-label>
+      <ion-input  [type]="passwordType"></ion-input>
+      <ion-icon [name]="passwordShown === true ? 'eye-off' : 'eye'" [color]="passwordShown === true ? 'bluelight' : 'bluedark' " slot="end" align-self-end (click)="togglePassword()"></ion-icon>
+    </ion-item>
+    <ion-item class="ion-margin-bottom">
+      <ion-label class="font14" position="floating">Confirmar contraseña</ion-label>
+      <ion-input  [type]="passwordType2"></ion-input>
+      <ion-icon [name]="passwordShown2 === true ? 'eye-off' : 'eye'" [color]="passwordShown2 === true ? 'bluelight' : 'bluedark' " slot="end" align-self-end (click)="revelarConfirmacion()"></ion-icon>
+    </ion-item>
+            <!-- <form [formGroup]="form"> -->
+              <!-- <ion-item>
+                <ion-label position="floating">Code</ion-label>
+                <ion-input formControlName="code" type="text" required></ion-input>
+              </ion-item> -->
+              <ion-item>
+                <!-- <ion-label position="floating">Lorem ipsum dolor sit amet.</ion-label> -->
+                <tag-input  
+                placeholder="Insert a new item" 
+                formControlName="tags" 
+                [editable]='true' 
+                [maxItems]='3'  
+                [separatorKeyCodes]="[32, 138]"
+                theme='minimal'></tag-input>
+              </ion-item>
+            <!-- </form> -->
+            <!-- <ion-item lines="none" float-right>
+              <ion-button (click)="upload(form.value)">
+                Search</ion-button>
+            </ion-item>
+          </ion-card-content>
+        </ion-card>
+      </div>
+    </div> -->
+          <br>
+          <div class="ion-text-center">
+            <ion-button type="submit" class="font15" [disabled]="!register1.valid"  color="bluedark" routerLink="/home">
+              Listo
+            </ion-button>
+          </div>
+        </form>
+</ion-content>

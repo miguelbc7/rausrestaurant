@@ -1,0 +1,107 @@
+.bgWhite {
+    background-color: #fff;
+}
+
+.imgAvatar {
+    border: 3px solid #e1e1e1;
+    // padding: 3px;
+}
+
+.avatar{
+    margin: auto;
+    position: absolute;
+    top: -40px;
+    right: 3.5%;
+    width: 80px;
+    height: 80px;
+ }
+
+.decimal {
+    position: absolute;
+    top: 30%;
+    right: 10px;
+}
+
+.customDarkText{
+    color:#494947
+}
+
+.hgLine {
+    line-height: 0.8;
+}
+
+.logoNav {
+    width: 80px;
+    height: auto;
+    margin-left: 10px;
+    padding:3px;
+}
+
+.iconPlay {
+    font-size: 2.5rem;
+}
+
+.pDirection {
+    color: #494947;
+}
+
+.mHorarios{
+    margin:1px;
+}
+ 
+ .IconNav {
+     font-size: 23pt;
+ }
+ 
+
+ ion-button {
+	ion-badge {
+        position: absolute;
+        top: 0.3rem;
+        right: 0.4rem;
+        opacity: 0.9;
+        font-size: 6px;
+        padding: 2px;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+		& ~ ion-icon {
+			margin-right: 1.2rem;
+		}
+    }
+    
+    ion-badge.email {
+        position: absolute;
+        top: .3rem;
+        right: .2rem;
+        opacity: 0.9;
+        font-size: 6px;
+        padding: 2px;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+		& ~ ion-icon {
+			margin-right: 1.2rem;
+		}
+	}
+}
+
+ion-button.btnNoPadding {
+    padding: 0 !important;
+}
+
+:root {
+    --ion-safe-area-top: 20px;
+    --ion-safe-area-bottom: 22px;
+  }
+  .swiper-slide {
+    display: block;
+  }
+  ion-slide > h2 {
+    margin-top: 2.8rem;
+  }
+  ion-slide > img {
+    max-height: 50%;
+    max-width: 60%;
+    margin: 36px 0;
+  }
