@@ -76,12 +76,12 @@
     </div>
     <ion-item>
       <ion-label class="font14" position="floating">Contraseña</ion-label>
-      <ion-input formControlName="password"  [type]="passwordType"></ion-input>
+      <ion-input formControlName="password" [type]="passwordType" [(ngModel)]="pass"></ion-input>
       <ion-icon [name]="passwordShown === true ? 'eye-off' : 'eye'" [color]="passwordShown === true ? 'bluelight' : 'bluedark' " slot="end" align-self-end (click)="togglePassword()"></ion-icon>
     </ion-item>
     <ion-item class="ion-margin-bottom">
       <ion-label class="font14" position="floating">Confirmar contraseña</ion-label>
-      <ion-input formControlName="confirmpassword"  [type]="passwordType2"></ion-input>
+      <ion-input formControlName="confirmpassword" [type]="passwordType2" [(ngModel)]="cpass" (keyup)="onKeydown($event)"></ion-input>
       <ion-icon [name]="passwordShown2 === true ? 'eye-off' : 'eye'" [color]="passwordShown2 === true ? 'bluelight' : 'bluedark' " slot="end" align-self-end (click)="revelarConfirmacion()"></ion-icon>
     </ion-item>
             <!-- <form [formGroup]="form"> -->

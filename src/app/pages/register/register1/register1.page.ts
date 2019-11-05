@@ -13,6 +13,8 @@ export class Register1Page implements OnInit {
 
   public register1: FormGroup;
   form: FormGroup;
+  pass;
+  cpass;
 
   constructor( public formBuilder: FormBuilder, private router: Router) {
 
@@ -111,6 +113,14 @@ export class Register1Page implements OnInit {
       return tagString;
     } else {
       return '';
+    }
+  }
+
+  onKeydown(event) {
+    if(this.pass != this.cpass) {
+      console.log('not equal');
+    } else {
+      console.log('equal')
     }
   }
 
