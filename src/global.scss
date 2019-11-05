@@ -256,6 +256,15 @@
     top: 5px;
 }
 
+// ITEM TAGS
+
+.inputTag{
+    // color:red !important;
+    --placeholder-color: red !important;
+}
+
+
+
 // IPAD
 
 @media (min-width: 768px) and (max-width: 1024px) {

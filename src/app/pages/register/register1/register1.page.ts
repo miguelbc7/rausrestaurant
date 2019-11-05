@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 // import { TagsHelper } from '../../helpers/tags-helper';
+// import { MustMatch } from '../../validators/must-match.validator';
 
 @Component({
   selector: 'app-register1',
@@ -54,7 +55,18 @@ export class Register1Page implements OnInit {
       tags: ['', Validators.compose([
         Validators.required,
       ])],
-  });
+      password: ['', Validators.compose([
+        Validators.required,
+        Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,15}')
+      ])],
+      confirmpassword: ['', Validators.compose([
+        Validators.required,
+      ])],
+  },
+  // {
+  //   validator: MustMatch('password', 'confirmPassword')
+  // }
+);
   }
 
 
@@ -80,7 +92,7 @@ export class Register1Page implements OnInit {
 
   onSubmit(values){
     console.log(values);
-    this.router.navigate(["/register2"]);
+    this.router.navigate(["/welcome"]);
   }
 
   ngOnInit() {
