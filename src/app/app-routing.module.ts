@@ -10,6 +10,7 @@ const routes: Routes = [
   { path: 'register3', loadChildren: './pages/register/register3/register3.module#Register3PageModule' },
   { path: 'home', loadChildren: './pages/home/home.module#HomePageModule' },
   { path: 'horarios', loadChildren: './pages/modals/horarios/horarios.module#HorariosPageModule' },
+  { path: 'opciones', loadChildren: './pages/opciones/opciones.module#OpcionesPageModule' },
 ];
 
 @NgModule({

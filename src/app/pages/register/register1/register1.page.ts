@@ -15,6 +15,8 @@ export class Register1Page implements OnInit {
   form: FormGroup;
   pass;
   cpass;
+  passwordType: string = "password";
+  passwordShown: boolean = false;
 
   constructor( public formBuilder: FormBuilder, private router: Router) {
 
@@ -55,7 +57,7 @@ export class Register1Page implements OnInit {
         Validators.required,
       ])],
       tags: ['', Validators.compose([
-        Validators.required,
+        // Validators.required,
       ])],
       password: ['', Validators.compose([
         Validators.required,
@@ -63,6 +65,7 @@ export class Register1Page implements OnInit {
       ])],
       confirmpassword: ['', Validators.compose([
         Validators.required,
+        Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,15}')
       ])],
   },
   // {
@@ -121,6 +124,16 @@ export class Register1Page implements OnInit {
       console.log('not equal');
     } else {
       console.log('equal')
+    }
+  }
+
+  public togglePassword() {
+    if(this.passwordShown){
+      this.passwordShown = false;
+      this.passwordType = "password";
+    }else {
+      this.passwordShown = true;
+      this.passwordType = "text";
     }
   }
 

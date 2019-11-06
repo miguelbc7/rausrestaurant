@@ -3,18 +3,16 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
+import { SharedModule } from '../sharedmodals/shared.module';
+
 import { IonicModule } from '@ionic/angular';
 
-import { HomePage } from './home.page';
-
-import { HorariosPage } from '../modals/horarios/horarios.page';
-
-import { SharedModule } from '../sharedmodals/shared.module';
+import { OpcionesPage } from './opciones.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: HomePage
+    component: OpcionesPage
   }
 ];
 
@@ -26,12 +24,6 @@ const routes: Routes = [
     SharedModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [
-    HomePage,
-    HorariosPage
-  ],
-  entryComponents: [
-    HorariosPage
-  ]
+  declarations: [OpcionesPage]
 })
-export class HomePageModule {}
+export class OpcionesPageModule {}

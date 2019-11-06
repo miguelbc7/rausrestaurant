@@ -26,6 +26,7 @@
 @import "~@ionic/angular/css/flex-utils.css";
 
 
+
 .error-message
 {
   color:#c70000;
@@ -258,10 +259,15 @@
 
 // ITEM TAGS
 
-.inputTag{
+tag-input .ng2-tag-input.minimal-theme {
     // color:red !important;
-    --placeholder-color: red !important;
+    width: 100% !important;
+    text-align: center;
 }
+
+// :host ::ng-deep .ng2-tag-input.minimal.inputTag::placeholder {
+//     color:red !important;
+//  } 
 
 
 
