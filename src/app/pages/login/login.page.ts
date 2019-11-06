@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { ModalPoliticasPage } from '../modals/modal-politicas/modal-politicas.page';
 import { ModalTerminosPage } from '../modals/modal-terminos/modal-terminos.page';
-import { NewPasswordPage } from '../modals/new-password/new-password.page';
+import { NewPasswordPageModule } from '../modals/new-password/new-password.module';
 import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -81,7 +81,7 @@ export class LoginPage implements OnInit {
 
   async newPassword() {
     const modal = await this.modalCtrl.create({
-      component: NewPasswordPage,
+      component: NewPasswordPageModule,
       cssClass: 'sizeModal'
     });
     await modal.present();
