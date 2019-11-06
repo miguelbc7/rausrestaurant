@@ -17,6 +17,8 @@ export class Register1Page implements OnInit {
   cpass;
   passwordType: string = "password";
   passwordShown: boolean = false;
+  passwordType2: string = "password";
+  passwordShown2: boolean = false;
 
   constructor( public formBuilder: FormBuilder, private router: Router) {
 
@@ -67,11 +69,7 @@ export class Register1Page implements OnInit {
         Validators.required,
         Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,15}')
       ])],
-  },
-  // {
-  //   validator: MustMatch('password', 'confirmPassword')
-  // }
-);
+  });
   }
 
 
@@ -134,6 +132,16 @@ export class Register1Page implements OnInit {
     }else {
       this.passwordShown = true;
       this.passwordType = "text";
+    }
+  }
+
+  public revelarConfirmacion() {
+    if(this.passwordShown2){
+      this.passwordShown2 = false;
+      this.passwordType2 = "password";
+    }else {
+      this.passwordShown2 = true;
+      this.passwordType2 = "text";
     }
   }
 
