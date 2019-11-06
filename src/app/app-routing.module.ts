@@ -6,8 +6,6 @@ const routes: Routes = [
   { path: 'login', loadChildren: './pages/login/login.module#LoginPageModule' },
   { path: 'welcome', loadChildren: './pages/welcome/welcome.module#WelcomePageModule' },
   { path: 'register1', loadChildren: './pages/register/register1/register1.module#Register1PageModule' },
-  { path: 'register2', loadChildren: './pages/register/register2/register2.module#Register2PageModule' },
-  { path: 'register3', loadChildren: './pages/register/register3/register3.module#Register3PageModule' },
   { path: 'home', loadChildren: './pages/home/home.module#HomePageModule' },
   { path: 'horarios', loadChildren: './pages/modals/horarios/horarios.module#HorariosPageModule' },
   { path: 'opciones', loadChildren: './pages/opciones/opciones.module#OpcionesPageModule' },
