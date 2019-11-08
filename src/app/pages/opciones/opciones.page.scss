@@ -1,0 +1,152 @@
+.bgWhite {
+    background-color: #fff;
+}
+
+.marginTopGrid {
+    margin-top: 10px;
+}
+
+.avatar{
+    margin: auto;
+    margin-top: -20px;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+ }
+
+ .absolute {
+     position: absolute;
+ }
+
+.imgAvatar {
+    border: 1px solid #bfdcf5;
+    padding: 1px;
+    // width: 120px;
+    // height: 120px;
+    border-radius: 50%;
+    
+}
+
+.ml-10 {
+    margin-left: 12px;
+}
+
+.decimal {
+    position: absolute;
+    top: 20%;
+    right: 60px;
+}
+
+.text-dorado {
+    color: #958659;
+}
+
+.text-blueDark {
+    color: #4e5d6a;
+}
+
+.customDarkText{
+    color:#494947
+}
+
+.hgLine {
+    line-height: 1;
+}
+
+.logoNav {
+    width: 80px;
+    height: auto;
+    margin-left: 10px;
+    padding:3px;
+}
+
+.iconPlay {
+    font-size: 2.5rem;
+}
+
+.IconNav {
+     font-size: 16pt;
+}
+
+.iconBack {
+    margin-top: -15px;
+    font-size: 30pt;
+    margin-left: 20px;
+}
+
+.buttonDiv {
+    // margin:auto;
+    line-height: 1.2;
+    background-color: #fafaf0;
+    padding:1px;
+    height: 100px;
+    width: 90%;
+}
+
+.buttonDiv:hover {
+    background-color: #a0a9c0;
+}
+
+.buttonDiv:hover p {
+   color: #ffffff;
+}
+
+.iconButton {
+    font-size: 40pt;
+    display: block;
+    margin:auto;
+    margin-top: 12%;
+}
+ 
+
+ ion-button {
+	ion-badge {
+        position: absolute;
+        top: 0.3rem;
+        right: 0.4rem;
+        opacity: 0.9;
+        font-size: 6px;
+        padding: 2px;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+		& ~ ion-icon {
+			margin-right: 1.2rem;
+		}
+    }
+    
+    ion-badge.email {
+        position: absolute;
+        top: .3rem;
+        right: .2rem;
+        opacity: 0.9;
+        font-size: 6px;
+        padding: 2px;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+		& ~ ion-icon {
+			margin-right: 1.2rem;
+		}
+	}
+}
+
+ion-button.btnNoPadding {
+    padding: 0 !important;
+}
+
+:root {
+    --ion-safe-area-top: 20px;
+    --ion-safe-area-bottom: 22px;
+  }
+  .swiper-slide {
+    display: block;
+  }
+  ion-slide > h2 {
+    margin-top: 2.8rem;
+  }
+  ion-slide > img {
+    max-height: 50%;
+    max-width: 60%;
+    margin: 36px 0;
+  }
