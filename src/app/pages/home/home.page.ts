@@ -9,7 +9,9 @@ import { ModalController } from '@ionic/angular';
 })
 export class HomePage implements OnInit {
 
-  constructor(private modalCtrl: ModalController) { }
+  constructor(private modalCtrl: ModalController) {
+    
+   }
 
   ngOnInit() {
   }
@@ -20,6 +22,12 @@ export class HomePage implements OnInit {
   
     await modal.present();
   }
+
+  slideOptsOne = {
+    initialSlide: 0,
+    slidesPerView: 1,
+    autoplay:true
+   };
 
 }
 

@@ -9,16 +9,28 @@ export class OpcionesPage implements OnInit {
 
   datas = [
     true,
-    true,
-    true,
     false,
-    false
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
   ];
 
   constructor() { }
 
   changeIcon(index: string){
-    this.datas[index] = !this.datas[index];
+    if(this.datas[index] == false){
+      this.datas[index] = !this.datas[index];
+      for(var i=0;i<this.datas.length;i++){
+        if(parseInt(index) != i ){
+          this.datas[i] = !this.datas[index];
+          }
+      }
+    }
+
   }
 
   ngOnInit() {

@@ -14,7 +14,14 @@
     right: 3.5%;
     width: 80px;
     height: 80px;
+    z-index: 2;
  }
+
+ion-slide.changeStyle img {
+    max-width: 100% !important;
+    max-height: 100% !important;
+    margin:0 !important;
+} 
 
 .decimal {
     position: absolute;

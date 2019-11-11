@@ -14,13 +14,41 @@
         <ion-row class="my-0">
             <ion-col class="ion-no-padding">
               <div class="boxBanner">
-                <img class="imgBanner" src="assets/img/rest1.jpg" alt="img banner">
+                  <ion-slides [options]="slideOptsOne">
+
+                      <ion-slide class="changeStyle">
+                        <img class="imgBanner" src="assets/img/rest1.jpg"/>
+                        <div class="divEdit" color="bluelight">
+                          <ion-icon class="iconEditBanner" color="white" name="create" (click)="editSlide"></ion-icon>
+                        </div>
+                      </ion-slide>
+              
+                      <ion-slide class="changeStyle">
+                        <img class="imgBanner" src="assets/img/rest1.jpg"/>
+                        <div class="divEdit" color="bluelight">
+                          <ion-icon class="iconEditBanner" color="white" name="create" (click)="editSlide"></ion-icon>
+                        </div>
+                      </ion-slide>
+              
+                      <ion-slide class="changeStyle">
+                        <img class="imgBanner" src="assets/img/rest1.jpg"/>
+                        <div class="divEdit" color="bluelight">
+                          <ion-icon class="iconEditBanner" color="white" name="create" (click)="editSlide"></ion-icon>
+                        </div>
+                      </ion-slide>
+              
+                      <ion-slide class="changeStyle">
+                        <img class="imgBanner" src="assets/img/rest1.jpg"/>
+                        <div class="divEdit" color="bluelight">
+                          <ion-icon class="iconEditBanner" color="white" name="create" (click)="editSlide"></ion-icon>
+                        </div>
+                      </ion-slide>
+              
+                    </ion-slides>
                 <ion-avatar class="avatar">
                     <img class="imgAvatar" src="assets/img/rest1.jpg" alt="avatar perfil">
                 </ion-avatar>
-                <div class="divEdit" color="bluelight">
-                    <ion-icon class="iconEditBanner" color="white" name="create"></ion-icon>
-                </div>
+                
               </div>
             </ion-col>
           </ion-row>
