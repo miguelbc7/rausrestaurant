@@ -3,7 +3,7 @@
     <img class="logoImg" src="assets/img/logo-raus.png" alt="logotipo">
     <p class="blue-dark">...the way you like</p>
   </div>
-  <form [formGroup]="login_form"  (ngSubmit)="onSubmit(login_form.value)">
+  <form [formGroup]="login_form" (ngSubmit)="loginUser(login_form.value)">
       <div class="ion-margin-horizontal boxForm">
           <ion-item class="ion-no-padding">
             <ion-label class="font14" position="floating">Correo / Teléfono</ion-label>
