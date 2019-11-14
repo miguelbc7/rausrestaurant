@@ -36,8 +36,9 @@
   
   <ion-row class="marginButtonTop">
     <ion-col size="12" class="ion-text-center">
-        <ion-button type="submit" [disabled]="!login_form.valid" class="font15" color="bluelight" >Entrar</ion-button>
+      <ion-button type="submit" [disabled]="!login_form.valid" class="font15" color="bluelight" >Entrar</ion-button>
     </ion-col>
+    <label class="error-message">{{errorMessage}}</label>
   </ion-row>
   <ion-row class="btnNuevo">
       <ion-col size="12" class="ion-text-center">

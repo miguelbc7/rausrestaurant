@@ -59,8 +59,9 @@ export class LoginPage implements OnInit {
             Validators.required,
             Validators.minLength(8),
             Validators.maxLength(15),
-            // Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+$')
-            Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?.&])[A-Za-z\d$@$!%*?.&].{8,15}')
+            // Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+$') 
+            
+            // Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$.@$!%*?&])[A-Za-z\d$@$.!%*?&].{8,15}')
 
           ])),
       });
@@ -70,15 +71,11 @@ export class LoginPage implements OnInit {
   loginUser(value){
     this.authService.loginUser(value)
     .then(res => {
-      console.log(res);
       this.errorMessage = "";
-      this.router.navigate(["/home"]);
-    }, err => {
-      this.errorMessage = err.message;
+      // this.router.navigate(["/home"]);
+    },err => {
+      this.errorMessage = "Usuario invalido.";
       console.log(err);
-    })
-    .catch(error =>{
-      console.log(error);
     })
   }
 

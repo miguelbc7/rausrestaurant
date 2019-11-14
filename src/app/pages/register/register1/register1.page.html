@@ -7,6 +7,19 @@
           <div class="ion-margin-vertical">
               <ion-item class="ion-no-padding">
                 <ion-label class="font14" position="floating">Nombre comercial</ion-label>
+                <ion-input formControlName="business_name" clearInput="true" type="text"></ion-input>
+              </ion-item>
+          </div>
+          <div class="validation-errors">
+              <ng-container *ngFor="let validation of validation_messages.business_name">
+                <div class="error-message" *ngIf="register1.get('business_name').hasError(validation.type) && (register1.get('business_name').dirty || register1.get('business_name').touched)">
+                  {{ validation.message }}
+                </div>
+              </ng-container>
+            </div>
+          <div class="ion-margin-vertical">
+              <ion-item class="ion-no-padding">
+                <ion-label class="font14" position="floating">Razón social</ion-label>
                 <ion-input formControlName="name" clearInput="true" type="text"></ion-input>
               </ion-item>
           </div>
@@ -19,26 +32,13 @@
             </div>
           <div class="ion-margin-vertical">
               <ion-item class="ion-no-padding">
-                <ion-label class="font14" position="floating">Razón social</ion-label>
-                <ion-input formControlName="lastname" clearInput="true" type="text"></ion-input>
-              </ion-item>
-          </div>
-          <div class="validation-errors">
-              <ng-container *ngFor="let validation of validation_messages.name">
-                <div class="error-message" *ngIf="register1.get('lastname').hasError(validation.type) && (register1.get('lastname').dirty || register1.get('lastname').touched)">
-                  {{ validation.message }}
-                </div>
-              </ng-container>
-            </div>
-          <div class="ion-margin-vertical">
-              <ion-item class="ion-no-padding">
                 <ion-label class="font14" position="floating">CIF/NIF</ion-label>
-                <ion-input formControlName="dni" clearInput="true" type="text"></ion-input>
+                <ion-input formControlName="cif_nic" clearInput="true" type="text"></ion-input>
               </ion-item>
           </div>
           <div class="validation-errors">
               <ng-container *ngFor="let validation of validation_messages.name">
-                <div class="error-message" *ngIf="register1.get('dni').hasError(validation.type) && (register1.get('dni').dirty || register1.get('dni').touched)">
+                <div class="error-message" *ngIf="register1.get('cif_nic').hasError(validation.type) && (register1.get('cif_nic').dirty || register1.get('cif_nic').touched)">
                   {{ validation.message }}
                 </div>
               </ng-container>
@@ -47,13 +47,13 @@
               <ion-item class="ion-no-padding">
                   <ion-label class="font14" position="floating">Dirección</ion-label>
                   <ion-input type="text" required></ion-input>
-                  <ion-icon name="pin" color="bluedark" slot="end" align-self-end></ion-icon>
+                  <ion-icon name="address" color="bluedark" slot="end" align-self-end></ion-icon>
                 </ion-item>
           </div>
           <div class="ion-margin-vertical">
             <ion-item class="ion-no-padding">
               <ion-label class="font14" position="floating">Nombre de responsable en el establecimineto</ion-label>
-              <ion-input formControlName="responsable" clearInput="true" type="text"></ion-input>
+              <ion-input formControlName="name_responsable" clearInput="true" type="text"></ion-input>
             </ion-item>
         </div>
         <div class="ion-margin-vertical">
@@ -75,7 +75,7 @@
     </ion-item>
     <ion-item class="ion-margin-bottom ion-no-padding">
       <ion-label class="font14" position="floating">Confirmar contraseña</ion-label>
-      <ion-input [(ngModel)]="cpass" formControlName="confirmpassword"  [type]="passwordType2"></ion-input>
+      <ion-input [(ngModel)]="cpass" formControlName="repeat_password"  [type]="passwordType2"></ion-input>
       <ion-icon [name]="passwordShown2 === true ? 'eye-off' : 'eye'" [color]="passwordShown2 === true ? 'bluelight' : 'bluedark' " slot="end" align-self-end (click)="revelarConfirmacion()"></ion-icon>
     </ion-item>
               <ion-item class="itemTags ion-no-padding">
@@ -84,7 +84,7 @@
                   como sugiere el ejemplo
                 </ion-label>
                 <tag-input  class="ion-text-center inputTag"
-                formControlName="tags" 
+                formControlName="categories" 
                 [placeholder]="' Agregar Tag'"
                 [secondaryPlaceholder]="'#hosteleria #restauracion'" 
                 [editable]='true' 
