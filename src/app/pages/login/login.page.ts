@@ -5,6 +5,7 @@ import { ModalTerminosPage } from '../modals/modal-terminos/modal-terminos.page'
 import { NewPasswordPage } from '../modals/new-password/new-password.page';
 import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 
 @Component({
@@ -15,13 +16,15 @@ import { Router } from '@angular/router';
 export class LoginPage implements OnInit {
 
   public login_form: FormGroup;
+  errorMessage: string = '';
 
   var_u: string = "username";
 
   passwordType: string = "password";
   passwordShown: boolean = false;
-  constructor(private modalCtrl: ModalController, public formBuilder: FormBuilder, private router: Router) {
+  constructor(private modalCtrl: ModalController, public formBuilder: FormBuilder, private router: Router, private authService: AuthService,) {
 
+<<<<<<< HEAD
         this.login_form = formBuilder.group({
           username: ['', Validators.compose([
             Validators.required,
@@ -33,13 +36,16 @@ export class LoginPage implements OnInit {
             Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,15}')
           ])],
       });
+=======
+       
+>>>>>>> 0a150d5b7c485537fd9f3e1d527eac72b6c2fcf7
    }
 
 
-   onSubmit(values){
-    console.log(values);
-    this.router.navigate(["/home"]);
-  }
+  //  onSubmit(values){
+  //   console.log(values);
+  //   this.router.navigate(["/home"]);
+  // }
 
   validation_messages = {
     'username': [
@@ -57,10 +63,35 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {
 
+      this.login_form = this.formBuilder.group({
+          username: new FormControl('', Validators.compose([
+            Validators.required,
+            Validators.minLength(8),
+            Validators.maxLength(30)
+          ]) ),
+          password: new FormControl('', Validators.compose([
+            Validators.required,
+            Validators.minLength(8),
+            Validators.maxLength(15),
+            // Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+$') 
+            
+            // Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$.@$!%*?&])[A-Za-z\d$@$.!%*?&].{8,15}')
 
+          ])),
+      });
+   
   }
 
-
+  loginUser(value){
+    this.authService.loginUser(value)
+    .then(res => {
+      this.errorMessage = "";
+      // this.router.navigate(["/home"]);
+    },err => {
+      this.errorMessage = "Usuario invalido.";
+      console.log(err);
+    })
+  }
 
   async presentPoliticas() {
     const modal = await this.modalCtrl.create({

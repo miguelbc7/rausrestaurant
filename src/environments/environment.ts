@@ -3,7 +3,28 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  url: 'http://localhost:3800/api/',
+  firebase: 
+  {
+    apiKey: "AIzaSyDMMmvx93kGW0ZiHpkbqFTopre63FHogzE",
+    authDomain: "raus-4de7b.firebaseapp.com",
+    databaseURL: "https://raus-4de7b.firebaseio.com",
+    projectId: "raus-4de7b",
+    storageBucket: "raus-4de7b.appspot.com",
+    messagingSenderId: "474517791609",
+    appId: "1:474517791609:web:81aff774436ec0c00d45a8",
+    measurementId: "G-8NV2FVKNJY"
+  }
+  // {
+  //   apiKey: "AIzaSyBvwWwuCYxl2BtN4zXwLUnSLNXretVOzEA",
+  //   authDomain: "prueba-a4c97.firebaseapp.com",
+  //   databaseURL: "https://prueba-a4c97.firebaseio.com",
+  //   projectId: "prueba-a4c97",
+  //   storageBucket: "prueba-a4c97.appspot.com",
+  //   messagingSenderId: "1068631952403",
+  //   appId: "1:1068631952403:web:12ee03da9c4f4cbe6583e6"
+  // }
 };
 
 /*

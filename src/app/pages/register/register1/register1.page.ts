@@ -3,6 +3,9 @@ import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms'
 import { Router } from '@angular/router';
 // import { TagsHelper } from '../../helpers/tags-helper';
 // import { MustMatch } from '../../validators/must-match.validator';
+import { AuthService } from '../../../services/auth.service';
+import { NativeGeocoder, NativeGeocoderResult, NativeGeocoderOptions } from '@ionic-native/native-geocoder/ngx';
+
 
 @Component({
   selector: 'app-register1',
@@ -20,7 +23,7 @@ export class Register1Page implements OnInit {
   passwordType2: string = "password";
   passwordShown2: boolean = false;
 
-  constructor( public formBuilder: FormBuilder, private router: Router) {
+  constructor( public formBuilder: FormBuilder, private router: Router,private authService: AuthService,private nativeGeocoder: NativeGeocoder,) {
 
     this.register1 = this.formBuilder.group({
       code: [],
@@ -28,22 +31,19 @@ export class Register1Page implements OnInit {
     });
 
     this.register1 = formBuilder.group({
+      business_name: ['', Validators.compose([
+        Validators.required,
+        Validators.maxLength(30)
+      ])],
       name: ['', Validators.compose([
         Validators.required,
         Validators.maxLength(30)
       ])],
-      lastname: ['', Validators.compose([
-        Validators.required,
-        Validators.maxLength(30)
-      ])],
-      dni: ['', Validators.compose([
+      cif_nic: ['', Validators.compose([
         Validators.required,
         Validators.maxLength(20)
       ])],
-      birthdate: ['', Validators.compose([
-        Validators.required,
-      ])],
-      responsable: ['', Validators.compose([
+      name_responsable: ['', Validators.compose([
         Validators.required,
         Validators.maxLength(30)
       ])],
@@ -55,47 +55,64 @@ export class Register1Page implements OnInit {
         Validators.required,
         Validators.maxLength(30)
       ])],
-      code: ['', Validators.compose([
-        Validators.required,
-      ])],
-      tags: ['', Validators.compose([
+      // code: ['', Validators.compose([
+      //   Validators.required,
+      // ])],
+      categories: ['', Validators.compose([
         // Validators.required,
       ])],
       password: ['', Validators.compose([
         Validators.required,
-        Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,15}')
+        Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&.])[A-Za-z\d$@$!%*?&.].{8,15}')
       ])],
-      confirmpassword: ['', Validators.compose([
+      repeat_password: ['', Validators.compose([
         Validators.required,
-        Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,15}')
+        Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&.])[A-Za-z\d$@$!%*?&.].{8,15}')
       ])],
   });
   }
 
-
-
+  errorMessage: string = '';
 
   validation_messages = {
-    'name': [
-        { type: 'required', message: 'Debe ingresar un nombre.' },
+    'business_name': [
+        { type: 'required', message: 'Debe ingresar un nombre comercial.' },
         { type: 'maxlength', message: 'Debe ser menor de 30 caracteres.' }
       ],
-      'lastname': [
-        { type: 'required', message: 'Debe ingresar un apellido.' },
+      'name': [
+        { type: 'required', message: 'Debe ingresar un razon social.' },
         { type: 'maxlength', message: 'Debe ser menor de 30 caracteres.' }
       ],
-      'dni': [
-        { type: 'required', message: 'Debe ingresar un DNI.' },
+      'cif_nic': [
+        { type: 'required', message: 'Debe ingresar un cif/nic.' },
         { type: 'maxlength', message: 'Debe ser menor de 20 caracteres.' }
       ],
-      'birthdate': [
-        { type: 'required', message: 'Debe ingresar una fecha de nacimiento.' },
-      ]
     }
 
   onSubmit(values){
-    console.log(values);
-    this.router.navigate(["/welcome"]);
+    this.nativeGeocoder.forwardGeocode(values.address)
+    .then((
+      result: NativeGeocoderResult[]
+      ) => {
+        console.log('The coordinates are latitude=' + result[0].latitude + ' and longitude=' + result[0].longitude)
+        
+        values.push('lat' , result[0].latitude);
+        values.push('lng' , result[0].longitude);
+        
+      }
+      )
+      .catch((error: any) => console.log(error));
+    
+    this.authService.registerUser(values)
+    .subscribe(res => {
+      this.errorMessage = "";
+      console.log(res);
+      // this.router.navigate(["/home"]);
+    },err => {
+      this.errorMessage = "error registro";
+      console.log(err);
+    })
+    // this.router.navigate(["/welcome"]);
   }
 
   ngOnInit() {

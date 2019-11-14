@@ -3,7 +3,7 @@
     <img class="logoImg" src="assets/img/logo-raus.png" alt="logotipo">
     <p class="blue-dark">...the way you like</p>
   </div>
-  <form [formGroup]="login_form"  (ngSubmit)="onSubmit(login_form.value)">
+  <form [formGroup]="login_form" (ngSubmit)="loginUser(login_form.value)">
       <div class="ion-margin-horizontal boxForm">
           <ion-item class="ion-no-padding">
             <ion-label class="font14" position="floating">Correo / Teléfono</ion-label>
@@ -36,8 +36,9 @@
   
   <ion-row class="marginButtonTop">
     <ion-col size="12" class="ion-text-center">
-        <ion-button type="submit" [disabled]="!login_form.valid" class="font15" color="bluelight" >Entrar</ion-button>
+      <ion-button type="submit" [disabled]="!login_form.valid" class="font15" color="bluelight" >Entrar</ion-button>
     </ion-col>
+    <label class="error-message">{{errorMessage}}</label>
   </ion-row>
   <ion-row class="btnNuevo">
       <ion-col size="12" class="ion-text-center">
