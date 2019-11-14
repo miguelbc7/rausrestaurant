@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HorariosPage } from '../modals/horarios/horarios.page';
+import { AddsliderPage } from '../modals/addslider/addslider.page';
+import { EditavatarPage } from '../modals/editavatar/editavatar.page';
+import { EditdireccionPage } from '../modals/editdireccion/editdireccion.page';
 import { ModalController } from '@ionic/angular';
 
 @Component({
@@ -15,6 +18,13 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
   }
+  async addslider() {
+   const modal = await this.modalCtrl.create({
+     component: AddsliderPage,
+   });
+   await modal.present();
+}
+
   async openHorarios() {
     const modal = await this.modalCtrl.create({
       component: HorariosPage,
@@ -23,10 +33,28 @@ export class HomePage implements OnInit {
     await modal.present();
   }
 
+  async editAvatar() {
+    const modal = await this.modalCtrl.create({
+      component: EditavatarPage,
+      cssClass: 'sizeModalAvatar'
+    });
+  
+    await modal.present();
+  }
+
+  async editdireccion() {
+    const modal = await this.modalCtrl.create({
+      component: EditdireccionPage,
+      cssClass: 'sizeModalDireccion'
+    });
+  
+    await modal.present();
+  }
+
   slideOptsOne = {
     initialSlide: 0,
-    slidesPerView: 1,
-    autoplay:true
+    slidesPerView: 1
+    // autoplay:true
    };
 
 }

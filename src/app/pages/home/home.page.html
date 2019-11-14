@@ -17,41 +17,42 @@
                   <ion-slides [options]="slideOptsOne">
 
                       <ion-slide class="changeStyle">
+                        <div class="divWhite">
+                        </div>
+                              <div class="addPhoto" color="">
+                                  <ion-icon class="addIcon" color="bluedark" name="add-circle-outline" (click)="addslider()"></ion-icon>
+                              </div>
+                      </ion-slide>
+              
+                      <ion-slide class="changeStyle">
                         <img class="imgBanner" src="assets/img/rest1.jpg"/>
                         <div class="divEdit" color="bluelight">
-                          <ion-icon class="iconEditBanner" color="white" name="create" (click)="editSlide"></ion-icon>
+                          <ion-icon class="iconEditBanner" color="white" name="create" (click)="addslider()"></ion-icon>
                         </div>
                       </ion-slide>
               
                       <ion-slide class="changeStyle">
                         <img class="imgBanner" src="assets/img/rest1.jpg"/>
                         <div class="divEdit" color="bluelight">
-                          <ion-icon class="iconEditBanner" color="white" name="create" (click)="editSlide"></ion-icon>
+                          <ion-icon class="iconEditBanner" color="white" name="create" (click)="addslider()"></ion-icon>
                         </div>
                       </ion-slide>
               
                       <ion-slide class="changeStyle">
                         <img class="imgBanner" src="assets/img/rest1.jpg"/>
                         <div class="divEdit" color="bluelight">
-                          <ion-icon class="iconEditBanner" color="white" name="create" (click)="editSlide"></ion-icon>
-                        </div>
-                      </ion-slide>
-              
-                      <ion-slide class="changeStyle">
-                        <img class="imgBanner" src="assets/img/rest1.jpg"/>
-                        <div class="divEdit" color="bluelight">
-                          <ion-icon class="iconEditBanner" color="white" name="create" (click)="editSlide"></ion-icon>
+                          <ion-icon class="iconEditBanner" color="white" name="create" (click)="addslider()"></ion-icon>
                         </div>
                       </ion-slide>
               
                     </ion-slides>
                 <ion-avatar class="avatar">
-                    <img class="imgAvatar" src="assets/img/rest1.jpg" alt="avatar perfil">
+                    <img class="imgAvatar" src="assets/img/rest1.jpg" alt="avatar perfil" (click)="editAvatar()">
                 </ion-avatar>
                 
               </div>
             </ion-col>
-          </ion-row>
+        </ion-row>
           <ion-row class="ion-no-padding">
             <ion-col class="ion-no-padding">
                 <img class="imgMap" src="assets/img/map.png" alt="map">
@@ -61,7 +62,7 @@
               <ion-col size="12">
                   <p class="ion-text-center ion-no-margin font11 pDirection">
                       Carrer de Aribau 655. 08021. Barcelona  
-                      <ion-icon color="bluedark" name="create"></ion-icon>
+                      <ion-icon color="bluedark" name="create" (click)="editdireccion()"></ion-icon>
                   </p>
               </ion-col>
               <ion-col size="12">
@@ -109,7 +110,9 @@
           </ion-row>
           <ion-row>
             <ion-col class="font12 ion-text-center blue-dark2">
-                <ion-icon color="bluedark" name="add-circle-outline"></ion-icon> Agregar productos
+              
+                <span  routerLink="/agregarproducto"><ion-icon color="bluedark" name="add-circle-outline"></ion-icon> Agregar productos</span>
+              
             </ion-col>
           </ion-row>
   </ion-grid>

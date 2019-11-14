@@ -6,8 +6,10 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { HomePage } from './home.page';
-
 import { HorariosPage } from '../modals/horarios/horarios.page';
+import { AddsliderPage } from '../modals/addslider/addslider.page';
+import { EditavatarPage } from '../modals/editavatar/editavatar.page';
+import { EditdireccionPage } from '../modals/editdireccion/editdireccion.page';
 
 import { SharedModule } from '../sharedmodals/shared.module';
 
@@ -28,10 +30,16 @@ const routes: Routes = [
   ],
   declarations: [
     HomePage,
-    HorariosPage
+    HorariosPage,
+    AddsliderPage,
+    EditavatarPage,
+    EditdireccionPage
   ],
   entryComponents: [
-    HorariosPage
+    HorariosPage,
+    AddsliderPage,
+    EditavatarPage,
+    EditdireccionPage
   ]
 })
 export class HomePageModule {}
