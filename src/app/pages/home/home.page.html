@@ -46,9 +46,9 @@
                       </ion-slide>
               
                     </ion-slides>
-                <ion-avatar class="avatar">
-                    <img class="imgAvatar" src="assets/img/rest1.jpg" alt="avatar perfil" (click)="editAvatar()">
-                </ion-avatar>
+                  <ion-avatar class="avatar">
+                      <img class="imgAvatar" src="assets/img/rest1.jpg" alt="avatar perfil" routerLink="/perfil">
+                  </ion-avatar>    
                 
               </div>
             </ion-col>
@@ -124,7 +124,33 @@
       <ion-col class="px-0" size="6">
           <ion-card class="customCard">
               <div class="boxBanner">
-                <img class="imgCarta" src="assets/img/pasta2.jpg" alt="avatar perfil">
+                <!-- <img class="imgCarta" src="assets/img/pasta2.jpg" alt="avatar perfil"> -->
+                <ion-slides>
+                  <ion-slide class="changeStyle">
+                    <img class="imgCarta3" src="assets/img/pasta1.jpg"/>
+                  </ion-slide>
+          
+                  <ion-slide class="changeStyle">
+                    <img class="imgCarta3" src="assets/img/pasta2.jpg"/>
+                  </ion-slide>
+          
+                  <ion-slide class="changeStyle">
+                    <img class="imgCarta3" src="assets/img/pasta1.jpg"/>
+                  </ion-slide>
+          
+                  <ion-slide class="changeStyle">
+                    <img class="imgCarta3" src="assets/img/pasta2.jpg"/>
+                  </ion-slide>
+
+                  <ion-slide class="changeStyle">
+                    <img class="imgCarta3" src="assets/img/pasta1.jpg"/>
+                  </ion-slide>
+          
+                  <ion-slide class="changeStyle">
+                    <img class="imgCarta3" src="assets/img/pasta2.jpg"/>
+                  </ion-slide>
+          
+                </ion-slides>
                 <div class="divEditCard" color="bluelight">
                     <ion-icon class="iconEditCard" color="white" name="create"></ion-icon>
                 </div>
@@ -157,122 +183,200 @@
                     </ion-col>
                   </ion-row>
               </ion-card-content>
-            </ion-card>
+          </ion-card>
       </ion-col>
       <ion-col class="px-0" size="6">
-          <ion-card class="customCard">
-              <div class="boxBanner">
-                <img class="imgCarta" src="assets/img/pasta1.jpg" alt="avatar perfil">
-                <div class="divEditCard" color="bluelight">
-                    <ion-icon class="iconEditCard" color="white" name="create"></ion-icon>
-                </div>
+        <ion-card class="customCard">
+            <div class="boxBanner">
+              <!-- <img class="imgCarta" src="assets/img/pasta2.jpg" alt="avatar perfil"> -->
+              <ion-slides>
+                <ion-slide class="changeStyle">
+                  <img class="imgCarta3" src="assets/img/pasta1.jpg"/>
+                </ion-slide>
+        
+                <ion-slide class="changeStyle">
+                  <img class="imgCarta3" src="assets/img/pasta2.jpg"/>
+                </ion-slide>
+        
+                <ion-slide class="changeStyle">
+                  <img class="imgCarta3" src="assets/img/pasta1.jpg"/>
+                </ion-slide>
+        
+                <ion-slide class="changeStyle">
+                  <img class="imgCarta3" src="assets/img/pasta2.jpg"/>
+                </ion-slide>
+
+                <ion-slide class="changeStyle">
+                  <img class="imgCarta3" src="assets/img/pasta1.jpg"/>
+                </ion-slide>
+        
+                <ion-slide class="changeStyle">
+                  <img class="imgCarta3" src="assets/img/pasta2.jpg"/>
+                </ion-slide>
+        
+              </ion-slides>
+              <div class="divEditCard" color="bluelight">
+                  <ion-icon class="iconEditCard" color="white" name="create"></ion-icon>
               </div>
-              <ion-card-content>
-                <ion-row>
-                  <ion-col class="ion-no-padding ion-align-self-center " size="6">
-                   <p class="hgPCarta my-0 customDarkText font14">
-                      Rao Rest...
+            </div>
+            <ion-card-content>
+              <ion-row>
+                <ion-col class="ion-no-padding ion-align-self-center " size="6">
+                 <p class="hgPCarta my-0 customDarkText font14">
+                    Ikibana S...
+                 </p> 
+                </ion-col>
+                <ion-col class="ion-no-padding" size="6">
+                  <p class="my-0 hgPCarta  customDarkText">
+                    <span class="font27">10</span>
+                    <span class="font12 decimalCarta">,50€</span>
+                  </p>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                  <ion-col class="ion-no-padding ion-align-self-center" size="8">
+                   <p class="hgPCarta my-0 customDarkText font10">
+                      Arroz con setas y...
                    </p> 
                   </ion-col>
-                  <ion-col class="ion-no-padding" size="6">
-                    <p class="my-0 hgPCarta  customDarkText">
-                      <span class="font27">10</span>
-                      <span class="font12 decimalCarta">,50€</span>
-                    </p>
+                  <ion-col class="ion-no-padding ion-align-self-center ion-text-right" size="2">
+                      <ion-icon color="bluedark" name="share"></ion-icon>
+                  </ion-col>
+                  <ion-col class="ion-no-padding ion-align-self-center ion-text-right" size="2">
+                      <ion-icon color="bluedark" name="megaphone"></ion-icon>
                   </ion-col>
                 </ion-row>
-                <ion-row>
-                    <ion-col class="ion-no-padding ion-align-self-center" size="8">
-                     <p class="hgPCarta my-0 customDarkText font10">
-                        Menú Pasta con...
-                     </p> 
-                    </ion-col>
-                    <ion-col class="ion-no-padding ion-align-self-center ion-text-right" size="2">
-                        <ion-icon color="bluedark" name="share"></ion-icon>
-                    </ion-col>
-                    <ion-col class="ion-no-padding ion-align-self-center ion-text-right" size="2">
-                        <ion-icon color="bluedark" name="megaphone"></ion-icon>
-                    </ion-col>
-                  </ion-row>
-              </ion-card-content>
-            </ion-card>
-      </ion-col>
-      <ion-col class="px-0" size="6">
-          <ion-card class="customCard">
-              <div class="boxBanner">
-                <img class="imgCarta" src="assets/img/pasta1.jpg" alt="avatar perfil">
-                <div class="divEditCard" color="bluelight">
-                    <ion-icon class="iconEditCard" color="white" name="create"></ion-icon>
-                </div>
-              </div>
-              <ion-card-content>
-                <ion-row>
-                  <ion-col class="ion-no-padding ion-align-self-center " size="6">
-                   <p class="hgPCarta my-0 customDarkText font14">
-                      Rao Rest...
-                   </p> 
-                  </ion-col>
-                  <ion-col class="ion-no-padding" size="6">
-                    <p class="my-0 hgPCarta  customDarkText">
-                      <span class="font27">10</span>
-                      <span class="font12 decimalCarta">,50€</span>
-                    </p>
-                  </ion-col>
-                </ion-row>
-                <ion-row>
-                    <ion-col class="ion-no-padding ion-align-self-center" size="8">
-                     <p class="hgPCarta my-0 customDarkText font10">
-                        Menú Pasta con...
-                     </p> 
-                    </ion-col>
-                    <ion-col class="ion-no-padding ion-align-self-center ion-text-right" size="2">
-                        <ion-icon color="bluedark" name="share"></ion-icon>
-                    </ion-col>
-                    <ion-col class="ion-no-padding ion-align-self-center ion-text-right" size="2">
-                        <ion-icon color="bluedark" name="megaphone"></ion-icon>
-                    </ion-col>
-                  </ion-row>
-              </ion-card-content>
-            </ion-card>
-      </ion-col>
-      <ion-col class="px-0" size="6">
-          <ion-card class="customCard">
-              <div class="boxBanner">
-                <img class="imgCarta" src="assets/img/pasta1.jpg" alt="avatar perfil">
-                <div class="divEditCard" color="bluelight">
-                    <ion-icon class="iconEditCard" color="white" name="create"></ion-icon>
-                </div>
-              </div>
-              <ion-card-content>
-                <ion-row>
-                  <ion-col class="ion-no-padding ion-align-self-center " size="6">
-                   <p class="hgPCarta my-0 customDarkText font14">
-                      Rao Rest...
-                   </p> 
-                  </ion-col>
-                  <ion-col class="ion-no-padding" size="6">
-                    <p class="my-0 hgPCarta  customDarkText">
-                      <span class="font27">10</span>
-                      <span class="font12 decimalCarta">,50€</span>
-                    </p>
-                  </ion-col>
-                </ion-row>
-                <ion-row>
-                    <ion-col class="ion-no-padding ion-align-self-center" size="8">
-                     <p class="hgPCarta my-0 customDarkText font10">
-                        Menú Pasta con...
-                     </p> 
-                    </ion-col>
-                    <ion-col class="ion-no-padding ion-align-self-center ion-text-right" size="2">
-                        <ion-icon color="bluedark" name="share"></ion-icon>
-                    </ion-col>
-                    <ion-col class="ion-no-padding ion-align-self-center ion-text-right" size="2">
-                        <ion-icon color="bluedark" name="megaphone"></ion-icon>
-                    </ion-col>
-                  </ion-row>
-              </ion-card-content>
-            </ion-card>
-      </ion-col>
+            </ion-card-content>
+        </ion-card>
+    </ion-col>
+    <ion-col class="px-0" size="6">
+      <ion-card class="customCard">
+          <div class="boxBanner">
+            <!-- <img class="imgCarta" src="assets/img/pasta2.jpg" alt="avatar perfil"> -->
+            <ion-slides>
+              <ion-slide class="changeStyle">
+                <img class="imgCarta3" src="assets/img/pasta1.jpg"/>
+              </ion-slide>
+      
+              <ion-slide class="changeStyle">
+                <img class="imgCarta3" src="assets/img/pasta2.jpg"/>
+              </ion-slide>
+      
+              <ion-slide class="changeStyle">
+                <img class="imgCarta3" src="assets/img/pasta1.jpg"/>
+              </ion-slide>
+      
+              <ion-slide class="changeStyle">
+                <img class="imgCarta3" src="assets/img/pasta2.jpg"/>
+              </ion-slide>
+
+              <ion-slide class="changeStyle">
+                <img class="imgCarta3" src="assets/img/pasta1.jpg"/>
+              </ion-slide>
+      
+              <ion-slide class="changeStyle">
+                <img class="imgCarta3" src="assets/img/pasta2.jpg"/>
+              </ion-slide>
+      
+            </ion-slides>
+            <div class="divEditCard" color="bluelight">
+                <ion-icon class="iconEditCard" color="white" name="create"></ion-icon>
+            </div>
+          </div>
+          <ion-card-content>
+            <ion-row>
+              <ion-col class="ion-no-padding ion-align-self-center " size="6">
+               <p class="hgPCarta my-0 customDarkText font14">
+                  Ikibana S...
+               </p> 
+              </ion-col>
+              <ion-col class="ion-no-padding" size="6">
+                <p class="my-0 hgPCarta  customDarkText">
+                  <span class="font27">10</span>
+                  <span class="font12 decimalCarta">,50€</span>
+                </p>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col class="ion-no-padding ion-align-self-center" size="8">
+                 <p class="hgPCarta my-0 customDarkText font10">
+                    Arroz con setas y...
+                 </p> 
+                </ion-col>
+                <ion-col class="ion-no-padding ion-align-self-center ion-text-right" size="2">
+                    <ion-icon color="bluedark" name="share"></ion-icon>
+                </ion-col>
+                <ion-col class="ion-no-padding ion-align-self-center ion-text-right" size="2">
+                    <ion-icon color="bluedark" name="megaphone"></ion-icon>
+                </ion-col>
+              </ion-row>
+          </ion-card-content>
+      </ion-card>
+  </ion-col>
+  <ion-col class="px-0" size="6">
+    <ion-card class="customCard">
+        <div class="boxBanner">
+          <!-- <img class="imgCarta" src="assets/img/pasta2.jpg" alt="avatar perfil"> -->
+          <ion-slides>
+            <ion-slide class="changeStyle">
+              <img class="imgCarta3" src="assets/img/pasta1.jpg"/>
+            </ion-slide>
+    
+            <ion-slide class="changeStyle">
+              <img class="imgCarta3" src="assets/img/pasta2.jpg"/>
+            </ion-slide>
+    
+            <ion-slide class="changeStyle">
+              <img class="imgCarta3" src="assets/img/pasta1.jpg"/>
+            </ion-slide>
+    
+            <ion-slide class="changeStyle">
+              <img class="imgCarta3" src="assets/img/pasta2.jpg"/>
+            </ion-slide>
+
+            <ion-slide class="changeStyle">
+              <img class="imgCarta3" src="assets/img/pasta1.jpg"/>
+            </ion-slide>
+    
+            <ion-slide class="changeStyle">
+              <img class="imgCarta3" src="assets/img/pasta2.jpg"/>
+            </ion-slide>
+    
+          </ion-slides>
+          <div class="divEditCard" color="bluelight">
+              <ion-icon class="iconEditCard" color="white" name="create"></ion-icon>
+          </div>
+        </div>
+        <ion-card-content>
+          <ion-row>
+            <ion-col class="ion-no-padding ion-align-self-center " size="6">
+             <p class="hgPCarta my-0 customDarkText font14">
+                Ikibana S...
+             </p> 
+            </ion-col>
+            <ion-col class="ion-no-padding" size="6">
+              <p class="my-0 hgPCarta  customDarkText">
+                <span class="font27">10</span>
+                <span class="font12 decimalCarta">,50€</span>
+              </p>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+              <ion-col class="ion-no-padding ion-align-self-center" size="8">
+               <p class="hgPCarta my-0 customDarkText font10">
+                  Arroz con setas y...
+               </p> 
+              </ion-col>
+              <ion-col class="ion-no-padding ion-align-self-center ion-text-right" size="2">
+                  <ion-icon color="bluedark" name="share"></ion-icon>
+              </ion-col>
+              <ion-col class="ion-no-padding ion-align-self-center ion-text-right" size="2">
+                  <ion-icon color="bluedark" name="megaphone"></ion-icon>
+              </ion-col>
+            </ion-row>
+        </ion-card-content>
+    </ion-card>
+</ion-col>
     </ion-row>
   </ion-grid>
 

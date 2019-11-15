@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HorariosPage } from '../modals/horarios/horarios.page';
+
 import { AddsliderPage } from '../modals/addslider/addslider.page';
 import { EditavatarPage } from '../modals/editavatar/editavatar.page';
 import { EditdireccionPage } from '../modals/editdireccion/editdireccion.page';
