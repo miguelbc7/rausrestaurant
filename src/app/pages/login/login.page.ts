@@ -15,16 +15,13 @@ import { AuthService } from '../../services/auth.service';
 })
 export class LoginPage implements OnInit {
 
-  public login_form: FormGroup;
-  errorMessage: string = '';
+  public loginForm: FormGroup;
+  errorMessage = '';
+  passwordShown: any;
+  passwordType: string;
 
-  var_u: string = "username";
-
-  passwordType: string = "password";
-  passwordShown: boolean = false;
-  constructor(private modalCtrl: ModalController, public formBuilder: FormBuilder, private router: Router, private authService: AuthService,) {
-
-    
+  constructor(private modalCtrl: ModalController, public formBuilder: FormBuilder, private router: Router,
+              private authService: AuthService, ) {
    }
 
 
@@ -33,13 +30,14 @@ export class LoginPage implements OnInit {
   //   this.router.navigate(["/home"]);
   // }
 
+  // tslint:disable-next-line: variable-name
   validation_messages = {
-    'username': [
+    username: [
         { type: 'required', message: 'Correo ó Teléfono requerido' },
         { type: 'minlength', message: 'Debe ser mayor de 5 caracteres' },
         { type: 'maxlength', message: 'Debe ser menor de 30 caracteres.' }
       ],
-      'password': [
+      password: [
             { type: 'required', message: 'Contraseña Rederida' },
             { type: 'minlength', message: 'Debe ser mayor de 8 caracteres' },
             { type: 'maxlength', message: 'Debe ser menor de 15 caracteres.' },
@@ -49,32 +47,30 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {
 
-      this.login_form = this.formBuilder.group({
+      this.loginForm = this.formBuilder.group({
           username: new FormControl('', Validators.compose([
             Validators.required,
-            Validators.minLength(8),
+            Validators.minLength(5),
             Validators.maxLength(30)
           ]) ),
           password: new FormControl('', Validators.compose([
             Validators.required,
             Validators.minLength(8),
             Validators.maxLength(15),
-            // Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+$') 
-            
-            // Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$.@$!%*?&])[A-Za-z\d$@$.!%*?&].{8,15}')
+            Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$.@$!%*?&])[A-Za-z0-9\d$@$.!%*?&].{8,15}')
 
           ])),
       });
-   
+
   }
 
   loginUser(value){
     this.authService.loginUser(value)
     .then(res => {
       this.errorMessage = "";
-      // this.router.navigate(["/home"]);
+      this.router.navigate(["/home"]);
     },err => {
-      this.errorMessage = "Usuario invalido.";
+      this.errorMessage = 'Usuario invalido.';
       console.log(err);
     })
   }
@@ -106,10 +102,10 @@ export class LoginPage implements OnInit {
   public togglePassword() {
     if(this.passwordShown){
       this.passwordShown = false;
-      this.passwordType = "password";
+      this.passwordType = 'password';
     }else {
       this.passwordShown = true;
-      this.passwordType = "text";
+      this.passwordType = 'text';
     }
   }
 

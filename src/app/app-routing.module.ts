@@ -10,6 +10,7 @@ const routes: Routes = [
   { path: 'opciones', loadChildren: './pages/opciones/opciones.module#OpcionesPageModule' },
   { path: 'agregarproducto', loadChildren: './pages/agregarproducto/agregarproducto.module#AgregarproductoPageModule' },
   { path: 'modal-promocion', loadChildren: './pages/modals/modal-promocion/modal-promocion.module#ModalPromocionPageModule' },
+  { path: 'perfil', loadChildren: './pages/perfil/perfil.module#PerfilPageModule' },
 ];
 
 @NgModule({

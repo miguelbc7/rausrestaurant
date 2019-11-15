@@ -44,40 +44,29 @@ export class AuthService {
 
 
   registerUser(value): Observable<Restaurant>{
-    return this.http
-              // .post(`${this.url}api/restaurants`,value)
-              .post<Restaurant>(`${this.url}restaurants`, JSON.stringify(value), this.httpOptions)
+    return this.http.post<Restaurant>(`${this.url}restaurants`, JSON.stringify(value), this.httpOptions)
               .pipe(
                   catchError(e => {
-                    console.log(e);
+                    console.log('registerUser error: '+e);
                     throw new Error(e);
                 })
     )
-    // return new Promise<any>((resolve, reject) => {
-    //   firebase.auth().createUserWithEmailAndPassword(value.email, value.password)
-    //   .then(
-    //     res => resolve(res),
-    //     err => reject(err))
-    // })
    }
   
    loginUser(value){
-     console.log(value);
     return new Promise<any>((resolve, reject) => {
       firebase.auth().signInWithEmailAndPassword(value.username, value.password)
       .then(
         res => {
-          console.log(res);
           let _token = this.http.post(`${this.url}auth/login`,res).pipe(
             catchError(e => {
               console.log(e.error.msg);
               throw new Error(e);
             })
-          );
-          console.log(_token);
+          );          
           resolve(res)
         },
-        err => reject(err))
+        err =>{ console.log('login auth service error'+ err) ; reject(err) })
     })
    }
   

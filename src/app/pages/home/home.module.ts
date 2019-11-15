@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { HomePage } from './home.page';
+
 import { HorariosPage } from '../modals/horarios/horarios.page';
 import { AddsliderPage } from '../modals/addslider/addslider.page';
 import { EditavatarPage } from '../modals/editavatar/editavatar.page';
