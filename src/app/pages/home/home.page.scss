@@ -59,8 +59,13 @@ ion-slide.changeStyle img {
  .IconNav {
      font-size: 23pt;
  }
- 
 
+ .imgCarta3 {
+    width: 100%;
+    height: 135px;
+    object-fit: cover !important;
+}
+ 
  ion-button {
 	ion-badge {
         position: absolute;

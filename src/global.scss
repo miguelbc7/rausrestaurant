@@ -61,6 +61,10 @@
     margin-bottom: 0px;
 }
 
+.mr-2 {
+    margin-right: .3rem;
+}
+
 // Colores
 
 .blue-light {
@@ -125,12 +129,12 @@
     font-size: 24pt !important;
 }
 
-.font30 {
-    font-size: 30pt !important;
-}
-
 .font27 {
     font-size: 27pt !important;
+}
+
+.font30 {
+    font-size: 30pt !important;
 }
 
 .font40 {
@@ -142,15 +146,6 @@
 }
 
 // CARTAS
-
-// .card-content-md {
-//     padding-left: unset;
-//     padding-right: unset;
-//     -webkit-padding-start: 4px;
-//     padding-inline-start: 4px;
-//     -webkit-padding-end: 4px;
-//     padding-inline-end: 4px;
-// }
 
 .customCard {
     box-shadow: none !important;
@@ -164,16 +159,6 @@
     padding-top: 0px;
     padding-bottom: 0px;
 }
-
-// .card-content-md p {
-//     margin-left: 0;
-//     margin-right: 0;
-//     margin-top: 0;
-//     margin-bottom: 2px;
-//     font-size: 14px;
-//     font-weight: 400;
-//     line-height: 1;
-// }
 
 .imgCarta {
     width: 100%;
@@ -191,6 +176,39 @@
     width: 100%;
     height: auto;
     max-height: 230px;
+}
+
+.divWhite {
+    width: 100%;
+    height: 100%;
+    min-height: 230px;
+    max-height: 230px;
+    position: relative;
+    // background-color: #fff;
+    z-index: 2;
+}
+
+.addPhoto {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+    border:3px solid #fff;
+    padding: 2px;
+    border-radius: 30px;
+    z-index: 2;
+}
+
+.addIcon {
+    position: relative;
+    left: 1px;
+    right: 1px;
+    bottom: 1px;
+    margin:auto;
+    font-size: 42pt;
+    z-index: 2;
 }
 
 .boxBanner {
@@ -229,6 +247,7 @@
     padding: 2px;
     background-color: #657b97;
     border-radius: 15px;
+    z-index: 2;
 }
 
 .iconEditCard {
@@ -462,6 +481,12 @@ ion-label{
     position: absolute; bottom: 20px;
 }
 
+
+
+ion-textarea.textareaCustom{
+    --padding-start: 0px !important;
+}
+
 .sizeCodigo .modal-wrapper {
     height: 200px;
     width: 90%;
@@ -478,6 +503,33 @@ ion-label{
 .sizeModal .modal-wrapper {
     height: 270px;
     width: 65%;
+    top: 0%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    position: absolute; 
+    display: block;  
+    overflow: hidden;
+ }
+
+ .sizeModalAvatar .modal-wrapper {
+    height: 300px;
+    width: 300px;
+    top: 0%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    position: absolute; 
+    display: block;  
+    overflow: hidden;
+ }
+
+ .sizeModalDireccion .modal-wrapper {
+    height: auto;
+    max-height: 250px;
+    width: 300px;
     top: 0%;
     bottom: 0;
     left: 0;
