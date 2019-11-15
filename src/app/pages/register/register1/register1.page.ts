@@ -22,22 +22,26 @@ export class Register1Page implements OnInit {
   passwordShown: boolean = false;
   passwordType2: string = "password";
   passwordShown2: boolean = false;
+  data: { username: any; password: any; };
+  tags:[];
 
   constructor( public formBuilder: FormBuilder, private router: Router,private authService: AuthService,private nativeGeocoder: NativeGeocoder,) {
 
     this.register1 = this.formBuilder.group({
       code: [],
-      tags: [[]],
+      tags: ['aaa','aaasss'],
     });
 
     this.register1 = formBuilder.group({
       business_name: ['', Validators.compose([
         Validators.required,
-        Validators.maxLength(30)
+        Validators.maxLength(300),
+        Validators.minLength(5)
       ])],
       name: ['', Validators.compose([
         Validators.required,
-        Validators.maxLength(30)
+        Validators.maxLength(300),
+        Validators.minLength(5)
       ])],
       cif_nic: ['', Validators.compose([
         Validators.required,
@@ -45,15 +49,17 @@ export class Register1Page implements OnInit {
       ])],
       name_responsable: ['', Validators.compose([
         Validators.required,
-        Validators.maxLength(30)
+        Validators.maxLength(150),
+        Validators.minLength(5)
       ])],
       phone: ['', Validators.compose([
         Validators.required,
-        Validators.maxLength(30)
+        Validators.maxLength(20)
       ])],
       email: ['', Validators.compose([
         Validators.required,
-        Validators.maxLength(30)
+        Validators.maxLength(30),
+        Validators.pattern('[A-Za-z0-9._%+-]{2,}@[a-zA-Z-_.]{2,}[.]{1}[a-zA-Z]{2,}'),
       ])],
       // code: ['', Validators.compose([
       //   Validators.required,
@@ -77,42 +83,83 @@ export class Register1Page implements OnInit {
   validation_messages = {
     'business_name': [
         { type: 'required', message: 'Debe ingresar un nombre comercial.' },
-        { type: 'maxlength', message: 'Debe ser menor de 30 caracteres.' }
+        { type: 'minlength', message: 'Debe ser mayor de 5 caracteres.' },
+        { type: 'maxlength', message: 'Debe ser menor de 300 caracteres.' }
       ],
       'name': [
         { type: 'required', message: 'Debe ingresar un razon social.' },
-        { type: 'maxlength', message: 'Debe ser menor de 30 caracteres.' }
+        { type: 'minlength', message: 'Debe ser mayor de 5 caracteres.' },
+        { type: 'maxlength', message: 'Debe ser menor de 300 caracteres.' }
       ],
       'cif_nic': [
         { type: 'required', message: 'Debe ingresar un cif/nic.' },
         { type: 'maxlength', message: 'Debe ser menor de 20 caracteres.' }
       ],
+      'address': [
+        { type: 'required', message: 'Debe ingresar una dirección.' },
+      ],
+      'name_responsable': [
+        { type: 'required', message: 'Debe ingresar un razon social.' },
+        { type: 'minlength', message: 'Debe ser mayor de 5 caracteres.' },
+        { type: 'maxlength', message: 'Debe ser menor de 30 caracteres.' }
+      ],
+      'phone': [
+        { type: 'required', message: 'Debe ingresar un razon social.' },
+        { type: 'minlength', message: 'Debe ser mayor de 5 caracteres.' },
+        { type: 'maxlength', message: 'Debe ser menor de 30 caracteres.' }
+      ],
+      'email': [
+        { type: 'required', message: 'Debe ingresar un razon social.' },
+        { type: 'minlength', message: 'Debe ser mayor de 5 caracteres.' },
+        { type: 'maxlength', message: 'Debe ser menor de 30 caracteres.' }
+      ],
+      'password': [
+        { type: 'required', message: 'Debe ingresar un razon social.' },
+        { type: 'minlength', message: 'Debe ser mayor de 5 caracteres.' },
+        { type: 'maxlength', message: 'Debe ser menor de 30 caracteres.' }
+      ],
+      'repeat_password': [
+        { type: 'required', message: 'Debe ingresar un razon social.' },
+        { type: 'minlength', message: 'Debe ser mayor de 5 caracteres.' },
+        { type: 'maxlength', message: 'Debe ser menor de 30 caracteres.' }
+      ],
+      'categories': [
+        { type: 'required', message: 'Debe ingresar un razon social.' },
+      ],
     }
 
   onSubmit(values){
-    this.nativeGeocoder.forwardGeocode(values.address)
-    .then((
-      result: NativeGeocoderResult[]
-      ) => {
-        console.log('The coordinates are latitude=' + result[0].latitude + ' and longitude=' + result[0].longitude)
+    // this.nativeGeocoder.forwardGeocode(values.address)
+    // .then((
+    //   result: NativeGeocoderResult[]
+    //   ) => {
+    //     console.log('The coordinates are latitude=' + result[0].latitude + ' and longitude=' + result[0].longitude)
         
-        values.push('lat' , result[0].latitude);
-        values.push('lng' , result[0].longitude);
+    //     values.lat = result[0].latitude;
+    //     values.lng = result[0].longitude;
         
-      }
-      )
-      .catch((error: any) => console.log(error));
-    
+    //   }
+    //   )
+    //   .catch((error: any) => console.log(error));
+    values.lat = 92,44551;
+    values.lng = -80,22231;
     this.authService.registerUser(values)
     .subscribe(res => {
       this.errorMessage = "";
-      console.log(res);
+      this.data.username = values.email;
+      this.data.password = values.password;
+      this.authService.loginUser(this.data);
       // this.router.navigate(["/home"]);
+
     },err => {
       this.errorMessage = "error registro";
       console.log(err);
     })
     // this.router.navigate(["/welcome"]);
+  }
+
+  getCategories(){
+    
   }
 
   ngOnInit() {

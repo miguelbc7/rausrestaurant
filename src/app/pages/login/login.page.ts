@@ -52,7 +52,7 @@ export class LoginPage implements OnInit {
       this.login_form = this.formBuilder.group({
           username: new FormControl('', Validators.compose([
             Validators.required,
-            Validators.minLength(8),
+            Validators.minLength(5),
             Validators.maxLength(30)
           ]) ),
           password: new FormControl('', Validators.compose([
@@ -61,7 +61,7 @@ export class LoginPage implements OnInit {
             Validators.maxLength(15),
             // Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+$') 
             
-            // Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$.@$!%*?&])[A-Za-z\d$@$.!%*?&].{8,15}')
+            Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$.@$!%*?&])[A-Za-z0-9\d$@$.!%*?&].{8,15}')
 
           ])),
       });
@@ -72,7 +72,7 @@ export class LoginPage implements OnInit {
     this.authService.loginUser(value)
     .then(res => {
       this.errorMessage = "";
-      // this.router.navigate(["/home"]);
+      this.router.navigate(["/home"]);
     },err => {
       this.errorMessage = "Usuario invalido.";
       console.log(err);
