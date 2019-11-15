@@ -24,21 +24,7 @@ export class LoginPage implements OnInit {
   passwordShown: boolean = false;
   constructor(private modalCtrl: ModalController, public formBuilder: FormBuilder, private router: Router, private authService: AuthService,) {
 
-<<<<<<< HEAD
-        this.login_form = formBuilder.group({
-          username: ['', Validators.compose([
-            Validators.required,
-            Validators.minLength(8),
-            Validators.maxLength(30)
-          ])],
-          password: ['', Validators.compose([
-            Validators.required,
-            Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,15}')
-          ])],
-      });
-=======
-       
->>>>>>> 0a150d5b7c485537fd9f3e1d527eac72b6c2fcf7
+    
    }
 
 
