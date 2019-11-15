@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 // import { TagsHelper } from '../../helpers/tags-helper';
 // import { MustMatch } from '../../validators/must-match.validator';
 import { AuthService } from '../../../services/auth.service';
-import { NativeGeocoder, NativeGeocoderResult, NativeGeocoderOptions } from '@ionic-native/native-geocoder/ngx';
+import { NativeGeocoder, NativeGeocoderResult } from '@ionic-native/native-geocoder/ngx';
 
 
 @Component({
@@ -13,11 +13,11 @@ import { NativeGeocoder, NativeGeocoderResult, NativeGeocoderOptions } from '@io
   styleUrls: ['./register1.page.scss'],
 })
 export class Register1Page implements OnInit {
-
+  
   public register1: FormGroup;
   form: FormGroup;
-  pass;
-  cpass;
+  pass:any;
+  cpass:any;
   passwordType: string = "password";
   passwordShown: boolean = false;
   passwordType2: string = "password";
@@ -25,12 +25,8 @@ export class Register1Page implements OnInit {
   data: { username: any; password: any; };
   tags:[];
 
-  constructor( public formBuilder: FormBuilder, private router: Router,private authService: AuthService,private nativeGeocoder: NativeGeocoder,) {
 
-    this.register1 = this.formBuilder.group({
-      code: [],
-      tags: ['aaa','aaasss'],
-    });
+  constructor( public formBuilder: FormBuilder, private router: Router,private authService: AuthService,private nativeGeocoder: NativeGeocoder) {
 
     this.register1 = formBuilder.group({
       business_name: ['', Validators.compose([
@@ -52,6 +48,11 @@ export class Register1Page implements OnInit {
         Validators.maxLength(150),
         Validators.minLength(5)
       ])],
+      address: ['', Validators.compose([
+        Validators.required,
+        Validators.maxLength(300),
+        Validators.minLength(5)
+      ])],
       phone: ['', Validators.compose([
         Validators.required,
         Validators.maxLength(20)
@@ -59,20 +60,25 @@ export class Register1Page implements OnInit {
       email: ['', Validators.compose([
         Validators.required,
         Validators.maxLength(30),
+        Validators.minLength(5),
         Validators.pattern('[A-Za-z0-9._%+-]{2,}@[a-zA-Z-_.]{2,}[.]{1}[a-zA-Z]{2,}'),
       ])],
       // code: ['', Validators.compose([
       //   Validators.required,
       // ])],
       categories: ['', Validators.compose([
-        // Validators.required,
+        Validators.required,
       ])],
       password: ['', Validators.compose([
         Validators.required,
+        Validators.maxLength(15),
+        Validators.minLength(8),
         Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&.])[A-Za-z\d$@$!%*?&.].{8,15}')
       ])],
       repeat_password: ['', Validators.compose([
         Validators.required,
+        Validators.maxLength(15),
+        Validators.minLength(8),
         Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&.])[A-Za-z\d$@$!%*?&.].{8,15}')
       ])],
   });
@@ -99,50 +105,52 @@ export class Register1Page implements OnInit {
         { type: 'required', message: 'Debe ingresar una dirección.' },
       ],
       'name_responsable': [
-        { type: 'required', message: 'Debe ingresar un razon social.' },
+        { type: 'required', message: 'Debe ingresar un nombre de responsable en el establecimineto.' },
         { type: 'minlength', message: 'Debe ser mayor de 5 caracteres.' },
         { type: 'maxlength', message: 'Debe ser menor de 30 caracteres.' }
       ],
       'phone': [
-        { type: 'required', message: 'Debe ingresar un razon social.' },
+        { type: 'required', message: 'Debe ingresar un Teléfono.' },
         { type: 'minlength', message: 'Debe ser mayor de 5 caracteres.' },
         { type: 'maxlength', message: 'Debe ser menor de 30 caracteres.' }
       ],
       'email': [
-        { type: 'required', message: 'Debe ingresar un razon social.' },
+        { type: 'required', message: 'Debe ingresar un Correo electrónico.' },
         { type: 'minlength', message: 'Debe ser mayor de 5 caracteres.' },
         { type: 'maxlength', message: 'Debe ser menor de 30 caracteres.' }
       ],
       'password': [
-        { type: 'required', message: 'Debe ingresar un razon social.' },
-        { type: 'minlength', message: 'Debe ser mayor de 5 caracteres.' },
-        { type: 'maxlength', message: 'Debe ser menor de 30 caracteres.' }
+        { type: 'required', message: 'Contraseña Rederida' },
+        { type: 'minlength', message: 'Debe ser mayor de 8 caracteres' },
+        { type: 'maxlength', message: 'Debe ser menor de 15 caracteres.' },
+        { type: 'pattern', message: 'Su contraseña debe contener al menos una mayúscula, una minúscula y un número.' }
       ],
       'repeat_password': [
-        { type: 'required', message: 'Debe ingresar un razon social.' },
-        { type: 'minlength', message: 'Debe ser mayor de 5 caracteres.' },
-        { type: 'maxlength', message: 'Debe ser menor de 30 caracteres.' }
+        { type: 'required', message: 'Contraseña Rederida' },
+        { type: 'minlength', message: 'Debe ser mayor de 8 caracteres' },
+        { type: 'maxlength', message: 'Debe ser menor de 15 caracteres.' },
+        { type: 'pattern', message: 'Su contraseña debe contener al menos una mayúscula, una minúscula y un número.' }
       ],
       'categories': [
-        { type: 'required', message: 'Debe ingresar un razon social.' },
+        { type: 'required', message: 'Debe ingresar por lo menos una actividad de tu empresa.' },
       ],
     }
 
   onSubmit(values){
-    // this.nativeGeocoder.forwardGeocode(values.address)
-    // .then((
-    //   result: NativeGeocoderResult[]
-    //   ) => {
-    //     console.log('The coordinates are latitude=' + result[0].latitude + ' and longitude=' + result[0].longitude)
+    this.nativeGeocoder.forwardGeocode(values.address)
+    .then((
+      result: NativeGeocoderResult[]
+      ) => {
+        console.log('The coordinates are latitude=' + result[0].latitude + ' and longitude=' + result[0].longitude)
         
-    //     values.lat = result[0].latitude;
-    //     values.lng = result[0].longitude;
+        values.lat = result[0].latitude;
+        values.lng = result[0].longitude;
         
-    //   }
-    //   )
-    //   .catch((error: any) => console.log(error));
-    values.lat = 92,44551;
-    values.lng = -80,22231;
+      }
+      )
+      .catch((error: any) => console.log(error));
+    // values.lat = 92,44551;
+    // values.lng = -80,22231;
     this.authService.registerUser(values)
     .subscribe(res => {
       this.errorMessage = "";

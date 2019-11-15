@@ -51,12 +51,6 @@ export class AuthService {
                     throw new Error(e);
                 })
     )
-    // return new Promise<any>((resolve, reject) => {
-    //   firebase.auth().createUserWithEmailAndPassword(value.email, value.password)
-    //   .then(
-    //     res => resolve(res),
-    //     err => reject(err))
-    // })
    }
   
    loginUser(value){
