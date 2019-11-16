@@ -18,7 +18,7 @@ export class LoginPage implements OnInit {
   public loginForm: FormGroup;
   errorMessage = '';
   passwordShown: any;
-  passwordType: string;
+  passwordType: string  = 'password';
 
   constructor(private modalCtrl: ModalController, public formBuilder: FormBuilder, private router: Router,
               private authService: AuthService, ) {
