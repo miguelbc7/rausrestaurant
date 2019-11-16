@@ -67,7 +67,7 @@ export class Register1Page implements OnInit {
       //   Validators.required,
       // ])],
       categories: ['', Validators.compose([
-        Validators.required,
+        // Validators.required,
       ])],
       password: ['', Validators.compose([
         Validators.required,
@@ -131,12 +131,14 @@ export class Register1Page implements OnInit {
         { type: 'maxlength', message: 'Debe ser menor de 15 caracteres.' },
         { type: 'pattern', message: 'Su contraseña debe contener al menos una mayúscula, una minúscula y un número.' }
       ],
-      'categories': [
-        { type: 'required', message: 'Debe ingresar por lo menos una actividad de tu empresa.' },
-      ],
+      // 'categories': [
+      //   { type: 'required', message: 'Debe ingresar por lo menos una actividad de tu empresa.' },
+      // ],
     }
 
   onSubmit(values){
+    values.lat = 92,44551;
+    values.lng = -80,22231;
     this.nativeGeocoder.forwardGeocode(values.address)
     .then((
       result: NativeGeocoderResult[]
@@ -149,18 +151,17 @@ export class Register1Page implements OnInit {
       }
       )
       .catch((error: any) => console.log(error));
-    // values.lat = 92,44551;
-    // values.lng = -80,22231;
+    console.log(this.register1.valid);
     this.authService.registerUser(values)
     .subscribe(res => {
       this.errorMessage = "";
-      this.data.username = values.email;
-      this.data.password = values.password;
-      this.authService.loginUser(this.data);
-      // this.router.navigate(["/home"]);
+      // this.data.username = values.email;
+      // this.data.password = values.password;
+      // this.authService.loginUser(this.data);
+      this.router.navigate(["/welcome"]);
 
     },err => {
-      this.errorMessage = "error registro";
+      this.errorMessage = "Hubo un error durante el proceso del registro, por favor intente de nuevo.";
       console.log(err);
     })
     // this.router.navigate(["/welcome"]);
