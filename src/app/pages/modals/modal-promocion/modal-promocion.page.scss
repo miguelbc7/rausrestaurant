@@ -1,5 +1,6 @@
 .text-promocion{
     padding-top: 10px;
+    margin-bottom: -10px;
     line-height: 1.5;
     color:#4e5d6a;
 }
@@ -22,9 +23,9 @@ input[type="radio"].radio1 {
 	background-color: transparent;
     border: 1px solid #999;
     cursor: pointer;
-    width: 20px;
-    height: 20px;
-    border-radius: 10px;
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
     position: relative;
     -webkit-appearance: none;
 }
@@ -33,13 +34,17 @@ input[type="radio"].radio1:after {
 	content: '';
 	content: "";
     display: block;
-    width: 14px;
-    height: 14px;
+    width: 22px;
+    height: 22px;
     border-radius: 50%;
-    top: 2px;
-    left: 2px;
+    top: 3px;
+    left: 3px;
     position: relative;
 }
 input[type="radio"].radio1:checked:after {
 	background-color: #4e5d6a;
+}
+
+.yellowpromobtn{
+    --background:#e6a430;
 }

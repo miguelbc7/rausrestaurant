@@ -48,6 +48,7 @@ export class HomePage implements OnInit {
     console.log('click');
     const modal = await this.modalCtrl.create({
       component: ModalPromocionPage,
+      cssClass: 'sizeModalPromocion'
     });
   
     await modal.present();

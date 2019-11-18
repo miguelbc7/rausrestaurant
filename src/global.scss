@@ -76,7 +76,7 @@
 }
 
 .blue-dark2{
-    color: #4e5d6a;
+    color: #4e5d6a !important;
 }
 .promo-color{
     color: #e6a430;
@@ -96,6 +96,9 @@
 }
 .font12-8{
     font-size: 12.8px !important;
+}
+.font9{
+    font-size: 9pt !important;
 }
 
 .font10 {
@@ -197,10 +200,14 @@
     justify-content: center;
 }
 
-.btnNuevo {
+.btnNuevoGuardar {
     position: absolute;
     top: 88%;
     left: 37%;
+}
+
+.btnNuevo {
+    margin-top: 5%;
 }
 
 // Menu Restaurante
@@ -579,7 +586,19 @@ ion-textarea.textareaCustom{
     display: block;  
     overflow: hidden;
  }
-
+ .sizeModalPromocion .modal-wrapper {
+    height: auto;
+    max-height: 470px;
+    width: 340px;
+    top: 0%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    position: absolute; 
+    display: block;  
+    overflow: hidden;
+ }
  .sizeModalAvatar .modal-wrapper {
     height: 300px;
     width: 300px;
