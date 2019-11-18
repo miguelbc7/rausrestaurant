@@ -78,7 +78,9 @@
 .blue-dark2{
     color: #4e5d6a;
 }
-
+.promo-color{
+    color: #e6a430;
+}
 .bgHorarios {
     background-color: #fafaf0;
 }
@@ -412,13 +414,23 @@ ion-label{
     font-size: 14pt !important;
 }
 
-.item-label-floating{
-    --min-height: 50px !important;
+
+.label-floating.sc-ion-label-md-h,
+.label-stacked.sc-ion-label-md-h {
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0px;
+    margin-bottom: -10px;
+    padding-bottom: 10px;
 }
 
-.item-label-stacked {
-    --min-height: 50px;
-}
+// .item-label-floating{
+//     --min-height: 50px !important;
+// }
+
+// .item-label-stacked {
+//     --min-height: 50px;
+// }
 
 // .item-has-focus .label-floating.sc-ion-label-md-h {
 //     transform: translate3d(0,10%,0) scale(0.90)!important;
@@ -439,7 +451,10 @@ ion-label{
     font-size: inherit;
 }
 
-.item-label-floating.sc-ion-input-md-h, .item-label-floating .sc-ion-input-md-h, .item-label-stacked.sc-ion-input-md-h, .item-label-stacked .sc-ion-input-md-h {
+.item-label-floating.sc-ion-input-md-h,
+.item-label-floating .sc-ion-input-md-h,
+.item-label-stacked.sc-ion-input-md-h,
+.item-label-stacked .sc-ion-input-md-h {
     --padding-top: 0px;
     --padding-bottom: 0px;
     --padding-start: 0;
@@ -460,12 +475,33 @@ ion-label{
     font-size: inherit;
 }
 
-.item-label-floating.sc-ion-input-ios-h, .item-label-floating .sc-ion-input-ios-h, .item-label-stacked.sc-ion-input-ios-h, .item-label-stacked .sc-ion-input-ios-h {
+.item-label-floating.sc-ion-input-ios-h,
+.item-label-floating .sc-ion-input-ios-h,
+.item-label-stacked.sc-ion-input-ios-h,
+.item-label-stacked .sc-ion-input-ios-h {
     --padding-top: 3px;
     --padding-bottom: 3px;
     --padding-start: 0;
 }
 
+.item-has-focus.label-floating.sc-ion-label-md-h,
+.item-has-focus .label-floating.sc-ion-label-md-h,
+.item-has-placeholder.label-floating.sc-ion-label-md-h,
+.item-has-placeholder .label-floating.sc-ion-label-md-h,
+.item-has-value.label-floating.sc-ion-label-md-h,
+.item-has-value .label-floating.sc-ion-label-md-h {
+    -webkit-transform: translate3d(0,20%,0) scale(.75);
+    transform: translate3d(0,20%,0) scale(.75);
+}
+.native-input.sc-ion-input-ios {
+    padding-left: unset;
+    padding-right: unset;
+    -webkit-padding-start: var(--padding-start);
+    padding-inline-start: var(--padding-start);
+    -webkit-padding-end: var(--padding-end);
+    padding-inline-end: var(--padding-end);
+    padding-bottom: 5px;
+}
 .ion-no-padding3px{
     --padding-start: 4px;
     --padding-end: 4px;
@@ -529,6 +565,20 @@ ion-textarea.textareaCustom{
  .sizeModalDireccion .modal-wrapper {
     height: auto;
     max-height: 250px;
+    width: 300px;
+    top: 0%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    position: absolute; 
+    display: block;  
+    overflow: hidden;
+ }
+
+ .sizeModalPromo1 .modal-wrapper {
+    height: auto;
+    max-height: 70%;
     width: 300px;
     top: 0%;
     bottom: 0;

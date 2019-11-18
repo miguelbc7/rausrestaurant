@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { ModalEditavatarPage } from '../modals/modal-editavatar/modal-editavatar.page';
+
+
 
 @Component({
   selector: 'app-perfil',
@@ -7,9 +11,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PerfilPage implements OnInit {
 
-  constructor() { }
+  constructor(private modalCtrl: ModalController) { }
 
   ngOnInit() {
   }
+
+  async editperfil() {
+    const modal = await this.modalCtrl.create({
+      component: ModalEditavatarPage,
+    });
+    await modal.present();
+ }
 
 }

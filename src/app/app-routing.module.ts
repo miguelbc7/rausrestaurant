@@ -11,6 +11,7 @@ const routes: Routes = [
   { path: 'agregarproducto', loadChildren: './pages/agregarproducto/agregarproducto.module#AgregarproductoPageModule' },
   { path: 'modal-promocion', loadChildren: './pages/modals/modal-promocion/modal-promocion.module#ModalPromocionPageModule' },
   { path: 'perfil', loadChildren: './pages/perfil/perfil.module#PerfilPageModule' },
+  { path: 'modal-editavatar', loadChildren: './pages/modals/modal-editavatar/modal-editavatar.module#ModalEditavatarPageModule' },
 ];
 
 @NgModule({

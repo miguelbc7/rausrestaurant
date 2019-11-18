@@ -23,6 +23,7 @@ export class AgregarproductoPage implements OnInit {
    async presentPromocion() {
     const modal = await this.modalCtrl.create({
       component: ModalPromocionPage,
+      cssClass: 'sizeModalPromo1'
     });
 
     await modal.present();
