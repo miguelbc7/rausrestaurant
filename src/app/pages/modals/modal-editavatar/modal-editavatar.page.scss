@@ -1,9 +1,9 @@
 ion-content{
-    --ion-background-color: rgba(0,0,0,.6);
+    --ion-background-color: rgba(0,0,0,.8);
 }
 
 ion-footer{
-    --ion-background-color: rgba(0,0,0,.6);
+    --ion-background-color: rgba(0,0,0,.8);
 }
 
 .imgPreviuw {
@@ -24,5 +24,7 @@ ion-footer{
 }
 
 .btnNuevo {
-    margin-top: 5%;
+    position: absolute;
+    top: 88%;
+    left: 37%;
 }

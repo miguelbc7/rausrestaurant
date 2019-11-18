@@ -46,8 +46,8 @@
                       </ion-slide>
               
                     </ion-slides>
-                  <ion-avatar class="avatar">
-                      <img class="imgAvatar" src="assets/img/rest1.jpg" alt="avatar perfil" routerLink="/perfil">
+                  <ion-avatar class="avatar" routerLink="/perfil">
+                      <img class="imgAvatar" src="assets/img/rest1.jpg" alt="avatar perfil">
                   </ion-avatar>    
                 
               </div>
@@ -151,7 +151,7 @@
                   </ion-slide>
           
                 </ion-slides>
-                <div class="divEditCard" color="bluelight">
+                <div class="divEditCard" color="bluelight" (click)="addproduct()">
                     <ion-icon class="iconEditCard" color="white" name="create"></ion-icon>
                 </div>
               </div>
@@ -215,7 +215,7 @@
                 </ion-slide>
         
               </ion-slides>
-              <div class="divEditCard" color="bluelight">
+              <div class="divEditCard" color="bluelight" (click)="addproduct()">
                   <ion-icon class="iconEditCard" color="white" name="create"></ion-icon>
               </div>
             </div>
@@ -279,7 +279,7 @@
               </ion-slide>
       
             </ion-slides>
-            <div class="divEditCard" color="bluelight">
+            <div class="divEditCard" color="bluelight" (click)="addproduct()">
                 <ion-icon class="iconEditCard" color="white" name="create"></ion-icon>
             </div>
           </div>
@@ -343,34 +343,34 @@
             </ion-slide>
     
           </ion-slides>
-          <div class="divEditCard" color="bluelight">
+          <div class="divEditCard" color="bluelight" (click)="addproduct()">
               <ion-icon class="iconEditCard" color="white" name="create"></ion-icon>
           </div>
         </div>
         <ion-card-content>
           <ion-row>
-            <ion-col class="ion-no-padding ion-align-self-center " size="6">
-             <p class="hgPCarta my-0 customDarkText font14">
+            <ion-col class="ion-no-padding ion-align-self-center " size="7">
+             <p class="hgPCarta my-0 customDarkText font12">
                 Ikibana S...
              </p> 
             </ion-col>
-            <ion-col class="ion-no-padding" size="6">
+            <ion-col class="ion-no-padding" size="5">
               <p class="my-0 hgPCarta  customDarkText">
-                <span class="font27">10</span>
+                <span class="font25">10</span>
                 <span class="font12 decimalCarta">,50€</span>
               </p>
             </ion-col>
           </ion-row>
           <ion-row>
               <ion-col class="ion-no-padding ion-align-self-center" size="8">
-               <p class="hgPCarta my-0 customDarkText font10">
+               <p class="hgPCarta my-0 customDarkText font12-8">
                   Arroz con setas y...
                </p> 
               </ion-col>
               <ion-col class="ion-no-padding ion-align-self-center ion-text-right" size="2">
                   <ion-icon color="bluedark" name="share"></ion-icon>
               </ion-col>
-              <ion-col class="ion-no-padding ion-align-self-center ion-text-right" size="2">
+              <ion-col class="ion-no-padding ion-align-self-center ion-text-right" size="2" (click)="addpromocion()">
                   <ion-icon color="bluedark" name="megaphone"></ion-icon>
               </ion-col>
             </ion-row>

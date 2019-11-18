@@ -94,6 +94,9 @@
 .font8 {
     font-size: 8pt !important;
 }
+.font12-8{
+    font-size: 12.8px !important;
+}
 
 .font10 {
     font-size: 10pt !important;
@@ -129,6 +132,9 @@
 
 .font24 {
     font-size: 24pt !important;
+}
+.font25{
+    font-size: 25pt !important
 }
 
 .font27 {
@@ -170,6 +176,31 @@
 .imgCarta2 {
     width: 100%;
     height: 120px;
+}
+
+// Modals
+
+.imgPreviuw {
+    width: auto;
+    max-height:450px;
+    max-width: 100%;
+    height: auto;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+}
+
+.boxImg {
+    display: flex;
+    justify-content: center;
+}
+
+.btnNuevo {
+    position: absolute;
+    top: 88%;
+    left: 37%;
 }
 
 // Menu Restaurante

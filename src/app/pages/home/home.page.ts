@@ -3,6 +3,8 @@ import { HorariosPage } from '../modals/horarios/horarios.page';
 
 import { AddsliderPage } from '../modals/addslider/addslider.page';
 import { EditavatarPage } from '../modals/editavatar/editavatar.page';
+import { ModalAddproductPage } from '../modals/modal-addproduct/modal-addproduct.page';
+import { ModalPromocionPage } from '../modals/modal-promocion/modal-promocion.page';
 import { EditdireccionPage } from '../modals/editdireccion/editdireccion.page';
 import { ModalController } from '@ionic/angular';
 
@@ -33,7 +35,23 @@ export class HomePage implements OnInit {
   
     await modal.present();
   }
+  async addproduct() {
+    console.log('click');
+    const modal = await this.modalCtrl.create({
+      component: ModalAddproductPage,
+    });
+  
+    await modal.present();
+  }
 
+  async addpromocion() {
+    console.log('click');
+    const modal = await this.modalCtrl.create({
+      component: ModalPromocionPage,
+    });
+  
+    await modal.present();
+  }
   async editAvatar() {
     const modal = await this.modalCtrl.create({
       component: EditavatarPage,
@@ -57,6 +75,7 @@ export class HomePage implements OnInit {
     slidesPerView: 1
     // autoplay:true
    };
+   
 
 }
 
