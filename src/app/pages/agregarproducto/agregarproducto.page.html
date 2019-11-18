@@ -13,7 +13,7 @@
         </div>
       </ion-col>
       <ion-col class="ion-justify-center ion-align-self-center ion-text-center">
-          <ion-icon class="font20" name="megaphone"></ion-icon>
+          <ion-icon class="font20" name="megaphone" (click)="presentPromocion()"></ion-icon>
           <div class="font8">Promoción</div>  
       </ion-col>
     </ion-row>
@@ -242,7 +242,7 @@
                   </ion-col>
               </ion-row>
               <div class="save-button">
-                  <ion-button class="font12" color="bluedark" (click)="presentPromocion()" float-right>Guardar</ion-button>
+                  <ion-button class="font12 float-right" color="bluedark"  >Guardar</ion-button>
               </div>
           </ion-grid>
             <!-- <label for="Disponible" class="fontSizeLabel">Todas</label> -->
