@@ -23,7 +23,7 @@ export class Register1Page implements OnInit {
   passwordType2: string = "password";
   passwordShown2: boolean = false;
   data: { username: any; password: any; };
-  tags:[];
+  tags:[{ nombre: "#hoteleria"},{ nombre: "#restaurante"} ];
 
 
   constructor( public formBuilder: FormBuilder, private router: Router,private authService: AuthService,private nativeGeocoder: NativeGeocoder) {
@@ -151,6 +151,9 @@ export class Register1Page implements OnInit {
       }
       )
       .catch((error: any) => console.log(error));
+
+    delete values.address;
+    console.log(values);
     this.authService.registerUser(values)
     .subscribe(res => {
       this.errorMessage = "";
@@ -161,13 +164,9 @@ export class Register1Page implements OnInit {
 
     },err => {
       this.errorMessage = "Hubo un error durante el proceso del registro, por favor intente de nuevo.";
-      console.log(err);
+      // console.log(err.msg);
     })
     // this.router.navigate(["/welcome"]);
-  }
-
-  getCategories(){
-    
   }
 
   ngOnInit() {
