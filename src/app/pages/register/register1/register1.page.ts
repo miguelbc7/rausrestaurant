@@ -137,8 +137,8 @@ export class Register1Page implements OnInit {
     }
 
   onSubmit(values){
-    values.lat = 92,44551;
-    values.lng = -80,22231;
+    values.lat = -4.0000000;
+    values.lng = 40.0000000;
     this.nativeGeocoder.forwardGeocode(values.address)
     .then((
       result: NativeGeocoderResult[]
@@ -151,7 +151,6 @@ export class Register1Page implements OnInit {
       }
       )
       .catch((error: any) => console.log(error));
-    console.log(this.register1.valid);
     this.authService.registerUser(values)
     .subscribe(res => {
       this.errorMessage = "";
