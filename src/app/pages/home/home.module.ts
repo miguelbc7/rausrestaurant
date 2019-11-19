@@ -16,7 +16,7 @@ import { EditdireccionPage } from '../modals/editdireccion/editdireccion.page';
 
 import { SharedModule } from '../sharedmodals/shared.module';
 
-import { ExpandableComponent } from "../../components/expandable/expandable.component";
+
 
 
 const routes: Routes = [
@@ -40,14 +40,12 @@ const routes: Routes = [
     EditavatarPage,
     ModalAddproductPage,
     EditdireccionPage,
-    ExpandableComponent
   ],
   entryComponents: [
     HorariosPage,
     EditavatarPage,
     ModalAddproductPage,
     EditdireccionPage,
-    ExpandableComponent
   ]
 })
 export class HomePageModule {}

@@ -380,32 +380,11 @@
     </ion-row>
   </ion-grid>
 
-  <ion-card (click)="expandItem(item)" *ngFor="let item of items">
-      <ion-card-header>
-        <ion-card-title>My Neighbor Totoro</ion-card-title>
-      </ion-card-header>
-  
-      <ion-card-content>
-        <app-expandable expandHeight="100px" [expanded]="item.expanded">
-          <p>
-            Hello there.
-          </p>
-          <p>
-            Hello there.
-          </p>
-          <p>
-            Hello there.
-          </p>
-          <p>
-            Hello there.
-          </p>
-          <p>
-            Hello there.
-          </p>
-          <p>
-            Hello there.
-          </p>
-        </app-expandable>
-      </ion-card-content>
-    </ion-card>
+  <div class="ion-text-center">
+    <ion-button class="font14 blue-dark" fill="clear" routerLink="/historial">historial</ion-button>
+  </div>
+
+  <div class="ion-text-center">
+      <ion-button class="font14 blue-dark" fill="clear" routerLink="/agregar">agregar</ion-button>
+    </div>
 </ion-content>
