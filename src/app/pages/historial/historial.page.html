@@ -1,38 +1,90 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>historial</ion-title>
-  </ion-toolbar>
-</ion-header>
 
 <ion-content>
-
-    <ion-card (click)="expandItem(item)" *ngFor="let item of items">
-        <ion-card-header>
-          <ion-card-title>My Neighbor Totoro</ion-card-title>
+<div>
+  <ion-row>
+    <ion-col size="12">
+      <ion-icon class="iconBack ion-text-center" src="assets/img/icon/back.svg"></ion-icon>
+      <ion-icon class="iconHist ion-text-center" src="assets/img/icon/reloj.svg"></ion-icon>
+      <p class="font18 f-historial ion-text-center">Historial</p>
+    </ion-col>
+  </ion-row>
+</div>
+<!-- Ingresos -->
+    <ion-card class="card-expandable" (click)="expandItem(item)" *ngFor="let item of items">
+        <ion-card-header class="margin-header" (click)="toggleZipped()">
+          <ion-card-title class="font18 color-font">Ingresos <ion-icon class="arrow-icon" color="bluedark" [name]="zipped ? 'arrow-dropright' : 'arrow-dropdown'"></ion-icon>
+          </ion-card-title>
         </ion-card-header>
-    
-        <ion-card-content>
-          <app-expandable expandHeight="100px" [expanded]="item.expanded">
-            <p>
-              Hello there.
+        <ion-card-content class="content-expandable">
+          <app-expandable expandHeight="120px" [expanded]="item.expanded">
+            <p class="font14">
+              Esta semana
             </p>
-            <p>
-              Hello there.
+            <p class="font14">
+              Este mes
             </p>
-            <p>
-              Hello there.
-            </p>
-            <p>
-              Hello there.
-            </p>
-            <p>
-              Hello there.
-            </p>
-            <p>
-              Hello there.
+            <p class="font14">
+              Anterior
             </p>
           </app-expandable>
         </ion-card-content>
       </ion-card>
-
+<!-- Egresos -->
+    <ion-card class="card-expandable" (click)="expandItem2(item)" *ngFor="let item of items">
+          <ion-card-header class="margin-header" (click)="toggleZipped2()">
+            <ion-card-title class="font18 color-font">Egresos <ion-icon class="arrow-icon" color="bluedark" [name]="zipped2 ? 'arrow-dropright' : 'arrow-dropdown'"></ion-icon>
+            </ion-card-title>
+          </ion-card-header>
+          <ion-card-content class="content-expandable">
+            <app-expandable expandHeight="120px" [expanded]="item.expanded2">
+              <p class="font14">
+                Esta semana
+              </p>
+              <p class="font14">
+                Este mes
+              </p>
+              <p class="font14">
+                Anterior
+              </p>
+            </app-expandable>
+          </ion-card-content>
+    </ion-card>
+<!-- Puntos Otorgados -->
+<ion-card class="card-expandable" (click)="expandItem3(item)" *ngFor="let item of items">
+    <ion-card-header class="margin-header" (click)="toggleZipped3()">
+      <ion-card-title class="font18 color-font">Puntos otorgados <ion-icon class="arrow-icon" color="bluedark" [name]="zipped3 ? 'arrow-dropright' : 'arrow-dropdown'"></ion-icon></ion-card-title>
+    </ion-card-header>
+    <ion-card-content class="content-expandable">
+      <app-expandable expandHeight="120px" [expanded]="item.expanded3">
+        <p class="font14">
+          Esta semana
+        </p>
+        <p class="font14">
+          Este mes
+        </p>
+        <p class="font14">
+          Anterior
+        </p>
+      </app-expandable>
+    </ion-card-content>
+</ion-card>
+<!-- Puntos Canjeados -->
+<ion-card class="card-expandable" (click)="expandItem4(item)" *ngFor="let item of items">
+    <ion-card-header class="margin-header" (click)="toggleZipped4()">
+      <ion-card-title class="font18 color-font">Puntos canjeados <ion-icon class="arrow-icon" color="bluedark" [name]="zipped4 ? 'arrow-dropright' : 'arrow-dropdown'"></ion-icon></ion-card-title>
+    </ion-card-header>
+    <ion-card-content class="content-expandable">
+      <app-expandable expandHeight="120px" [expanded]="item.expanded4">
+        <p class="font14">
+          Esta semana
+        </p>
+        <p class="font14">
+          Este mes
+        </p>
+        <p class="font14">
+          Anterior
+        </p>
+      </app-expandable>
+    </ion-card-content>
+</ion-card>
 </ion-content>
