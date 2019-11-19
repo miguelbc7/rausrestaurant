@@ -681,6 +681,20 @@ ion-textarea.textareaCustom{
     overflow: hidden;
  }
 
+ .sizeModalAgregarListo .modal-wrapper {
+    height: auto;
+    max-height: 55%;
+    width: 310px;
+    top: 0%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    position: absolute; 
+    display: block;  
+    overflow: hidden;
+ }
+
  .xModal {
     position: absolute; right: 10px; top: 10px;
  }

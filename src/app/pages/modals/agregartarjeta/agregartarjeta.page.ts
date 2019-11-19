@@ -18,7 +18,7 @@ export class AgregartarjetaPage implements OnInit {
     await this.modalCtrl.dismiss();
     const modal = await this.modalCtrl.create({
       component: AgregarlistoPage,
-      cssClass: 'sizeModalAgregarTajerta'
+      cssClass: 'sizeModalAgregarListo'
     });
     await modal.present();
   }
