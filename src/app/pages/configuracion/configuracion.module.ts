@@ -7,6 +7,9 @@ import { IonicModule } from '@ionic/angular';
 
 import { ConfiguracionPage } from './configuracion.page';
 
+import { ExpandableComponent } from "../../components/expandable/expandable.component";
+
+
 const routes: Routes = [
   {
     path: '',
@@ -21,6 +24,9 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [ConfiguracionPage]
+  declarations: [ConfiguracionPage,ExpandableComponent],
+  entryComponents: [
+    ExpandableComponent
+  ]
 })
 export class ConfiguracionPageModule {}
