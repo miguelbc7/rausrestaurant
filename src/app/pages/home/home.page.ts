@@ -6,6 +6,8 @@ import { EditavatarPage } from '../modals/editavatar/editavatar.page';
 import { ModalAddproductPage } from '../modals/modal-addproduct/modal-addproduct.page';
 import { ModalPromocionPage } from '../modals/modal-promocion/modal-promocion.page';
 import { EditdireccionPage } from '../modals/editdireccion/editdireccion.page';
+import { AgregarPage } from '../modals/agregar/agregar.page';
+// import { AgregartarjetaPage } from '../modals/agregartarjeta/agregartarjeta.page';
 import { ModalController } from '@ionic/angular';
 
 @Component({
@@ -31,9 +33,17 @@ export class HomePage implements OnInit {
     const modal = await this.modalCtrl.create({
       component: HorariosPage,
     });
-  
     await modal.present();
   }
+
+  async openAgregarSaldo() {
+    const modal = await this.modalCtrl.create({
+      component: AgregarPage,
+      cssClass: 'sizeModalAgregarProducto'
+    });
+    await modal.present();
+  }
+
   async addproduct() {
     console.log('click');
     const modal = await this.modalCtrl.create({
@@ -49,7 +59,6 @@ export class HomePage implements OnInit {
       component: ModalPromocionPage,
       cssClass: 'sizeModalPromocion'
     });
-  
     await modal.present();
   }
   async editAvatar() {
@@ -57,7 +66,6 @@ export class HomePage implements OnInit {
       component: EditavatarPage,
       cssClass: 'sizeModalAvatar'
     });
-  
     await modal.present();
   }
 
@@ -66,7 +74,6 @@ export class HomePage implements OnInit {
       component: EditdireccionPage,
       cssClass: 'sizeModalDireccion'
     });
-  
     await modal.present();
   }
 

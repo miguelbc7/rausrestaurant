@@ -13,6 +13,7 @@ const routes: Routes = [
   { path: 'agregar', loadChildren: './pages/modals/agregar/agregar.module#AgregarPageModule' },  { path: 'agregartarjeta', loadChildren: './pages/modals/agregartarjeta/agregartarjeta.module#AgregartarjetaPageModule' },
   { path: 'agregarconfirmar', loadChildren: './pages/modals/agregarconfirmar/agregarconfirmar.module#AgregarconfirmarPageModule' },
   { path: 'agregarlisto', loadChildren: './pages/modals/agregarlisto/agregarlisto.module#AgregarlistoPageModule' },
+  { path: 'configuracion', loadChildren: './pages/configuracion/configuracion.module#ConfiguracionPageModule' },
 
 ];
 

@@ -13,8 +13,13 @@ import { ModalAddproductPage } from '../modals/modal-addproduct/modal-addproduct
 import { EditavatarPage } from '../modals/editavatar/editavatar.page';
 import { EditdireccionPage } from '../modals/editdireccion/editdireccion.page';
 
+import { AgregarPage } from '../modals/agregar/agregar.page';
+import { AgregartarjetaPage } from '../modals/agregartarjeta/agregartarjeta.page';
+import { AgregarlistoPage } from '../modals/agregarlisto/agregarlisto.page';
+
 
 import { SharedModule } from '../sharedmodals/shared.module';
+
 
 
 
@@ -40,12 +45,18 @@ const routes: Routes = [
     EditavatarPage,
     ModalAddproductPage,
     EditdireccionPage,
+    AgregarPage,
+    AgregartarjetaPage,
+    AgregarlistoPage
   ],
   entryComponents: [
     HorariosPage,
     EditavatarPage,
     ModalAddproductPage,
     EditdireccionPage,
+    AgregarPage,
+    AgregartarjetaPage,
+    AgregarlistoPage
   ]
 })
 export class HomePageModule {}

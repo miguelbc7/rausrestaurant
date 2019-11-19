@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { AgregartarjetaPage } from '../agregartarjeta/agregartarjeta.page';
 
 @Component({
   selector: 'app-agregar',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AgregarPage implements OnInit {
 
-  constructor() { }
+  constructor(private modalCtrl: ModalController) { }
 
   ngOnInit() {
+  }
+
+  async openAgregarTarjeta() {
+    await this.modalCtrl.dismiss();
+    const modal = await this.modalCtrl.create({
+      component: AgregartarjetaPage,
+      cssClass: 'sizeModalAgregarTajerta'
+    });
+    await modal.present();
   }
 
 }
