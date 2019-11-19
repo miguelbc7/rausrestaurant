@@ -4,10 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
-import { AddsliderPage } from '../modals/addslider/addslider.page';
-import { ModalPromocionPage } from '../modals/modal-promocion/modal-promocion.page';
+// import { AddsliderPage } from '../modals/addslider/addslider.page';
+// import { ModalPromocionPage } from '../modals/modal-promocion/modal-promocion.page';
+// import { ExcelentePage } from '../modals/excelente/excelente.page';
 import { AgregarproductoPage } from './agregarproducto.page';
-import { ExcelentePage } from '../modals/excelente/excelente.page';
+
+import { SharedModule } from '../sharedmodals/shared.module';
 
 
 const routes: Routes = [
@@ -22,11 +24,19 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
+    SharedModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [AgregarproductoPage, ModalPromocionPage,AddsliderPage,ExcelentePage],
+  declarations: [
+    AgregarproductoPage,
+    // ModalPromocionPage,
+    // AddsliderPage,
+    // ExcelentePage
+  ],
   entryComponents: [
-    ModalPromocionPage,AddsliderPage,ExcelentePage
+    // ModalPromocionPage,
+    // AddsliderPage,
+    // ExcelentePage
   ]
 })
 export class AgregarproductoPageModule {}

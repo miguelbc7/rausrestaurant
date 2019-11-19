@@ -21,9 +21,22 @@ firebase.initializeApp(environment.firebase);
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { AddsliderPage } from './pages/modals/addslider/addslider.page';
+import { ExcelentePage } from './pages/modals/excelente/excelente.page';
+import { ModalPromocionPage } from './pages/modals/modal-promocion/modal-promocion.page';
+
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
+  declarations: [
+    AppComponent,
+    AddsliderPage,
+    ExcelentePage,
+    ModalPromocionPage
+  ],
+  entryComponents: [
+    AddsliderPage,
+    ExcelentePage,
+    ModalPromocionPage
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
