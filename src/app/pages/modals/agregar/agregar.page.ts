@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { AgregartarjetaPage } from '../agregartarjeta/agregartarjeta.page';
+import { AgregarconfirmarPage } from '../agregarconfirmar/agregarconfirmar.page';
 
 @Component({
   selector: 'app-agregar',
@@ -19,6 +20,15 @@ export class AgregarPage implements OnInit {
     const modal = await this.modalCtrl.create({
       component: AgregartarjetaPage,
       cssClass: 'sizeModalAgregarTajerta'
+    });
+    await modal.present();
+  }
+
+  async openConfirmarAgregar() {
+    await this.modalCtrl.dismiss();
+    const modal = await this.modalCtrl.create({
+      component: AgregarconfirmarPage,
+      cssClass: 'sizeModalConfirmacion'
     });
     await modal.present();
   }

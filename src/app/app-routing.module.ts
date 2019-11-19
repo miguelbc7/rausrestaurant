@@ -15,6 +15,8 @@ const routes: Routes = [
   { path: 'agregarlisto', loadChildren: './pages/modals/agregarlisto/agregarlisto.module#AgregarlistoPageModule' },
   { path: 'configuracion', loadChildren: './pages/configuracion/configuracion.module#ConfiguracionPageModule' },
   { path: 'analiticas', loadChildren: './pages/analiticas/analiticas.module#AnaliticasPageModule' },
+  { path: 'cierre', loadChildren: './pages/cierre/cierre.module#CierrePageModule' },
+  { path: 'dineromodal', loadChildren: './pages/modals/dineromodal/dineromodal.module#DineromodalPageModule' },
 
 ];
 

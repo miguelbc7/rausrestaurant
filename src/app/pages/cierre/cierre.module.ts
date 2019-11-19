@@ -2,16 +2,16 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
-
+import { DineromodalPage } from '../modals/dineromodal/dineromodal.page';
 
 import { IonicModule } from '@ionic/angular';
 
-import { AgregarPage } from './agregar.page';
+import { CierrePage } from './cierre.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: AgregarPage
+    component: CierrePage
   }
 ];
 
@@ -23,9 +23,11 @@ const routes: Routes = [
     RouterModule.forChild(routes)
   ],
   declarations: [
-    AgregarPage,
+    CierrePage,
+    DineromodalPage
   ],
   entryComponents: [
+    DineromodalPage
   ]
 })
-export class AgregarPageModule {}
+export class CierrePageModule {}

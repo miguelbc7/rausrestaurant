@@ -35,11 +35,16 @@
   margin-top: 10px;
 }
 
+.bold {
+    font-weight: bold;
+}
+
 // padding
 
 .pt-2 {
     padding-top: .5rem;
 }
+
 
 // no-padding
 
@@ -65,6 +70,11 @@
     margin-right: .3rem;
 }
 
+.mx-2 {
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
 // Colores
 
 .blue-light {
@@ -73,6 +83,10 @@
 
 .blue-dark {
     color:#657b9f;
+}
+
+.text-dorado {
+    color:#958659 !important;
 }
 
 .blue-dark2{
@@ -472,6 +486,7 @@ ion-label{
     padding-bottom: 10px;
 }
 
+
 // .item-label-floating{
 //     --min-height: 50px !important;
 // }
@@ -694,6 +709,50 @@ ion-textarea.textareaCustom{
     display: block;  
     overflow: hidden;
  }
+
+ .sizeModalConfirmacion .modal-wrapper {
+    height: auto;
+    max-height: 35%;
+    width: 310px;
+    top: 0%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    position: absolute; 
+    display: block;  
+    overflow: hidden;
+ }
+
+ .sizeModalDineroModal .modal-wrapper {
+    height: auto;
+    max-height: 30%;
+    width: 310px;
+    top: 0%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    position: absolute; 
+    display: block;  
+    overflow: hidden;
+ }
+
+ .sizeModalCierreModal .modal-wrapper {
+    height: auto;
+    max-height: 80%;
+    width: 310px;
+    top: 0%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    position: absolute; 
+    display: block;  
+    overflow: hidden;
+ }
+
+
 
  .xModal {
     position: absolute; right: 10px; top: 10px;
