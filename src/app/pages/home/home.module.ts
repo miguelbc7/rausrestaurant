@@ -13,6 +13,8 @@ import { ModalAddproductPage } from '../modals/modal-addproduct/modal-addproduct
 import { ModalPromocionPage } from '../modals/modal-promocion/modal-promocion.page';
 import { EditavatarPage } from '../modals/editavatar/editavatar.page';
 import { EditdireccionPage } from '../modals/editdireccion/editdireccion.page';
+import { ExcelentePage } from '../modals/excelente/excelente.page';
+
 
 import { SharedModule } from '../sharedmodals/shared.module';
 
@@ -38,7 +40,8 @@ const routes: Routes = [
     EditavatarPage,
     ModalAddproductPage,
     ModalPromocionPage,
-    EditdireccionPage
+    EditdireccionPage,
+    ExcelentePage
   ],
   entryComponents: [
     HorariosPage,
@@ -46,7 +49,8 @@ const routes: Routes = [
     EditavatarPage,
     ModalAddproductPage,
     ModalPromocionPage,
-    EditdireccionPage
+    EditdireccionPage,
+    ExcelentePage
   ]
 })
 export class HomePageModule {}

@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { AddsliderPage } from '../modals/addslider/addslider.page';
 import { ModalPromocionPage } from '../modals/modal-promocion/modal-promocion.page';
+import { ExcelentePage } from '../modals/excelente/excelente.page';
+
 
 @Component({
   selector: 'app-agregarproducto',
@@ -23,9 +26,23 @@ export class AgregarproductoPage implements OnInit {
    async presentPromocion() {
     const modal = await this.modalCtrl.create({
       component: ModalPromocionPage,
-      cssClass: 'sizeModalPromo1'
+      cssClass: 'sizeModalPromocion'
     });
 
     await modal.present();
   }
+  async addprom() {
+    await this.modalCtrl.dismiss();
+    const modal = await this.modalCtrl.create({
+      component: ExcelentePage,
+      cssClass: 'sizeModalPromocion'
+    });
+    await modal.present();
+  }
+  async addslider() {
+    const modal = await this.modalCtrl.create({
+      component: AddsliderPage,
+    });
+    await modal.present();
+ }
 }

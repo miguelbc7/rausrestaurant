@@ -21,6 +21,10 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [ModalPromocionPage]
+  declarations: [
+    ModalPromocionPage,
+  ],
+  entryComponents: [
+  ]
 })
 export class ModalPromocionPageModule {}

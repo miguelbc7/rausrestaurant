@@ -4,8 +4,11 @@ import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
+import { AddsliderPage } from '../modals/addslider/addslider.page';
 import { ModalPromocionPage } from '../modals/modal-promocion/modal-promocion.page';
 import { AgregarproductoPage } from './agregarproducto.page';
+import { ExcelentePage } from '../modals/excelente/excelente.page';
+
 
 const routes: Routes = [
   {
@@ -21,9 +24,9 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [AgregarproductoPage, ModalPromocionPage],
+  declarations: [AgregarproductoPage, ModalPromocionPage,AddsliderPage,ExcelentePage],
   entryComponents: [
-    ModalPromocionPage
+    ModalPromocionPage,AddsliderPage,ExcelentePage
   ]
 })
 export class AgregarproductoPageModule {}
