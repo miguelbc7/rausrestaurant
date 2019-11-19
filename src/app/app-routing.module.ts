@@ -15,8 +15,13 @@ const routes: Routes = [
   { path: 'agregarlisto', loadChildren: './pages/modals/agregarlisto/agregarlisto.module#AgregarlistoPageModule' },
   { path: 'configuracion', loadChildren: './pages/configuracion/configuracion.module#ConfiguracionPageModule' },
   { path: 'analiticas', loadChildren: './pages/analiticas/analiticas.module#AnaliticasPageModule' },
+<<<<<<< HEAD
   { path: 'cierre', loadChildren: './pages/cierre/cierre.module#CierrePageModule' },
   { path: 'dineromodal', loadChildren: './pages/modals/dineromodal/dineromodal.module#DineromodalPageModule' },
+=======
+  { path: 'fidelizacion', loadChildren: './pages/fidelizacion/fidelizacion.module#FidelizacionPageModule' },
+  { path: 'modal-planes', loadChildren: './pages/modals/modal-planes/modal-planes.module#ModalPlanesPageModule' },
+>>>>>>> c0c70ca9c4c0222dc67e56cef22bfdb167fcb4e1
 
 ];
 

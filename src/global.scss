@@ -614,6 +614,19 @@ ion-textarea.textareaCustom{
     display: block;  
     overflow: hidden;
  }
+ .sizeModalPlanes .modal-wrapper {
+    height: auto;
+    max-height: 470px;
+    width: 340px;
+    top: 0%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    position: absolute; 
+    display: block;  
+    overflow: hidden;
+ }
  .sizeModalPromocion .modal-wrapper {
     height: auto;
     max-height: 470px;
