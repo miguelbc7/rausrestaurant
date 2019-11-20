@@ -10,18 +10,16 @@ const routes: Routes = [
   { path: 'opciones', loadChildren: './pages/opciones/opciones.module#OpcionesPageModule' },
   { path: 'perfil', loadChildren: './pages/perfil/perfil.module#PerfilPageModule' },
   { path: 'historial', loadChildren: './pages/historial/historial.module#HistorialPageModule' },
-  { path: 'agregar', loadChildren: './pages/modals/agregar/agregar.module#AgregarPageModule' },  { path: 'agregartarjeta', loadChildren: './pages/modals/agregartarjeta/agregartarjeta.module#AgregartarjetaPageModule' },
+  { path: 'agregar', loadChildren: './pages/modals/agregar/agregar.module#AgregarPageModule' },
+  { path: 'agregartarjeta', loadChildren: './pages/modals/agregartarjeta/agregartarjeta.module#AgregartarjetaPageModule' },
   { path: 'agregarconfirmar', loadChildren: './pages/modals/agregarconfirmar/agregarconfirmar.module#AgregarconfirmarPageModule' },
   { path: 'agregarlisto', loadChildren: './pages/modals/agregarlisto/agregarlisto.module#AgregarlistoPageModule' },
   { path: 'configuracion', loadChildren: './pages/configuracion/configuracion.module#ConfiguracionPageModule' },
   { path: 'analiticas', loadChildren: './pages/analiticas/analiticas.module#AnaliticasPageModule' },
-<<<<<<< HEAD
   { path: 'cierre', loadChildren: './pages/cierre/cierre.module#CierrePageModule' },
   { path: 'dineromodal', loadChildren: './pages/modals/dineromodal/dineromodal.module#DineromodalPageModule' },
-=======
   { path: 'fidelizacion', loadChildren: './pages/fidelizacion/fidelizacion.module#FidelizacionPageModule' },
   { path: 'modal-planes', loadChildren: './pages/modals/modal-planes/modal-planes.module#ModalPlanesPageModule' },
->>>>>>> c0c70ca9c4c0222dc67e56cef22bfdb167fcb4e1
 
 ];
 

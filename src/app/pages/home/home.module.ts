@@ -13,9 +13,9 @@ import { ModalAddproductPage } from '../modals/modal-addproduct/modal-addproduct
 import { EditavatarPage } from '../modals/editavatar/editavatar.page';
 import { EditdireccionPage } from '../modals/editdireccion/editdireccion.page';
 
-import { AgregarPage } from '../modals/agregar/agregar.page';
-import { AgregartarjetaPage } from '../modals/agregartarjeta/agregartarjeta.page';
-import { AgregarlistoPage } from '../modals/agregarlisto/agregarlisto.page';
+// import { AgregarPage } from '../modals/agregar/agregar.page';
+// import { AgregartarjetaPage } from '../modals/agregartarjeta/agregartarjeta.page';
+// import { AgregarlistoPage } from '../modals/agregarlisto/agregarlisto.page';
 
 import { AgregarconfirmarPage } from '../modals/agregarconfirmar/agregarconfirmar.page';
 import { CierrePage } from '../cierre/cierre.page';
@@ -48,9 +48,9 @@ const routes: Routes = [
     EditavatarPage,
     ModalAddproductPage,
     EditdireccionPage,
-    AgregarPage,
-    AgregartarjetaPage,
-    AgregarlistoPage,
+    // AgregarPage,
+    // AgregartarjetaPage,
+    // AgregarlistoPage,
     AgregarconfirmarPage,
     CierrePage
   ],
@@ -59,9 +59,9 @@ const routes: Routes = [
     EditavatarPage,
     ModalAddproductPage,
     EditdireccionPage,
-    AgregarPage,
-    AgregartarjetaPage,
-    AgregarlistoPage,
+    // AgregarPage,
+    // AgregartarjetaPage,
+    // AgregarlistoPage,
     AgregarconfirmarPage,
     CierrePage
   ]

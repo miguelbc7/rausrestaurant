@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { AgregarPage } from '../modals/agregar/agregar.page';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-opciones',
@@ -8,43 +11,105 @@ import { Component, OnInit } from '@angular/core';
 export class OpcionesPage implements OnInit {
 
   datas = [
-    {status: true, name: 'Cierre día', icono: 'assets/img/icon/campa2.svg'},
-    {status: false, name: 'Agregar', icono: 'assets/img/icon/campa2.svg'},
-    {status: false, name: 'Historial', icono: 'assets/img/icon/campa2.svg'},
-    {status: false, name: 'Recompensas', icono: 'assets/img/icon/campa2.svg'},
-    {status: false, name: 'Analíticas', icono: 'assets/img/icon/campa2.svg'},
-    {status: false, name: 'Perfil', icono: 'assets/img/icon/campa2.svg'},
-    {status: false, name: 'Config', icono: 'assets/img/icon/campa2.svg'},
-    {status: false, name: 'Salir', icono: 'assets/img/icon/campa2.svg'},
-    // {status: false, name: ''}
+    {
+      status: false,
+      name: 'Cierre día',
+      icono: 'assets/img/icon/campa2.svg'
+    },
+    {
+      status: false,
+      name: 'Agregar',
+      icono: 'assets/img/icon/campa2.svg'
+    },
+    {
+      status: false,
+      name: 'Historial',
+      icono: 'assets/img/icon/campa2.svg'
+      },
+    {
+      status: false,
+      name: 'Recompensas',
+      icono: 'assets/img/icon/campa2.svg'
+    },
+    {
+      status: false,
+      name: 'Analíticas',
+      icono: 'assets/img/icon/campa2.svg'
+    },
+    {
+      status: false,
+      name: 'Perfil',
+      icono: 'assets/img/icon/campa2.svg'
+      },
+    {
+      status: false,
+      name: 'Config',
+      icono: 'assets/img/icon/campa2.svg'
+    },
+    {
+      status: false,
+      name: 'Salir',
+      icono: 'assets/img/icon/campa2.svg'
+    },
   ];
 
-  constructor() { }
+  constructor(private modalCtrl: ModalController, private router: Router,) { }
 
-  changeIcon(index: string){
+  changeIcon(index: number){
     if(this.datas[index].status == false){
       this.datas[index].status = !this.datas[index].status;
       for(var i=0;i<this.datas.length;i++){
-        if(parseInt(index) != i ){
+        if(index != i ){
           this.datas[i].status = !this.datas[index].status;
           }
       }
     }
 
     switch(index){
-      case(0):
-        //posicion 1 abrir modal del cierre
-        console.log('cierre');
+      case (0):
+
         break;
-      case(1):
-        //posicion 2 url
-        console.log('agregar');
+
+      case (1):
+        this.presentPoliticas();
+        break;
+
+      case (2):
+        this.router.navigate(['/historial']);
+        break;
+        
+      case (3):
+        
+        break;
+        
+      case (4):
+          this.router.navigate(['/analiticas']);
+        break;
+        
+      case (5):
+          this.router.navigate(['/perfil']);
+        break;
+        
+      case (6):
+          this.router.navigate(['/configuracion']);
+        break;
+        
+      case (7):
+          this.router.navigate(['/login']);
         break;
     }
 
   }
 
   ngOnInit() {
+  }
+
+  async presentPoliticas() {
+    const modal = await this.modalCtrl.create({
+      component: AgregarPage,
+    });
+
+    await modal.present();
   }
 
 }
