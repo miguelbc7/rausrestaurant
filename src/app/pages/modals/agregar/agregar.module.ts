@@ -23,7 +23,7 @@ const routes: Routes = [
     RouterModule.forChild(routes)
   ],
   declarations: [
-    AgregarPage,
+    // AgregarPage,
   ],
   entryComponents: [
   ]

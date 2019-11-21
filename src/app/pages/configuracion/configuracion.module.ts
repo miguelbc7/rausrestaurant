@@ -7,7 +7,9 @@ import { IonicModule } from '@ionic/angular';
 
 import { ConfiguracionPage } from './configuracion.page';
 
-import { ExpandableComponent } from "../../components/expandable/expandable.component";
+import { SharedModule } from '../sharedmodals/shared.module';
+
+// import { ExpandableComponent } from "../../components/expandable/expandable.component";
 
 
 const routes: Routes = [
@@ -22,11 +24,15 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
+    SharedModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [ConfiguracionPage,ExpandableComponent],
+  declarations: [
+    ConfiguracionPage,
+    // ExpandableComponent
+  ],
   entryComponents: [
-    ExpandableComponent
+    // ExpandableComponent
   ]
 })
 export class ConfiguracionPageModule {}

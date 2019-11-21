@@ -17,8 +17,8 @@ import { EditdireccionPage } from '../modals/editdireccion/editdireccion.page';
 // import { AgregartarjetaPage } from '../modals/agregartarjeta/agregartarjeta.page';
 // import { AgregarlistoPage } from '../modals/agregarlisto/agregarlisto.page';
 
-import { AgregarconfirmarPage } from '../modals/agregarconfirmar/agregarconfirmar.page';
-import { CierrePage } from '../cierre/cierre.page';
+// import { AgregarconfirmarPage } from '../modals/agregarconfirmar/agregarconfirmar.page';
+// import { CierrePage } from '../cierre/cierre.page';
 
 
 import { SharedModule } from '../sharedmodals/shared.module';
@@ -48,22 +48,12 @@ const routes: Routes = [
     EditavatarPage,
     ModalAddproductPage,
     EditdireccionPage,
-    // AgregarPage,
-    // AgregartarjetaPage,
-    // AgregarlistoPage,
-    AgregarconfirmarPage,
-    CierrePage
   ],
   entryComponents: [
     HorariosPage,
     EditavatarPage,
     ModalAddproductPage,
     EditdireccionPage,
-    // AgregarPage,
-    // AgregartarjetaPage,
-    // AgregarlistoPage,
-    AgregarconfirmarPage,
-    CierrePage
   ]
 })
 export class HomePageModule {}

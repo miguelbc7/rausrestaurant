@@ -7,7 +7,9 @@ import { IonicModule } from '@ionic/angular';
 
 import { HistorialPage } from './historial.page';
 
-import { ExpandableComponent } from "../../components/expandable/expandable.component";
+import { SharedModule } from '../sharedmodals/shared.module';
+
+// import { ExpandableComponent } from "../../components/expandable/expandable.component";
 
 const routes: Routes = [
   {
@@ -21,14 +23,15 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
+    SharedModule,
     RouterModule.forChild(routes)
   ],
   declarations: [
     HistorialPage,
-    ExpandableComponent
+    // ExpandableComponent
   ],
   entryComponents: [
-    ExpandableComponent
+    // ExpandableComponent
   ]
 })
 export class HistorialPageModule {}

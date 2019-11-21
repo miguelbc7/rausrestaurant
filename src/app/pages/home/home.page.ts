@@ -6,8 +6,8 @@ import { EditavatarPage } from '../modals/editavatar/editavatar.page';
 import { ModalAddproductPage } from '../modals/modal-addproduct/modal-addproduct.page';
 import { ModalPromocionPage } from '../modals/modal-promocion/modal-promocion.page';
 import { EditdireccionPage } from '../modals/editdireccion/editdireccion.page';
-import { AgregarPage } from '../modals/agregar/agregar.page';
-import { CierrePage } from '../cierre/cierre.page';
+// import { AgregarPage } from '../modals/agregar/agregar.page';
+// import { CierrePage } from '../cierre/cierre.page';
 // import { AgregartarjetaPage } from '../modals/agregartarjeta/agregartarjeta.page';
 import { ModalController } from '@ionic/angular';
 
@@ -38,13 +38,13 @@ export class HomePage implements OnInit {
     await modal.present();
   }
 
-  async openAgregarSaldo() {
-    const modal = await this.modalCtrl.create({
-      component: AgregarPage,
-      cssClass: 'sizeModalAgregarProducto'
-    });
-    await modal.present();
-  }
+  // async openAgregarSaldo() {
+  //   const modal = await this.modalCtrl.create({
+  //     component: AgregarPage,
+  //     cssClass: 'sizeModalAgregarProducto'
+  //   });
+  //   await modal.present();
+  // }
 
   async addproduct() {
     console.log('click');
@@ -79,13 +79,13 @@ export class HomePage implements OnInit {
     await modal.present();
   }
 
- async openCierreModal() {
-  const modal = await this.modalCtrl.create({
-    component: CierrePage,
-    cssClass: 'sizeModalCierreModal'
-  });
-  await modal.present();
-}
+//  async openCierreModal() {
+//   const modal = await this.modalCtrl.create({
+//     component: CierrePage,
+//     cssClass: 'sizeModalCierreModal'
+//   });
+//   await modal.present();
+// }
 
   slideOptsOne = {
     initialSlide: 0,

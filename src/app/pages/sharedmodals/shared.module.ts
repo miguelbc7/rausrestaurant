@@ -10,11 +10,14 @@ import { ComponetsPoliticasComponent } from '../../components/componets-politica
 import { ComponentTerminosComponent } from '../../components/component-terminos/component-terminos.component';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
 
+import { ExpandableComponent } from "../../components/expandable/expandable.component";
+
 @NgModule ({
     declarations: [
         ComponetsPoliticasComponent,
         ComponentTerminosComponent,
         NavbarComponent,
+        ExpandableComponent
         // ModalPromocionPage,
         // AddsliderPage,
         // ExcelentePage
@@ -23,6 +26,7 @@ import { NavbarComponent } from '../../components/navbar/navbar.component';
         ComponetsPoliticasComponent,
         ComponentTerminosComponent,
         NavbarComponent,
+        ExpandableComponent
         // ModalPromocionPage,
         // AddsliderPage,
         // ExcelentePage

@@ -3,6 +3,10 @@ import { ModalController } from '@ionic/angular';
 import { AgregarPage } from '../modals/agregar/agregar.page';
 import { Router } from '@angular/router';
 
+import { AgregarconfirmarPage } from '../modals/agregarconfirmar/agregarconfirmar.page';
+import { CierrePage } from '../cierre/cierre.page';
+// import { DineromodalPage } from '../modals/dineromodal/dineromodal.page';
+
 @Component({
   selector: 'app-opciones',
   templateUrl: './opciones.page.html',
@@ -14,42 +18,50 @@ export class OpcionesPage implements OnInit {
     {
       status: false,
       name: 'Cierre día',
-      icono: 'assets/img/icon/campa2.svg'
+      iconoazul: 'assets/img/icon/menu/cierreazul.svg',
+      iconogris: 'assets/img/icon/menu/cierregris.svg'
     },
     {
       status: false,
       name: 'Agregar',
-      icono: 'assets/img/icon/campa2.svg'
+      iconoazul: 'assets/img/icon/menu/agregarazul.svg',
+      iconogris: 'assets/img/icon/menu/agregargris.svg'
     },
     {
       status: false,
       name: 'Historial',
-      icono: 'assets/img/icon/campa2.svg'
+      iconoazul: 'assets/img/icon/menu/historialazul.svg',
+      iconogris: 'assets/img/icon/menu/historialgris.svg'
       },
     {
       status: false,
       name: 'Recompensas',
-      icono: 'assets/img/icon/campa2.svg'
+      iconoazul: 'assets/img/icon/menu/cierreazul.svg',
+      iconogris: 'assets/img/icon/menu/cierregris.svg'
     },
     {
       status: false,
       name: 'Analíticas',
-      icono: 'assets/img/icon/campa2.svg'
+      iconoazul: 'assets/img/icon/menu/analiticasazul.svg',
+      iconogris: 'assets/img/icon/menu/analiticasgris.svg'
     },
     {
       status: false,
       name: 'Perfil',
-      icono: 'assets/img/icon/campa2.svg'
+      iconoazul: 'assets/img/icon/menu/perfilazul.svg',
+      iconogris: 'assets/img/icon/menu/perfilgris.svg'
       },
     {
       status: false,
       name: 'Config',
-      icono: 'assets/img/icon/campa2.svg'
+      iconoazul: 'assets/img/icon/menu/configuracionazul.svg',
+      iconogris: 'assets/img/icon/menu/configuraciongris.svg'
     },
     {
       status: false,
       name: 'Salir',
-      icono: 'assets/img/icon/campa2.svg'
+      iconoazul: 'assets/img/icon/menu/salirazul.svg',
+      iconogris: 'assets/img/icon/menu/salirgris.svg'
     },
   ];
 
@@ -66,12 +78,12 @@ export class OpcionesPage implements OnInit {
     }
 
     switch(index){
-      case (0):
-
+        case (0):
+          this.openCierreModal();
         break;
 
       case (1):
-        this.presentPoliticas();
+        this.openAgregarSaldo();
         break;
 
       case (2):
@@ -104,12 +116,38 @@ export class OpcionesPage implements OnInit {
   ngOnInit() {
   }
 
-  async presentPoliticas() {
+  async openAgregarSaldo() {
     const modal = await this.modalCtrl.create({
       component: AgregarPage,
+      cssClass: 'sizeModalAgregarProducto'
     });
 
     await modal.present();
   }
+
+  async openConfirmarAgregar() {
+    await this.modalCtrl.dismiss();
+    const modal = await this.modalCtrl.create({
+      component: AgregarconfirmarPage,
+      cssClass: 'sizeModalConfirmacion'
+    });
+    await modal.present();
+  }
+
+  async openCierreModal() {
+    const modal = await this.modalCtrl.create({
+      component: CierrePage,
+      cssClass: 'sizeModalCierreModal'
+    });
+    await modal.present();
+  }
+
+//   async openDineroModal() {
+//     const modal = await this.modalCtrl.create({
+//       component: DineromodalPage,
+//       cssClass: 'sizeModalDineroModal'
+//     });
+//     await modal.present();
+//  }
 
 }

@@ -21,6 +21,8 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [AgregarlistoPage]
+  declarations: [
+    
+  ]
 })
 export class AgregarlistoPageModule {}

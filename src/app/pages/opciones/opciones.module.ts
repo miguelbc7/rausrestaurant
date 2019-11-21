@@ -12,6 +12,11 @@ import { AgregarPage } from '../modals/agregar/agregar.page';
 import { AgregartarjetaPage } from '../modals/agregartarjeta/agregartarjeta.page';
 import { AgregarlistoPage } from '../modals/agregarlisto/agregarlisto.page';
 
+import { AgregarconfirmarPage } from '../modals/agregarconfirmar/agregarconfirmar.page';
+import { DineromodalPage } from '../modals/dineromodal/dineromodal.page';
+
+import { CierrePage } from '../cierre/cierre.page';
+
 const routes: Routes = [
   {
     path: '',
@@ -28,15 +33,21 @@ const routes: Routes = [
     RouterModule.forChild(routes)
   ],
   declarations: [
-    OpcionesPage, 
-    AgregarPage, 
+    OpcionesPage,
+    AgregarPage,
     AgregartarjetaPage,
     AgregarlistoPage,
+    AgregarconfirmarPage,
+    CierrePage,
+    DineromodalPage
   ],
   entryComponents: [
     AgregarPage,
     AgregartarjetaPage,
     AgregarlistoPage,
+    AgregarconfirmarPage,
+    CierrePage,
+    DineromodalPage
   ]
 })
 export class OpcionesPageModule {}

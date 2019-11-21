@@ -15,6 +15,7 @@ export class CierrePage implements OnInit {
   }
 
   async openDineroModal() {
+    await this.modalCtrl.dismiss();
     const modal = await this.modalCtrl.create({
       component: DineromodalPage,
       cssClass: 'sizeModalDineroModal'
