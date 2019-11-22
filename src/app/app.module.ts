@@ -25,6 +25,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AddsliderPage } from './pages/modals/addslider/addslider.page';
 import { ExcelentePage } from './pages/modals/excelente/excelente.page';
 import { ModalPromocionPage } from './pages/modals/modal-promocion/modal-promocion.page';
+import { IonicStorageModule } from '@ionic/storage';
 
 
 @NgModule({
@@ -48,6 +49,7 @@ import { ModalPromocionPage } from './pages/modals/modal-promocion/modal-promoci
     AppRoutingModule,
     AngularFireAuthModule,
     HttpClientModule,
+    IonicStorageModule.forRoot(),
   ],
   providers: [
     StatusBar,

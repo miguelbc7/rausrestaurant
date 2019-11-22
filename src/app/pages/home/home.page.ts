@@ -10,6 +10,7 @@ import { EditdireccionPage } from '../modals/editdireccion/editdireccion.page';
 // import { CierrePage } from '../cierre/cierre.page';
 // import { AgregartarjetaPage } from '../modals/agregartarjeta/agregartarjeta.page';
 import { ModalController } from '@ionic/angular';
+import { ProductosService } from '../../services/productos.service';
 
 
 @Component({
@@ -19,10 +20,14 @@ import { ModalController } from '@ionic/angular';
 })
 export class HomePage implements OnInit {
 
-  constructor(private modalCtrl: ModalController) {
+  productos:any;
+
+  constructor(private modalCtrl: ModalController, public productosService: ProductosService) {
+    this.productos = [];
    }
 
   ngOnInit() {
+    this.getListProductos();
   }
   async addslider() {
    const modal = await this.modalCtrl.create({
@@ -93,6 +98,13 @@ export class HomePage implements OnInit {
     // autoplay:true
    };
    
+   getListProductos()
+   {
+    this.productosService.getList().subscribe(response => {
+      console.log(response);
+      this.productos = response;
+    })
+   }
 
 }
 

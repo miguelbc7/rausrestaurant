@@ -58,16 +58,27 @@ export class AuthService {
       firebase.auth().signInWithEmailAndPassword(value.username, value.password)
       .then(
         res => {
-          let _token = this.http.post(`${this.url}auth/login`,res).pipe(
-            catchError(e => {
-              console.log(e.error.msg);
-              throw new Error(e);
-            })
-          );          
+          // this.http.post(`${this.url}auth/login`,res).pipe(
+          //   catchError(e => {
+          //     console.log(e.error.msg);
+          //     throw new Error(e);
+          //   })
+          // );          
           resolve(res)
         },
         err =>{ console.log('login auth service error'+ err) ; reject(err) })
     })
+   }
+
+   getToken(value): Observable<any>{
+     console.log('token '+ value)
+    return this.http.post(`${this.url}auth/login`, JSON.stringify({uid:value}), this.httpOptions)
+    .pipe(
+        catchError(e => {
+          throw new Error(e);
+          console.log('tokenr error: '+e);
+      })
+    )
    }
   
    logoutUser(){

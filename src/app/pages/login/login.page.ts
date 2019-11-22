@@ -6,6 +6,7 @@ import { NewPasswordPage } from '../modals/new-password/new-password.page';
 import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { Storage } from '@ionic/storage';
 
 
 @Component({
@@ -21,7 +22,7 @@ export class LoginPage implements OnInit {
   passwordType: string  = 'password';
 
   constructor(private modalCtrl: ModalController, public formBuilder: FormBuilder, private router: Router,
-              private authService: AuthService, ) {
+              private authService: AuthService, private storage: Storage) {
    }
 
 
@@ -68,7 +69,11 @@ export class LoginPage implements OnInit {
     this.authService.loginUser(value)
     .then(res => {
       this.errorMessage = "";
-      this.router.navigate(["/home"]);
+      this.authService.getToken(res.user.uid).subscribe(token =>{
+        console.log(token);
+        this.storage.set('token', token);
+        this.router.navigate(["/home"]);
+      });
     },err => {
       this.errorMessage = 'Usuario invalido.';
       console.log(err);
