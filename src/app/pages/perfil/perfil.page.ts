@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { ModalEditavatarPage } from '../modals/modal-editavatar/modal-editavatar.page';
+import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
+import { Storage } from '@ionic/storage';
 
 
 
@@ -11,10 +15,78 @@ import { ModalEditavatarPage } from '../modals/modal-editavatar/modal-editavatar
 })
 export class PerfilPage implements OnInit {
 
-  constructor(private modalCtrl: ModalController) { }
+  public profileForm: FormGroup;
+  errorMessage = '';
+  profile:any =[];
+
+  constructor(private modalCtrl: ModalController, public formBuilder: FormBuilder, private router: Router,
+    private authService: AuthService, private storage: Storage) { 
+
+      this.profileForm = this.formBuilder.group({
+        business_name: ['', Validators.compose([
+          Validators.required,
+          Validators.maxLength(300),
+          Validators.minLength(5)
+        ])],
+        address: ['', Validators.compose([
+          Validators.required,
+          Validators.maxLength(300),
+          Validators.minLength(5)
+        ])],
+        phone: ['', Validators.compose([
+          Validators.required,
+          Validators.maxLength(20)
+        ])],
+        email: ['', Validators.compose([
+          Validators.required,
+          Validators.maxLength(30),
+          Validators.minLength(5),
+          Validators.pattern('[A-Za-z0-9._%+-]{2,}@[a-zA-Z-_.]{2,}[.]{1}[a-zA-Z]{2,}'),
+        ])],
+        password: ['', Validators.compose([
+          Validators.required,
+          Validators.maxLength(15),
+          Validators.minLength(8),
+          Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&.])[A-Za-z\d$@$!%*?&.].{8,15}')
+        ])],
+    });
+
+    }
 
   ngOnInit() {
+    this.getUserDetail();
+    
   }
+  validation_messages = {
+    'business_name': [
+        { type: 'required', message: 'Debe ingresar un nombre comercial.' },
+        { type: 'minlength', message: 'Debe ser mayor de 5 caracteres.' },
+        { type: 'maxlength', message: 'Debe ser menor de 300 caracteres.' }
+      ],
+      'address': [
+        { type: 'required', message: 'Debe ingresar una dirección.' },
+      ],
+      'phone': [
+        { type: 'required', message: 'Debe ingresar un Teléfono.' },
+        { type: 'minlength', message: 'Debe ser mayor de 5 caracteres.' },
+        { type: 'maxlength', message: 'Debe ser menor de 30 caracteres.' }
+      ],
+      'email': [
+        { type: 'required', message: 'Debe ingresar un Correo electrónico.' },
+        { type: 'minlength', message: 'Debe ser mayor de 5 caracteres.' },
+        { type: 'maxlength', message: 'Debe ser menor de 30 caracteres.' }
+      ],
+      'password': [
+        { type: 'required', message: 'Contraseña Requerida' },
+        { type: 'minlength', message: 'Debe ser mayor de 8 caracteres' },
+        { type: 'maxlength', message: 'Debe ser menor de 15 caracteres.' },
+        { type: 'pattern', message: 'Su contraseña debe contener al menos una mayúscula, una minúscula y un número.' }
+      ],
+      // 'categories': [
+      //   { type: 'required', message: 'Debe ingresar por lo menos una actividad de tu empresa.' },
+      // ],
+    }
+
 
   async editperfil() {
     const modal = await this.modalCtrl.create({
@@ -22,5 +94,14 @@ export class PerfilPage implements OnInit {
     });
     await modal.present();
  }
+
+ getUserDetail(){
+  this.storage.get('user').then(res=>{
+    if(res){
+      this.profile = res;
+    }
+  });
+ }
+ 
 
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { ExcelentePage } from '../excelente/excelente.page';
+import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 
 
 @Component({
@@ -10,9 +11,19 @@ import { ExcelentePage } from '../excelente/excelente.page';
 })
 export class ModalPromocionPage implements OnInit {
 
-  constructor(private modalCtrl: ModalController) { }
+  public promotionForm : FormGroup;
+
+  constructor(
+    private modalCtrl: ModalController,
+    public formBuilder: FormBuilder, 
+    ) { }
 
   ngOnInit() {
+    this.promotionForm = this.formBuilder.group({
+      name: new FormControl('', Validators.compose([
+        Validators.required,
+      ]) ),
+  });
   }
   async closeModal() {
     await this.modalCtrl.dismiss();

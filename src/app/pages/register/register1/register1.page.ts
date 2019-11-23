@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 // import { MustMatch } from '../../validators/must-match.validator';
 import { AuthService } from '../../../services/auth.service';
 import { NativeGeocoder, NativeGeocoderResult } from '@ionic-native/native-geocoder/ngx';
+import { Storage } from '@ionic/storage';
 
 
 @Component({
@@ -26,7 +27,7 @@ export class Register1Page implements OnInit {
   tags:[{ nombre: "#hoteleria"},{ nombre: "#restaurante"} ];
 
 
-  constructor( public formBuilder: FormBuilder, private router: Router,private authService: AuthService,private nativeGeocoder: NativeGeocoder) {
+  constructor( public formBuilder: FormBuilder, private router: Router,private authService: AuthService,private nativeGeocoder: NativeGeocoder, private storage: Storage) {
 
     this.register1 = formBuilder.group({
       business_name: ['', Validators.compose([
@@ -136,7 +137,8 @@ export class Register1Page implements OnInit {
       // ],
     }
 
-  onSubmit(values){
+  async onSubmit(values){
+   await this.storage.set('user', values);
     values.lat = -4.0000000;
     values.lng = 40.0000000;
     this.nativeGeocoder.forwardGeocode(values.address)
@@ -151,7 +153,7 @@ export class Register1Page implements OnInit {
       }
       )
       .catch((error: any) => console.log(error));
-
+      
     delete values.address;
     console.log(values);
     this.authService.registerUser(values)

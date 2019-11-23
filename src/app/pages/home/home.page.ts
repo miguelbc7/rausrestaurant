@@ -11,6 +11,7 @@ import { EditdireccionPage } from '../modals/editdireccion/editdireccion.page';
 // import { AgregartarjetaPage } from '../modals/agregartarjeta/agregartarjeta.page';
 import { ModalController } from '@ionic/angular';
 import { ProductosService } from '../../services/productos.service';
+import { Storage } from '@ionic/storage';
 
 
 @Component({
@@ -21,9 +22,13 @@ import { ProductosService } from '../../services/productos.service';
 export class HomePage implements OnInit {
 
   productos:any;
+  token:any;
 
-  constructor(private modalCtrl: ModalController, public productosService: ProductosService) {
+  constructor(private modalCtrl: ModalController, public productosService: ProductosService, private storage: Storage) {
     this.productos = [];
+    this.storage.get('_token').then(val =>{
+      this.token = val.token;
+    })
    }
 
   ngOnInit() {
@@ -60,8 +65,8 @@ export class HomePage implements OnInit {
     await modal.present();
   }
 
-  async addpromocion() {
-    console.log('click');
+  async addpromocion(productID) {
+    this.storage.set('productID', productID);
     const modal = await this.modalCtrl.create({
       component: ModalPromocionPage,
       cssClass: 'sizeModalPromocion'
@@ -100,9 +105,13 @@ export class HomePage implements OnInit {
    
    getListProductos()
    {
-    this.productosService.getList().subscribe(response => {
-      console.log(response);
-      this.productos = response;
+    this.productosService.getList().then(response => {
+      response.subscribe((data) => {
+        this.productos = data.products;
+        console.log(data);
+     }, err => {
+      console.log(err);
+    });
     })
    }
 

@@ -69,9 +69,9 @@ export class LoginPage implements OnInit {
     this.authService.loginUser(value)
     .then(res => {
       this.errorMessage = "";
+      this.storage.set('_uid', res.user.uid);
       this.authService.getToken(res.user.uid).subscribe(token =>{
-        console.log(token);
-        this.storage.set('token', token);
+        this.storage.set('_token', token);
         this.router.navigate(["/home"]);
       });
     },err => {

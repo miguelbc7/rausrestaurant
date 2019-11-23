@@ -62,7 +62,7 @@
               <ion-col size="12">
                   <p class="ion-text-center ion-no-margin font11 pDirection">
                       Carrer de Aribau 655. 08021. Barcelona  
-                      <ion-icon color="bluedark" name="create" (click)="editdireccion()"></ion-icon>
+                      <ion-icon color="bluedark" name="create" routerLink="/perfil"></ion-icon>
                   </p>
               </ion-col>
               <ion-col size="12">
@@ -120,36 +120,20 @@
       <p class="ion-text-center">Tus promociones</p>
   </ion-text> -->
   <ion-grid class="px-0">
-    <ion-row>
-      <ion-col class="px-0" size="6">
+    <ion-row >
+      <ion-col class="px-0" size="6" *ngFor="let product of productos; let i = index">
           <ion-card class="customCard">
               <div class="boxBanner">
                 <!-- <img class="imgCarta" src="assets/img/pasta2.jpg" alt="avatar perfil"> -->
-                <ion-slides>
+                <ion-slides *ngIf="product.images.length > 0">
+                  <ion-slide class="changeStyle"  *ngFor="let img of product.images; let imgIndex = index">
+                    <img class="imgCarta3" src="assets/img/pasta1.jpg"/>
+                  </ion-slide>
+                </ion-slides>
+                <ion-slides *ngIf="product.images.length == 0">
                   <ion-slide class="changeStyle">
                     <img class="imgCarta3" src="assets/img/pasta1.jpg"/>
                   </ion-slide>
-          
-                  <ion-slide class="changeStyle">
-                    <img class="imgCarta3" src="assets/img/pasta2.jpg"/>
-                  </ion-slide>
-          
-                  <ion-slide class="changeStyle">
-                    <img class="imgCarta3" src="assets/img/pasta1.jpg"/>
-                  </ion-slide>
-          
-                  <ion-slide class="changeStyle">
-                    <img class="imgCarta3" src="assets/img/pasta2.jpg"/>
-                  </ion-slide>
-
-                  <ion-slide class="changeStyle">
-                    <img class="imgCarta3" src="assets/img/pasta1.jpg"/>
-                  </ion-slide>
-          
-                  <ion-slide class="changeStyle">
-                    <img class="imgCarta3" src="assets/img/pasta2.jpg"/>
-                  </ion-slide>
-          
                 </ion-slides>
                 <div class="divEditCard" color="bluelight" (click)="addproduct()">
                     <ion-icon class="iconEditCard" color="white" name="create"></ion-icon>
@@ -159,7 +143,7 @@
                 <ion-row>
                   <ion-col class="ion-no-padding ion-align-self-center " size="7">
                    <p class="hgPCarta my-0 customDarkText font12">
-                      Ikibana S...
+                     {{product.name}}
                    </p> 
                   </ion-col>
                   <ion-col class="ion-no-padding" size="5">
@@ -172,211 +156,20 @@
                 <ion-row>
                     <ion-col class="ion-no-padding ion-align-self-center" size="8">
                      <p class="hgPCarta my-0 customDarkText font9">
-                        Arroz con setas y...
+                        {{ product.ingredients.toString() }}
                      </p> 
                     </ion-col>
                     <ion-col class="ion-no-padding ion-align-self-center ion-text-right" size="2">
                         <ion-icon color="bluedark" name="share"></ion-icon>
                     </ion-col>
-                    <ion-col class="ion-no-padding ion-align-self-center ion-text-right" size="2" (click)="addpromocion()">
+                    <ion-col class="ion-no-padding ion-align-self-center ion-text-right" size="2" (click)="addpromocion(product.id)">
                         <ion-icon color="bluedark" name="megaphone"></ion-icon>
                     </ion-col>
                   </ion-row>
               </ion-card-content>
           </ion-card>
       </ion-col>
-      <ion-col class="px-0" size="6">
-        <ion-card class="customCard">
-            <div class="boxBanner">
-              <!-- <img class="imgCarta" src="assets/img/pasta2.jpg" alt="avatar perfil"> -->
-              <ion-slides>
-                <ion-slide class="changeStyle">
-                  <img class="imgCarta3" src="assets/img/pasta1.jpg"/>
-                </ion-slide>
-        
-                <ion-slide class="changeStyle">
-                  <img class="imgCarta3" src="assets/img/pasta2.jpg"/>
-                </ion-slide>
-        
-                <ion-slide class="changeStyle">
-                  <img class="imgCarta3" src="assets/img/pasta1.jpg"/>
-                </ion-slide>
-        
-                <ion-slide class="changeStyle">
-                  <img class="imgCarta3" src="assets/img/pasta2.jpg"/>
-                </ion-slide>
-
-                <ion-slide class="changeStyle">
-                  <img class="imgCarta3" src="assets/img/pasta1.jpg"/>
-                </ion-slide>
-        
-                <ion-slide class="changeStyle">
-                  <img class="imgCarta3" src="assets/img/pasta2.jpg"/>
-                </ion-slide>
-        
-              </ion-slides>
-              <div class="divEditCard" color="bluelight" (click)="addproduct()">
-                  <ion-icon class="iconEditCard" color="white" name="create"></ion-icon>
-              </div>
-            </div>
-            <ion-card-content>
-              <ion-row>
-                <ion-col class="ion-no-padding ion-align-self-center " size="7">
-                 <p class="hgPCarta my-0 customDarkText font12">
-                    Ikibana S...
-                 </p> 
-                </ion-col>
-                <ion-col class="ion-no-padding" size="5">
-                  <p class="my-0 hgPCarta  customDarkText">
-                    <span class="font25">10</span>
-                    <span class="font12 decimalCarta">,50€</span>
-                  </p>
-                </ion-col>
-              </ion-row>
-              <ion-row>
-                  <ion-col class="ion-no-padding ion-align-self-center" size="8">
-                   <p class="hgPCarta my-0 customDarkText font9">
-                      Arroz con setas y...
-                   </p> 
-                  </ion-col>
-                  <ion-col class="ion-no-padding ion-align-self-center ion-text-right" size="2">
-                      <ion-icon color="bluedark" name="share"></ion-icon>
-                  </ion-col>
-                  <ion-col class="ion-no-padding ion-align-self-center ion-text-right" size="2" (click)="addpromocion()">
-                      <ion-icon color="bluedark" name="megaphone"></ion-icon>
-                  </ion-col>
-                </ion-row>
-            </ion-card-content>
-        </ion-card>
-    </ion-col>
-    <ion-col class="px-0" size="6">
-      <ion-card class="customCard">
-          <div class="boxBanner">
-            <!-- <img class="imgCarta" src="assets/img/pasta2.jpg" alt="avatar perfil"> -->
-            <ion-slides>
-              <ion-slide class="changeStyle">
-                <img class="imgCarta3" src="assets/img/pasta1.jpg"/>
-              </ion-slide>
-      
-              <ion-slide class="changeStyle">
-                <img class="imgCarta3" src="assets/img/pasta2.jpg"/>
-              </ion-slide>
-      
-              <ion-slide class="changeStyle">
-                <img class="imgCarta3" src="assets/img/pasta1.jpg"/>
-              </ion-slide>
-      
-              <ion-slide class="changeStyle">
-                <img class="imgCarta3" src="assets/img/pasta2.jpg"/>
-              </ion-slide>
-
-              <ion-slide class="changeStyle">
-                <img class="imgCarta3" src="assets/img/pasta1.jpg"/>
-              </ion-slide>
-      
-              <ion-slide class="changeStyle">
-                <img class="imgCarta3" src="assets/img/pasta2.jpg"/>
-              </ion-slide>
-      
-            </ion-slides>
-            <div class="divEditCard" color="bluelight" (click)="addproduct()">
-                <ion-icon class="iconEditCard" color="white" name="create"></ion-icon>
-            </div>
-          </div>
-          <ion-card-content>
-            <ion-row>
-              <ion-col class="ion-no-padding ion-align-self-center " size="7">
-               <p class="hgPCarta my-0 customDarkText font12">
-                  Ikibana S...
-               </p> 
-              </ion-col>
-              <ion-col class="ion-no-padding" size="5">
-                <p class="my-0 hgPCarta  customDarkText">
-                  <span class="font25">10</span>
-                  <span class="font12 decimalCarta">,50€</span>
-                </p>
-              </ion-col>
-            </ion-row>
-            <ion-row>
-                <ion-col class="ion-no-padding ion-align-self-center" size="8">
-                 <p class="hgPCarta my-0 customDarkText font9">
-                    Arroz con setas y...
-                 </p> 
-                </ion-col>
-                <ion-col class="ion-no-padding ion-align-self-center ion-text-right" size="2">
-                    <ion-icon color="bluedark" name="share"></ion-icon>
-                </ion-col>
-                <ion-col class="ion-no-padding ion-align-self-center ion-text-right" size="2" (click)="addpromocion()">
-                    <ion-icon color="bluedark" name="megaphone"></ion-icon>
-                </ion-col>
-              </ion-row>
-          </ion-card-content>
-      </ion-card>
-  </ion-col>
-  <ion-col class="px-0" size="6">
-    <ion-card class="customCard">
-        <div class="boxBanner">
-          <!-- <img class="imgCarta" src="assets/img/pasta2.jpg" alt="avatar perfil"> -->
-          <ion-slides>
-            <ion-slide class="changeStyle">
-              <img class="imgCarta3" src="assets/img/pasta1.jpg"/>
-            </ion-slide>
-    
-            <ion-slide class="changeStyle">
-              <img class="imgCarta3" src="assets/img/pasta2.jpg"/>
-            </ion-slide>
-    
-            <ion-slide class="changeStyle">
-              <img class="imgCarta3" src="assets/img/pasta1.jpg"/>
-            </ion-slide>
-    
-            <ion-slide class="changeStyle">
-              <img class="imgCarta3" src="assets/img/pasta2.jpg"/>
-            </ion-slide>
-
-            <ion-slide class="changeStyle">
-              <img class="imgCarta3" src="assets/img/pasta1.jpg"/>
-            </ion-slide>
-    
-            <ion-slide class="changeStyle">
-              <img class="imgCarta3" src="assets/img/pasta2.jpg"/>
-            </ion-slide>
-    
-          </ion-slides>
-          <div class="divEditCard" color="bluelight" (click)="addproduct()">
-              <ion-icon class="iconEditCard" color="white" name="create"></ion-icon>
-          </div>
-        </div>
-        <ion-card-content>
-          <ion-row>
-            <ion-col class="ion-no-padding ion-align-self-center " size="7">
-             <p class="hgPCarta my-0 customDarkText font12">
-                Ikibana S...
-             </p> 
-            </ion-col>
-            <ion-col class="ion-no-padding" size="5">
-              <p class="my-0 hgPCarta  customDarkText">
-                <span class="font25">10</span>
-                <span class="font12 decimalCarta">,50€</span>
-              </p>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-              <ion-col class="ion-no-padding ion-align-self-center" size="8">
-               <p class="hgPCarta my-0 customDarkText font9">
-                  Arroz con setas y...
-               </p> 
-              </ion-col>
-              <ion-col class="ion-no-padding ion-align-self-center ion-text-right" size="2">
-                  <ion-icon color="bluedark" name="share"></ion-icon>
-              </ion-col>
-              <ion-col class="ion-no-padding ion-align-self-center ion-text-right" size="2" (click)="addpromocion()">
-                  <ion-icon color="bluedark" name="megaphone"></ion-icon>
-              </ion-col>
-            </ion-row>
-        </ion-card-content>
-    </ion-card>
-</ion-col>
+     
     </ion-row>
   </ion-grid>
 <!-- 

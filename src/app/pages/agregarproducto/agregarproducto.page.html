@@ -40,34 +40,20 @@
                     <div class="divWhite borderGris">
                     </div>
                           <div class="addPhoto" color="">
-                              <ion-icon class="addIcon" color="bluedark" name="add-circle-outline" (click)="addslider()"></ion-icon>
+                              <ion-icon class="addIcon" color="bluedark" name="add-circle-outline" (click)="pickImage()"></ion-icon>
                           </div>
                           <div class="textP">
                             <p class="ion-text-center my-0 font14">Agregar imagenes al carrusel</p>
                           </div>
                   </ion-slide>
-          
-                  <ion-slide class="changeStyle">
-                    <img class="imgBanner" src="assets/img/rest1.jpg"/>
+                  <ion-slides *ngFor="let img of aImages; index as pos" > 
+                  <ion-slide class="changeStyle" >
+                    <img class="imgBanner" src="{{img.path}}"/>
                     <div class="divEdit" color="bluelight">
                       <ion-icon class="iconEditBanner" color="white" name="create" (click)="addslider()"></ion-icon>
                     </div>
                   </ion-slide>
-          
-                  <ion-slide class="changeStyle">
-                    <img class="imgBanner" src="assets/img/rest1.jpg"/>
-                    <div class="divEdit" color="bluelight">
-                      <ion-icon class="iconEditBanner" color="white" name="create" (click)="addslider()"></ion-icon>
-                    </div>
-                  </ion-slide>
-          
-                  <ion-slide class="changeStyle">
-                    <img class="imgBanner" src="assets/img/rest1.jpg"/>
-                    <div class="divEdit" color="bluelight">
-                      <ion-icon class="iconEditBanner" color="white" name="create" (click)="addslider()"></ion-icon>
-                    </div>
-                  </ion-slide>
-          
+                </ion-slides>
                 </ion-slides>          
           </div>
         </ion-col>
@@ -86,6 +72,7 @@
           </ion-item>
           <ion-item class="px-0 itemNoPadding">
               <ion-textarea
+              formControlName="ingredientes"
                 class="font11"
                 rows="4" 
                 cols="20" 
@@ -94,6 +81,7 @@
           </ion-item>
           <ion-item class="px-0 itemNoPadding">
               <ion-textarea
+              formControlName="no_ingredientes"
                 class="font11"
                 rows="7" 
                 cols="20" 
@@ -108,7 +96,7 @@
                   </ion-col>
                   <ion-col size="3" class="ion-align-self-center">
                         <div class="onoffswitch-valores">
-                            <input type="checkbox" formControlName="nutricional_values" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch5" checked>
+                            <input type="checkbox" formControlName="nutritional_values" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch5" checked>
                             <label class="onoffswitch-label2" for="myonoffswitch5"></label>
                         </div>
                   </ion-col>
@@ -137,7 +125,7 @@
                         <!-- <span>Exento</span> -->
                   </ion-col>
                   <ion-col size="3" class="ion-align-self-center">
-                      <ion-input class="inputCustom3 ion-text-center" formControlName="carbohyrates"></ion-input>
+                      <ion-input class="inputCustom3 ion-text-center" formControlName="carbohydrates"></ion-input>
                   </ion-col>
               </ion-row>
               <ion-row>
@@ -164,7 +152,7 @@
           </ion-text>
           </ion-item>
           <ion-grid class="blue-dark2">
-              <ion-row>
+              <!-- <ion-row>
                   <ion-col size="12" >
                       <span class="mr-2">Stock</span>
                       <div class="inline">
@@ -173,7 +161,7 @@
                           <ion-icon class="iconMargin" name="add"></ion-icon>
                       </div>
                   </ion-col>
-              </ion-row>
+              </ion-row> -->
               <ion-row>
                 <ion-col size="8" class="ion-align-self-center">
                     <span>Iva 4%</span>

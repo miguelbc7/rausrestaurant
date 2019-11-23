@@ -12,29 +12,17 @@ import { Storage } from '@ionic/storage';
 })
 export class ProductosService {
 
-  token:any;
+  token:any ;
   base_path = environment.url;
 
 
   constructor(private http: HttpClient, private storage: Storage) { 
-    this.storage.get('token').then((val) => {
-      this.token = val.token;
-    });
-  }
-
-  
-  
-  // Http Options
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': this.token,
-    })
-  }
+  }  
  
   // Handle API errors
   handleError(error: HttpErrorResponse) {
     console.log(error);
+    console.log(error.error);
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.
       console.error('An error occurred:', error.error.message);
@@ -51,11 +39,20 @@ export class ProductosService {
   };
 
    // Create a new item
-   createItem(item): Observable<Producto> {
+  async createItem(item): Promise<any> {
+    await this.storage.get('_token').then(res=>{
+      this.token = res.token;
+    });
+    delete item.ingredientes;
+    delete item.no_ingredientes;
     return this.http
-      .post<Producto>(this.base_path+'products', JSON.stringify(item), this.httpOptions)
+      .post<Producto>(this.base_path+'products', JSON.stringify(item),{
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Authorization': this.token,
+        })
+      })
       .pipe(
-        retry(2),
         catchError(this.handleError)
       )
   }
@@ -63,19 +60,30 @@ export class ProductosService {
   // Get single Producto data by ID
   getItem(id): Observable<Producto> {
     return this.http
-      .get<Producto>(this.base_path+'products/' + id, this.httpOptions)
+      .get<Producto>(this.base_path+'products/' + id, {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': this.token,
+    })
+  })
       .pipe(
-        retry(2),
         catchError(this.handleError)
       )
   }
  
   // Get Productos data
-  getList(): Observable<Producto> {
-    return this.http
-      .get<Producto>(this.base_path+'products', this.httpOptions)
+ async getList(): Promise<any> {
+        await this.storage.get('_token').then(res=>{
+          this.token = res.token;
+        });
+        return this.http
+          .get<Producto>(this.base_path+'products', {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Authorization': this.token,
+        })
+      })
       .pipe(
-        retry(2),
         catchError(this.handleError)
       )
   }
@@ -83,19 +91,27 @@ export class ProductosService {
   // Update item by id
   updateItem(id, item): Observable<Producto> {
     return this.http
-      .put<Producto>(this.base_path+'products/' + id, JSON.stringify(item), this.httpOptions)
+      .put<Producto>(this.base_path+'products/' + id, JSON.stringify(item), {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': this.token,
+    })
+  })
       .pipe(
-        retry(2),
         catchError(this.handleError)
       )
   }
  
   // Delete item by id
-  deleteItem(id) {
+  deleteItem(id, item) {
     return this.http
-      .delete<Producto>(this.base_path+'products/' + id, this.httpOptions)
+      .delete<Producto>(this.base_path+'products/' + id, {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Authorization': this.token,
+        })
+      })
       .pipe(
-        retry(2),
         catchError(this.handleError)
       )
   }
