@@ -19,7 +19,7 @@ export class AgregarproductoPage implements OnInit {
 
   public productoForm: FormGroup;
 
-  productos: any = [];
+  productos:any = [];
   aImages: any = [];
   name;
   description;
@@ -255,11 +255,12 @@ export class AgregarproductoPage implements OnInit {
 
  //////////////////// Imagen //////////////////////
 
+
   pickImage() {
     const options: CameraOptions = {
-      quality: 20,
+      quality: 100,
       sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
-      destinationType: this.camera.DestinationType.DATA_URL,
+      destinationType: this.camera.DestinationType.FILE_URI,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE
     }
@@ -274,5 +275,6 @@ export class AgregarproductoPage implements OnInit {
       // Handle error
     });
   }
+
 
 }
