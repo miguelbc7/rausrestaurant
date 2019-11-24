@@ -157,7 +157,7 @@ export class Register1Page implements OnInit {
       this.data.username = values.email;
       this.data.password = values.password;
       this.authService.loginUser(this.data);
-      // this.router.navigate(["/home"]);
+      this.router.navigate(["/home"]);
 
     },err => {
       this.errorMessage = "error registro";
