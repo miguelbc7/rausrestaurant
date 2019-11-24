@@ -60,24 +60,10 @@ toggleZipped(): void {
   this.zipped = !this.zipped;
 }
   ngOnInit() {
-    this.fidelizacionService.read_Items().subscribe(data => {
- 
-      this.data = data.map(e => {
-        return {
-          isEdit: false,
-          id: e.payload.doc.id,
-          name: e.payload.doc.data()['name'],
-          from: e.payload.doc.data()['from'],
-          to: e.payload.doc.data()['to'],
-          qtyValue: e.payload.doc.data()['qtyValue'],
-          value: e.payload.doc.data()['value'],
-          qtyBuy: e.payload.doc.data()['qtyBuy'],
-          buy: e.payload.doc.data()['buy'],
-          status: e.payload.doc.data()['status'],
-        };
+    this.fidelizacionService.read_Items().then(data => {
+       data.subscribe(e => {
+        this.data = e;
       })
-      console.log(this.data);
- 
     });
   }
 
@@ -86,7 +72,8 @@ toggleZipped(): void {
     this.fidelizacionService.delete_Item(rowID);
   }
  
-  async EditRecord(record) {
+  async EditRecord(record, recordID) {
+    console.log(record, recordID);
     record.isEdit = true;
     record['Name'] = record.name;
     record['from'] = record.from;
@@ -96,6 +83,7 @@ toggleZipped(): void {
     record['qtyBuy'] = record.qtyBuy;
     record['buy'] = record.buy;
     record['status'] = record.status;
+    record['id'] = recordID;
     const modal = await this.modalCtrl.create({
       component: ModalPlanesPage,
       componentProps:{

@@ -6,11 +6,8 @@ import { ExcelentePage } from '../modals/excelente/excelente.page';
 import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ProductosService } from '../../services/productos.service';
-import { Camera, CameraOptions, PictureSourceType } from '@ionic-native/Camera/ngx';
-import { File, FileEntry } from '@ionic-native/File/ngx';
-import { FilePath } from '@ionic-native/file-path/ngx';
+import { Camera, CameraOptions } from '@ionic-native/Camera/ngx';
 import { Storage } from '@ionic/storage';
-import { WebView } from '@ionic-native/ionic-webview/ngx';
 
 
 @Component({
@@ -46,12 +43,7 @@ export class AgregarproductoPage implements OnInit {
     private router: Router,
     private productosService: ProductosService, 
     private camera: Camera,
-    private file: File,
-    private plt: Platform,
-    private filePath:FilePath,
     private storage:Storage,
-    private webview: WebView,
-    private ref: ChangeDetectorRef,
     ) {
   
         this.productoForm = this.formBuilder.group({
@@ -157,10 +149,6 @@ export class AgregarproductoPage implements OnInit {
       ],
     }
   ngOnInit() {
-    this.plt.ready().then(() => {
-      this.loadStoredImages();
-       
-    });
     console.log(this.productos);
     this.storage.get('product').then(res =>{
       console.log(res);
@@ -237,6 +225,7 @@ export class AgregarproductoPage implements OnInit {
        console.log(data);
       //  this.productos = data.products;
       console.log(data);
+      this.uploadImage(data.products.id);
        this.presentPromocion(data.products.id);
        this.router.navigate(['home']);
    }, err => {
@@ -247,21 +236,21 @@ export class AgregarproductoPage implements OnInit {
   });
  }
 
- //////////////////// Imagen //////////////////////
-
- loadStoredImages() {
-  this.storage.get('STORAGE_KEY').then(images => {
-    if (images) {
-      let arr = JSON.parse(images);
-      this.aImages = [];
-      for (let img of arr) {
-        let filePath = this.file.dataDirectory + img;
-        let resPath = this.pathForImage(filePath);
-        this.aImages.push({ name: img, path: resPath, filePath: filePath });
-      }
-    }
-  });
+ uploadImage(id){
+  this.productosService.uploadItem(id, this.aImages).then((response) => {
+    response.subscribe((data) => {
+      console.log(data);
+     //  this.productos = data.products;
+     console.log(data);
+      this.presentPromocion(data.products.id);
+      this.router.navigate(['home']);
+  }, err => {
+      console.log(err);
+    });
+ });
 }
+
+ //////////////////// Imagen //////////////////////
 
   pickImage() {
     const options: CameraOptions = {
@@ -274,85 +263,14 @@ export class AgregarproductoPage implements OnInit {
     this.camera.getPicture(options).then((imageData) => {
       // imageData is either a base64 encoded string or a file URI
       // If it's base64 (DATA_URL):
-      // let base64Image = 'data:image/jpeg;base64,' + imageData;
-      console.log(imageData);
-      // this.aImages.push(imageData) ;
-      if (this.plt.is('android') ) {
-        this.filePath.resolveNativePath(imageData)
-            .then(filePath => {
-                let correctPath = filePath.substr(0, filePath.lastIndexOf('/') + 1);
-                let currentName = imageData.substring(imageData.lastIndexOf('/') + 1, imageData.lastIndexOf('?'));
-                this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
-            });
-    } else {
-        var currentName = imageData.substr(imageData.lastIndexOf('/') + 1);
-        var correctPath = imageData.substr(0, imageData.lastIndexOf('/') + 1);
-        this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
-    }
+      let base64Image = 'data:image/jpeg;base64,' + imageData;
+      console.log(base64Image);
+      this.aImages.push(base64Image) ;
+    
     }, (err) => {
       // Handle error
     });
   }
-  createFileName() {
-      var d = new Date(),
-          n = d.getTime(),
-          newFileName = n + ".jpg";
-      return newFileName;
-  }
-  copyFileToLocalDir(namePath, currentName, newFileName) {
-    this.file.copyFile(namePath, currentName, this.file.dataDirectory, newFileName).then(success => {
-        this.updateStoredImages(newFileName);
-    }, error => {
-        console.log('Error while storing file.');
-    });
-  }
-  updateStoredImages(name) {
-    this.storage.get('STORAGE_KEY').then(images => {
-        let arr = JSON.parse(images);
-        if (!arr) {
-            let newImages = [name];
-            this.storage.set('STORAGE_KEY', JSON.stringify(newImages));
-        } else {
-            arr.push(name);
-            this.storage.set('STORAGE_KEY', JSON.stringify(arr));
-        }
-
-        let filePath = this.file.dataDirectory + name;
-        let resPath = this.pathForImage(filePath);
-
-        let newEntry = {
-            name: name,
-            path: resPath,
-            filePath: filePath
-        };
-
-        this.aImages = [newEntry, ...this.aImages];
-        this.ref.detectChanges(); // trigger change detection cycle
-    });
-  }
-  pathForImage(img) {
-    if (img === null) {
-      return '';
-    } else {
-      let converted = this.webview.convertFileSrc(img);
-      return converted;
-    }
-  }
-  deleteImage(imgEntry, position) {
-    this.aImages.splice(position, 1);
- 
-    this.storage.get('STORAGE_KEY').then(images => {
-        let arr = JSON.parse(images);
-        let filtered = arr.filter(name => name != imgEntry.name);
-        this.storage.set('STORAGE_KEY', JSON.stringify(filtered));
- 
-        var correctPath = imgEntry.filePath.substr(0, imgEntry.filePath.lastIndexOf('/') + 1);
- 
-        this.file.removeFile(correctPath, imgEntry.name).then(res => {
-            console.log('File removed.');
-        });
-    });
-}
 
 
 }

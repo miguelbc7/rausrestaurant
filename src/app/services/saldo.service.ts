@@ -8,15 +8,15 @@ import 'firebase/storage';
 @Injectable({
   providedIn: 'root'
 })
-export class FidelizacionService {
+export class SaldoService {
   private snapshotChangesSubscription: any;
 
   constructor(private afs: AngularFirestore,public afAuth: AngularFireAuth) { }
-
+  
   create_NewItem(record) {
     return new Promise<any>((resolve, reject) => {
       let currentUser = firebase.auth().currentUser;
-      this.afs.collection('restaurantes').doc(currentUser.uid).collection('fidelizacion').add(record)
+      this.afs.collection('restaurantes').doc(currentUser.uid).collection('saldos').add(record)
       .then(
         res => resolve(res),
         err => reject(err)
@@ -28,7 +28,7 @@ export class FidelizacionService {
     return new Promise<any>((resolve, reject) => {
       this.afAuth.user.subscribe(currentUser => {
         if(currentUser){
-          this.snapshotChangesSubscription = this.afs.collection('restaurantes').doc(currentUser.uid).collection('fidelizacion').snapshotChanges();
+          this.snapshotChangesSubscription = this.afs.collection('restaurantes').doc(currentUser.uid).collection('saldos').snapshotChanges();
           resolve(this.snapshotChangesSubscription);
         }
       })
@@ -39,7 +39,7 @@ export class FidelizacionService {
     return new Promise<any>((resolve, reject) => {
       this.afAuth.user.subscribe(currentUser => {
         if(currentUser){
-          this.snapshotChangesSubscription = this.afs.doc<any>('restaurantes/' + currentUser.uid + '/fidelizacion/' + itemID).valueChanges()
+          this.snapshotChangesSubscription = this.afs.doc<any>('restaurantes/' + currentUser.uid + '/saldos/' + itemID).valueChanges()
           .subscribe(snapshots => {
             resolve(snapshots);
           }, err => {
@@ -54,7 +54,7 @@ export class FidelizacionService {
     console.log(record);
     return new Promise<any>((resolve, reject) => {
       let currentUser = firebase.auth().currentUser;
-      this.afs.collection('restaurantes').doc(currentUser.uid).collection('fidelizacion').doc(recordID).set(record)
+      this.afs.collection('restaurantes').doc(currentUser.uid).collection('saldos').doc(recordID).set(record)
       .then(
         res => resolve(res),
         err => reject(err)
@@ -65,7 +65,7 @@ export class FidelizacionService {
   delete_Item(record_id) {
     return new Promise<any>((resolve, reject) => {
       let currentUser = firebase.auth().currentUser;
-      this.afs.collection('restaurantes').doc(currentUser.uid).collection('fidelizacion').doc(record_id).delete()
+      this.afs.collection('restaurantes').doc(currentUser.uid).collection('saldos').doc(record_id).delete()
       .then(
         res => resolve(res),
         err => reject(err)
@@ -73,5 +73,4 @@ export class FidelizacionService {
     })
   }
 
-  
 }

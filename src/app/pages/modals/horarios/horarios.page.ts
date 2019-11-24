@@ -41,6 +41,7 @@ export class HorariosPage implements OnInit {
       res.subscribe(data =>{
         console.log(data);
         this.getHorario();
+        // this.modalCtrl.dismiss();
       },
       error=>{
         console.log(error);

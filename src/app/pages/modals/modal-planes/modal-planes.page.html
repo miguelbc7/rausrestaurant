@@ -64,13 +64,13 @@
           <div class="inline">
               <ion-input  [(ngModel)]=" buy" class="inputCustom2 ion-text-center"></ion-input>
           </div>
-          <span class="ml-2">euros</span>
+          <span class="ml-2">compras</span>
       </ion-col>
   </ion-row>
   <ion-row class="btnNuevoGuardar">
       <ion-col size="12" class="ion-text-center">
           <ion-button class="font14" color="bluedark" *ngIf="type == 'create'" (click)="CreateRecord()" >Guardar</ion-button>
-          <ion-button class="font14" color="bluedark" *ngIf="type == 'edit'" (click)="UpdateRecord(item)" type="submit" >Actualizar</ion-button>
+          <ion-button class="font14" color="bluedark" *ngIf="type == 'edit'" (click)="UpdateRecord(item.id)" type="submit" >Actualizar</ion-button>
       </ion-col>
   </ion-row>
 </ion-grid>

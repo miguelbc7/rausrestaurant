@@ -19,7 +19,7 @@ export class PerfilPage implements OnInit {
   public profileForm: FormGroup;
   errorMessage = '';
   profile:any =[];
-  address:any = 'España';
+  address:any = 'Carrer de Aribau 655. 08021. Barcelona';
   email;
 
   constructor(private modalCtrl: ModalController, public formBuilder: FormBuilder, private router: Router,

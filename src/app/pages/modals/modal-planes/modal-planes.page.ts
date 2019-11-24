@@ -58,7 +58,6 @@ export class ModalPlanesPage implements OnInit {
       this.qtyBuy = 0;
       this.buy = '';
       this.status = false;
-      console.log(resp);
      await this.modalController.dismiss();
     })
       .catch(error => {
@@ -67,7 +66,7 @@ export class ModalPlanesPage implements OnInit {
   }
 
    
- async UpdateRecord(recordRow) {
+ async UpdateRecord(recordID) {
    console.log(this.item.name);
     let record = {};
     record['name'] = this.name;
@@ -78,8 +77,10 @@ export class ModalPlanesPage implements OnInit {
     record['qtyBuy'] = this.qtyBuy;
     record['buy'] = this.buy;
     record['status'] = this.status;
-    this.fidelizacionService.update_Item(recordRow.id, record);
-    recordRow.isEdit = false;
+    console.log(record);
+    console.log(recordID);
+    this.fidelizacionService.update_Item(recordID, record);
+    // recordRow.isEdit = false;
     await this.modalController.dismiss();
   }
 }

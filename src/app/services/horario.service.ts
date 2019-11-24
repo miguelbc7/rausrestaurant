@@ -6,6 +6,10 @@ import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { Storage } from '@ionic/storage';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireAuth } from '@angular/fire/auth';
+import * as firebase from 'firebase/app';
+import 'firebase/storage';
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +19,9 @@ export class HorarioService {
   token:any ;
   uid;
   base_path = environment.url;
+  private snapshotChangesSubscription: any;
 
-  constructor(private http: HttpClient, private storage: Storage) { }
+  constructor(private http: HttpClient, private storage: Storage, private afs: AngularFirestore,public afAuth: AngularFireAuth) { }
 
   // Handle API errors
   handleError(error: HttpErrorResponse) {
@@ -107,4 +112,63 @@ export class HorarioService {
       )
   }
  
+create_NewItem(record) {
+  return new Promise<any>((resolve, reject) => {
+    let currentUser = firebase.auth().currentUser;
+    this.afs.collection('restaurantes').doc(currentUser.uid).collection('horarios').add(record)
+    .then(
+      res => resolve(res),
+      err => reject(err)
+    )
+  })
+}
+
+read_Items() {
+  return new Promise<any>((resolve, reject) => {
+    this.afAuth.user.subscribe(currentUser => {
+      if(currentUser){
+        this.snapshotChangesSubscription = this.afs.collection('restaurantes').doc(currentUser.uid).collection('horarios').snapshotChanges();
+        resolve(this.snapshotChangesSubscription);
+      }
+    })
+  })
+}
+
+ get_Item(itemID){
+  return new Promise<any>((resolve, reject) => {
+    this.afAuth.user.subscribe(currentUser => {
+      if(currentUser){
+        this.snapshotChangesSubscription = this.afs.doc<any>('restaurantes/' + currentUser.uid + '/horarios/' + itemID).valueChanges()
+        .subscribe(snapshots => {
+          resolve(snapshots);
+        }, err => {
+          reject(err)
+        })
+      }
+    })
+  });
+}
+
+update_Item(recordID,record){
+  console.log(record);
+  return new Promise<any>((resolve, reject) => {
+    let currentUser = firebase.auth().currentUser;
+    this.afs.collection('restaurantes').doc(currentUser.uid).collection('horarios').doc(recordID).set(record)
+    .then(
+      res => resolve(res),
+      err => reject(err)
+    )
+  })
+}
+
+delete_Item(record_id) {
+  return new Promise<any>((resolve, reject) => {
+    let currentUser = firebase.auth().currentUser;
+    this.afs.collection('restaurantes').doc(currentUser.uid).collection('horarios').doc(record_id).delete()
+    .then(
+      res => resolve(res),
+      err => reject(err)
+    )
+  })
+}
 }

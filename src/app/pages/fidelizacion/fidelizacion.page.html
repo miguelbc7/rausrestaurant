@@ -2,7 +2,7 @@
     <ion-grid>
         <ion-row>
           <ion-col class="ion-text-center" size="12">
-            <ion-icon class="iconBack" src="assets/img/icon/back.svg"></ion-icon>
+            <ion-icon class="iconBack" routerLink="/opciones" src="assets/img/icon/back.svg"></ion-icon>
             <ion-icon class="iconHist" src="assets/img/icon/analiticas.svg"></ion-icon>
             <p class="font14 f-historial ion-text-center ion-no-margin">Fidelización</p>
           </ion-col>
@@ -19,11 +19,11 @@
           <ion-card-content class="content-expandable" *ngFor="let d of data">
             <app-expandable expandHeight="120px" [expanded]="item.expanded" >
                 <ion-item >
-                    <ion-label class="font12 font-color label-mg" (click)="EditRecord(d)">
-                      {{d.name}}
+                    <ion-label class="font12 font-color label-mg" (click)="EditRecord(d.payload.doc.data(),d.payload.doc.id )">
+                      {{d.payload.doc.data().name}}
                     </ion-label>
-                    <ion-icon name="create" slot="end" (click)="EditRecord(d)"></ion-icon>
-                    <ion-icon name="trash" slot="end" (click)="RemoveRecord(d.id)"></ion-icon>
+                    <ion-icon name="create" slot="end" (click)="EditRecord(d.payload.doc.data(),d.payload.doc.id)"></ion-icon>
+                    <ion-icon name="trash" slot="end" (click)="RemoveRecord(d.payload.doc.id)"></ion-icon>
                   </ion-item>
             </app-expandable>
           </ion-card-content>

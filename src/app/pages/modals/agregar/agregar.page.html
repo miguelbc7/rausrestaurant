@@ -10,46 +10,24 @@
         <ion-item class="itemSaldo ion-padding-horizontal">
             <!-- <ion-label class="font14" position="floating">Dirección</ion-label> -->
             <!-- <ion-icon class="mx-0 iconWhite font24" name="logo-euro" color="" slot="start" align-self-center></ion-icon> -->
-            <ion-input class="saldoModal ion-text-center" type="number" placeholder="0,00" required></ion-input>
+            <ion-input class="saldoModal ion-text-center" [(ngModel)]="value" name="value" type="number" placeholder="0.00" required></ion-input>
         </ion-item>
     </div>
   <p class="ion-text-center my-0">
       Seleccionar tarjeta o cuenta
   </p>
-  <ion-list class="ion-padding font14 ">
-    <ion-row (click)="openConfirmarAgregar()">
-          <ion-col class="ion-text-start">
+  <ion-list class="ion-padding font14 " *ngFor="let d of data">
+    <ion-row >
+          <ion-col class="ion-text-start" (click)="openConfirmarAgregar(d.payload.doc.id)">
               <ion-label class="iconWhite">Visa</ion-label>
           </ion-col>
-          <ion-col class="ion-text-end">
-              <ion-label class="iconWhite">*******899</ion-label>
+          <ion-col class="ion-text-end" (click)="openConfirmarAgregar(d.payload.doc.id)">
+              <ion-label class="iconWhite">*******{{d.payload.doc.data().numero.substr(-10)}} </ion-label>
           </ion-col>
-          <ion-col class="ion-text-center" size="2">
+          <ion-col class="ion-text-center" (click)="RemoveRecord(d.payload.doc.id)" size="2">
             <ion-icon class="mx-0 iconWhite" name="close" color=""></ion-icon>
           </ion-col>
     </ion-row>
-    <ion-row>
-        <ion-col class="ion-text-start">
-            <ion-label class="iconWhite">Caixa</ion-label>
-        </ion-col>
-        <ion-col class="ion-text-end">
-            <ion-label class="iconWhite">*******785</ion-label>
-        </ion-col>
-        <ion-col class="ion-text-center" size="2">
-          <ion-icon class="mx-0 iconWhite" name="close" color=""></ion-icon>
-        </ion-col>
-  </ion-row>
-  <ion-row>
-      <ion-col class="ion-text-start">
-          <ion-label class="iconWhite">Master</ion-label>
-      </ion-col>
-      <ion-col class="ion-text-end">
-          <ion-label class="iconWhite">*******636</ion-label>
-      </ion-col>
-      <ion-col class="ion-text-center" size="2">
-        <ion-icon class="mx-0 iconWhite" name="close" color=""></ion-icon>
-      </ion-col>
-</ion-row>
       <!-- <ion-item class="noBorderItem">
         <ion-label>Caixa</ion-label>
         <ion-icon class="mx-0 iconWhite" name="close" color="" slot="end" align-self-end></ion-icon>

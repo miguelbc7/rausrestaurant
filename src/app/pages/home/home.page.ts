@@ -10,10 +10,13 @@ import { EditdireccionPage } from '../modals/editdireccion/editdireccion.page';
 // import { CierrePage } from '../cierre/cierre.page';
 // import { AgregartarjetaPage } from '../modals/agregartarjeta/agregartarjeta.page';
 import { ModalController, NavController } from '@ionic/angular';
-import { ProductosService } from '../../services/productos.service';
 import { Storage } from '@ionic/storage';
+import { ProductosService } from '../../services/productos.service';
 import { HorarioService } from 'src/app/services/horario.service';
+import { SliderHomeService } from 'src/app/services/slider-home.service';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
+import { Camera, CameraOptions } from '@ionic-native/Camera/ngx';
 
 
 @Component({
@@ -25,7 +28,7 @@ export class HomePage implements OnInit {
 
   productos:any;
   token:any;
-  horarios: any=[
+  horarios: any= [
     {
       name: 'Lunes',
       status: true,
@@ -48,7 +51,7 @@ export class HomePage implements OnInit {
         end: '16:00'
       }]
     }
-  ];
+  ] ;
   lunes:any = [];
   martes:any = [];
   miercoles:any = [];
@@ -56,8 +59,18 @@ export class HomePage implements OnInit {
   viernes:any = [];
   sabado:any = [];
   domingo:any = [];
+  slider: any;
+  avatar;
+  aImages:any = [];
 
-  constructor(private modalCtrl: ModalController, public productosService: ProductosService, private storage: Storage, private horarioService: HorarioService,public router:Router) {
+  constructor(private modalCtrl: ModalController, 
+    public productosService: ProductosService, 
+    private storage: Storage, 
+    private sliderService: SliderHomeService, 
+    private horarioService:HorarioService,
+    private authService: AuthService,
+    private camera: Camera,
+    public router:Router) {
     this.productos = [];
     this.storage.get('_token').then(val =>{
       this.token = val.token;
@@ -67,16 +80,34 @@ export class HomePage implements OnInit {
   ngOnInit() {
     this.getListProductos();
     this.getListHorario();
+    this.getSlider();
   }
   async addslider() {
-   const modal = await this.modalCtrl.create({
-     component: AddsliderPage,
-   });
-   await modal.present();
+    const options: CameraOptions = {
+      quality: 100,
+      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE
+    }
+    this.camera.getPicture(options).then((imageData) => {
+      // imageData is either a base64 encoded string or a file URI
+      // If it's base64 (DATA_URL):
+      let base64Image = 'data:image/jpeg;base64,' + imageData;
+      this.aImages.push(base64Image) ;
+        this.sliderService.create_NewItem({image:base64Image}).then((response) => {
+          response.subscribe((data) => {
+        }, err => {
+            console.log(err);
+          });
+       });
+    
+    }, (err) => {
+      // Handle error
+    });
 }
 
   async openHorarios(dia, data) {
-    console.log(data);
     const modal = await this.modalCtrl.create({
       component: HorariosPage,
       componentProps: { 
@@ -97,7 +128,6 @@ export class HomePage implements OnInit {
 
   async addpromocion(productID) {
     // this.storage.set('productID', productID);
-    console.log(productID);
     const modal = await this.modalCtrl.create({
       component: ModalPromocionPage,
       componentProps:{
@@ -142,7 +172,6 @@ export class HomePage implements OnInit {
     this.productosService.getList().then(response => {
       response.subscribe((data) => {
         this.productos = data.products;
-        console.log(data);
      }, err => {
       console.log(err);
     });
@@ -152,18 +181,12 @@ export class HomePage implements OnInit {
    getListHorario(){
     this.horarioService.getList().then(response => {
       response.subscribe((data) => {
-        // this.horarios = data.schedules;
-        console.log(data);
-        console.log(this.horarios);
+        this.horarios = data.schedules;
 
         for(let dia of  this.horarios){
-          console.log(dia.schedules);
           switch(dia.name){
             case('Lunes'):
               this.lunes.push(dia);
-              console.log('this.lunes');
-              console.log(this.lunes);
-              console.log(this.sabado);
               break;
             case('Martes'):
               this.martes.push(dia);
@@ -179,8 +202,6 @@ export class HomePage implements OnInit {
               break;
             case('Sabado'):
             this.sabado.push(dia);
-            console.log('this.sabado');
-            console.log(this.sabado);
               break;
             case('Domingo'):
               this.domingo.push(dia);
@@ -205,6 +226,22 @@ export class HomePage implements OnInit {
     this.router.navigate(['/agregarproducto']);
   }
 
+  getSlider(){
+    this.sliderService.read_Items().then(response => {
+      response.subscribe((data) => {
+        this.slider = data;
+     }, err => {
+      console.log(err);
+    });
+    });
+  }
+
+  async editslider(){
+    const modal = await this.modalCtrl.create({
+      component: AddsliderPage,
+    });
+    await modal.present();
+  }
 }
 
 

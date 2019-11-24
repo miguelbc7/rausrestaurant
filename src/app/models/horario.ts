@@ -3,4 +3,5 @@ export class Horario {
     name: string;
     status: boolean;
     schedules:any;
+    idUser:string;
 }
