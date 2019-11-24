@@ -22,7 +22,7 @@
     "@angular/platform-browser": "~8.1.2",
     "@angular/platform-browser-dynamic": "~8.1.2",
     "@angular/router": "~8.1.2",
-    "@ionic-native/camera": "^5.17.0",
+    "@ionic-native/camera": "^5.0.0",
     "@ionic-native/core": "^5.0.0",
     "@ionic-native/file": "^5.17.0",
     "@ionic-native/file-path": "^5.17.0",
@@ -93,9 +93,7 @@
       "cordova-plugin-ionic-keyboard": {},
       "cordova-plugin-nativegeocoder": {},
       "cordova-sqlite-storage": {},
-      "cordova-plugin-camera": {
-        "ANDROID_SUPPORT_V4_VERSION": "27.+"
-      },
+      "cordova-plugin-camera": {},
       "cordova-plugin-file": {},
       "cordova-plugin-filepath": {}
     },
