@@ -213,7 +213,6 @@ export class HomePage implements OnInit {
     });
     });
    }
-
    
    editProduct(product) {
      this.storage.set('product', product);

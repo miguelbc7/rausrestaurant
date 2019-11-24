@@ -123,11 +123,13 @@ export class OpcionesPage implements OnInit {
       data.subscribe(e => {
        this.data = e;
        console.log(this.data);
+       let valor = 0;
            for(let i = 0; i<this.data.length; i++){
              console.log(this.data[i].payload.doc.data().value);
              console.log(this.data[i].payload.doc.data());
-              this.value = Number(this.value) + Number(this.data[i].payload.doc.data().value);    
+              valor = Number(valor) + Number(this.data[i].payload.doc.data().value);    
             }
+            this.value = valor;
             this.decimal = this.value.toFixed(2).toString().split('.'); 
      })
    });

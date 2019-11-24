@@ -54,6 +54,7 @@ export class ModalPromocionPage implements OnInit {
       this.promocionService.productPromo(data._id).then(resp =>{
         res.subscribe(dat =>{
           console.log(dat);
+          this.closeModal();
         });
       });
     },

@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { ModalController, Platform } from '@ionic/angular';
+import { ModalController, Platform, NavParams } from '@ionic/angular';
 import { AddsliderPage } from '../modals/addslider/addslider.page';
 import { ModalPromocionPage } from '../modals/modal-promocion/modal-promocion.page';
 import { ExcelentePage } from '../modals/excelente/excelente.page';
@@ -30,12 +30,13 @@ export class AgregarproductoPage implements OnInit {
   carbohydrates;
   protein;
   total_calories;
-  price_with_iva = '10';
+  price_with_iva;
   iva;
   eat_in_restaurant:boolean = true;
   wear:boolean = true;
   delivery:boolean = true;
   status:boolean = true;
+  public type = this.navParams.get('type');
 
   constructor(
     private modalCtrl: ModalController, 
@@ -44,6 +45,7 @@ export class AgregarproductoPage implements OnInit {
     private productosService: ProductosService, 
     private camera: Camera,
     private storage:Storage,
+    private navParams: NavParams,
     ) {
   
         this.productoForm = this.formBuilder.group({
@@ -108,7 +110,7 @@ export class AgregarproductoPage implements OnInit {
       ],
       'description': [
         { type: 'required', message: 'Debe ingresar una descripción.' },
-        { type: 'minlength', message: 'Debe ser mayor de 5 caracteres.' },
+        { type: 'minlength', message: 'Debe ser mayor de 10 caracteres.' },
         { type: 'maxlength', message: 'Debe ser menor de 300 caracteres.' }
       ],
       'ingredientes': [
@@ -222,11 +224,12 @@ export class AgregarproductoPage implements OnInit {
    console.log(values);
    this.productosService.createItem(values).then((response) => {
      response.subscribe((data) => {
-       console.log(data);
       //  this.productos = data.products;
       console.log(data);
-      this.uploadImage(data.products.id);
-       this.presentPromocion(data.products.id);
+      if(this.aImages.lenght > 0){
+        this.uploadImage(data.products._id);
+      }
+       this.presentPromocion(data.products._id);
        this.router.navigate(['home']);
    }, err => {
     console.log(err);
