@@ -22,7 +22,7 @@ export class AgregarproductoPage implements OnInit {
 
   public productoForm: FormGroup;
 
-  productos: any = [];
+  productos:any = [];
   aImages: any = [];
 
   constructor(
@@ -142,6 +142,9 @@ export class AgregarproductoPage implements OnInit {
       ],
     }
   ngOnInit() {
+    this.plt.ready().then(() => {
+      this.loadStoredImages();
+    });
   }
 
   slideOptsOne = {
@@ -197,25 +200,110 @@ export class AgregarproductoPage implements OnInit {
 
  // Imagen 
 
+ loadStoredImages() {
+  this.storage.get('STORAGE_KEY').then(images => {
+    if (images) {
+      let arr = JSON.parse(images);
+      this.aImages = [];
+      for (let img of arr) {
+        let filePath = this.file.dataDirectory + img;
+        let resPath = this.pathForImage(filePath);
+        this.aImages.push({ name: img, path: resPath, filePath: filePath });
+      }
+    }
+  });
+}
+
   pickImage() {
     const options: CameraOptions = {
-      quality: 20,
+      quality: 100,
       sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
-      destinationType: this.camera.DestinationType.DATA_URL,
+      destinationType: this.camera.DestinationType.FILE_URI,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE
     }
     this.camera.getPicture(options).then((imageData) => {
       // imageData is either a base64 encoded string or a file URI
       // If it's base64 (DATA_URL):
-      let base64Image = 'data:image/jpeg;base64,' + imageData;
-      console.log(base64Image);
-      this.aImages.push(base64Image) ;
-      console.log(this.aImages);
-   
+      // let base64Image = 'data:image/jpeg;base64,' + imageData;
+      console.log(imageData);
+      // this.aImages.push(imageData) ;
+      if (this.plt.is('android') ) {
+        this.filePath.resolveNativePath(imageData)
+            .then(filePath => {
+                let correctPath = filePath.substr(0, filePath.lastIndexOf('/') + 1);
+                let currentName = imageData.substring(imageData.lastIndexOf('/') + 1, imageData.lastIndexOf('?'));
+                this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
+            });
+    } else {
+        var currentName = imageData.substr(imageData.lastIndexOf('/') + 1);
+        var correctPath = imageData.substr(0, imageData.lastIndexOf('/') + 1);
+        this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
+    }
     }, (err) => {
       // Handle error
     });
   }
+  createFileName() {
+      var d = new Date(),
+          n = d.getTime(),
+          newFileName = n + ".jpg";
+      return newFileName;
+  }
+  copyFileToLocalDir(namePath, currentName, newFileName) {
+    this.file.copyFile(namePath, currentName, this.file.dataDirectory, newFileName).then(success => {
+        this.updateStoredImages(newFileName);
+    }, error => {
+        console.log('Error while storing file.');
+    });
+  }
+  updateStoredImages(name) {
+    this.storage.get('STORAGE_KEY').then(images => {
+        let arr = JSON.parse(images);
+        if (!arr) {
+            let newImages = [name];
+            this.storage.set('STORAGE_KEY', JSON.stringify(newImages));
+        } else {
+            arr.push(name);
+            this.storage.set('STORAGE_KEY', JSON.stringify(arr));
+        }
+
+        let filePath = this.file.dataDirectory + name;
+        let resPath = this.pathForImage(filePath);
+
+        let newEntry = {
+            name: name,
+            path: resPath,
+            filePath: filePath
+        };
+
+        this.aImages = [newEntry, ...this.aImages];
+        this.ref.detectChanges(); // trigger change detection cycle
+    });
+  }
+  pathForImage(img) {
+    if (img === null) {
+      return '';
+    } else {
+      let converted = this.webview.convertFileSrc(img);
+      return converted;
+    }
+  }
+  deleteImage(imgEntry, position) {
+    this.aImages.splice(position, 1);
+ 
+    this.storage.get('STORAGE_KEY').then(images => {
+        let arr = JSON.parse(images);
+        let filtered = arr.filter(name => name != imgEntry.name);
+        this.storage.set('STORAGE_KEY', JSON.stringify(filtered));
+ 
+        var correctPath = imgEntry.filePath.substr(0, imgEntry.filePath.lastIndexOf('/') + 1);
+ 
+        this.file.removeFile(correctPath, imgEntry.name).then(res => {
+            console.log('File removed.');
+        });
+    });
+}
+
 
 }
