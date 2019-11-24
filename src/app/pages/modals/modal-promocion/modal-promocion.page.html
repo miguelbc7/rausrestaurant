@@ -5,42 +5,38 @@
 </ion-header> -->
 
 <ion-content>
-  <div class="text-promocion ion-text-center">Máximo 1 promoción</div>
-  <ion-textarea class="text-promocion ion-text-center" rows="6">
-      Gana más visibilidad y ventas<br>  
+  <div class="text-promocion ion-text-center font14 blue-dark2">Máximo 1 promoción</div>
+      <p class="text-promo1 ion-text-center font14 blue-dark2">Gana más visibilidad y ventas<br>  
       activando más promociones por el<br>  
       ligero precio de 0,50€ al día cada<br>  
       una. Se debitará automáticamente<br>  
       de tu saldo Raus. Recibiras la <br> 
-      factura a tu inbox y a tu e-mail.
-      <ion-row style="margin-top: 40px;">
+      factura a tu inbox y a tu e-mail.</p>
+      <!-- <form [formGroup]="promotionForm" (ngSubmit)="loginUser(promotionForm.value)"> -->
+      <ion-row class="select-section">
           <ion-col size="12">
-            <div class="ion-text-center">Selecciona</div>
+            <div class="ion-text-center font14">Selecciona</div>
           </ion-col>
       </ion-row>
       <ion-row>
-          <ion-col size="4">
-              <input type="radio" class="radio1" value="" name="opcion"/>
+          <ion-col size="4" class="ion-justify-content-center ion-text-center">
+              <input type="radio" class="radio1" value="" name="opcion"/> <br>
+              <ion-label class="font18 blue-dark2">1 día</ion-label>
           </ion-col>
-          <ion-col size="4">
-              <input type="radio" class="radio1" value="" name="opcion"/>
+          <ion-col size="4" class="ion-justify-content-center ion-text-center">
+              <input type="radio" class="radio1" value="" name="opcion"/> <br>
+              <ion-label class="font18 blue-dark2">3 días</ion-label>
           </ion-col>
-          <ion-col size="4">
-              <input type="radio" class="radio1" value="" name="opcion"/>
+          <ion-col size="4" class="ion-justify-content-center ion-text-center">
+              <input type="radio" class="radio1" value="" name="opcion"/> <br>
+              <ion-label class="font18 blue-dark2">5 días</ion-label>
           </ion-col>
       </ion-row>
-      <ion-row>
-          <ion-col size="4">
-              <ion-label>1 día</ion-label>
-            </ion-col>
-          <ion-col size="4">
-              <ion-label>3 días</ion-label>
-            </ion-col>
-          <ion-col size="4">
-              <ion-label>5 días</ion-label>
-            </ion-col>
+      <ion-row class="mt-promo">
+        <ion-col size="12" class="ion-text-center">
+          <ion-button class="font14 yellowpromobtn" (click)="addprom()">Promocionar</ion-button>
+        </ion-col>
       </ion-row>
-  </ion-textarea>
-
+      <!-- </form> -->
 
 </ion-content>

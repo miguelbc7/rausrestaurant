@@ -1,0 +1,32 @@
+ion-content{
+    --ion-background-color: #a0a9c0;
+    --color:#fff;
+}
+
+.saldoModal {
+    font-size: 60pt;
+    color: #fff;
+}
+
+
+.iconWhite {
+    color: #fff !important;
+}
+
+.noBorderItem {
+    --border-color: transparent;
+}
+
+.itemSaldo {
+    --border-color: #fff;
+    --color-focused: #fff;
+}
+
+ion-item.itemSaldo {
+    --highlight-color-focused:#fff;
+    --detail-icon-opacity: 1 !important;
+}
+
+.focusLabel:target {
+    background-color: #222;
+}

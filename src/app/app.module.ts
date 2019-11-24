@@ -19,11 +19,33 @@ import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
 
 firebase.initializeApp(environment.firebase);
 
+// import { ExpandableComponent } from "./components/expandable/expandable.component";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { AddsliderPage } from './pages/modals/addslider/addslider.page';
+import { ExcelentePage } from './pages/modals/excelente/excelente.page';
+import { ModalPromocionPage } from './pages/modals/modal-promocion/modal-promocion.page';
+import { IonicStorageModule } from '@ionic/storage';
+import { Camera } from '@ionic-native/Camera/ngx';
+import { File } from '@ionic-native/File/ngx';
+import { WebView } from '@ionic-native/ionic-webview/ngx';
+import { FilePath } from '@ionic-native/file-path/ngx'
+
+
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
+  declarations: [
+    AppComponent,
+    AddsliderPage,
+    ExcelentePage,
+    ModalPromocionPage,
+    // ExpandableComponent
+  ],
+  entryComponents: [
+    AddsliderPage,
+    ExcelentePage,
+    ModalPromocionPage,
+    // ExpandableComponent
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -31,13 +53,19 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppRoutingModule,
     AngularFireAuthModule,
     HttpClientModule,
+    IonicStorageModule.forRoot(),
   ],
   providers: [
     StatusBar,
     SplashScreen,
     AuthService,
     NativeGeocoder,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    Camera,
+    File,
+    WebView,
+    FilePath,
+  
   ],
   bootstrap: [AppComponent]
 })

@@ -5,6 +5,7 @@ import { Restaurant } from '../models/restaurant';
 import { environment } from '../../environments/environment';
 import { catchError } from 'rxjs/operators';
 import {  Observable, throwError } from 'rxjs';
+import { Storage } from '@ionic/storage';
 
 
 @Injectable({
@@ -13,6 +14,7 @@ import {  Observable, throwError } from 'rxjs';
 export class AuthService {
 
   url = environment.url;
+  token:string;
   
   // Http Options
   httpOptions = {
@@ -39,7 +41,7 @@ export class AuthService {
   };
 
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private storage: Storage) { }
 
 
 
@@ -47,8 +49,8 @@ export class AuthService {
     return this.http.post<Restaurant>(`${this.url}restaurants`, JSON.stringify(value), this.httpOptions)
               .pipe(
                   catchError(e => {
-                    console.log('registerUser error: '+e);
                     throw new Error(e);
+                    console.log('registerUser error: '+e);
                 })
     )
    }
@@ -58,16 +60,26 @@ export class AuthService {
       firebase.auth().signInWithEmailAndPassword(value.username, value.password)
       .then(
         res => {
-          let _token = this.http.post(`${this.url}auth/login`,res).pipe(
-            catchError(e => {
-              console.log(e.error.msg);
-              throw new Error(e);
-            })
-          );          
+          // this.http.post(`${this.url}auth/login`,res).pipe(
+          //   catchError(e => {
+          //     console.log(e.error.msg);
+          //     throw new Error(e);
+          //   })
+          // );          
           resolve(res)
         },
         err =>{ console.log('login auth service error'+ err) ; reject(err) })
     })
+   }
+
+   getToken(value): Observable<any>{
+    return this.http.post(`${this.url}auth/login`, JSON.stringify({uid:value}), this.httpOptions)
+    .pipe(
+        catchError(e => {
+          throw new Error(e);
+          console.log('tokenr error: '+e);
+      })
+    )
    }
   
    logoutUser(){
@@ -86,5 +98,35 @@ export class AuthService {
   
    userDetails(){
      return firebase.auth().currentUser;
+   }
+
+   async getProfile(item): Promise<any> {
+    await this.storage.get('_token').then(res=>{
+      this.token = res.token;
+    });
+   }
+
+   async updateProfile(item): Promise<any> {
+    await this.storage.get('_token').then(res=>{
+      this.token = res.token;
+      return this.http.put<Restaurant>(this.url+'restaurants/', JSON.stringify(item),{
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Authorization': this.token,
+        })
+      })
+      .pipe(
+        catchError(this.handleError)
+      )
+    });
+    return this.http.put<Restaurant>(this.url+'restaurants', JSON.stringify(item),{
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': this.token,
+      })
+    })
+    .pipe(
+      catchError(this.handleError)
+    )
    }
 }

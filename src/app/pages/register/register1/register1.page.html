@@ -47,7 +47,7 @@
               <ion-item class="ion-no-padding">
                   <ion-label class="font14" position="floating">Dirección</ion-label>
                   <ion-input type="text" required></ion-input>
-                  <ion-icon name="address" color="bluedark" slot="end" align-self-end></ion-icon>
+                  <ion-icon name="pin" color="bluedark" slot="end" align-self-end></ion-icon>
                 </ion-item>
           </div>
           <div class="validation-errors">
@@ -101,36 +101,59 @@
       <ion-input [(ngModel)]="pass" formControlName="password"  [type]="passwordType"></ion-input>
       <ion-icon [name]="passwordShown === true ? 'eye-off' : 'eye'" [color]="passwordShown === true ? 'bluelight' : 'bluedark' " slot="end" align-self-end (click)="togglePassword()"></ion-icon>
     </ion-item>
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of validation_messages.password">
+        <div class="error-message" *ngIf="register1.get('password').hasError(validation.type) && (register1.get('password').dirty || register1.get('password').touched)">
+          <!-- <ion-icon name="information-circle-outline"></ion-icon>  -->
+          {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
     <ion-item class="ion-margin-bottom ion-no-padding">
       <ion-label class="font14" position="floating">Confirmar contraseña</ion-label>
       <ion-input [(ngModel)]="cpass" formControlName="repeat_password"  [type]="passwordType2"></ion-input>
       <ion-icon [name]="passwordShown2 === true ? 'eye-off' : 'eye'" [color]="passwordShown2 === true ? 'bluelight' : 'bluedark' " slot="end" align-self-end (click)="revelarConfirmacion()"></ion-icon>
     </ion-item>
-              <ion-item class="itemTags ion-no-padding">
-                <ion-label class ="ion-text-center" position="floating" style="margin-bottom: 4rem;">
-                  Escribe la actividad de tu empresa <br>
-                  como sugiere el ejemplo
-                </ion-label>
-                <tag-input  class="ion-text-center inputTag"
-                formControlName="categories" 
-                [placeholder]="' Agregar Tag'"
-                [secondaryPlaceholder]="'#hostelería #restauración'" 
-                [editable]='true' 
-                [maxItems]='3'  
-                [separatorKeyCodes]="[32, 138]"
-                theme='minimal'>
-                <tag-input-dropdown [autocompleteItems]="['#restaurante','#hosteleria']">
-                </tag-input-dropdown>
-              </tag-input>
-              </ion-item>
-          <br>
-          <div class="ion-text-center">
-            <ion-button type="submit" class="font15"  color="bluedark">
-              Listo
-            </ion-button>
-          </div>
-        </form>
-        <br>
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of validation_messages.repeat_password">
+        <div class="error-message" *ngIf="register1.get('repeat_password').hasError(validation.type) && (register1.get('repeat_password').dirty || register1.get('repeat_password').touched)">
+          <!-- <ion-icon name="information-circle-outline"></ion-icon>  -->
+          {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+      <ion-item class="itemTags ion-no-padding">
+        <ion-label class ="ion-text-center" position="floating" style="margin-bottom: 4rem;">
+          Escribe la actividad de tu empresa <br>
+          como sugiere el ejemplo
+        </ion-label>
+        <tag-input  class="ion-text-center inputTag"
+          formControlName="categories" 
+          [placeholder]="' Agregar Tag'"
+          [secondaryPlaceholder]="'#hostelería #restauración'" 
+          [editable]='true' 
+          [maxItems]='3'  
+          [separatorKeyCodes]="[32, 138]"
+          theme='minimal'
+          [displayBy]="'name'"
+        >
+        <tag-input-dropdown 
+        [autocompleteItems]="[{name:'#restaurante'},{name:'#hoteleria'}]"
+          [displayBy]="'name'"
+        >
+        </tag-input-dropdown>
+      </tag-input>
+      </ion-item>
+  <br>
+  <div class="ion-text-center">
+    <ion-button type="submit" class="font15"  color="bluedark">
+      Listo
+    </ion-button>
+    <br>
+    <label class="error-message">{{errorMessage}}</label>
+  </div>
+  </form>
+  <br>
 </ion-content>
 
-<!-- [disabled]="!register1.valid"  -->
+<!-- [disabled]="!register1.valid" , [autocompleteItems]="['#restaurante','#hoteleria']" -->

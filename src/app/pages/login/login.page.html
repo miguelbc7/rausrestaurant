@@ -19,7 +19,7 @@
           <ion-item class="mt-30 ion-no-padding">
             <ion-label class="font14" position="floating">Contraseña</ion-label>
             <ion-input formControlName="password"  [type]="passwordType"></ion-input>
-            <ion-icon [name]="passwordShown === true ? 'eye-off' : 'eye'" [color]="passwordShown === true ? 'bluelight' : 'bluedark' " slot="end" align-self-end (click)="togglePassword()"></ion-icon>
+            <ion-icon align-self-end style="margin-top: 5px;" [name]="passwordShown === true ? 'eye-off' : 'eye'" [color]="passwordShown === true ? 'bluelight' : 'bluedark' " slot="end" (click)="togglePassword()"></ion-icon>
           </ion-item>
           <div class="validation-errors">
               <ng-container *ngFor="let validation of validation_messages.password">
@@ -62,7 +62,7 @@
 </ion-content>
 <ion-footer no-border>
   <ion-toolbar>
-    <ion-grid no-padding>
+    <ion-grid class="ion-no-padding">
       <ion-row  style="margin:0px 2px">
           <ion-col size="6">
               <p class="font11 blue-dark  ion-text-wrap mb-0" fill="cler" (click)="presentPoliticas()">Políticas <br> de privacidad</p>

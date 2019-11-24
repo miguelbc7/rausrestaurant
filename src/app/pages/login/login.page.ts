@@ -6,6 +6,7 @@ import { NewPasswordPage } from '../modals/new-password/new-password.page';
 import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { Storage } from '@ionic/storage';
 
 
 @Component({
@@ -18,10 +19,10 @@ export class LoginPage implements OnInit {
   public loginForm: FormGroup;
   errorMessage = '';
   passwordShown: any;
-  passwordType: string;
+  passwordType: string  = 'password';
 
   constructor(private modalCtrl: ModalController, public formBuilder: FormBuilder, private router: Router,
-              private authService: AuthService, ) {
+              private authService: AuthService, private storage: Storage) {
    }
 
 
@@ -41,7 +42,7 @@ export class LoginPage implements OnInit {
             { type: 'required', message: 'Contraseña Rederida' },
             { type: 'minlength', message: 'Debe ser mayor de 8 caracteres' },
             { type: 'maxlength', message: 'Debe ser menor de 15 caracteres.' },
-            { type: 'pattern', message: 'Su contraseña debe contener al menos una mayúscula, una minúscula y un número.' }
+            // { type: 'pattern', message: 'Su contraseña debe contener al menos una mayúscula, una minúscula y un número.' }
           ]
     }
 
@@ -57,7 +58,7 @@ export class LoginPage implements OnInit {
             Validators.required,
             Validators.minLength(8),
             Validators.maxLength(15),
-            Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$.@$!%*?&])[A-Za-z0-9\d$@$.!%*?&].{8,15}')
+            // Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$.@$!%*?&])[A-Za-z0-9\d$@$.!%*?&].{8,15}')
 
           ])),
       });
@@ -68,7 +69,11 @@ export class LoginPage implements OnInit {
     this.authService.loginUser(value)
     .then(res => {
       this.errorMessage = "";
-      this.router.navigate(["/home"]);
+      this.storage.set('_uid', res.user.uid);
+      this.authService.getToken(res.user.uid).subscribe(token =>{
+        this.storage.set('_token', token);
+        this.router.navigate(["/home"]);
+      });
     },err => {
       this.errorMessage = 'Usuario invalido.';
       console.log(err);

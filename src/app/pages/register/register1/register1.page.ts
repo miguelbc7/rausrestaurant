@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 // import { MustMatch } from '../../validators/must-match.validator';
 import { AuthService } from '../../../services/auth.service';
 import { NativeGeocoder, NativeGeocoderResult } from '@ionic-native/native-geocoder/ngx';
+import { Storage } from '@ionic/storage';
 
 
 @Component({
@@ -23,10 +24,10 @@ export class Register1Page implements OnInit {
   passwordType2: string = "password";
   passwordShown2: boolean = false;
   data: { username: any; password: any; };
-  tags:[];
+  tags:[{ nombre: "#hoteleria"},{ nombre: "#restaurante"} ];
 
 
-  constructor( public formBuilder: FormBuilder, private router: Router,private authService: AuthService,private nativeGeocoder: NativeGeocoder) {
+  constructor( public formBuilder: FormBuilder, private router: Router,private authService: AuthService,private nativeGeocoder: NativeGeocoder, private storage: Storage) {
 
     this.register1 = formBuilder.group({
       business_name: ['', Validators.compose([
@@ -67,7 +68,7 @@ export class Register1Page implements OnInit {
       //   Validators.required,
       // ])],
       categories: ['', Validators.compose([
-        Validators.required,
+        // Validators.required,
       ])],
       password: ['', Validators.compose([
         Validators.required,
@@ -120,23 +121,26 @@ export class Register1Page implements OnInit {
         { type: 'maxlength', message: 'Debe ser menor de 30 caracteres.' }
       ],
       'password': [
-        { type: 'required', message: 'Contraseña Rederida' },
+        { type: 'required', message: 'Contraseña Requerida' },
         { type: 'minlength', message: 'Debe ser mayor de 8 caracteres' },
         { type: 'maxlength', message: 'Debe ser menor de 15 caracteres.' },
         { type: 'pattern', message: 'Su contraseña debe contener al menos una mayúscula, una minúscula y un número.' }
       ],
       'repeat_password': [
-        { type: 'required', message: 'Contraseña Rederida' },
+        { type: 'required', message: 'Contraseña Requerida' },
         { type: 'minlength', message: 'Debe ser mayor de 8 caracteres' },
         { type: 'maxlength', message: 'Debe ser menor de 15 caracteres.' },
         { type: 'pattern', message: 'Su contraseña debe contener al menos una mayúscula, una minúscula y un número.' }
       ],
-      'categories': [
-        { type: 'required', message: 'Debe ingresar por lo menos una actividad de tu empresa.' },
-      ],
+      // 'categories': [
+      //   { type: 'required', message: 'Debe ingresar por lo menos una actividad de tu empresa.' },
+      // ],
     }
 
-  onSubmit(values){
+  async onSubmit(values){
+   await this.storage.set('user', values);
+    values.lat = -4.0000000;
+    values.lng = 40.0000000;
     this.nativeGeocoder.forwardGeocode(values.address)
     .then((
       result: NativeGeocoderResult[]
@@ -149,25 +153,22 @@ export class Register1Page implements OnInit {
       }
       )
       .catch((error: any) => console.log(error));
-    // values.lat = 92,44551;
-    // values.lng = -80,22231;
+      
+    delete values.address;
+    console.log(values);
     this.authService.registerUser(values)
     .subscribe(res => {
       this.errorMessage = "";
-      this.data.username = values.email;
-      this.data.password = values.password;
-      this.authService.loginUser(this.data);
-      this.router.navigate(["/home"]);
+      // this.data.username = values.email;
+      // this.data.password = values.password;
+      // this.authService.loginUser(this.data);
+      this.router.navigate(["/welcome"]);
 
     },err => {
-      this.errorMessage = "error registro";
-      console.log(err);
+      this.errorMessage = "Hubo un error durante el proceso del registro, por favor intente de nuevo.";
+      // console.log(err.msg);
     })
     // this.router.navigate(["/welcome"]);
-  }
-
-  getCategories(){
-    
   }
 
   ngOnInit() {
