@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, NavParams } from '@ionic/angular';
 import { AgregarlistoPage } from '../agregarlisto/agregarlisto.page';
 import { AgregarPage } from '../agregar/agregar.page';
+import { SaldoService } from 'src/app/services/saldo.service';
 
 @Component({
   selector: 'app-agregarconfirmar',
@@ -10,7 +11,10 @@ import { AgregarPage } from '../agregar/agregar.page';
 })
 export class AgregarconfirmarPage implements OnInit {
 
-  constructor(private modalCtrl: ModalController) { }
+  public value = this.navParams.get('value');
+  public cardID = this.navParams.get('cardID');
+
+  constructor(private modalCtrl: ModalController, private saldoService:SaldoService, private navParams: NavParams,) { }
 
   ngOnInit() {
   }
@@ -25,12 +29,25 @@ export class AgregarconfirmarPage implements OnInit {
   }
 
   async openAgregarListo() {
-    await this.modalCtrl.dismiss();
+
+    let record = {};
+    record['value'] = this.value;
+    record['cardID'] = this.cardID;
+
+    console.log(record);
+    this.saldoService.create_NewItem(record).then(async resp => {
+     
+      await this.modalCtrl.dismiss();
     const modal = await this.modalCtrl.create({
       component: AgregarlistoPage,
       cssClass: 'sizeModalAgregarListo'
     });
     await modal.present();
+  })
+    .catch(error => {
+        console.log(error);
+      });
+    
   }
 
   async closeModal() {

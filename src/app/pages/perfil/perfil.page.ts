@@ -5,6 +5,7 @@ import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms'
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { Storage } from '@ionic/storage';
+import { NativeGeocoder, NativeGeocoderResult } from '@ionic-native/native-geocoder/ngx';
 
 
 
@@ -18,9 +19,11 @@ export class PerfilPage implements OnInit {
   public profileForm: FormGroup;
   errorMessage = '';
   profile:any =[];
+  address:any = 'Carrer de Aribau 655. 08021. Barcelona';
+  email;
 
   constructor(private modalCtrl: ModalController, public formBuilder: FormBuilder, private router: Router,
-    private authService: AuthService, private storage: Storage) { 
+    private authService: AuthService, private storage: Storage, private nativeGeocoder: NativeGeocoder, ) { 
 
       this.profileForm = this.formBuilder.group({
         business_name: ['', Validators.compose([
@@ -55,7 +58,7 @@ export class PerfilPage implements OnInit {
 
   ngOnInit() {
     this.getUserDetail();
-    
+    this.getMe();
   }
   validation_messages = {
     'business_name': [
@@ -96,12 +99,36 @@ export class PerfilPage implements OnInit {
  }
 
  getUserDetail(){
-  this.storage.get('user').then(res=>{
-    if(res){
-      this.profile = res;
-    }
+  this.authService.getProfile().then(res=>{
+    res.subscribe(data =>{
+
+      this.nativeGeocoder.reverseGeocode(data.address.lat,data.address.lon)
+          .then(
+            (result: NativeGeocoderResult[]) => {
+            this.address = result[0];
+            // console.log(JSON.stringify( result[0] ) )
+            })
+          .catch((error: any) => console.log(error));
+      data.address = this.address;
+      this.profile = data;
+    })
   });
  }
  
+ getMe(){
+   this.authService.me().then(res =>{
+    res.subscribe(data =>{
+      this.email = data.user.email;
+
+      console.log(this.email);
+    })
+  });
+ }
+
+ onSubmit(values){
+  this.authService.updateProfile(values).then(res=>{
+    this.router.navigate(["/home"]);
+  })
+ }
 
 }

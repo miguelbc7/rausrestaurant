@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { AgregarconfirmarPage } from '../modals/agregarconfirmar/agregarconfirmar.page';
 import { CierrePage } from '../cierre/cierre.page';
 // import { DineromodalPage } from '../modals/dineromodal/dineromodal.page';
+import { SaldoService } from 'src/app/services/saldo.service';
 
 @Component({
   selector: 'app-opciones',
@@ -13,6 +14,10 @@ import { CierrePage } from '../cierre/cierre.page';
   styleUrls: ['./opciones.page.scss'],
 })
 export class OpcionesPage implements OnInit {
+
+  value:any = 0.00;
+  decimal = this.value.toFixed(2).toString().split('.'); 
+  data;
 
   datas = [
     {
@@ -35,7 +40,7 @@ export class OpcionesPage implements OnInit {
       },
     {
       status: false,
-      name: 'Recompensas',
+      name: 'Fidelización',
       iconoazul: 'assets/img/icon/menu/cierreazul.svg',
       iconogris: 'assets/img/icon/menu/cierregris.svg'
     },
@@ -65,7 +70,7 @@ export class OpcionesPage implements OnInit {
     },
   ];
 
-  constructor(private modalCtrl: ModalController, private router: Router,) { }
+  constructor(private modalCtrl: ModalController, private router: Router, private saldoService:SaldoService) { }
 
   changeIcon(index: number){
     if(this.datas[index].status == false){
@@ -91,7 +96,7 @@ export class OpcionesPage implements OnInit {
         break;
         
       case (3):
-        
+        this.router.navigate(['/fidelizacion']);
         break;
         
       case (4):
@@ -114,6 +119,18 @@ export class OpcionesPage implements OnInit {
   }
 
   ngOnInit() {
+    this.saldoService.read_Items().then(data => {
+      data.subscribe(e => {
+       this.data = e;
+       console.log(this.data);
+           for(let i = 0; i<this.data.length; i++){
+             console.log(this.data[i].payload.doc.data().value);
+             console.log(this.data[i].payload.doc.data());
+              this.value = Number(this.value) + Number(this.data[i].payload.doc.data().value);    
+            }
+            this.decimal = this.value.toFixed(2).toString().split('.'); 
+     })
+   });
   }
 
   async openAgregarSaldo() {

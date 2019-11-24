@@ -9,7 +9,7 @@ import { FidelizacionPage } from './fidelizacion.page';
 import { ModalPlanesPage } from '../modals/modal-planes/modal-planes.page';
 
 
-import { ExpandableComponent } from "../../components/expandable/expandable.component";
+import { SharedModule } from '../sharedmodals/shared.module';
 
 
 const routes: Routes = [
@@ -24,11 +24,15 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
+    SharedModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [FidelizacionPage,ExpandableComponent,ModalPlanesPage],
+  declarations: [
+    FidelizacionPage,
+    ModalPlanesPage
+  ],
   entryComponents: [
-    ExpandableComponent,ModalPlanesPage
+    ModalPlanesPage
   ]
 })
 export class FidelizacionPageModule {}

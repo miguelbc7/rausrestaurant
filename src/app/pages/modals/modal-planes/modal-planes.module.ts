@@ -21,6 +21,6 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [ModalPlanesPage]
+  declarations: []
 })
 export class ModalPlanesPageModule {}
