@@ -24,6 +24,21 @@ export class AgregarproductoPage implements OnInit {
 
   productos:any = [];
   aImages: any = [];
+  name;
+  description;
+  ingredientes;
+  no_ingredientes;
+  nutritional_values:boolean = true;
+  fat;
+  carbohydrates;
+  protein;
+  total_calories;
+  price_with_iva = '10';
+  iva;
+  eat_in_restaurant:boolean = true;
+  wear:boolean = true;
+  delivery:boolean = true;
+  status:boolean = true;
 
   constructor(
     private modalCtrl: ModalController, 
@@ -38,56 +53,56 @@ export class AgregarproductoPage implements OnInit {
     private webview: WebView,
     private ref: ChangeDetectorRef,
     ) {
-    this.productoForm = formBuilder.group({
-        name: ['', Validators.compose([
-          Validators.required,
-          Validators.maxLength(300),
-          Validators.minLength(5)
-        ])],
-        description: ['', Validators.compose([
-          Validators.required,
-          Validators.maxLength(300),
-          Validators.minLength(10)
-        ])],
-        ingredientes: ['', Validators.compose([
-          Validators.required,
-          Validators.maxLength(300),
-          Validators.minLength(5)
-        ])],
-        no_ingredientes: ['', Validators.compose([
-          Validators.required,
-          Validators.maxLength(300),
-          Validators.minLength(5)
-        ])],
-        nutritional_values: [true],
-        fat: ['', Validators.compose([
-          Validators.required,
-        ])],
-        carbohydrates: ['', Validators.compose([
-          Validators.required,
-        ])],
-        protein: ['', Validators.compose([
-          Validators.required,
-        ])],
-        total_calories: ['', Validators.compose([
-          Validators.required,
-        ])],
-        price_with_iva: ['10', Validators.compose([
-          // Validators.required,
-        ])],
-        iva: ['', Validators.compose([
-          // Validators.required,
-        ])],
-        eat_in_restaurant: [true],
-        wear: [true],
-        delivery: [true],
-        status: [true],
-        // images: [],
-        // stock: ['', Validators.compose([
-        //   Validators.required,
-        // ])],
-    });
-
+  
+        this.productoForm = this.formBuilder.group({
+          name: [this.name , Validators.compose([
+            Validators.required,
+            Validators.maxLength(300),
+            Validators.minLength(5)
+          ])],
+          description: [this.description, Validators.compose([
+            Validators.required,
+            Validators.maxLength(300),
+            Validators.minLength(10)
+          ])],
+          ingredientes: [this.ingredientes, Validators.compose([
+            Validators.required,
+            Validators.maxLength(300),
+            Validators.minLength(5)
+          ])],
+          no_ingredientes: [this.no_ingredientes, Validators.compose([
+            Validators.required,
+            Validators.maxLength(300),
+            Validators.minLength(5)
+          ])],
+          nutritional_values: [this.nutritional_values],
+          fat: [this.name, Validators.compose([
+            Validators.required,
+          ])],
+          carbohydrates: [this.carbohydrates, Validators.compose([
+            Validators.required,
+          ])],
+          protein: [this.protein, Validators.compose([
+            Validators.required,
+          ])],
+          total_calories: [this.total_calories, Validators.compose([
+            Validators.required,
+          ])],
+          price_with_iva: [this.price_with_iva, Validators.compose([
+            // Validators.required,
+          ])],
+          iva: [this.iva, Validators.compose([
+            // Validators.required,
+          ])],
+          eat_in_restaurant: [this.eat_in_restaurant],
+          wear: [this.wear],
+          delivery: [this.delivery],
+          status: [this.status],
+          // images: [],
+          // stock: ['', Validators.compose([
+          //   Validators.required,
+          // ])],
+      });
 
    }
 
@@ -144,7 +159,37 @@ export class AgregarproductoPage implements OnInit {
   ngOnInit() {
     this.plt.ready().then(() => {
       this.loadStoredImages();
+       
     });
+    console.log(this.productos);
+    this.storage.get('product').then(res =>{
+      console.log(res);
+       this.productos = res;
+      if(this.productos){
+        this.name = res.name;
+        this.description = res.description;
+        this.ingredientes = res.ingredients.toString();
+        this.no_ingredientes = res.no_ingredients.toString();
+        this.nutritional_values = res.nutritional_values;
+        this.carbohydrates = res.carbohydrates;
+        this.fat = res.fat;
+        this.protein = res.protein;
+        this.total_calories = res.total_calories;
+        this.price_with_iva = res.price_with_iva;
+        this.iva = res.iva;
+        this.eat_in_restaurant = res.eat_in_restaurant;
+        this.wear = res.wear;
+        this.delivery = res.delivery;
+        this.status = res.status;
+      }
+      this.storage.remove('product');
+
+      });
+  }
+
+  back(){
+    this.storage.remove('product');
+    this.router.navigate(['home']);
   }
 
   slideOptsOne = {
@@ -153,9 +198,12 @@ export class AgregarproductoPage implements OnInit {
     // autoplay:true
    };
 
-   async presentPromocion() {
+   async presentPromocion(productID:any) {
     const modal = await this.modalCtrl.create({
       component: ModalPromocionPage,
+      componentProps:{
+        productID: productID,
+      },
       cssClass: 'sizeModalPromocion'
     });
 
@@ -188,7 +236,8 @@ export class AgregarproductoPage implements OnInit {
      response.subscribe((data) => {
        console.log(data);
       //  this.productos = data.products;
-       this.presentPromocion();
+      console.log(data);
+       this.presentPromocion(data.products.id);
        this.router.navigate(['home']);
    }, err => {
     console.log(err);
@@ -198,7 +247,7 @@ export class AgregarproductoPage implements OnInit {
   });
  }
 
- // Imagen 
+ //////////////////// Imagen //////////////////////
 
  loadStoredImages() {
   this.storage.get('STORAGE_KEY').then(images => {
@@ -218,7 +267,7 @@ export class AgregarproductoPage implements OnInit {
     const options: CameraOptions = {
       quality: 100,
       sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
-      destinationType: this.camera.DestinationType.FILE_URI,
+      destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE
     }

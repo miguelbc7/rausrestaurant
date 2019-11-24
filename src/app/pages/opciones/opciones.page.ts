@@ -35,7 +35,7 @@ export class OpcionesPage implements OnInit {
       },
     {
       status: false,
-      name: 'Recompensas',
+      name: 'Fidelización',
       iconoazul: 'assets/img/icon/menu/cierreazul.svg',
       iconogris: 'assets/img/icon/menu/cierregris.svg'
     },
@@ -91,7 +91,7 @@ export class OpcionesPage implements OnInit {
         break;
         
       case (3):
-        
+        this.router.navigate(['/fidelizacion']);
         break;
         
       case (4):

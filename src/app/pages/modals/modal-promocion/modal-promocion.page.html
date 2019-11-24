@@ -12,7 +12,7 @@
       una. Se debitará automáticamente<br>  
       de tu saldo Raus. Recibiras la <br> 
       factura a tu inbox y a tu e-mail.</p>
-      <!-- <form [formGroup]="promotionForm" (ngSubmit)="loginUser(promotionForm.value)"> -->
+      <form (ngSubmit)="createForm()">
       <ion-row class="select-section">
           <ion-col size="12">
             <div class="ion-text-center font14">Selecciona</div>
@@ -20,23 +20,23 @@
       </ion-row>
       <ion-row>
           <ion-col size="4" class="ion-justify-content-center ion-text-center">
-              <input type="radio" class="radio1" value="" name="opcion"/> <br>
+              <input type="radio" (click)="radioVal('1 dia')" class="radio1" value="1" name="opcion"/> <br>
               <ion-label class="font18 blue-dark2">1 día</ion-label>
           </ion-col>
           <ion-col size="4" class="ion-justify-content-center ion-text-center">
-              <input type="radio" class="radio1" value="" name="opcion"/> <br>
+              <input type="radio" (click)="radioVal('3 dias')" class="radio1" value="3" name="opcion"/> <br>
               <ion-label class="font18 blue-dark2">3 días</ion-label>
           </ion-col>
           <ion-col size="4" class="ion-justify-content-center ion-text-center">
-              <input type="radio" class="radio1" value="" name="opcion"/> <br>
+              <input type="radio" (click)="radioVal('5 dias')" class="radio1" value="5" name="opcion"/> <br>
               <ion-label class="font18 blue-dark2">5 días</ion-label>
           </ion-col>
       </ion-row>
       <ion-row class="mt-promo">
         <ion-col size="12" class="ion-text-center">
-          <ion-button class="font14 yellowpromobtn" (click)="addprom()">Promocionar</ion-button>
+          <ion-button class="font14 yellowpromobtn" (click)="createForm()" >Promocionar</ion-button>
         </ion-col>
       </ion-row>
-      <!-- </form> -->
+      </form>
 
 </ion-content>

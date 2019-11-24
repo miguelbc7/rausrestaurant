@@ -15,6 +15,7 @@ export class AuthService {
 
   url = environment.url;
   token:string;
+  uid;
   
   // Http Options
   httpOptions = {
@@ -59,13 +60,7 @@ export class AuthService {
     return new Promise<any>((resolve, reject) => {
       firebase.auth().signInWithEmailAndPassword(value.username, value.password)
       .then(
-        res => {
-          // this.http.post(`${this.url}auth/login`,res).pipe(
-          //   catchError(e => {
-          //     console.log(e.error.msg);
-          //     throw new Error(e);
-          //   })
-          // );          
+        res => {         
           resolve(res)
         },
         err =>{ console.log('login auth service error'+ err) ; reject(err) })
@@ -100,15 +95,42 @@ export class AuthService {
      return firebase.auth().currentUser;
    }
 
-   async getProfile(item): Promise<any> {
+   async getProfile(): Promise<any> {
     await this.storage.get('_token').then(res=>{
       this.token = res.token;
     });
+    await this.storage.get('_uid').then(res=>{
+      this.uid = res;
+    });
+    return this.http.get(this.url+'restaurants/'+this.uid,{
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': this.token,
+      })
+    }).pipe(
+      catchError(this.handleError)
+    );
+   }
+
+   async me(): Promise <any>{
+    await this.storage.get('_token').then(res=>{
+      this.token = res.token;
+    });
+        return this.http.get(this.url+'auth/me',{
+          headers: new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': this.token,
+          })
+        })
+        .pipe(
+          catchError(this.handleError)
+        )
    }
 
    async updateProfile(item): Promise<any> {
-    await this.storage.get('_token').then(res=>{
-      this.token = res.token;
+      await this.storage.get('_token').then(res=>{
+        this.token = res.token;
+      });
       return this.http.put<Restaurant>(this.url+'restaurants/', JSON.stringify(item),{
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
@@ -118,15 +140,5 @@ export class AuthService {
       .pipe(
         catchError(this.handleError)
       )
-    });
-    return this.http.put<Restaurant>(this.url+'restaurants', JSON.stringify(item),{
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': this.token,
-      })
-    })
-    .pipe(
-      catchError(this.handleError)
-    )
    }
 }

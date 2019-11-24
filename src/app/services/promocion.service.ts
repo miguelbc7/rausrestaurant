@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { Producto } from '../models/producto';
+import { Promocion } from '../models/promocion';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
@@ -24,8 +24,6 @@ export class PromocionService {
       'Authorization': this.token,
     })
   }
-
-  
  
   // Handle API errors
   handleError(error: HttpErrorResponse) {
@@ -47,9 +45,17 @@ export class PromocionService {
   };
 
    // Create a new item
-   createItem(item): Observable<Producto> {
+   async createItem(item): Promise<any> {
+     await this.storage.get('_token').then(res=>{
+        this.token = res.token;
+      });
     return this.http
-      .post<Producto>(this.base_path+'promotions', JSON.stringify(item), this.httpOptions)
+      .post<Promocion>(this.base_path+'promotions', JSON.stringify(item), {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Authorization': this.token,
+        })
+      })
       .pipe(
         retry(2),
         catchError(this.handleError)
@@ -57,9 +63,17 @@ export class PromocionService {
   }
  
   // Get single Producto data by ID
-  getItem(id): Observable<Producto> {
+  async getItem(id): Promise<any> {
+    await this.storage.get('_token').then(res=>{
+        this.token = res.token;
+      });
     return this.http
-      .get<Producto>(this.base_path+'promotions/' + id, this.httpOptions)
+      .get<Promocion>(this.base_path+'promotions/' + id, {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Authorization': this.token,
+        })
+      })
       .pipe(
         retry(2),
         catchError(this.handleError)
@@ -67,9 +81,34 @@ export class PromocionService {
   }
  
   // Get Productos data
-  getList(): Observable<Producto> {
+  async getList(): Promise<any> {
+    await this.storage.get('_token').then(res=>{
+        this.token = res.token;
+      });
     return this.http
-      .get<Producto>(this.base_path+'promotions', this.httpOptions)
+      .get<Promocion>(this.base_path+'promotions', {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Authorization': this.token,
+        })
+      })
+      .pipe(
+        retry(2),
+        catchError(this.handleError)
+      )
+  }
+
+  async productPromo(item): Promise<any>{
+    await this.storage.get('_token').then(res=>{
+      this.token = res.token;
+    });
+    return this.http
+      .put<Promocion>(this.base_path+'products/promotion', JSON.stringify(item), {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Authorization': this.token,
+        })
+      })
       .pipe(
         retry(2),
         catchError(this.handleError)
@@ -77,9 +116,17 @@ export class PromocionService {
   }
  
   // Update item by id
-  updateItem(id, item): Observable<Producto> {
+  async updateItem(id, item): Promise<any> {
+    await this.storage.get('_token').then(res=>{
+        this.token = res.token;
+      });
     return this.http
-      .put<Producto>(this.base_path+'promotions/' + id, JSON.stringify(item), this.httpOptions)
+      .put<Promocion>(this.base_path+'promotions/' + id, JSON.stringify(item), {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Authorization': this.token,
+        })
+      })
       .pipe(
         retry(2),
         catchError(this.handleError)
@@ -87,9 +134,9 @@ export class PromocionService {
   }
  
   // Delete item by id
-  deleteItem(id) {
+  async deleteItem(id) {
     return this.http
-      .delete<Producto>(this.base_path+'promotions/' + id, this.httpOptions)
+      .delete<Promocion>(this.base_path+'promotions/' + id, this.httpOptions)
       .pipe(
         retry(2),
         catchError(this.handleError)
