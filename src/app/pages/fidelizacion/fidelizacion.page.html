@@ -1,0 +1,31 @@
+<ion-content>
+    <ion-grid>
+        <ion-row>
+          <ion-col class="ion-text-center" size="12">
+            <ion-icon class="iconBack" routerLink="/opciones" src="assets/img/icon/back.svg"></ion-icon>
+            <ion-icon class="iconHist" src="assets/img/icon/analiticas.svg"></ion-icon>
+            <p class="font14 f-historial ion-text-center ion-no-margin">Fidelización</p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-button class="font14 button-salir" fill="clear" (click)="createplan()"><ion-icon name="add"></ion-icon>Crear plan de fidelización
+      </ion-button>
+      <!-- Planes creados -->
+      <ion-card class="card-expandable" *ngFor="let item of items">
+          <ion-card-header class="margin-header" (click)="toggleZipped()">
+            <ion-card-title class="font14 color-font"  (click)="expandItem(item)">Planes creados <ion-icon class="arrow-icon" color="bluedark" [name]="!zipped ? 'arrow-dropright' : 'arrow-dropdown'"></ion-icon>
+            </ion-card-title>
+          </ion-card-header>
+          <ion-card-content class="content-expandable" *ngFor="let d of data">
+            <app-expandable expandHeight="120px" [expanded]="item.expanded" >
+                <ion-item >
+                    <ion-label class="font12 font-color label-mg" (click)="EditRecord(d.payload.doc.data(),d.payload.doc.id )">
+                      {{d.payload.doc.data().name}}
+                    </ion-label>
+                    <ion-icon name="create" slot="end" (click)="EditRecord(d.payload.doc.data(),d.payload.doc.id)"></ion-icon>
+                    <ion-icon name="trash" slot="end" (click)="RemoveRecord(d.payload.doc.id)"></ion-icon>
+                  </ion-item>
+            </app-expandable>
+          </ion-card-content>
+        </ion-card>
+</ion-content>

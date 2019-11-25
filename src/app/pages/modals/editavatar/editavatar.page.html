@@ -1,0 +1,29 @@
+<!-- <ion-header no-border>
+  <ion-toolbar>
+    <ion-title class="ion-text-center">Políticas de privacidad</ion-title>
+    <ion-buttons slot="primary">
+        <ion-button color="dark" fill="clear" (click)="closeModal()">
+          <ion-icon slot="end" name="close"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header> -->
+<ion-content>
+    <div class="ion-text-end">
+        <ion-button color="dark" fill="clear" (click)="closeModal()">
+            <ion-icon class="font14" slot="end" name="close"></ion-icon>
+          </ion-button>
+    </div>
+    <!-- <h5 class="ion-text-center">
+        Vegetalia Restaurant
+    </h5> -->
+    <ion-avatar class="avatar">
+      <img class="imgAvatar" name="avatar" [(ngModel)]="avatar"  src="{{avatar}}" alt="avatar perfil">
+      <!-- <ion-icon class="iconCamera" name="camera"></ion-icon> -->
+    </ion-avatar>
+    <ion-row class="btnNuevo">
+        <ion-col size="12" class="ion-text-center">
+            <ion-button class="font15" color="bluedark" ><ion-icon class="iconCamera" name="camera"></ion-icon></ion-button>
+        </ion-col>
+    </ion-row>
+</ion-content>

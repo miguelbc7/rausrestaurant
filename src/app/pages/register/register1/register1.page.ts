@@ -3,6 +3,10 @@ import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms'
 import { Router } from '@angular/router';
 // import { TagsHelper } from '../../helpers/tags-helper';
 // import { MustMatch } from '../../validators/must-match.validator';
+import { AuthService } from '../../../services/auth.service';
+import { NativeGeocoder, NativeGeocoderResult } from '@ionic-native/native-geocoder/ngx';
+import { Storage } from '@ionic/storage';
+
 
 @Component({
   selector: 'app-register1',
@@ -10,92 +14,161 @@ import { Router } from '@angular/router';
   styleUrls: ['./register1.page.scss'],
 })
 export class Register1Page implements OnInit {
-
+  
   public register1: FormGroup;
   form: FormGroup;
-  pass;
-  cpass;
+  pass:any;
+  cpass:any;
   passwordType: string = "password";
   passwordShown: boolean = false;
   passwordType2: string = "password";
   passwordShown2: boolean = false;
+  data: { username: any; password: any; };
+  tags:[{ nombre: "#hoteleria"},{ nombre: "#restaurante"} ];
 
-  constructor( public formBuilder: FormBuilder, private router: Router) {
 
-    this.register1 = this.formBuilder.group({
-      code: [],
-      tags: [[]],
-    });
+  constructor( public formBuilder: FormBuilder, private router: Router,private authService: AuthService,private nativeGeocoder: NativeGeocoder, private storage: Storage) {
 
     this.register1 = formBuilder.group({
+      business_name: ['', Validators.compose([
+        Validators.required,
+        Validators.maxLength(300),
+        Validators.minLength(5)
+      ])],
       name: ['', Validators.compose([
         Validators.required,
-        Validators.maxLength(30)
+        Validators.maxLength(300),
+        Validators.minLength(5)
       ])],
-      lastname: ['', Validators.compose([
-        Validators.required,
-        Validators.maxLength(30)
-      ])],
-      dni: ['', Validators.compose([
+      cif_nic: ['', Validators.compose([
         Validators.required,
         Validators.maxLength(20)
       ])],
-      birthdate: ['', Validators.compose([
+      name_responsable: ['', Validators.compose([
         Validators.required,
+        Validators.maxLength(150),
+        Validators.minLength(5)
       ])],
-      responsable: ['', Validators.compose([
+      address: ['', Validators.compose([
         Validators.required,
-        Validators.maxLength(30)
+        Validators.maxLength(300),
+        Validators.minLength(5)
       ])],
       phone: ['', Validators.compose([
         Validators.required,
-        Validators.maxLength(30)
+        Validators.maxLength(20)
       ])],
       email: ['', Validators.compose([
         Validators.required,
-        Validators.maxLength(30)
+        Validators.maxLength(30),
+        Validators.minLength(5),
+        Validators.pattern('[A-Za-z0-9._%+-]{2,}@[a-zA-Z-_.]{2,}[.]{1}[a-zA-Z]{2,}'),
       ])],
-      code: ['', Validators.compose([
-        Validators.required,
-      ])],
-      tags: ['', Validators.compose([
+      // code: ['', Validators.compose([
+      //   Validators.required,
+      // ])],
+      categories: ['', Validators.compose([
         // Validators.required,
       ])],
       password: ['', Validators.compose([
         Validators.required,
-        Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,15}')
+        Validators.maxLength(15),
+        Validators.minLength(8),
+        Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&.])[A-Za-z\d$@$!%*?&.].{8,15}')
       ])],
-      confirmpassword: ['', Validators.compose([
+      repeat_password: ['', Validators.compose([
         Validators.required,
-        Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,15}')
+        Validators.maxLength(15),
+        Validators.minLength(8),
+        Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&.])[A-Za-z\d$@$!%*?&.].{8,15}')
       ])],
   });
   }
 
-
-
+  errorMessage: string = '';
 
   validation_messages = {
-    'name': [
-        { type: 'required', message: 'Debe ingresar un nombre.' },
-        { type: 'maxlength', message: 'Debe ser menor de 30 caracteres.' }
+    'business_name': [
+        { type: 'required', message: 'Debe ingresar un nombre comercial.' },
+        { type: 'minlength', message: 'Debe ser mayor de 5 caracteres.' },
+        { type: 'maxlength', message: 'Debe ser menor de 300 caracteres.' }
       ],
-      'lastname': [
-        { type: 'required', message: 'Debe ingresar un apellido.' },
-        { type: 'maxlength', message: 'Debe ser menor de 30 caracteres.' }
+      'name': [
+        { type: 'required', message: 'Debe ingresar un razon social.' },
+        { type: 'minlength', message: 'Debe ser mayor de 5 caracteres.' },
+        { type: 'maxlength', message: 'Debe ser menor de 300 caracteres.' }
       ],
-      'dni': [
-        { type: 'required', message: 'Debe ingresar un DNI.' },
+      'cif_nic': [
+        { type: 'required', message: 'Debe ingresar un cif/nic.' },
         { type: 'maxlength', message: 'Debe ser menor de 20 caracteres.' }
       ],
-      'birthdate': [
-        { type: 'required', message: 'Debe ingresar una fecha de nacimiento.' },
-      ]
+      'address': [
+        { type: 'required', message: 'Debe ingresar una dirección.' },
+      ],
+      'name_responsable': [
+        { type: 'required', message: 'Debe ingresar un nombre de responsable en el establecimineto.' },
+        { type: 'minlength', message: 'Debe ser mayor de 5 caracteres.' },
+        { type: 'maxlength', message: 'Debe ser menor de 30 caracteres.' }
+      ],
+      'phone': [
+        { type: 'required', message: 'Debe ingresar un Teléfono.' },
+        { type: 'minlength', message: 'Debe ser mayor de 5 caracteres.' },
+        { type: 'maxlength', message: 'Debe ser menor de 30 caracteres.' }
+      ],
+      'email': [
+        { type: 'required', message: 'Debe ingresar un Correo electrónico.' },
+        { type: 'minlength', message: 'Debe ser mayor de 5 caracteres.' },
+        { type: 'maxlength', message: 'Debe ser menor de 30 caracteres.' }
+      ],
+      'password': [
+        { type: 'required', message: 'Contraseña Requerida' },
+        { type: 'minlength', message: 'Debe ser mayor de 8 caracteres' },
+        { type: 'maxlength', message: 'Debe ser menor de 15 caracteres.' },
+        { type: 'pattern', message: 'Su contraseña debe contener al menos una mayúscula, una minúscula y un número.' }
+      ],
+      'repeat_password': [
+        { type: 'required', message: 'Contraseña Requerida' },
+        { type: 'minlength', message: 'Debe ser mayor de 8 caracteres' },
+        { type: 'maxlength', message: 'Debe ser menor de 15 caracteres.' },
+        { type: 'pattern', message: 'Su contraseña debe contener al menos una mayúscula, una minúscula y un número.' }
+      ],
+      // 'categories': [
+      //   { type: 'required', message: 'Debe ingresar por lo menos una actividad de tu empresa.' },
+      // ],
     }
 
-  onSubmit(values){
+  async onSubmit(values){
+   await this.storage.set('user', values);
+    values.lat = -4.0000000;
+    values.lng = 40.0000000;
+    this.nativeGeocoder.forwardGeocode(values.address)
+    .then((
+      result: NativeGeocoderResult[]
+      ) => {
+        console.log('The coordinates are latitude=' + result[0].latitude + ' and longitude=' + result[0].longitude)
+        
+        values.lat = result[0].latitude;
+        values.lng = result[0].longitude;
+        
+      }
+      )
+      .catch((error: any) => console.log(error));
+      
+    delete values.address;
     console.log(values);
-    this.router.navigate(["/welcome"]);
+    this.authService.registerUser(values)
+    .subscribe(res => {
+      this.errorMessage = "";
+      // this.data.username = values.email;
+      // this.data.password = values.password;
+      // this.authService.loginUser(this.data);
+      this.router.navigate(["/welcome"]);
+
+    },err => {
+      this.errorMessage = "Hubo un error durante el proceso del registro, por favor intente de nuevo.";
+      // console.log(err.msg);
+    })
+    // this.router.navigate(["/welcome"]);
   }
 
   ngOnInit() {

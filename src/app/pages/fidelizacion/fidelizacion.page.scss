@@ -1,0 +1,40 @@
+.iconHist{
+    // position: absolute;
+    // left: 45%;
+    font-size: 45px;
+}
+.f-historial{
+    color:#89acdb;
+}
+.iconBack{
+    position: absolute;
+    top: 20%;
+    font-size: 45px;
+    left: 5%;
+}
+.button-salir{
+    color:black !important;
+    font-family: var(--ion-font-family) !important;
+}
+
+.card-expandable{
+    box-shadow: none !important;
+    border-bottom: 0px solid;
+    // border-color: #657b97;
+}
+.font-color{
+    color: #222428 !important;
+}
+.label-mg{
+    margin-bottom: 0pt !important;
+}
+ion-item {
+    --highlight-color-focused: none;
+    --border-color: aliceblue;
+    border-bottom: 1px solid;
+    --detail-icon-opacity: none;
+}
+.arrow-icon{
+    position: absolute;
+    font-size: 20pt;
+}

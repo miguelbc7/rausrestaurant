@@ -1,0 +1,77 @@
+
+
+<ion-content>
+<div class="font18 ion-text-center line-title">
+  <p>Modificar plan de</p>
+  <p>fidelización</p>
+</div>
+<ion-grid>
+<!-- Switch -->
+<div class="onoffswitch ion-float-right">
+    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch"  [(ngModel)]="item?.status? item.status:status" checked>
+    <label class="onoffswitch-label" for="myonoffswitch"></label>
+</div><br>
+<ion-row>
+  <ion-col size="12">
+      <ion-item>
+          <ion-input  [(ngModel)]=" name"  class="font10 ion-text-center" autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" color="blue-dark2" inputmode="text" placeholder="Nombre del Plan" required="true"></ion-input>
+      </ion-item>
+  </ion-col>
+</ion-row>
+<ion-row>
+    <ion-col size="6">
+        <ion-item>
+            <ion-datetime  [(ngModel)]=" from" class="font10 ion-text-center" autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" color="blue-dark2" inputmode="text" placeholder="del dd/mm/aaaa" displayFormat="dd/mm/Y"  required="true"></ion-datetime>
+        </ion-item>
+    </ion-col>
+    <ion-col size="6">
+        <ion-item>
+            <ion-input  [(ngModel)]=" to" class="font10 ion-text-center" autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" color="blue-dark2" inputmode="text" placeholder="hasta dd/mm/aaaa" required="true"></ion-input>
+        </ion-item>
+    </ion-col>
+  </ion-row>
+  <div class="ion-text-center">
+    <p>Valor</p>
+  </div>
+  <ion-row>
+      <ion-col size="6" class="ion-text-center" >
+          <div class="inline">
+              <ion-icon class="iconMargin" name="remove"></ion-icon>
+              <ion-input  [(ngModel)]=" qtyValue" class="inputCustom2 ion-text-center"></ion-input>
+              <ion-icon class="iconMargin" name="add"></ion-icon>
+          </div>
+          <span class="ml-2">por cada</span>
+      </ion-col>
+      <ion-col size="6" class="ion-text-center" >
+          <div class="inline">
+              <ion-input  [(ngModel)]=" value" class="inputCustom2 ion-text-center"></ion-input>
+          </div>
+          <span class="ml-2">euros</span>
+      </ion-col>
+  </ion-row>
+  <br>
+  <br>
+  <ion-row>
+      <ion-col size="6" class="ion-text-center" >
+          <div class="inline">
+              <ion-icon class="iconMargin" name="remove"></ion-icon>
+              <ion-input  [(ngModel)]=" qtyBuy" class="inputCustom2 ion-text-center"></ion-input>
+              <ion-icon class="iconMargin" name="add"></ion-icon>
+          </div>
+          <span class="ml-2">por cada</span>
+      </ion-col>
+      <ion-col size="6" class="ion-text-center" >
+          <div class="inline">
+              <ion-input  [(ngModel)]=" buy" class="inputCustom2 ion-text-center"></ion-input>
+          </div>
+          <span class="ml-2">compras</span>
+      </ion-col>
+  </ion-row>
+  <ion-row class="btnNuevoGuardar">
+      <ion-col size="12" class="ion-text-center">
+          <ion-button class="font14" color="bluedark" *ngIf="type == 'create'" (click)="CreateRecord()" >Guardar</ion-button>
+          <ion-button class="font14" color="bluedark" *ngIf="type == 'edit'" (click)="UpdateRecord(item.id)" type="submit" >Actualizar</ion-button>
+      </ion-col>
+  </ion-row>
+</ion-grid>
+</ion-content>

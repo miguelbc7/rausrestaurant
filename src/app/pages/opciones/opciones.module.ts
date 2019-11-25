@@ -8,6 +8,14 @@ import { SharedModule } from '../sharedmodals/shared.module';
 import { IonicModule } from '@ionic/angular';
 
 import { OpcionesPage } from './opciones.page';
+import { AgregarPage } from '../modals/agregar/agregar.page';
+import { AgregartarjetaPage } from '../modals/agregartarjeta/agregartarjeta.page';
+import { AgregarlistoPage } from '../modals/agregarlisto/agregarlisto.page';
+
+import { AgregarconfirmarPage } from '../modals/agregarconfirmar/agregarconfirmar.page';
+import { DineromodalPage } from '../modals/dineromodal/dineromodal.page';
+
+import { CierrePage } from '../cierre/cierre.page';
 
 const routes: Routes = [
   {
@@ -24,6 +32,22 @@ const routes: Routes = [
     SharedModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [OpcionesPage]
+  declarations: [
+    OpcionesPage,
+    AgregarPage,
+    AgregartarjetaPage,
+    AgregarlistoPage,
+    AgregarconfirmarPage,
+    CierrePage,
+    DineromodalPage
+  ],
+  entryComponents: [
+    AgregarPage,
+    AgregartarjetaPage,
+    AgregarlistoPage,
+    AgregarconfirmarPage,
+    CierrePage,
+    DineromodalPage
+  ]
 })
 export class OpcionesPageModule {}

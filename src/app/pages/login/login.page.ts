@@ -5,6 +5,8 @@ import { ModalTerminosPage } from '../modals/modal-terminos/modal-terminos.page'
 import { NewPasswordPage } from '../modals/new-password/new-password.page';
 import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
+import { Storage } from '@ionic/storage';
 
 
 @Component({
@@ -14,56 +16,69 @@ import { Router } from '@angular/router';
 })
 export class LoginPage implements OnInit {
 
-  public login_form: FormGroup;
+  public loginForm: FormGroup;
+  errorMessage = '';
+  passwordShown: any;
+  passwordType: string  = 'password';
 
-  var_u: string = "username";
-
-  passwordType: string = "password";
-  passwordShown: boolean = false;
-  constructor(private modalCtrl: ModalController, public formBuilder: FormBuilder, private router: Router) {
-
-        this.login_form = formBuilder.group({
-          username: ['', Validators.compose([
-            Validators.required,
-            Validators.minLength(8),
-            Validators.maxLength(30)
-          ])],
-          password: ['', Validators.compose([
-            Validators.required,
-            // Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+$')
-            Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,15}')
-
-
-          ])],
-      });
+  constructor(private modalCtrl: ModalController, public formBuilder: FormBuilder, private router: Router,
+              private authService: AuthService, private storage: Storage) {
    }
 
 
-   onSubmit(values){
-    console.log(values);
-    this.router.navigate(["/home"]);
-  }
+  //  onSubmit(values){
+  //   console.log(values);
+  //   this.router.navigate(["/home"]);
+  // }
 
+  // tslint:disable-next-line: variable-name
   validation_messages = {
-    'username': [
+    username: [
         { type: 'required', message: 'Correo ó Teléfono requerido' },
         { type: 'minlength', message: 'Debe ser mayor de 5 caracteres' },
         { type: 'maxlength', message: 'Debe ser menor de 30 caracteres.' }
       ],
-      'password': [
+      password: [
             { type: 'required', message: 'Contraseña Rederida' },
             { type: 'minlength', message: 'Debe ser mayor de 8 caracteres' },
             { type: 'maxlength', message: 'Debe ser menor de 15 caracteres.' },
-            { type: 'pattern', message: 'Su contraseña debe contener al menos una mayúscula, una minúscula y un número.' }
+            // { type: 'pattern', message: 'Su contraseña debe contener al menos una mayúscula, una minúscula y un número.' }
           ]
     }
 
   ngOnInit() {
 
+      this.loginForm = this.formBuilder.group({
+          username: new FormControl('', Validators.compose([
+            Validators.required,
+            Validators.minLength(5),
+            Validators.maxLength(30)
+          ]) ),
+          password: new FormControl('', Validators.compose([
+            Validators.required,
+            Validators.minLength(8),
+            Validators.maxLength(15),
+            // Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$.@$!%*?&])[A-Za-z0-9\d$@$.!%*?&].{8,15}')
+
+          ])),
+      });
 
   }
 
-
+  loginUser(value){
+    this.authService.loginUser(value)
+    .then(res => {
+      this.errorMessage = "";
+      this.storage.set('_uid', res.user.uid);
+      this.authService.getToken(res.user.uid).subscribe(token =>{
+        this.storage.set('_token', token);
+        this.router.navigate(["/home"]);
+      });
+    },err => {
+      this.errorMessage = 'Usuario invalido.';
+      console.log(err);
+    })
+  }
 
   async presentPoliticas() {
     const modal = await this.modalCtrl.create({
@@ -92,10 +107,10 @@ export class LoginPage implements OnInit {
   public togglePassword() {
     if(this.passwordShown){
       this.passwordShown = false;
-      this.passwordType = "password";
+      this.passwordType = 'password';
     }else {
       this.passwordShown = true;
-      this.passwordType = "text";
+      this.passwordType = 'text';
     }
   }
 

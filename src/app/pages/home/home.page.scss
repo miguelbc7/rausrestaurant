@@ -14,7 +14,14 @@
     right: 3.5%;
     width: 80px;
     height: 80px;
+    z-index: 2;
  }
+
+ion-slide.changeStyle img {
+    max-width: 100% !important;
+    max-height: 100% !important;
+    margin:0 !important;
+} 
 
 .decimal {
     position: absolute;
@@ -52,8 +59,13 @@
  .IconNav {
      font-size: 23pt;
  }
- 
 
+ .imgCarta3 {
+    width: 100%;
+    height: 135px;
+    object-fit: cover !important;
+}
+ 
  ion-button {
 	ion-badge {
         position: absolute;

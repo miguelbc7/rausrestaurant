@@ -110,9 +110,17 @@
   --ion-color-bluewelcome-shade: #45525d;
   --ion-color-bluewelcome-tint: #606d79;
 
+// yellowpromo
+    --ion-color-yellowpromo: #e6a430;
+    --ion-color-yellowpromo-rgb: 230,164,48;
+    --ion-color-yellowpromo-contrast: #000000;
+    --ion-color-yellowpromo-contrast-rgb: 0,0,0;
+    --ion-color-yellowpromo-shade: #ca902a;
+    --ion-color-yellowpromo-tint: #e9ad45;
+
 
   /** font **/
-  --ion-font-family: 'SEGUIHIS';
+  --ion-font-family: 'San Fransico';
     font-family: var(--ion-font-family) !important;
 
 
@@ -216,16 +224,39 @@
   --ion-color-tint: var(--ion-color-custondark-tint);
 }
 
+.ion-color-yellowpromo {
+  --ion-color-base: var(--ion-color-yellowpromo);
+  --ion-color-base-rgb: var(--ion-color-yellowpromo-rgb);
+  --ion-color-contrast: var(--ion-color-yellowpromo-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-yellowpromo-contrast-rgb);
+  --ion-color-shade: var(--ion-color-yellowpromo-shade);
+  --ion-color-tint: var(--ion-color-yellowpromo-tint);
+}
+
 
 ion-item {
   --highlight-color-focused:#657b97;
   --border-color: var(--ion-color-bluedark);
   --detail-icon-opacity: 0.75;
+  
 }
 
+// .item-native {
+//   padding-left:0px !important;
+// }
+
+// @font-face {
+//   font-family: 'Agustina' !important;
+//   // font-style: normal;
+//   // font-weight: normal;
+//   src: url('../assets/fonts/Agustina.otf');
+// }
+
 @font-face {
-  font-family: 'SEGUIHIS' !important;
-  // font-style: normal;
-  // font-weight: normal;
-  src: url('../assets/fonts/SEGUIHIS.TTF');
+  font-family: 'San Fransico';
+  src: url('../assets/fonts/SEGUIHIS.TTF');//mine
+}
+
+* {
+  font-family: 'San Fransico';
 }

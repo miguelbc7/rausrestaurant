@@ -1,0 +1,62 @@
+import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { AgregartarjetaPage } from '../agregartarjeta/agregartarjeta.page';
+import { AgregarconfirmarPage } from '../agregarconfirmar/agregarconfirmar.page';
+import { CreditCardService } from 'src/app/services/credit-card.service';
+
+@Component({
+  selector: 'app-agregar',
+  templateUrl: './agregar.page.html',
+  styleUrls: ['./agregar.page.scss'],
+})
+export class AgregarPage implements OnInit {
+
+  data:any;
+  value;
+  public sum : number = 0;
+  // public total(items){
+  //   this.sum = 0;
+  //   for(let i = 0; i<this.items.length; i++){
+  //     this.sum = this.sum + this.items[i];    
+  //   }
+  //   return this.sum;
+  // }
+
+
+  constructor(private modalCtrl: ModalController , private creditCardService:CreditCardService) { }
+
+  ngOnInit() {
+    this.creditCardService.read_Items().then(data => {
+       data.subscribe(e => {
+        this.data = e;
+      })
+    });
+  }
+
+  async openAgregarTarjeta() {
+    await this.modalCtrl.dismiss();
+    const modal = await this.modalCtrl.create({
+      component: AgregartarjetaPage,
+      cssClass: 'sizeModalAgregarTajerta'
+    });
+    await modal.present();
+  }
+
+  async openConfirmarAgregar(cardID) {
+    await this.modalCtrl.dismiss();
+    const modal = await this.modalCtrl.create({
+      component: AgregarconfirmarPage,
+      componentProps:{
+        value: this.value,
+        cardID:cardID
+      },
+      cssClass: 'sizeModalConfirmacion'
+    });
+    await modal.present();
+  }
+
+  RemoveRecord(rowID){
+    this.creditCardService.delete_Item(rowID);
+  }
+
+}

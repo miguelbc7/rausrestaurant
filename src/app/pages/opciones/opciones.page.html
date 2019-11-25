@@ -1,9 +1,34 @@
 
 <app-navbar></app-navbar>
 <ion-content>
-  <ion-grid class="px-0">
+  <ion-grid class="px-0 marginTopGrid">
     <ion-row>
+        <ion-col size="7" class="hgLine  px-0">
+            <p class="font16 my-0 ml-10">Balance</p>
+            <p class="my-0 text-dorado"> <span class="font60">{{decimal[0] }}</span> <span class="font18 decimal">,{{decimal[1]? decimal[1] : 00 }}€</span></p> <br>
+            <ion-icon class="iconBack" src="assets/img/icon/back.svg" routerLink="/home"></ion-icon>
+        </ion-col>
+        <ion-col size="5">
+          <ion-avatar class="avatar">
+            <img class="imgAvatar" src="assets/img/rest1.jpg" alt="avatar perfil">
+          </ion-avatar>
+          <p class="text-dorado ion-text-center">
+            Vegetalia Res...
+          </p>
+        </ion-col>
+    </ion-row>
+  </ion-grid>
 
+  <ion-grid>
+    <ion-row>
+      <ion-col size="4" *ngFor="let data of datas; let i = index" >
+        <div class="buttonDiv ion-align-items-center" (click)="changeIcon(i)" [ngClass]="data.status?'active':''">
+            <!-- <ion-icon class="iconButton" src="assets/img/icon/campa2.svg"  onmouseover="this.src='assets/img/icon/ojo2.svg';" onmouseout="this.src='assets/img/icon/campa2.svg';"></ion-icon> -->
+          <ion-icon class="iconButton" src="{{data.iconoazul}}" *ngIf="!data.status"></ion-icon>
+          <ion-icon class="iconButton" src="{{data.iconogris}}" *ngIf="data.status"></ion-icon>
+          <p class="ion-text-center my-0  font10">{{data.name}} </p>
+        </div>
+      </ion-col>
     </ion-row>
   </ion-grid>
 
