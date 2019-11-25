@@ -11,7 +11,7 @@ import { HorarioService } from '../../../services/horario.service';
 export class HorariosPage implements OnInit {
 
   name;
-  start:'';
+  start:'12:00';
   end:'';
   status = false;
   list:any;
@@ -29,7 +29,6 @@ export class HorariosPage implements OnInit {
   }
 
   createForm(){
-    console.log();
     let item = {
       name: this.name,
       schedules: {
@@ -43,7 +42,7 @@ export class HorariosPage implements OnInit {
       res.subscribe(data =>{
         console.log(data);
         this.getHorario();
-        // this.modalCtrl.dismiss();
+        this.modalCtrl.dismiss();
       },
       error=>{
         console.log(error);
@@ -60,6 +59,11 @@ export class HorariosPage implements OnInit {
         this.list = data.schedules;
       })
     });
+  }
+
+  remove(id)
+  {
+
   }
 
 }

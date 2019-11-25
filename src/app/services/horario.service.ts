@@ -115,5 +115,11 @@ export class HorarioService {
         catchError(this.handleError)
       )
   }
+
+  async updateItem(id, item): Promise<any>{
+    await this.storage.get('_token').then(res=>{
+      this.token = res.token;
+    });
+  }
  
 }

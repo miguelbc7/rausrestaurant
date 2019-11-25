@@ -40,10 +40,10 @@
       </ion-item>
       <ion-item-options>
         <ion-item-option color="bluedark">
-          <ion-icon slot="start" name="create"></ion-icon>
+          <ion-icon slot="start" (click)="edit()" name="create"></ion-icon>
         </ion-item-option>
         <ion-item-option color="danger">
-          <ion-icon slot="start" name="trash"></ion-icon>
+          <ion-icon slot="start" (click)="remove(sc.id)" name="trash"></ion-icon>
         </ion-item-option>
       </ion-item-options>
     </ion-item-sliding>
