@@ -131,7 +131,7 @@ export class AuthService {
       await this.storage.get('_token').then(res=>{
         this.token = res.token;
       });
-      return this.http.put<Restaurant>(this.url+'users/update/', JSON.stringify(item),{
+      return this.http.put<Restaurant>(this.url+'restaurants/update/', JSON.stringify(item),{
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
           'Authorization': this.token,

@@ -127,6 +127,7 @@ export class PerfilPage implements OnInit {
 
  onSubmit(values){
   this.authService.updateProfile(values).then(res=>{
+    console.log(res);
     this.router.navigate(["/home"]);
   })
  }
