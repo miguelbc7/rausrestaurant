@@ -13,7 +13,7 @@
       <!-- Planes creados -->
       <ion-card class="card-expandable" *ngFor="let item of items">
           <ion-card-header class="margin-header" (click)="toggleZipped()">
-            <ion-card-title class="font14 color-font"  (click)="expandItem(item)">Planes creados <ion-icon class="arrow-icon" color="bluedark" [name]="!zipped ? 'arrow-dropright' : 'arrow-dropdown'"></ion-icon>
+            <ion-card-title class="font14 color-font"  (click)="expandItem(item)">Planes creados <ion-icon class="arrow-icon" color="bluedark" [name]="zipped ? 'arrow-dropright' : 'arrow-dropdown'"></ion-icon>
             </ion-card-title>
           </ion-card-header>
           <ion-card-content class="content-expandable" *ngFor="let d of data">

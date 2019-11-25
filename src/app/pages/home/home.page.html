@@ -69,7 +69,7 @@
                   <div *ngIf="ln?.schedules?.length == 0 || ln?.status == false">Cerrado</div>
                   <div *ngIf="ln.status == true">
                 <div *ngFor="let s of ln.schedules">
-                  <div>{{s.start}} a {{s.end}}</div>
+                  <div>{{ s.start }} a {{s.end}}</div>
               </div>
               </div>
               </div>
@@ -195,8 +195,8 @@
                 </ion-row>
                 <ion-row>
                     <ion-col class="ion-no-padding ion-align-self-center" size="8">
-                     <p class="hgPCarta my-0 customDarkText font9">
-                        {{ product.ingredients.toString() }}
+                     <p class="hgPCarta my-0 customDarkText font9" *ngFor="let i of product.ingredients">
+                        {{ i.name }},
                      </p> 
                     </ion-col>
                     <ion-col class="ion-no-padding ion-align-self-center ion-text-right" size="2">

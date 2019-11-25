@@ -28,30 +28,7 @@ export class HomePage implements OnInit {
 
   productos:any;
   token:any;
-  horarios: any= [
-    {
-      name: 'Lunes',
-      status: true,
-      schedules:[{
-        id: 1,
-        start: '11:00',
-        end: '16:00'
-      },{
-        id: 2,
-        start: '20:00',
-        end: '22:00'
-      }]
-    },
-    {
-      name: 'Martes',
-      status: false,
-      schedules:[{
-        id: 1,
-        start: '11:00',
-        end: '16:00'
-      }]
-    }
-  ] ;
+  horarios: any = [];
   lunes:any = [];
   martes:any = [];
   miercoles:any = [];
@@ -62,6 +39,7 @@ export class HomePage implements OnInit {
   slider: any;
   avatar;
   aImages:any = [];
+  ingredientes;
 
   constructor(private modalCtrl: ModalController, 
     public productosService: ProductosService, 
@@ -169,64 +147,79 @@ export class HomePage implements OnInit {
    
    getListProductos()
    {
-    this.productosService.getList().then(response => {
+     this.productosService.getList().then(response => {
       response.subscribe((data) => {
+        console.log(data);
         this.productos = data.products;
-     }, err => {
-      console.log(err);
+      }, err => {
+        console.log(err);
+      });
     });
-    });
+    console.log(this.ingredientes);
    }
 
    getListHorario(){
-    this.horarioService.getList().then(response => {
+     this.horarioService.getList().then(response => {
       response.subscribe((data) => {
-        this.horarios = data.schedules;
-        console.log(data.schedules);
-        for(let dia of  this.horarios){
-          switch(dia.name){
-            case('Lunes'):
-              this.lunes.push(dia);
-              break;
-            case('Martes'):
-              this.martes.push(dia);
-              break;
-            case('Miercoles'):
-              this.miercoles.push(dia);
-              break;
-            case('Jueves'):
-              this.jueves.push(dia);
-              break;
-            case('Viernes'):
-              this.viernes.push(dia);
-              break;
-            case('Sabado'):
-            this.sabado.push(dia);
-              break;
-            case('Domingo'):
-              this.domingo.push(dia);
-              break;
+        // this.horarios = data;
+        console.log(data);
+        console.log(data.schedules.schedules);
+        console.log(data.schedules.schedules[0]);
+        console.log(data.schedules.schedules.length);
+
+
+          for(let index = 0 ; index < data.schedules.schedules.length; index++){
+            console.log('aaa');
+            console.log(data.schedules.schedules[index]);
+            
+              console.log(data.schedules.schedules[index]);
+              switch(data.schedules.schedules[index].name){
+                case('Lunes'):
+                this.lunes.push(data.schedules.schedules[index]);
+                console.log(this.lunes);
+                  break;
+                case('Martes'):
+                  this.martes.push(data.schedules.schedules[index]);
+                  break;
+                case('Miercoles'):
+                  this.miercoles.push(data.schedules.schedules[index]);
+                  break;
+                case('Jueves'):
+                  this.jueves.push(data.schedules.schedules[index]);
+                  break;
+                case('Viernes'):
+                  this.viernes.push(data.schedules.schedules[index]);
+                  break;
+                case('Sabado'):
+                this.sabado.push(data.schedules.schedules[index]);
+                  break;
+                case('Domingo'):
+                  this.domingo.push(data.schedules.schedules[index]);
+                  break;
+              }
           }
-        }
      }, err => {
       console.log(err);
     });
     });
+
    }
    
    editProduct(product) {
      this.storage.set('product', product);
+     this.storage.set('type', 'edit');
      this.router.navigate(['/agregarproducto']);
   }
 
   addProduct()
   {
     this.storage.remove('product');
+    this.storage.set('type', 'create');
     this.router.navigate(['/agregarproducto']);
   }
 
-  getSlider(){
-    this.sliderService.read_Items().then(response => {
+ async getSlider(){
+   await this.sliderService.read_Items().then(response => {
       response.subscribe((data) => {
         this.slider = data;
      }, err => {

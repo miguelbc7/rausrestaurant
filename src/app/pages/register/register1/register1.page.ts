@@ -75,13 +75,13 @@ export class Register1Page implements OnInit {
         Validators.required,
         Validators.maxLength(15),
         Validators.minLength(8),
-        Validators.pattern('(?=.*[a-zñ])(?=.*[A-ZÑ])(?=.*[0-9])(?=.*[$@!%*?&.,])[A-Za-zñÑ\d$@!%*?&.,].{3,}')
+        Validators.pattern('(?=.*[a-zñ])(?=.*[A-ZÑ])(?=.*[0-9])(?=.*[$@$!%*?&#.$($)-_])[A-Za-zñÑ\d$@$!%*?&#.$($)-_].{7,15}')
       ])],
       repeat_password: ['', Validators.compose([
         Validators.required,
         Validators.maxLength(15),
         Validators.minLength(8),
-        Validators.pattern('(?=.*[a-zñ])(?=.*[A-ZÑ])(?=.*[0-9])(?=.*[$@!%*?&.,])[A-Za-zñÑ\d$@!%*?&.,].{3,}')
+        Validators.pattern('(?=.*[a-zñ])(?=.*[A-ZÑ])(?=.*[0-9])(?=.*[$@$!%*?&#.$($)-_])[A-Za-zñÑ\d$@$!%*?&#.$($)-_].{7,15}')
       ])],
   });
   }
@@ -126,13 +126,13 @@ export class Register1Page implements OnInit {
         { type: 'required', message: 'Contraseña Requerida' },
         { type: 'minlength', message: 'Debe ser mayor de 8 caracteres' },
         { type: 'maxlength', message: 'Debe ser menor de 15 caracteres.' },
-        { type: 'pattern', message: 'Su contraseña debe contener al menos una mayúscula, una minúscula, un número y un caracter especial.' }
+        { type: 'pattern', message: 'Su contraseña debe contener al menos una mayúscula, una minúscula, un número y un caracter especial(@!%*?&#.$-_).' }
       ],
       'repeat_password': [
         { type: 'required', message: 'Contraseña Requerida' },
         { type: 'minlength', message: 'Debe ser mayor de 8 caracteres' },
         { type: 'maxlength', message: 'Debe ser menor de 15 caracteres.' },
-        { type: 'pattern', message: 'Su contraseña debe contener al menos una mayúscula, una minúscula, un número y un caracter especial.' }
+        { type: 'pattern', message: 'Su contraseña debe contener al menos una mayúscula, una minúscula, un número y un caracter especial(@!%*?&#.$-_).' }
       ],
       // 'categories': [
       //   { type: 'required', message: 'Debe ingresar por lo menos una actividad de tu empresa.' },
