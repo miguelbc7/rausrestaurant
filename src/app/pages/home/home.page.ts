@@ -182,7 +182,7 @@ export class HomePage implements OnInit {
     this.horarioService.getList().then(response => {
       response.subscribe((data) => {
         this.horarios = data.schedules;
-
+        console.log(data.schedules);
         for(let dia of  this.horarios){
           switch(dia.name){
             case('Lunes'):
@@ -240,6 +240,10 @@ export class HomePage implements OnInit {
       component: AddsliderPage,
     });
     await modal.present();
+  }
+
+  ngOnDestroy(){
+    
   }
 }
 

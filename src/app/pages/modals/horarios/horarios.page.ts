@@ -12,11 +12,11 @@ export class HorariosPage implements OnInit {
 
   name;
 
-  public data = {
+  public data = [{
     start:'',
     end:'',
     status: false,
-  };
+  }];
 
   list:any;
 
@@ -33,10 +33,12 @@ export class HorariosPage implements OnInit {
   }
 
   createForm(){
+    console.log(this.data);
     let item = {
       name: this.name,
       schedules: this.data,
     }
+    console.log(item);
     this.horarioService.createItem(item).then(res =>{
       res.subscribe(data =>{
         console.log(data);

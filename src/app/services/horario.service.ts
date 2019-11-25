@@ -79,7 +79,7 @@ export class HorarioService {
       this.token = res.token;
     });
     return this.http
-      .get<Horario>(this.base_path+'schedule', {
+      .get<Horario>(this.base_path+'schedules/day', {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': this.token,
