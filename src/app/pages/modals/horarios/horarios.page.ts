@@ -51,12 +51,13 @@ export class HorariosPage implements OnInit {
     });
   }
 
+
   async getHorario(){
    await this.horarioService.getItem(this.name).then(res=>{
       res.subscribe(data =>{
         console.log(data);
-        console.log(data.schedule);
-        this.list = data.schedule;
+        console.log(data.schedules);
+        this.list = data.schedules;
       })
     });
   }

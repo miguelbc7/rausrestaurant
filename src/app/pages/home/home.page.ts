@@ -161,18 +161,9 @@ export class HomePage implements OnInit {
    getListHorario(){
      this.horarioService.getList().then(response => {
       response.subscribe((data) => {
-        // this.horarios = data;
-        console.log(data);
-        console.log(data.schedules.schedules);
-        console.log(data.schedules.schedules[0]);
-        console.log(data.schedules.schedules.length);
-
 
           for(let index = 0 ; index < data.schedules.schedules.length; index++){
-            console.log('aaa');
-            console.log(data.schedules.schedules[index]);
             
-              console.log(data.schedules.schedules[index]);
               switch(data.schedules.schedules[index].name){
                 case('Lunes'):
                 this.lunes.push(data.schedules.schedules[index]);
