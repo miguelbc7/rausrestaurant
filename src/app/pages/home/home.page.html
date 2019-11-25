@@ -69,7 +69,7 @@
                   <div *ngIf="ln?.schedules?.length == 0 || ln?.status == false">Cerrado</div>
                   <div *ngIf="ln.status == true">
                 <div *ngFor="let s of ln.schedules">
-                  <div>{{ s.start | date: "h:mm a" }} a {{s.end}}</div>
+                  <div>{{ s.start | date: "h:mm a" }} a {{s.end | date: "h:mm a"}}</div>
               </div>
               </div>
               </div>
