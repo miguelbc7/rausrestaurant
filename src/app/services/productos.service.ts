@@ -163,7 +163,7 @@ export class ProductosService {
   async uploadItem(id, item): Promise<any>{
     let data = {
       _id : id,
-      image: item
+      images: item
     }
     await this.storage.get('_token').then(res=>{
         this.token = res.token;

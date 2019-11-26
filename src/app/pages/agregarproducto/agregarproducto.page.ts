@@ -299,6 +299,7 @@ export class AgregarproductoPage implements OnInit {
  }
 
  uploadImage(id){
+
   this.productosService.uploadItem(id, this.aImages).then((response) => {
     response.subscribe((data) => {
      //  this.productos = data.products;
