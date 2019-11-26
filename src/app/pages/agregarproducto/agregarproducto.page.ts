@@ -229,9 +229,16 @@ export class AgregarproductoPage implements OnInit {
     await modal.present();
   }
 
-  async addslider() {
+  async addslider(img) {
+    console.log(img);
+    console.log('addslier');
     const modal = await this.modalCtrl.create({
       component: AddsliderPage,
+      componentProps:[
+       {
+          img:img
+        }
+      ]
     });
     await modal.present();
  }
@@ -311,7 +318,7 @@ export class AgregarproductoPage implements OnInit {
     const options: CameraOptions = {
       quality: 100,
       sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
-      destinationType: this.camera.DestinationType.FILE_URI,
+      destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE
     }
@@ -319,9 +326,9 @@ export class AgregarproductoPage implements OnInit {
       // imageData is either a base64 encoded string or a file URI
       // If it's base64 (DATA_URL):
       let base64Image = 'data:image/jpeg;base64,' + imageData;
-      console.log(base64Image);
       this.aImages.push(base64Image) ;
-    
+      console.log(this.aImages);
+      
     }, (err) => {
       // Handle error
     });

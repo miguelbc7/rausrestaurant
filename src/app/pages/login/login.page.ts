@@ -39,7 +39,7 @@ export class LoginPage implements OnInit {
         { type: 'maxlength', message: 'Debe ser menor de 30 caracteres.' }
       ],
       password: [
-            { type: 'required', message: 'Contraseña Rederida' },
+            { type: 'required', message: 'Contraseña Requerida' },
             { type: 'minlength', message: 'Debe ser mayor de 8 caracteres' },
             { type: 'maxlength', message: 'Debe ser menor de 15 caracteres.' },
             // { type: 'pattern', message: 'Su contraseña debe contener al menos una mayúscula, una minúscula y un número.' }

@@ -40,6 +40,10 @@ export class HomePage implements OnInit {
   avatar;
   aImages:any = [];
   ingredientes;
+  profile:any = {
+    name: '',
+    direction: '',
+  };
 
   constructor(private modalCtrl: ModalController, 
     public productosService: ProductosService, 
@@ -60,9 +64,20 @@ export class HomePage implements OnInit {
     this.getListProductos();
     this.getListHorario();
     this.getSlider();
+    this.getProfile();
    }
   ngOnInit() {
   
+  }
+
+  getProfile(){
+    this.authService.getProfile().then(res =>{
+      res.subscribe(data =>{
+        console.log(data);
+        this.profile.name = data.name;
+        this.profile.direction = data.direction;
+      })
+    });
   }
   async addslider() {
     const options: CameraOptions = {
@@ -238,9 +253,15 @@ export class HomePage implements OnInit {
     });
   }
 
-  async editslider(){
+  async editslider(img){
+    console.log(img);
     const modal = await this.modalCtrl.create({
       component: AddsliderPage,
+      componentProps:[
+        {
+          img:img
+        }
+      ]
     });
     await modal.present();
   }

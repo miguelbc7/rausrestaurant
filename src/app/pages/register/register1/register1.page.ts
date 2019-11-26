@@ -155,7 +155,7 @@ export class Register1Page implements OnInit {
       }
       )
       .catch((error: any) => console.log(error));
-      
+      values.direction = values.address;
     delete values.address;
     if(values.categories){
       for (let index = 0; index < values.categories.length; index++) {

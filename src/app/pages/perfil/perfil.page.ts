@@ -111,6 +111,7 @@ export class PerfilPage implements OnInit {
           .catch((error: any) => console.log(error));
       data.address = this.address;
       this.profile = data;
+      console.log(this.profile);
     })
   });
  }

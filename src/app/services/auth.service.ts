@@ -47,6 +47,7 @@ export class AuthService {
 
 
   registerUser(value): Observable<Restaurant>{
+    console.log(value);
     return this.http.post<Restaurant>(`${this.url}restaurants`, JSON.stringify(value), this.httpOptions)
               .pipe(
                   catchError(e => {
@@ -130,6 +131,13 @@ export class AuthService {
       await this.storage.get('_token').then(res=>{
         this.token = res.token;
       });
+      await this.storage.get('_uid').then(res=>{
+        this.uid = res;
+      });
+
+      let data = {
+        id_restaurant: this.uid
+      };
       return this.http.put<Restaurant>(this.url+'restaurants/update/', JSON.stringify(item),{
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
