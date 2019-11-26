@@ -18,7 +18,7 @@ export class PerfilPage implements OnInit {
 
   public profileForm: FormGroup;
   errorMessage = '';
-  profile:any =[];
+  profile:any ={};
   address:any = 'Carrer de Aribau 655. 08021. Barcelona';
   email;
 
@@ -56,6 +56,11 @@ export class PerfilPage implements OnInit {
 
     }
 
+ ionViewWillEnter(){
+    this.ngOnInit();
+   }
+
+  
   ngOnInit() {
     this.getUserDetail();
     this.getMe();
@@ -127,9 +132,18 @@ export class PerfilPage implements OnInit {
  }
 
  onSubmit(values){
+   console.log(values);
   this.authService.updateProfile(values).then(res=>{
     console.log(res);
-    this.router.navigate(["/home"]);
+    res.subscribe(data =>{
+      console.log(data);
+      this.router.navigate(["/home"]);
+    },err=>{
+      console.error(err);
+
+    })
+  }).catch(error =>{
+    console.error(error);
   })
  }
 

@@ -164,8 +164,15 @@ export class Register1Page implements OnInit {
     console.log(values);
     this.authService.registerUser(values)
     .subscribe(res => {
+      console.log(res);
+      console.log(res.uid);
       this.errorMessage = "";
-      this.router.navigate(["/welcome"]);
+      this.storage.set('_uid', res.uid);
+      this.authService.getToken(res.uid).subscribe(token =>{
+        this.storage.set('_token', token);
+        this.router.navigate(["/welcome"]);
+      });
+      // this.router.navigate(["/welcome"]);
     },(err) => {
       console.error(err.error);
       if(err.error){

@@ -20,6 +20,10 @@ export class OpcionesPage implements OnInit {
   value:any = 0.00;
   decimal = this.value.toFixed(2).toString().split('.'); 
   data;
+  profile:any = {
+    business_name: '',
+    direction: '',
+  };
 
   datas = [
     {
@@ -73,6 +77,10 @@ export class OpcionesPage implements OnInit {
   ];
 
   constructor(private modalCtrl: ModalController, private router: Router, private saldoService:SaldoService, private authService: AuthService, private storage:Storage) { }
+   
+  ionViewWillEnter(){
+    this.getProfile();
+   }
 
   changeIcon(index: number){
     if(this.datas[index].status == false){
@@ -83,7 +91,7 @@ export class OpcionesPage implements OnInit {
           }
       }
     }
-
+ 
     switch(index){
         case (0):
           this.openCierreModal();
@@ -163,6 +171,17 @@ export class OpcionesPage implements OnInit {
       cssClass: 'sizeModalCierreModal'
     });
     await modal.present();
+  }
+
+  
+  getProfile(){
+    this.authService.getProfile().then(res =>{
+      res.subscribe(data =>{
+        console.log(data);
+        this.profile.business_name = data.business_name;
+        this.profile.direction = data.direction;
+      })
+    });
   }
 
 //   async openDineroModal() {

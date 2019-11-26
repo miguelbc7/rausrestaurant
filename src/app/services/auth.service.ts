@@ -72,8 +72,8 @@ export class AuthService {
     return this.http.post(`${this.url}auth/login`, JSON.stringify({uid:value}), this.httpOptions)
     .pipe(
         catchError(e => {
+          console.error(e);
           throw new Error(e);
-          console.log('tokenr error: '+e);
       })
     )
    }
@@ -137,9 +137,17 @@ export class AuthService {
       });
 
       let data = {
-        id_restaurant: this.uid
-      };
-      return this.http.put<Restaurant>(this.url+'restaurants/update/', JSON.stringify(item),{
+        uid : this.uid,
+        business_name: item.business_name,
+        lat: '40',
+        lng: '-49.00012',
+        phone: item.phone,
+        direction: item.address,
+      }
+
+
+        console.log(item);
+      return this.http.put<Restaurant>(this.url+'restaurants/update/', JSON.stringify(data),{
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
           'Authorization': this.token,
