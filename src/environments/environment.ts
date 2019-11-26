@@ -6,9 +6,9 @@ export const environment = {
   production: false,
   //local
   // url: 'http://192.168.0.130:3800/api/',
-  // url: 'http://localhost:3800/api/',
+  url: 'http://localhost:3800/api/',
   //server
-   url: 'https://cors-anywhere.herokuapp.com/http://35.214.92.171:8080/api/',
+  //  url: 'https://cors-anywhere.herokuapp.com/http://35.214.92.171:8080/api/',
 
   firebase: 
   {

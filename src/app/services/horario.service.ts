@@ -68,8 +68,11 @@ export class HorarioService {
         .post<Horario>(this.base_path+'schedules', JSON.stringify(data),{
           headers: new HttpHeaders({
             'Content-Type': 'application/json',
-            'Authorization': this.token,
-          })
+            // 'Authorization': this.token,
+          }),
+          params: {
+            token: this.token,
+          }
         })
         .pipe(
           catchError(this.handleError)
@@ -85,8 +88,11 @@ export class HorarioService {
       .post<Horario>(this.base_path+'scheduless/day',JSON.stringify({id_restaurant:this.uid, name: name}) ,{
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': this.token,
+      // 'Authorization': this.token,
     }),
+    params: {
+      token: this.token,
+    }
     // params: {name: name}
   })
       .pipe(
@@ -103,12 +109,19 @@ export class HorarioService {
           this.uid = res;
         });
         console.log(this.uid);
+
+        let data = {
+          id_restaurant:this.uid
+        };
         return this.http
-          .post<Horario>(this.base_path+'scheduless/get',JSON.stringify({id_restaurant:this.uid}), {
+          .post<Horario>(this.base_path+'scheduless/get',JSON.stringify(data), {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
-          'Authorization': this.token,
+          // 'Authorization': this.token,
         }),
+        params: {
+          token: this.token,
+        }
         // params: {id_restaurant: this.uid}
       })
       .pipe(
@@ -138,8 +151,11 @@ export class HorarioService {
     return this.http.put<Horario>(this.base_path+'schedules/update', JSON.stringify(data),{
           headers: new HttpHeaders({
             'Content-Type': 'application/json',
-            'Authorization': this.token,
-          })
+            // 'Authorization': this.token,
+          }),
+          params: {
+            token: this.token,
+          }
         })
         .pipe(
           catchError(this.handleError)
@@ -172,8 +188,11 @@ export class HorarioService {
     return this.http.put<Horario>(this.base_path+'schedules/estatus', JSON.stringify(data),{
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': this.token,
-      })
+        // 'Authorization': this.token,
+      }),
+      params: {
+        token: this.token,
+      }
     })
   }
  
