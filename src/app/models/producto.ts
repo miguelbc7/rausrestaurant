@@ -16,4 +16,5 @@ export class Producto {
     delivery:boolean;
     status:boolean;
     images:any =[];
+    id_restaurant?: string;
 }

@@ -13,6 +13,7 @@ import { Storage } from '@ionic/storage';
 export class ProductosService {
 
   token:any ;
+  uid:any;
   base_path = environment.url;
 
 
@@ -43,28 +44,47 @@ export class ProductosService {
     await this.storage.get('_token').then(res=>{
       this.token = res.token;
     });
+    await this.storage.get('_uid').then(res=>{
+      this.uid = res;
+    });
     delete item.ingredientes;
     delete item.no_ingredientes;
+    item.id_restaurant = this.uid;
+    console.log(item);
     return this.http
       .post<Producto>(this.base_path+'products', JSON.stringify(item),{
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
-          'Authorization': this.token,
-        })
-      })
+          // 'Authorization': this.token,
+        }),
+        params: {
+          token: this.token,
+        }
+      },)
       .pipe(
         catchError(this.handleError)
       )
   }
  
   // Get single Producto data by ID
-  getItem(id): Observable<Producto> {
+  async getItem(id): Promise<any> {
+    
+    await this.storage.get('_uid').then(res=>{
+      this.uid = res;
+    });
+
+    let data = {
+      id_restaurant: this.uid,
+    }
     return this.http
-      .get<Producto>(this.base_path+'products/' + id, {
+      .post<Producto>(this.base_path+'products/get', JSON.stringify(data),{
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': this.token,
-    })
+    }),
+    params: {
+      token: this.token,
+    }
   })
       .pipe(
         catchError(this.handleError)
@@ -76,12 +96,23 @@ export class ProductosService {
         await this.storage.get('_token').then(res=>{
           this.token = res.token;
         });
+        await this.storage.get('_uid').then(res=>{
+          this.uid = res;
+        });
+
+        let data = {
+          id_restaurant: this.uid
+        };
         return this.http
-          .get<Producto>(this.base_path+'products', {
+          .post<Producto>(this.base_path+'products/list',JSON.stringify( data ), {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
-          'Authorization': this.token,
-        })
+          // 'Authorization': this.token,
+        }),
+        // params: {
+        //   token: this.token,
+        //   id_restaurant: this.uid,
+        // }
       })
       .pipe(
         catchError(this.handleError)
@@ -101,8 +132,11 @@ export class ProductosService {
       .put<Producto>(this.base_path+'products/update', JSON.stringify(item), {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': this.token,
-      })
+        // 'Authorization': this.token,
+      }),
+      params: {
+        token: this.token,
+      }
     })
       .pipe(
         catchError(this.handleError)
@@ -115,8 +149,11 @@ export class ProductosService {
       .delete<Producto>(this.base_path+'products/' + id, {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
-          'Authorization': this.token,
-        })
+          // 'Authorization': this.token,
+        }),
+        params: {
+          token: this.token,
+        }
       })
       .pipe(
         catchError(this.handleError)
@@ -135,8 +172,11 @@ export class ProductosService {
         .post<any>(this.base_path+'products/images',JSON.stringify(data) ,{
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': this.token,
-      })
+        // 'Authorization': this.token,
+      }),
+      params: {
+        token: this.token,
+      }
     })
     .pipe(
       catchError(this.handleError)

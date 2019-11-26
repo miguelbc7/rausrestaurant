@@ -120,7 +120,7 @@ export class PerfilPage implements OnInit {
     res.subscribe(data =>{
       this.email = data.user.email;
 
-      console.log(this.email);
+      // console.log(this.email);
     })
   });
  }

@@ -294,13 +294,12 @@ export class AgregarproductoPage implements OnInit {
  uploadImage(id){
   this.productosService.uploadItem(id, this.aImages).then((response) => {
     response.subscribe((data) => {
-      console.log(data);
      //  this.productos = data.products;
      console.log(data);
       this.presentPromocion(data.products.id);
       this.router.navigate(['home']);
   }, err => {
-      console.log(err);
+      console.error(err);
     });
  });
 }
