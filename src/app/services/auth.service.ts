@@ -48,6 +48,7 @@ export class AuthService {
 
   registerUser(value): Observable<Restaurant>{
     console.log(value);
+    delete value.address;
     return this.http.post<Restaurant>(`${this.url}restaurants`, JSON.stringify(value), this.httpOptions)
               .pipe(
                   catchError(e => {
