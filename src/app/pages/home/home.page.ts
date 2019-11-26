@@ -177,7 +177,8 @@ export class HomePage implements OnInit {
     this.domingo = [];
      this.horarioService.getList().then(response => {
       response.subscribe((data) => {
-        if(data){
+        console.log(data);
+        if(data.schedules.schedules){
           for(let index = 0 ; index < data.schedules.schedules.length; index++){
             
               switch(data.schedules.schedules[index].name){

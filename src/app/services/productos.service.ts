@@ -67,9 +67,17 @@ export class ProductosService {
   }
  
   // Get single Producto data by ID
-  getItem(id): Observable<Producto> {
+  async getItem(id): Promise<any> {
+    
+    await this.storage.get('_uid').then(res=>{
+      this.uid = res;
+    });
+
+    let data = {
+      id_restaurant: this.uid,
+    }
     return this.http
-      .get<Producto>(this.base_path+'products/' + id, {
+      .post<Producto>(this.base_path+'products/get', JSON.stringify(data),{
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': this.token,
@@ -91,7 +99,6 @@ export class ProductosService {
         await this.storage.get('_uid').then(res=>{
           this.uid = res;
         });
-        console.log(this.uid);
 
         let data = {
           id_restaurant: this.uid
