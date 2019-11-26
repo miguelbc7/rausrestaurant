@@ -57,7 +57,7 @@ export class HorarioService {
         id_restaurant: this.uid,
         schedules:{
           name: item.name,
-          status: item.schedules.status,
+          status: item.status,
           schedules: [{
             start: item.schedules.start,
             end:item.schedules.end
@@ -120,12 +120,40 @@ export class HorarioService {
     await this.storage.get('_token').then(res=>{
       this.token = res.token;
     });
+    
+    await this.storage.get('_uid').then(res=>{
+      this.uid = res;
+    });
+    let data = {
+      id_restaurant: this.uid,
+      name: item.name,
+      // status: item.status,
+      schedule:{
+          id: id,
+          start: item.schedules.start,
+          end:item.schedules.end
+        }
+      }
+    console.log(data);
+    return this.http.put<Horario>(this.base_path+'schedules/update', JSON.stringify(data),{
+          headers: new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': this.token,
+          })
+        })
+        .pipe(
+          catchError(this.handleError)
+        )
   }
 
   async deleteItem(id): Promise<any>{
     await this.storage.get('_token').then(res=>{
       this.token = res.token;
     });
+    await this.storage.get('_uid').then(res=>{
+      this.uid = res;
+    });
+
   }
  
 }
