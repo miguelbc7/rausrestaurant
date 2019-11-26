@@ -8,7 +8,7 @@ export const environment = {
   // url: 'http://192.168.0.130:3800/api/',
   // url: 'http://localhost:3800/api/',
   //server
-   url: 'http://35.197.211.133:8080/api/',
+   url: 'http://35.214.92.171:8080/api/',
   firebase: 
   {
     apiKey: "AIzaSyDMMmvx93kGW0ZiHpkbqFTopre63FHogzE",

@@ -17,6 +17,7 @@ export class HorariosPage implements OnInit {
   end:'';
   status = false;
   list:any;
+  errorMessage: any;
 
   constructor(private modalCtrl: ModalController, private horarioService: HorarioService, private router:Router) { 
     this.name = `${name}`;
@@ -45,10 +46,12 @@ export class HorariosPage implements OnInit {
         console.log(data);
         this.getHorario();
         this.modalCtrl.dismiss();
+        this.errorMessage = '';
         this.router.navigate(['home']);
       },
       error=>{
         console.log(error);
+        this.errorMessage = error.error;
       })
     });
   }
@@ -59,7 +62,7 @@ export class HorariosPage implements OnInit {
       res.subscribe(data =>{
         console.log(data);
         console.log(data.schedules);
-        this.list = data.schedules;
+        this.list = data.schedules.schedules;
       })
     });
   }

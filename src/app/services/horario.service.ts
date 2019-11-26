@@ -29,10 +29,13 @@ export class HorarioService {
     console.log(error.error);
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.
-      console.error('An error occurred:', error.error.message);
+      console.error('An error occurred:', error.error);
     } else {
       // The backend returned an unsuccessful response code.
       // The response body may contain clues as to what went wrong,
+      if(error.status == 400){
+        return throwError(error.error);
+      }
       console.error(
         `Backend returned code ${error.status}, ` +
         `body was: ${error.error}`);
@@ -50,8 +53,6 @@ export class HorarioService {
      await this.storage.get('_uid').then(res=>{
         this.uid = res;
       });
-      console.log(item);
-      console.log(item.schedules);
       let data = {
         id_restaurant: this.uid,
         schedules:{
@@ -63,7 +64,6 @@ export class HorarioService {
           }]
         }
       }
-      console.log(data);
       return this.http
         .post<Horario>(this.base_path+'schedules', JSON.stringify(data),{
           headers: new HttpHeaders({
