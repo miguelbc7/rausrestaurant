@@ -50,8 +50,8 @@ export class AuthService {
     return this.http.post<Restaurant>(`${this.url}restaurants`, JSON.stringify(value), this.httpOptions)
               .pipe(
                   catchError(e => {
-                    throw new Error(e);
-                    console.log('registerUser error: '+e);
+                    console.log(e);
+                   return throwError(e);
                 })
     )
    }

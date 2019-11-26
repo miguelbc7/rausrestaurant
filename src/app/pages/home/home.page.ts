@@ -55,7 +55,11 @@ export class HomePage implements OnInit {
     })
    }
 
+   ionViewWillEnter(){
+    this.ngOnInit();
+   }
   ngOnInit() {
+  
     this.getListProductos();
     this.getListHorario();
     this.getSlider();
@@ -91,6 +95,12 @@ export class HomePage implements OnInit {
       componentProps: { 
         name: dia,
         schedules: data,
+      }
+    });
+    modal.onDidDismiss().then((dataReturned) => {
+      if (dataReturned !== null) {
+        this.getListHorario();
+        //alert('Modal Sent Data :'+ dataReturned);
       }
     });
     await modal.present();
@@ -159,6 +169,13 @@ export class HomePage implements OnInit {
    }
 
    getListHorario(){
+    this.lunes = [];
+    this.martes = [];
+    this.miercoles = [];
+    this.jueves = [];
+    this.viernes = [];
+    this.sabado = [];
+    this.domingo = [];
      this.horarioService.getList().then(response => {
       response.subscribe((data) => {
 

@@ -137,6 +137,7 @@
           [separatorKeyCodes]="[32, 138]"
           theme='minimal'
           [displayBy]="'name'"
+          required="true"
         >
         <tag-input-dropdown 
         [autocompleteItems]="[{name:'#restaurante'},{name:'#hoteleria'}]"
@@ -151,7 +152,7 @@
       Listo
     </ion-button>
     <br>
-    <label class="error-message">{{errorMessage}}</label>
+    <label class="error-message" >{{errorMessage}}</label>
   </div>
   </form>
   <br>

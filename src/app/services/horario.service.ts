@@ -121,5 +121,11 @@ export class HorarioService {
       this.token = res.token;
     });
   }
+
+  async deleteItem(id): Promise<any>{
+    await this.storage.get('_token').then(res=>{
+      this.token = res.token;
+    });
+  }
  
 }

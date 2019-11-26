@@ -96,7 +96,7 @@ export class ProductosService {
     item._id = id;
     console.log(item);
     return this.http
-      .put<Producto>(this.base_path+'products/', JSON.stringify(item), {
+      .put<Producto>(this.base_path+'products/update', JSON.stringify(item), {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'Authorization': this.token,

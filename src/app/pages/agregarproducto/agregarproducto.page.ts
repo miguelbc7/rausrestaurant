@@ -23,9 +23,9 @@ export class AgregarproductoPage implements OnInit {
   aImages: any = [];
   name;
   description;
-  ingredientes  ;
+  ingredientes:any =[]  ;
   // dingredientes:any = [];;
-  no_ingredientes ; 
+  no_ingredientes:any =[] ; 
   // dno_ingredientes:any = [];
   nutritional_values:boolean = true;
   fat;
@@ -157,6 +157,9 @@ export class AgregarproductoPage implements OnInit {
     this.storage.get('type').then(res =>{
       this.type = res;
       console.log(this.type);
+      if(res == 'create'){
+        this.storage.remove('product');
+      }
     })
 
     this.storage.get('product').then(res =>{
@@ -188,7 +191,6 @@ export class AgregarproductoPage implements OnInit {
         this.delivery = res.delivery;
         this.status = res.status;
       }
-      this.storage.remove('product');
 
       });
   }
@@ -268,7 +270,7 @@ export class AgregarproductoPage implements OnInit {
     });
    }else if(this.type == 'edit'){
     console.log(this.type);
-      this.productosService.updateItem(this.productos.id,values).then((response) => {
+      this.productosService.updateItem(this.productos._id,values).then((response) => {
         response.subscribe((data) => {
         //  this.productos = data.products;
         console.log(data);

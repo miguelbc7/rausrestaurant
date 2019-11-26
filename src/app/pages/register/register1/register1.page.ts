@@ -26,6 +26,8 @@ export class Register1Page implements OnInit {
   data: { username: any; password: any; };
   tags:[{ nombre: "#hoteleria"},{ nombre: "#restaurante"} ];
   categories;
+  errorMessage:string = "";
+
 
 
   constructor( public formBuilder: FormBuilder, private router: Router,private authService: AuthService,private nativeGeocoder: NativeGeocoder, private storage: Storage) {
@@ -85,8 +87,6 @@ export class Register1Page implements OnInit {
       ])],
   });
   }
-
-  errorMessage: string = '';
 
   validation_messages = {
     'business_name': [
@@ -157,17 +157,24 @@ export class Register1Page implements OnInit {
       .catch((error: any) => console.log(error));
       
     delete values.address;
-    for (let index = 0; index < values.categories.length; index++) {
-      delete values.categories[index].value;
+    if(values.categories){
+      for (let index = 0; index < values.categories.length; index++) {
+        delete values.categories[index].value;
+      }
     }
     console.log(values);
     this.authService.registerUser(values)
     .subscribe(res => {
       this.errorMessage = "";
       this.router.navigate(["/welcome"]);
-    },err => {
-      this.errorMessage = "Hubo un error durante el proceso del registro, por favor intente más tarde.";
-    })
+    },(err) => {
+      console.error(err.error);
+      if(err.error){
+        this.errorMessage = err.error.error;
+      }
+    }
+      // this.errorMessage = "Hubo un error durante el proceso del registro, por favor intente más tarde.";
+    );
   }
 
   ngOnInit() {

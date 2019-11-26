@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 
 import { HorarioService } from '../../../services/horario.service';
+import { ThrowStmt } from '@angular/compiler';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-horarios',
@@ -16,7 +18,7 @@ export class HorariosPage implements OnInit {
   status = false;
   list:any;
 
-  constructor(private modalCtrl: ModalController, private horarioService: HorarioService) { 
+  constructor(private modalCtrl: ModalController, private horarioService: HorarioService, private router:Router) { 
     this.name = `${name}`;
   }
 
@@ -43,6 +45,7 @@ export class HorariosPage implements OnInit {
         console.log(data);
         this.getHorario();
         this.modalCtrl.dismiss();
+        this.router.navigate(['home']);
       },
       error=>{
         console.log(error);
