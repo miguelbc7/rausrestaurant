@@ -188,8 +188,8 @@
                   </ion-col>
                   <ion-col class="ion-no-padding" size="5">
                     <p class="my-0 hgPCarta  customDarkText">
-                      <span class="font25">10</span>
-                      <span class="font12 decimalCarta">,50€</span>
+                      <span class="font12">{{product.price_with_iva| currency:'EUR':true:'1.2-2'}}</span>
+                      <!-- <span class="font12 decimalCarta">,50€</span> -->
                     </p>
                   </ion-col>
                 </ion-row>

@@ -248,8 +248,8 @@ export class AgregarproductoPage implements OnInit {
     values.no_ingredients = [aNoIngredients[index]= { 'name' :aNoIngredients[index] } ] ;
     
   }
-  //  values.ingredients = aIngredients;
-  //  values.no_ingredients = aNoIngredients;
+   delete values.ingredientes;
+   delete values.no_ingredientes;
    console.log(values);
    if(this.type == 'create'){
      console.log(this.type);

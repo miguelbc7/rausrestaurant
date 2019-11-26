@@ -56,13 +56,13 @@ export class HomePage implements OnInit {
    }
 
    ionViewWillEnter(){
-    this.ngOnInit();
-   }
-  ngOnInit() {
-  
+    // this.ngOnInit();
     this.getListProductos();
     this.getListHorario();
     this.getSlider();
+   }
+  ngOnInit() {
+  
   }
   async addslider() {
     const options: CameraOptions = {
@@ -165,7 +165,6 @@ export class HomePage implements OnInit {
         console.log(err);
       });
     });
-    console.log(this.ingredientes);
    }
 
    getListHorario(){

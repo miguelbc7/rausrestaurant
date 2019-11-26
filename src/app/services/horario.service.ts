@@ -29,10 +29,13 @@ export class HorarioService {
     console.log(error.error);
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.
-      console.error('An error occurred:', error.error.message);
+      console.error('An error occurred:', error.error);
     } else {
       // The backend returned an unsuccessful response code.
       // The response body may contain clues as to what went wrong,
+      if(error.status == 400){
+        return throwError(error.error);
+      }
       console.error(
         `Backend returned code ${error.status}, ` +
         `body was: ${error.error}`);
@@ -50,20 +53,17 @@ export class HorarioService {
      await this.storage.get('_uid').then(res=>{
         this.uid = res;
       });
-      console.log(item);
-      console.log(item.schedules);
       let data = {
         id_restaurant: this.uid,
         schedules:{
           name: item.name,
-          status: item.schedules.status,
+          status: item.status,
           schedules: [{
             start: item.schedules.start,
             end:item.schedules.end
           }]
         }
       }
-      console.log(data);
       return this.http
         .post<Horario>(this.base_path+'schedules', JSON.stringify(data),{
           headers: new HttpHeaders({
@@ -120,12 +120,40 @@ export class HorarioService {
     await this.storage.get('_token').then(res=>{
       this.token = res.token;
     });
+    
+    await this.storage.get('_uid').then(res=>{
+      this.uid = res;
+    });
+    let data = {
+      id_restaurant: this.uid,
+      name: item.name,
+      // status: item.status,
+      schedule:{
+          id: id,
+          start: item.schedules.start,
+          end:item.schedules.end
+        }
+      }
+    console.log(data);
+    return this.http.put<Horario>(this.base_path+'schedules/update', JSON.stringify(data),{
+          headers: new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': this.token,
+          })
+        })
+        .pipe(
+          catchError(this.handleError)
+        )
   }
 
   async deleteItem(id): Promise<any>{
     await this.storage.get('_token').then(res=>{
       this.token = res.token;
     });
+    await this.storage.get('_uid').then(res=>{
+      this.uid = res;
+    });
+
   }
  
 }

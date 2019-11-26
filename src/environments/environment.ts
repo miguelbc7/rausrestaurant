@@ -9,6 +9,7 @@ export const environment = {
   // url: 'http://localhost:3800/api/',
   //server
    url: 'https://cors-anywhere.herokuapp.com/http://35.214.92.171:8080/api/',
+
   firebase: 
   {
     apiKey: "AIzaSyDMMmvx93kGW0ZiHpkbqFTopre63FHogzE",

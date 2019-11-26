@@ -17,6 +17,9 @@ export class HorariosPage implements OnInit {
   end:'';
   status = false;
   list:any;
+  errorMessage: any;
+  title = 'Agregar';
+  id;
 
   constructor(private modalCtrl: ModalController, private horarioService: HorarioService, private router:Router) { 
     this.name = `${name}`;
@@ -31,26 +34,48 @@ export class HorariosPage implements OnInit {
   }
 
   createForm(){
+    console.log(this.list);
     let item = {
       name: this.name,
+      status: this.status,
       schedules: {
         end: this.end,
         start: this.start,
-        status: this.status,
       },
     }
     console.log(item);
-    this.horarioService.createItem(item).then(res =>{
-      res.subscribe(data =>{
-        console.log(data);
-        this.getHorario();
-        this.modalCtrl.dismiss();
-        this.router.navigate(['home']);
-      },
-      error=>{
-        console.log(error);
-      })
-    });
+    console.log(this.title);
+    if(this.title == 'Agregar')
+    {
+      this.horarioService.createItem(item).then(res =>{
+        res.subscribe(data =>{
+          console.log(data);
+          this.getHorario();
+          this.modalCtrl.dismiss();
+          this.errorMessage = '';
+          this.router.navigate(['home']);
+        },
+        error=>{
+          console.log(error);
+          this.errorMessage = error.error;
+        })
+      });
+    } else if(this.title == 'Editar')
+    { console.log('aaa');
+      this.horarioService.updateItem(this.id,item).then(res =>{
+        res.subscribe(data =>{
+          console.log(data);
+          this.getHorario();
+          this.modalCtrl.dismiss();
+          this.errorMessage = '';
+          this.router.navigate(['home']);
+        },
+        error=>{
+          console.log(error);
+          this.errorMessage = error.error;
+        })
+      });
+    }
   }
 
 
@@ -59,14 +84,22 @@ export class HorariosPage implements OnInit {
       res.subscribe(data =>{
         console.log(data);
         console.log(data.schedules);
-        this.list = data.schedules;
+        this.list = data.schedules.schedules;
       })
     });
   }
 
   remove(id)
   {
+    this.horarioService.deleteItem(id);
+  }
 
+  edit(value){
+    console.log(value);
+    this.start = value.start;
+    this.end = value.end;
+    this.id = value.id;
+    this.title = 'Editar';
   }
 
 }

@@ -41,7 +41,7 @@
       </ion-item>
       <ion-item-options>
         <ion-item-option color="bluedark">
-          <ion-icon slot="start" (click)="edit()" name="create"></ion-icon>
+          <ion-icon slot="start" (click)="edit(sc)" name="create"></ion-icon>
         </ion-item-option>
         <ion-item-option color="danger">
           <ion-icon slot="start" (click)="remove(sc.id)" name="trash"></ion-icon>
@@ -51,7 +51,7 @@
 </ion-list>
 
     <ion-text color="bluedark">
-        <h3 class="ion-text-center pr-h3">Agregar</h3>
+        <h3 class="ion-text-center pr-h3">{{title}}</h3>
       </ion-text>
     <ion-grid>
       <form #form="ngForm" (ngSubmit)="createForm()">
@@ -73,6 +73,7 @@
           <ion-col size="12" class="ion-text-center">
               <ion-button type="submit"  class="font15" color="bluedark">Guardar</ion-button>
           </ion-col>
+          <label class="error-message" >{{errorMessage}}</label>
         </ion-row>
       </form>
     </ion-grid>
