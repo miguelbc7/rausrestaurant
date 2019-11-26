@@ -196,6 +196,7 @@ export class HomePage implements OnInit {
                   break;
                 case('Viernes'):
                   this.viernes.push(data.schedules.schedules[index]);
+                  console.log(this.viernes);
                   break;
                 case('Sabado'):
                 this.sabado.push(data.schedules.schedules[index]);
@@ -214,14 +215,14 @@ export class HomePage implements OnInit {
    
    editProduct(product) {
      this.storage.set('product', product);
-     this.storage.set('type', 'edit');
+     this.storage.set('typeProduct', 'edit');
      this.router.navigate(['/agregarproducto']);
   }
 
   addProduct()
   {
     this.storage.remove('product');
-    this.storage.set('type', 'create');
+    this.storage.set('typeProduct', 'create');
     this.router.navigate(['/agregarproducto']);
   }
 

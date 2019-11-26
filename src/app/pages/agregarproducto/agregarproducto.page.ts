@@ -152,9 +152,12 @@ export class AgregarproductoPage implements OnInit {
       'delivery': [
       ],
     }
+    ionViewWillEnter(){
+      console.log(this.type);
+    }
   ngOnInit() {
     console.log(this.productos);
-    this.storage.get('type').then(res =>{
+    this.storage.get('typeProduct').then(res =>{
       this.type = res;
       console.log(this.type);
       if(res == 'create'){
@@ -248,9 +251,9 @@ export class AgregarproductoPage implements OnInit {
     values.no_ingredients = [aNoIngredients[index]= { 'name' :aNoIngredients[index] } ] ;
     
   }
-   delete values.ingredientes;
-   delete values.no_ingredientes;
+  
    console.log(values);
+   console.log(this.type);
    if(this.type == 'create'){
      console.log(this.type);
      this.productosService.createItem(values).then((response) => {

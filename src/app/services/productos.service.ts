@@ -43,6 +43,8 @@ export class ProductosService {
     await this.storage.get('_token').then(res=>{
       this.token = res.token;
     });
+    delete item.ingredientes;
+    delete item.no_ingredientes;
     return this.http
       .post<Producto>(this.base_path+'products', JSON.stringify(item),{
         headers: new HttpHeaders({
@@ -93,6 +95,8 @@ export class ProductosService {
     });
     item._id = id;
     console.log(item);
+    delete item.ingredientes;
+    delete item.no_ingredientes;
     return this.http
       .put<Producto>(this.base_path+'products/update', JSON.stringify(item), {
       headers: new HttpHeaders({

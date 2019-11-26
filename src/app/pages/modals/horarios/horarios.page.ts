@@ -34,7 +34,6 @@ export class HorariosPage implements OnInit {
   }
 
   createForm(){
-    console.log(this.list);
     let item = {
       name: this.name,
       status: this.status,
@@ -43,13 +42,10 @@ export class HorariosPage implements OnInit {
         start: this.start,
       },
     }
-    console.log(item);
-    console.log(this.title);
     if(this.title == 'Agregar')
     {
       this.horarioService.createItem(item).then(res =>{
         res.subscribe(data =>{
-          console.log(data);
           this.getHorario();
           this.modalCtrl.dismiss();
           this.errorMessage = '';
@@ -61,10 +57,9 @@ export class HorariosPage implements OnInit {
         })
       });
     } else if(this.title == 'Editar')
-    { console.log('aaa');
+    { 
       this.horarioService.updateItem(this.id,item).then(res =>{
         res.subscribe(data =>{
-          console.log(data);
           this.getHorario();
           this.modalCtrl.dismiss();
           this.errorMessage = '';
@@ -82,9 +77,9 @@ export class HorariosPage implements OnInit {
   async getHorario(){
    await this.horarioService.getItem(this.name).then(res=>{
       res.subscribe(data =>{
-        console.log(data);
-        console.log(data.schedules);
+        console.log(data.schedules.status);
         this.list = data.schedules.schedules;
+        this.status = data.schedules.status;
       })
     });
   }
@@ -95,11 +90,28 @@ export class HorariosPage implements OnInit {
   }
 
   edit(value){
-    console.log(value);
     this.start = value.start;
     this.end = value.end;
     this.id = value.id;
     this.title = 'Editar';
+  }
+
+  statusItem()
+  {
+    console.log(this.status);
+
+    let data = {
+      status: this.status,
+      name: this.name,
+    }
+    console.log(data);
+    this.horarioService.statusItem(data).then(res=>{
+      res.subscribe(data =>{
+        console.log(data);
+      })
+    },err =>{
+      console.error(err);
+    });;
   }
 
 }

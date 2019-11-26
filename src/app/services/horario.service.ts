@@ -155,5 +155,26 @@ export class HorarioService {
     });
 
   }
+
+  async statusItem(item): Promise<any>{
+    await this.storage.get('_token').then(res=>{
+      this.token = res.token;
+    });
+    await this.storage.get('_uid').then(res=>{
+      this.uid = res;
+    });
+    let data = {
+      id_restaurant: this.uid,
+      status: !item.status,
+      name: item.name,
+    }
+    console.log(data);
+    return this.http.put<Horario>(this.base_path+'schedules/estatus', JSON.stringify(data),{
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': this.token,
+      })
+    })
+  }
  
 }
