@@ -252,7 +252,7 @@
                   </ion-col>
               </ion-row>
               <div class="save-button">
-                  <ion-button class="font12 ion-float-right" color="bluedark" type="submit"  >Guardar</ion-button>
+                  <ion-button class="font12 ion-float-right" [disabled]="!productoForm.valid" color="bluedark" type="submit"  >Guardar</ion-button>
               </div>
           </ion-grid>
             <!-- <label for="Disponible" class="fontSizeLabel">Todas</label>  [disabled]="!productoForm.valid"-->

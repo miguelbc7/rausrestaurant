@@ -85,10 +85,10 @@ export class AgregarproductoPage implements OnInit {
             Validators.required,
           ])],
           price_with_iva: [this.price_with_iva, Validators.compose([
-            // Validators.required,
+            Validators.required,
           ])],
           iva: [this.iva, Validators.compose([
-            // Validators.required,
+            Validators.required,
           ])],
           eat_in_restaurant: [this.eat_in_restaurant],
           wear: [this.wear],
@@ -140,7 +140,7 @@ export class AgregarproductoPage implements OnInit {
         { type: 'required', message: 'Debe ingresar la cantidad total dde calorías' },
       ],
       'price_with_iva': [
-        // { type: 'required', message: 'Debe ingresar el precio con iva.' },
+        { type: 'required', message: 'Debe ingresar el precio con iva.' },
       ],
       'iva': [
         { type: 'required', message: 'Debe seleccionar el iva.' },

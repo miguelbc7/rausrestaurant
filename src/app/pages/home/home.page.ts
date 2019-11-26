@@ -41,7 +41,7 @@ export class HomePage implements OnInit {
   aImages:any = [];
   ingredientes;
   profile:any = {
-    name: '',
+    business_name: '',
     direction: '',
   };
 
@@ -74,7 +74,7 @@ export class HomePage implements OnInit {
     this.authService.getProfile().then(res =>{
       res.subscribe(data =>{
         console.log(data);
-        this.profile.name = data.name;
+        this.profile.business_name = data.business_name;
         this.profile.direction = data.direction;
       })
     });
@@ -243,8 +243,8 @@ export class HomePage implements OnInit {
     this.router.navigate(['/agregarproducto']);
   }
 
- async getSlider(){
-   await this.sliderService.read_Items().then(response => {
+  getSlider(){
+    this.sliderService.read_Items().then(response => {
       response.subscribe((data) => {
         this.slider = data;
      }, err => {
