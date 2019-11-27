@@ -94,8 +94,9 @@ export class HomePage implements OnInit {
       this.aImages.push(base64Image) ;
         this.sliderService.create_NewItem({image:base64Image}).then((response) => {
           response.subscribe((data) => {
+            console.log(data);
         }, err => {
-            console.log(err);
+            console.error(err);
           });
        });
     

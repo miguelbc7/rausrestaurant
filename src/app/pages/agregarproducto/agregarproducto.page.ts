@@ -327,7 +327,7 @@ export class AgregarproductoPage implements OnInit {
       // imageData is either a base64 encoded string or a file URI
       // If it's base64 (DATA_URL):
       let base64Image = 'data:image/jpeg;base64,' + imageData;
-      this.aImages.push(base64Image) ;
+      this.aImages.push({img : base64Image}) ;
       console.log(this.aImages);
       
     }, (err) => {

@@ -24,7 +24,7 @@ export class Register1Page implements OnInit {
   passwordType2: string = "password";
   passwordShown2: boolean = false;
   data: { username: any; password: any; };
-  tags:[{ nombre: "#hoteleria"},{ nombre: "#restaurante"} ];
+  tags:[{ nombre: "hoteleria"},{ nombre: "restaurante"} ];
   categories;
   errorMessage:string = "";
 
@@ -41,7 +41,8 @@ export class Register1Page implements OnInit {
       name: ['', Validators.compose([
         Validators.required,
         Validators.maxLength(300),
-        Validators.minLength(5)
+        Validators.minLength(5),
+        Validators.pattern('[A-Za-zñÑ\s]{5,300}'),
       ])],
       cif_nic: ['', Validators.compose([
         Validators.required,
@@ -65,7 +66,7 @@ export class Register1Page implements OnInit {
         Validators.required,
         Validators.maxLength(30),
         Validators.minLength(5),
-        Validators.pattern('[A-Za-z0-9._%+-]{2,}@[a-zA-Z-_.]{2,}[.]{1}[a-zA-Z]{2,}'),
+        Validators.pattern('[A-Za-z0-9._%+-ñÑ]{2,}@[a-zA-Z-_.ñÑ]{2,}[.]{1}[a-zA-ZñÑ]{2,}'),
       ])],
       // code: ['', Validators.compose([
       //   Validators.required,
@@ -105,6 +106,8 @@ export class Register1Page implements OnInit {
       ],
       'address': [
         { type: 'required', message: 'Debe ingresar una dirección.' },
+        { type: 'minlength', message: 'Debe ser mayor de 5 caracteres.' },
+        { type: 'maxlength', message: 'Debe ser menor de 300 caracteres.' }
       ],
       'name_responsable': [
         { type: 'required', message: 'Debe ingresar un nombre de responsable en el establecimineto.' },
