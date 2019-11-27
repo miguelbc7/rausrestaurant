@@ -18,44 +18,51 @@ export class PerfilPage implements OnInit {
 
   public profileForm: FormGroup;
   errorMessage = '';
-  profile:any =[];
+  profile:any ={};
   address:any = 'Carrer de Aribau 655. 08021. Barcelona';
   email;
+  passwordType: string  = 'password';
+  passwordShown: any;
 
   constructor(private modalCtrl: ModalController, public formBuilder: FormBuilder, private router: Router,
     private authService: AuthService, private storage: Storage, private nativeGeocoder: NativeGeocoder, ) { 
 
       this.profileForm = this.formBuilder.group({
-        business_name: ['', Validators.compose([
-          Validators.required,
-          Validators.maxLength(300),
-          Validators.minLength(5)
-        ])],
-        address: ['', Validators.compose([
-          Validators.required,
-          Validators.maxLength(300),
-          Validators.minLength(5)
-        ])],
-        phone: ['', Validators.compose([
-          Validators.required,
-          Validators.maxLength(20)
-        ])],
-        email: ['', Validators.compose([
-          Validators.required,
-          Validators.maxLength(30),
-          Validators.minLength(5),
-          Validators.pattern('[A-Za-z0-9._%+-]{2,}@[a-zA-Z-_.]{2,}[.]{1}[a-zA-Z]{2,}'),
-        ])],
-        password: ['', Validators.compose([
-          Validators.required,
-          Validators.maxLength(15),
-          Validators.minLength(8),
-          Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&.])[A-Za-z\d$@$!%*?&.].{8,15}')
-        ])],
-    });
+          business_name: ['', Validators.compose([
+            Validators.required,
+            Validators.maxLength(300),
+            Validators.minLength(5)
+          ])],
+          address: ['', Validators.compose([
+            Validators.required,
+            Validators.maxLength(300),
+            Validators.minLength(5)
+          ])],
+          phone: ['', Validators.compose([
+            Validators.required,
+            Validators.maxLength(20)
+          ])],
+          email: ['', Validators.compose([
+            // Validators.required,
+            Validators.maxLength(30),
+            // Validators.minLength(5),
+            Validators.pattern('[A-Za-z0-9._%+-]{2,}@[a-zA-Z-_.]{2,}[.]{1}[a-zA-Z]{2,}'),
+          ])],
+          password: ['', Validators.compose([
+            // Validators.required,
+            // Validators.maxLength(15),
+            // Validators.minLength(8),
+            Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&.])[A-Za-z\d$@$!%*?&.].{7,15}')
+          ])],
+      });
 
     }
 
+ ionViewWillEnter(){
+    this.ngOnInit();
+   }
+
+  
   ngOnInit() {
     this.getUserDetail();
     this.getMe();
@@ -111,6 +118,7 @@ export class PerfilPage implements OnInit {
           .catch((error: any) => console.log(error));
       data.address = this.address;
       this.profile = data;
+      console.log(this.profile);
     })
   });
  }
@@ -120,16 +128,34 @@ export class PerfilPage implements OnInit {
     res.subscribe(data =>{
       this.email = data.user.email;
 
-      console.log(this.email);
+      // console.log(this.email);
     })
   });
  }
 
  onSubmit(values){
+   console.log(values);
   this.authService.updateProfile(values).then(res=>{
     console.log(res);
-    this.router.navigate(["/home"]);
+    res.subscribe(data =>{
+      console.log(data);
+      this.router.navigate(["/home"]);
+    },err=>{
+      console.error(err);
+
+    })
+  }).catch(error =>{
+    console.error(error);
   })
  }
+ public togglePassword() {
+  if(this.passwordShown){
+    this.passwordShown = false;
+    this.passwordType = 'password';
+  }else {
+    this.passwordShown = true;
+    this.passwordType = 'text';
+  }
+}
 
 }

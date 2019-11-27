@@ -46,7 +46,7 @@
             <div class="ion-margin-vertical">
               <ion-item class="ion-no-padding">
                   <ion-label class="font14" position="floating">Dirección</ion-label>
-                  <ion-input type="text" required></ion-input>
+                  <ion-input type="text" formControlName="address"  required></ion-input>
                   <ion-icon name="pin" color="bluedark" slot="end" align-self-end></ion-icon>
                 </ion-item>
           </div>
@@ -86,7 +86,7 @@
       <div class="ion-margin-vertical">
         <ion-item class="ion-no-padding">
           <ion-label class="font14" position="floating">Correo electrónico</ion-label>
-          <ion-input formControlName="email" clearInput="true" type="email" required></ion-input>
+          <ion-input formControlName="email" clearInput="true" type="email" required="true"></ion-input>
         </ion-item>
     </div>
     <div class="validation-errors">
@@ -148,7 +148,7 @@
       </ion-item>
   <br>
   <div class="ion-text-center">
-    <ion-button type="submit" class="font15"  color="bluedark">
+    <ion-button type="submit" class="font15" [disabled]="!register1.valid" color="bluedark">
       Listo
     </ion-button>
     <br>

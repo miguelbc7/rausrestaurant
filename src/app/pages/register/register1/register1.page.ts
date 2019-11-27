@@ -24,7 +24,7 @@ export class Register1Page implements OnInit {
   passwordType2: string = "password";
   passwordShown2: boolean = false;
   data: { username: any; password: any; };
-  tags:[{ nombre: "#hoteleria"},{ nombre: "#restaurante"} ];
+  tags:[{ nombre: "hoteleria"},{ nombre: "restaurante"} ];
   categories;
   errorMessage:string = "";
 
@@ -41,7 +41,8 @@ export class Register1Page implements OnInit {
       name: ['', Validators.compose([
         Validators.required,
         Validators.maxLength(300),
-        Validators.minLength(5)
+        Validators.minLength(5),
+        Validators.pattern('[A-Za-zñÑ\s]{5,300}'),
       ])],
       cif_nic: ['', Validators.compose([
         Validators.required,
@@ -65,7 +66,7 @@ export class Register1Page implements OnInit {
         Validators.required,
         Validators.maxLength(30),
         Validators.minLength(5),
-        Validators.pattern('[A-Za-z0-9._%+-]{2,}@[a-zA-Z-_.]{2,}[.]{1}[a-zA-Z]{2,}'),
+        Validators.pattern('[A-Za-z0-9._%+-ñÑ]{2,}@[a-zA-Z-_.ñÑ]{2,}[.]{1}[a-zA-ZñÑ]{2,}'),
       ])],
       // code: ['', Validators.compose([
       //   Validators.required,
@@ -105,6 +106,8 @@ export class Register1Page implements OnInit {
       ],
       'address': [
         { type: 'required', message: 'Debe ingresar una dirección.' },
+        { type: 'minlength', message: 'Debe ser mayor de 5 caracteres.' },
+        { type: 'maxlength', message: 'Debe ser menor de 300 caracteres.' }
       ],
       'name_responsable': [
         { type: 'required', message: 'Debe ingresar un nombre de responsable en el establecimineto.' },
@@ -155,18 +158,24 @@ export class Register1Page implements OnInit {
       }
       )
       .catch((error: any) => console.log(error));
-      
-    delete values.address;
-    if(values.categories){
-      for (let index = 0; index < values.categories.length; index++) {
-        delete values.categories[index].value;
+      if(values.categories){
+        for (let index = 0; index < values.categories.length; index++) {
+          delete values.categories[index].value;
+        }
       }
-    }
+    values.direction = values.address;
     console.log(values);
     this.authService.registerUser(values)
     .subscribe(res => {
+      console.log(res);
+      console.log(res.uid);
       this.errorMessage = "";
-      this.router.navigate(["/welcome"]);
+      this.storage.set('_uid', res.uid);
+      this.authService.getToken(res.uid).subscribe(token =>{
+        this.storage.set('_token', token);
+        this.router.navigate(["/welcome"]);
+      });
+      // this.router.navigate(["/welcome"]);
     },(err) => {
       console.error(err.error);
       if(err.error){

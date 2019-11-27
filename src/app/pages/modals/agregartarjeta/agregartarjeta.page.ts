@@ -3,6 +3,7 @@ import { ModalController } from '@ionic/angular';
 import { AgregarlistoPage } from '../agregarlisto/agregarlisto.page';
 import { AgregarPage } from '../agregar/agregar.page';
 import { CreditCardService } from 'src/app/services/credit-card.service';
+import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-agregartarjeta',
@@ -16,7 +17,49 @@ export class AgregartarjetaPage implements OnInit {
   cvc;
   fechaExp;
 
-  constructor(private modalCtrl: ModalController, private creditCardService:CreditCardService) { }
+  public cardForm: FormGroup;
+  validation_messages = {
+    'nombre': [
+        { type: 'required', message: 'Debe ingresar un nombre.' },
+        { type: 'minlength', message: 'Debe ser mayor de 5 caracteres.' },
+        { type: 'maxlength', message: 'Debe ser menor de 300 caracteres.' }
+      ],
+      'cvc': [
+        { type: 'required', message: 'Debe ingresar el cvc de la tarjeta.' },
+        { type: 'minlength', message: 'Debe ser minimo 3 digitos.' },
+      ],
+      'fechExp': [
+        { type: 'required', message: 'Debe ingresar la fecha de expiración.' },
+      ],
+      'numero': [
+        { type: 'required', message: 'Debe ingresar el número de la tarjeta.' },
+        { type: 'minlength', message: 'Debe ser mayor a 13 digitos.' },
+        // { type: 'pattern', message: 'Debe ingresar solo digitos.' },
+      ],
+    }
+  errorMessage: any;
+
+  constructor(private modalCtrl: ModalController, private creditCardService:CreditCardService, public formBuilder: FormBuilder) { 
+    this.cardForm = this.formBuilder.group({
+      nombre: ['', Validators.compose([
+        Validators.required,
+        Validators.maxLength(300),
+        Validators.minLength(5)
+      ])],
+      cvc: ['', Validators.compose([
+        Validators.required,
+        Validators.minLength(3)
+      ])],
+      fechaExp: ['', Validators.compose([
+        Validators.required,
+      ])],
+      numero: ['', Validators.compose([
+        Validators.required,
+        Validators.minLength(13),
+        // Validators.pattern('/^(?=.*\d)[\d]*$/'),
+      ])],
+  });
+  }
 
   ngOnInit() {
   }
@@ -42,6 +85,11 @@ export class AgregartarjetaPage implements OnInit {
         cssClass: 'sizeModalAgregarProducto'
       });
       await modal.present();
+    },(err) => {
+      console.error(err);
+      if(err.error){
+        this.errorMessage = err.error.error;
+      }
     })
       .catch(error => {
         console.log(error);

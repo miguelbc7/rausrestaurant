@@ -47,6 +47,8 @@ export class AuthService {
 
 
   registerUser(value): Observable<Restaurant>{
+    console.log(value);
+    delete value.address;
     return this.http.post<Restaurant>(`${this.url}restaurants`, JSON.stringify(value), this.httpOptions)
               .pipe(
                   catchError(e => {
@@ -70,8 +72,8 @@ export class AuthService {
     return this.http.post(`${this.url}auth/login`, JSON.stringify({uid:value}), this.httpOptions)
     .pipe(
         catchError(e => {
+          console.error(e);
           throw new Error(e);
-          console.log('tokenr error: '+e);
       })
     )
    }
@@ -130,7 +132,22 @@ export class AuthService {
       await this.storage.get('_token').then(res=>{
         this.token = res.token;
       });
-      return this.http.put<Restaurant>(this.url+'restaurants/update/', JSON.stringify(item),{
+      await this.storage.get('_uid').then(res=>{
+        this.uid = res;
+      });
+
+      let data = {
+        uid : this.uid,
+        business_name: item.business_name,
+        lat: '40',
+        lng: '-49.00012',
+        phone: item.phone,
+        direction: item.address,
+      }
+
+
+        console.log(item);
+      return this.http.put<Restaurant>(this.url+'restaurants/update/', JSON.stringify(data),{
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
           'Authorization': this.token,

@@ -85,10 +85,10 @@ export class AgregarproductoPage implements OnInit {
             Validators.required,
           ])],
           price_with_iva: [this.price_with_iva, Validators.compose([
-            // Validators.required,
+            Validators.required,
           ])],
           iva: [this.iva, Validators.compose([
-            // Validators.required,
+            Validators.required,
           ])],
           eat_in_restaurant: [this.eat_in_restaurant],
           wear: [this.wear],
@@ -140,7 +140,7 @@ export class AgregarproductoPage implements OnInit {
         { type: 'required', message: 'Debe ingresar la cantidad total dde calorías' },
       ],
       'price_with_iva': [
-        // { type: 'required', message: 'Debe ingresar el precio con iva.' },
+        { type: 'required', message: 'Debe ingresar el precio con iva.' },
       ],
       'iva': [
         { type: 'required', message: 'Debe seleccionar el iva.' },
@@ -229,9 +229,16 @@ export class AgregarproductoPage implements OnInit {
     await modal.present();
   }
 
-  async addslider() {
+  async addslider(img) {
+    console.log(img);
+    console.log('addslier');
     const modal = await this.modalCtrl.create({
       component: AddsliderPage,
+      componentProps:[
+       {
+          img:img
+        }
+      ]
     });
     await modal.present();
  }
@@ -292,15 +299,15 @@ export class AgregarproductoPage implements OnInit {
  }
 
  uploadImage(id){
+
   this.productosService.uploadItem(id, this.aImages).then((response) => {
     response.subscribe((data) => {
-      console.log(data);
      //  this.productos = data.products;
      console.log(data);
       this.presentPromocion(data.products.id);
       this.router.navigate(['home']);
   }, err => {
-      console.log(err);
+      console.error(err);
     });
  });
 }
@@ -312,7 +319,7 @@ export class AgregarproductoPage implements OnInit {
     const options: CameraOptions = {
       quality: 100,
       sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
-      destinationType: this.camera.DestinationType.FILE_URI,
+      destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE
     }
@@ -320,9 +327,9 @@ export class AgregarproductoPage implements OnInit {
       // imageData is either a base64 encoded string or a file URI
       // If it's base64 (DATA_URL):
       let base64Image = 'data:image/jpeg;base64,' + imageData;
-      console.log(base64Image);
-      this.aImages.push(base64Image) ;
-    
+      this.aImages.push({img : base64Image}) ;
+      console.log(this.aImages);
+      
     }, (err) => {
       // Handle error
     });

@@ -7,7 +7,7 @@
           </ion-col>
           <ion-col size="8" class="ion-text-center">
               <p class="my-0 font14 ">
-                  Vegetalia Restaurant
+                  {{profile.business_name}}
               </p>
           </ion-col>
         </ion-row>
@@ -19,7 +19,7 @@
                     <ion-slide class="changeStyle" *ngFor="let img of slider">
                       <img class="imgBanner" src="{{img.payload.doc.data().image}}"/>
                       <div class="divEdit" color="bluelight">
-                        <ion-icon class="iconEditBanner" color="white" name="create" (click)="editslider()"></ion-icon>
+                        <ion-icon class="iconEditBanner" color="white" name="create" (click)="editslider(img.payload.doc.data().image)"></ion-icon>
                       </div>
                     </ion-slide>
             
@@ -47,7 +47,7 @@
           <ion-row class="ion-no-padding">
               <ion-col size="12">
                   <p class="ion-text-center ion-no-margin font11 pDirection">
-                      Carrer de Aribau 655. 08021. Barcelona  
+                    {{profile.direction}} 
                       <ion-icon color="bluedark" name="create" routerLink="/perfil"></ion-icon>
                   </p>
               </ion-col>
@@ -166,7 +166,7 @@
                 <!-- <img class="imgCarta" src="assets/img/pasta2.jpg" alt="avatar perfil"> -->
                 <ion-slides *ngIf="product.images.length > 0">
                   <ion-slide class="changeStyle"  *ngFor="let img of product.images; let imgIndex = index">
-                    <img class="imgCarta3" src="{{img}}"/>
+                    <img class="imgCarta3" src="{{img.img}}"/>
                   </ion-slide>
                 </ion-slides>
                 <ion-slides *ngIf="product.images.length == 0">

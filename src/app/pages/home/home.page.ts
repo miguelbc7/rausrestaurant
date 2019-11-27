@@ -40,6 +40,10 @@ export class HomePage implements OnInit {
   avatar;
   aImages:any = [];
   ingredientes;
+  profile:any = {
+    business_name: '',
+    direction: '',
+  };
 
   constructor(private modalCtrl: ModalController, 
     public productosService: ProductosService, 
@@ -60,9 +64,20 @@ export class HomePage implements OnInit {
     this.getListProductos();
     this.getListHorario();
     this.getSlider();
+    this.getProfile();
    }
   ngOnInit() {
   
+  }
+
+  getProfile(){
+    this.authService.getProfile().then(res =>{
+      res.subscribe(data =>{
+        console.log(data);
+        this.profile.business_name = data.business_name;
+        this.profile.direction = data.direction;
+      })
+    });
   }
   async addslider() {
     const options: CameraOptions = {
@@ -79,8 +94,9 @@ export class HomePage implements OnInit {
       this.aImages.push(base64Image) ;
         this.sliderService.create_NewItem({image:base64Image}).then((response) => {
           response.subscribe((data) => {
+            console.log(data);
         }, err => {
-            console.log(err);
+            console.error(err);
           });
        });
     
@@ -177,7 +193,8 @@ export class HomePage implements OnInit {
     this.domingo = [];
      this.horarioService.getList().then(response => {
       response.subscribe((data) => {
-
+        console.log(data);
+        if(data.schedules.schedules){
           for(let index = 0 ; index < data.schedules.schedules.length; index++){
             
               switch(data.schedules.schedules[index].name){
@@ -205,6 +222,7 @@ export class HomePage implements OnInit {
                   this.domingo.push(data.schedules.schedules[index]);
                   break;
               }
+            }
           }
      }, err => {
       console.log(err);
@@ -226,8 +244,8 @@ export class HomePage implements OnInit {
     this.router.navigate(['/agregarproducto']);
   }
 
- async getSlider(){
-   await this.sliderService.read_Items().then(response => {
+  getSlider(){
+    this.sliderService.read_Items().then(response => {
       response.subscribe((data) => {
         this.slider = data;
      }, err => {
@@ -236,9 +254,15 @@ export class HomePage implements OnInit {
     });
   }
 
-  async editslider(){
+  async editslider(img){
+    console.log(img);
     const modal = await this.modalCtrl.create({
       component: AddsliderPage,
+      componentProps:[
+        {
+          img:img
+        }
+      ]
     });
     await modal.present();
   }

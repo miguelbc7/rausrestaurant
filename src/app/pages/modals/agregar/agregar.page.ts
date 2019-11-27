@@ -12,7 +12,7 @@ import { CreditCardService } from 'src/app/services/credit-card.service';
 export class AgregarPage implements OnInit {
 
   data:any;
-  value;
+  value = 0;
   public sum : number = 0;
   // public total(items){
   //   this.sum = 0;
@@ -21,6 +21,7 @@ export class AgregarPage implements OnInit {
   //   }
   //   return this.sum;
   // }
+  erroMessage = '';
 
 
   constructor(private modalCtrl: ModalController , private creditCardService:CreditCardService) { }
@@ -43,16 +44,25 @@ export class AgregarPage implements OnInit {
   }
 
   async openConfirmarAgregar(cardID) {
-    await this.modalCtrl.dismiss();
-    const modal = await this.modalCtrl.create({
-      component: AgregarconfirmarPage,
-      componentProps:{
-        value: this.value,
-        cardID:cardID
-      },
-      cssClass: 'sizeModalConfirmacion'
-    });
-    await modal.present();
+    console.log(this.value);
+    if(this.value > 0){
+      this.erroMessage = '';
+      await this.modalCtrl.dismiss();
+      const modal = await this.modalCtrl.create({
+        component: AgregarconfirmarPage,
+        componentProps:{
+          value: this.value,
+          cardID:cardID
+        },
+        cssClass: 'sizeModalConfirmacion'
+      });
+      modal.onDidDismiss().then(data =>{
+        this.value = 0;
+      });
+      await modal.present();
+    }else{
+      this.erroMessage = 'Debe ingresar el monto a recargar';
+    }
   }
 
   RemoveRecord(rowID){

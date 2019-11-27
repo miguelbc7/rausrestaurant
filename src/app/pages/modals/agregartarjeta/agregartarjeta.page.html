@@ -6,45 +6,73 @@
 
 <ion-content>
     <br>
-    <form class="ion-padding-horizontal">
+    <form class="ion-padding-horizontal" [formGroup]="cardForm">
       <ion-row>
         <ion-col size="12">
             <ion-item class="ion-no-padding">
               <ion-label class="font14" position="floating">Tarjeta número</ion-label>
-              <ion-input clearInput="true" type="number" minLenght="10" required name="numero" [(ngModel)]="numero" ></ion-input>
+              <ion-input clearInput="true" type="tel" pattern="[\d]*" required formControlName="numero" [(ngModel)]="numero" ></ion-input>
             </ion-item>    
         </ion-col>
       </ion-row>
+          <div class="validation-errors">
+          <ng-container *ngFor="let validation of validation_messages.numero">
+            <div class="error-message" *ngIf="cardForm.get('numero').hasError(validation.type) && (cardForm.get('numero').dirty || cardForm.get('numero').touched)">
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
       <ion-row>
           <ion-col size="6" class="ion-no-padding">
               <ion-item class="ion-no-padding">
                   <ion-label class="font14" position="floating">Fecha exp.</ion-label>
-                  <ion-datetime clearInput="true" displayFormat="MM/YY" min="1970" max="3000" name="fechaExp" [(ngModel)]="fechaExp"></ion-datetime>
+                  <ion-datetime clearInput="true" displayFormat="MM/YY" min="1970" max="3000" formControlName="fechaExp" [(ngModel)]="fechaExp"></ion-datetime>
               </ion-item> 
           </ion-col>
           <ion-col size="6" class="ion-no-padding">
               <ion-item class="ion-no-padding">
                   <ion-label class="font14" position="floating">CVC</ion-label>
-                  <ion-input clearInput="true" type="number" name="cvc" [(ngModel)]="cvc"></ion-input>
+                  <ion-input clearInput="true" type="number" formControlName="cvc" [(ngModel)]="cvc"></ion-input>
               </ion-item> 
           </ion-col>
       </ion-row>
+      <div class="validation-errors">
+          <ng-container *ngFor="let validation of validation_messages.cvc">
+            <div class="error-message" *ngIf="cardForm.get('cvc').hasError(validation.type) && (cardForm.get('cvc').dirty || cardForm.get('cvc').touched)">
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+        <div class="validation-errors">
+            <ng-container *ngFor="let validation of validation_messages.fechaExp">
+              <div class="error-message" *ngIf="cardForm.get('fechaExp').hasError(validation.type) && (cardForm.get('fechaExp').dirty || cardForm.get('fechaExp').touched)">
+                {{ validation.message }}
+              </div>
+            </ng-container>
+          </div>
       <ion-row>
           <ion-col size="12">
             <ion-item class="ion-no-padding">
               <ion-label class="font14" position="floating">Nombre en tarjeta</ion-label>
-              <ion-input clearInput="true" type="text" name="nombre" [(ngModel)]="nombre"></ion-input>
+              <ion-input clearInput="true" type="text" formControlName="nombre" [(ngModel)]="nombre"></ion-input>
             </ion-item>
           </ion-col>
       </ion-row>
-        
+      <div class="validation-errors">
+          <ng-container *ngFor="let validation of validation_messages.nombre">
+            <div class="error-message" *ngIf="cardForm.get('nombre').hasError(validation.type) && (cardForm.get('nombre').dirty || cardForm.get('nombre').touched)">
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
         <ion-row class="btnNuevo">
             <ion-col size="6" class="ion-text-center">
-                <ion-button class="font15" color="bluedark" (click)="openAgregarSaldo()">Guardar</ion-button>
+                <ion-button class="font15" color="bluedark" [disabled]="!cardForm.valid" (click)="openAgregarSaldo()">Guardar</ion-button>
             </ion-col>
             <ion-col size="6" class="ion-text-center">
                 <ion-button class="font15" color="bluelight" (click)="closeModal()">Volver</ion-button>
             </ion-col>
          </ion-row>
+         <label>{{errorMessage}}</label>
     </form>
 </ion-content>
