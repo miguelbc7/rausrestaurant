@@ -62,13 +62,13 @@
             <ion-input  [(ngModel)]="qtyValue"  formControlName="qtyValue" class="inputCustom2 ion-text-center"></ion-input>
             <ion-icon class="iconMargin" name="add"></ion-icon>
         </div>
-        <span class="ml-2">por cada</span>
+        <span class="ml-1 font10">por cada</span>
     </ion-col>
-      <ion-col size="6" class="ion-text-center" >
-        <div class="inline">
+      <ion-col size="6" class="ion-text-left" >
+        <div class="inline ml-2">
           <ion-input  [(ngModel)]="value"  formControlName="value" class="inputCustom2 ion-text-center"></ion-input>
         </div>
-        <span class="ml-2">euros</span>
+        <span class="ml-2 font10">euros</span>
       </ion-col>
       <div class="validation-errors">
         <label *ngFor="let validation of validation_messages.qtyValue">
@@ -92,14 +92,14 @@
               <ion-input  [(ngModel)]="qtyBuy"  formControlName="qtyBuy" class="inputCustom2 ion-text-center"></ion-input>
               <ion-icon class="iconMargin" name="add"></ion-icon>
           </div>
-          <span class="ml-2">por cada</span>
+          <span class="ml-1 font10">por cada</span>
         </ion-col>
         
-        <ion-col size="6" class="ion-text-center" >
-          <div class="inline">
+        <ion-col size="6" class="ion-text-left" >
+          <div class="inline ml-2">
             <ion-input  [(ngModel)]="buy"  formControlName="buy" class="inputCustom2 ion-text-center"></ion-input>
           </div>
-          <span class="ml-2">compras</span>
+          <span class="ml-2 font10">compras</span>
         </ion-col>
             <div class="validation-errors">
               <label *ngFor="let validation of validation_messages.qtyBuy">
@@ -114,7 +114,7 @@
                   </label>
             </div>
   </ion-row>
-  <ion-row class="btnNuevoGuardar">
+  <ion-row class="">
       <ion-col size="12" class="ion-text-center">
           <ion-button class="font14" color="bluedark" *ngIf="type == 'create'" [disabled]="!loyaltyForm.valid" (click)="CreateRecord()" >Guardar</ion-button>
           <ion-button class="font14" color="bluedark" *ngIf="type == 'edit'" [disabled]="!loyaltyForm.valid" (click)="UpdateRecord(item.id)" type="submit" >Actualizar</ion-button>

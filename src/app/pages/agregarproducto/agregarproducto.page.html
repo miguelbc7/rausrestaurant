@@ -8,13 +8,13 @@
   <form [formGroup]="productoForm" (ngSubmit)="onSubmit(productoForm.value)" class="ion-margin-horizontal">
     <!-- <form [formGroup]="productoForm" (ngSubmit)="onUpdate(productoForm.value)" *ngIf="type == edit"  class="ion-margin-horizontal"> -->
     <ion-row>
-        <ion-col size="7" class="ion-align-self-center">
+        <ion-col size="6" class="ion-align-self-center">
             Vegetalia Restaurant
         </ion-col>
         <ion-col class="ion-justify-center ion-align-self-center ion-text-center">
             <div class="font8">activo/inactivo</div>  
             <!-- <ion-toggle class="toggleCustom"></ion-toggle> -->
-            <div class="onoffswitch">
+            <div class="ml-2 onoffswitch">
               <input type="checkbox" name="onoffswitch" formControlName="status" [(ngModel)]="status" class="onoffswitch-checkbox" id="myonoffswitch" checked>
               <label class="onoffswitch-label" for="myonoffswitch"></label>
           </div>
