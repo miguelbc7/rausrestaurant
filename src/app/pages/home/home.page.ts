@@ -28,30 +28,7 @@ export class HomePage implements OnInit {
 
   productos:any;
   token:any;
-  horarios: any= [
-    {
-      name: 'Lunes',
-      status: true,
-      schedules:[{
-        id: 1,
-        start: '11:00',
-        end: '16:00'
-      },{
-        id: 2,
-        start: '20:00',
-        end: '22:00'
-      }]
-    },
-    {
-      name: 'Martes',
-      status: false,
-      schedules:[{
-        id: 1,
-        start: '11:00',
-        end: '16:00'
-      }]
-    }
-  ] ;
+  horarios: any = [];
   lunes:any = [];
   martes:any = [];
   miercoles:any = [];
@@ -62,6 +39,7 @@ export class HomePage implements OnInit {
   slider: any;
   avatar;
   aImages:any = [];
+  ingredientes;
 
   constructor(private modalCtrl: ModalController, 
     public productosService: ProductosService, 
@@ -77,10 +55,14 @@ export class HomePage implements OnInit {
     })
    }
 
-  ngOnInit() {
+   ionViewWillEnter(){
+    // this.ngOnInit();
     this.getListProductos();
     this.getListHorario();
     this.getSlider();
+   }
+  ngOnInit() {
+  
   }
   async addslider() {
     const options: CameraOptions = {
@@ -113,6 +95,12 @@ export class HomePage implements OnInit {
       componentProps: { 
         name: dia,
         schedules: data,
+      }
+    });
+    modal.onDidDismiss().then((dataReturned) => {
+      if (dataReturned !== null) {
+        this.getListHorario();
+        //alert('Modal Sent Data :'+ dataReturned);
       }
     });
     await modal.present();
@@ -169,64 +157,77 @@ export class HomePage implements OnInit {
    
    getListProductos()
    {
-    this.productosService.getList().then(response => {
+     this.productosService.getList().then(response => {
       response.subscribe((data) => {
+        console.log(data);
         this.productos = data.products;
-     }, err => {
-      console.log(err);
-    });
+      }, err => {
+        console.log(err);
+      });
     });
    }
 
    getListHorario(){
-    this.horarioService.getList().then(response => {
+    this.lunes = [];
+    this.martes = [];
+    this.miercoles = [];
+    this.jueves = [];
+    this.viernes = [];
+    this.sabado = [];
+    this.domingo = [];
+     this.horarioService.getList().then(response => {
       response.subscribe((data) => {
-        this.horarios = data.schedules;
 
-        for(let dia of  this.horarios){
-          switch(dia.name){
-            case('Lunes'):
-              this.lunes.push(dia);
-              break;
-            case('Martes'):
-              this.martes.push(dia);
-              break;
-            case('Miercoles'):
-              this.miercoles.push(dia);
-              break;
-            case('Jueves'):
-              this.jueves.push(dia);
-              break;
-            case('Viernes'):
-              this.viernes.push(dia);
-              break;
-            case('Sabado'):
-            this.sabado.push(dia);
-              break;
-            case('Domingo'):
-              this.domingo.push(dia);
-              break;
+          for(let index = 0 ; index < data.schedules.schedules.length; index++){
+            
+              switch(data.schedules.schedules[index].name){
+                case('Lunes'):
+                this.lunes.push(data.schedules.schedules[index]);
+                console.log(this.lunes);
+                  break;
+                case('Martes'):
+                  this.martes.push(data.schedules.schedules[index]);
+                  break;
+                case('Miercoles'):
+                  this.miercoles.push(data.schedules.schedules[index]);
+                  break;
+                case('Jueves'):
+                  this.jueves.push(data.schedules.schedules[index]);
+                  break;
+                case('Viernes'):
+                  this.viernes.push(data.schedules.schedules[index]);
+                  console.log(this.viernes);
+                  break;
+                case('Sabado'):
+                this.sabado.push(data.schedules.schedules[index]);
+                  break;
+                case('Domingo'):
+                  this.domingo.push(data.schedules.schedules[index]);
+                  break;
+              }
           }
-        }
      }, err => {
       console.log(err);
     });
     });
+
    }
    
    editProduct(product) {
      this.storage.set('product', product);
+     this.storage.set('typeProduct', 'edit');
      this.router.navigate(['/agregarproducto']);
   }
 
   addProduct()
   {
     this.storage.remove('product');
+    this.storage.set('typeProduct', 'create');
     this.router.navigate(['/agregarproducto']);
   }
 
-  getSlider(){
-    this.sliderService.read_Items().then(response => {
+ async getSlider(){
+   await this.sliderService.read_Items().then(response => {
       response.subscribe((data) => {
         this.slider = data;
      }, err => {
@@ -240,6 +241,10 @@ export class HomePage implements OnInit {
       component: AddsliderPage,
     });
     await modal.present();
+  }
+
+  ngOnDestroy(){
+    
   }
 }
 

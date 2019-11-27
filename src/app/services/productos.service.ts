@@ -89,14 +89,21 @@ export class ProductosService {
   }
  
   // Update item by id
-  updateItem(id, item): Observable<Producto> {
+  async updateItem(id, item): Promise<any> {
+    await this.storage.get('_token').then(res=>{
+      this.token = res.token;
+    });
+    item._id = id;
+    console.log(item);
+    delete item.ingredientes;
+    delete item.no_ingredientes;
     return this.http
-      .put<Producto>(this.base_path+'products/' + id, JSON.stringify(item), {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': this.token,
+      .put<Producto>(this.base_path+'products/update', JSON.stringify(item), {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': this.token,
+      })
     })
-  })
       .pipe(
         catchError(this.handleError)
       )

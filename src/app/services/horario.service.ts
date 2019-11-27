@@ -29,10 +29,13 @@ export class HorarioService {
     console.log(error.error);
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.
-      console.error('An error occurred:', error.error.message);
+      console.error('An error occurred:', error.error);
     } else {
       // The backend returned an unsuccessful response code.
       // The response body may contain clues as to what went wrong,
+      if(error.status == 400){
+        return throwError(error.error);
+      }
       console.error(
         `Backend returned code ${error.status}, ` +
         `body was: ${error.error}`);
@@ -52,14 +55,14 @@ export class HorarioService {
       });
       let data = {
         id_restaurant: this.uid,
-        schedules:[{
+        schedules:{
           name: item.name,
-          status: item.schedules.status,
-          schedules: {
+          status: item.status,
+          schedules: [{
             start: item.schedules.start,
             end:item.schedules.end
-          }
-        }]
+          }]
+        }
       }
       return this.http
         .post<Horario>(this.base_path+'schedules', JSON.stringify(data),{
@@ -79,12 +82,12 @@ export class HorarioService {
       this.token = res.token;
     });
     return this.http
-      .get<Horario>(this.base_path+'schedule', {
+      .post<Horario>(this.base_path+'scheduless/day',JSON.stringify({id_restaurant:this.uid, name: name}) ,{
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': this.token,
     }),
-    params: {name: name}
+    // params: {name: name}
   })
       .pipe(
         catchError(this.handleError)
@@ -99,76 +102,79 @@ export class HorarioService {
         await this.storage.get('_uid').then(res=>{
           this.uid = res;
         });
+        console.log(this.uid);
         return this.http
-          .get<Horario>(this.base_path+'schedules', {
+          .post<Horario>(this.base_path+'scheduless/get',JSON.stringify({id_restaurant:this.uid}), {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
           'Authorization': this.token,
         }),
-        params: {id_restaurant: this.uid}
+        // params: {id_restaurant: this.uid}
       })
       .pipe(
         catchError(this.handleError)
       )
   }
- 
-create_NewItem(record) {
-  return new Promise<any>((resolve, reject) => {
-    let currentUser = firebase.auth().currentUser;
-    this.afs.collection('restaurantes').doc(currentUser.uid).collection('horarios').add(record)
-    .then(
-      res => resolve(res),
-      err => reject(err)
-    )
-  })
-}
 
-read_Items() {
-  return new Promise<any>((resolve, reject) => {
-    this.afAuth.user.subscribe(currentUser => {
-      if(currentUser){
-        this.snapshotChangesSubscription = this.afs.collection('restaurantes').doc(currentUser.uid).collection('horarios').snapshotChanges();
-        resolve(this.snapshotChangesSubscription);
+  async updateItem(id, item): Promise<any>{
+    await this.storage.get('_token').then(res=>{
+      this.token = res.token;
+    });
+    
+    await this.storage.get('_uid').then(res=>{
+      this.uid = res;
+    });
+    let data = {
+      id_restaurant: this.uid,
+      name: item.name,
+      // status: item.status,
+      schedule:{
+          id: id,
+          start: item.schedules.start,
+          end:item.schedules.end
+        }
       }
-    })
-  })
-}
-
- get_Item(itemID){
-  return new Promise<any>((resolve, reject) => {
-    this.afAuth.user.subscribe(currentUser => {
-      if(currentUser){
-        this.snapshotChangesSubscription = this.afs.doc<any>('restaurantes/' + currentUser.uid + '/horarios/' + itemID).valueChanges()
-        .subscribe(snapshots => {
-          resolve(snapshots);
-        }, err => {
-          reject(err)
+    console.log(data);
+    return this.http.put<Horario>(this.base_path+'schedules/update', JSON.stringify(data),{
+          headers: new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': this.token,
+          })
         })
-      }
+        .pipe(
+          catchError(this.handleError)
+        )
+  }
+
+  async deleteItem(id): Promise<any>{
+    await this.storage.get('_token').then(res=>{
+      this.token = res.token;
+    });
+    await this.storage.get('_uid').then(res=>{
+      this.uid = res;
+    });
+
+  }
+
+  async statusItem(item): Promise<any>{
+    await this.storage.get('_token').then(res=>{
+      this.token = res.token;
+    });
+    await this.storage.get('_uid').then(res=>{
+      this.uid = res;
+    });
+    let data = {
+      id_restaurant: this.uid,
+      status: !item.status,
+      name: item.name,
+    }
+    console.log(data);
+    return this.http.put<Horario>(this.base_path+'schedules/estatus', JSON.stringify(data),{
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': this.token,
+      })
     })
-  });
-}
-
-update_Item(recordID,record){
-  console.log(record);
-  return new Promise<any>((resolve, reject) => {
-    let currentUser = firebase.auth().currentUser;
-    this.afs.collection('restaurantes').doc(currentUser.uid).collection('horarios').doc(recordID).set(record)
-    .then(
-      res => resolve(res),
-      err => reject(err)
-    )
-  })
-}
-
-delete_Item(record_id) {
-  return new Promise<any>((resolve, reject) => {
-    let currentUser = firebase.auth().currentUser;
-    this.afs.collection('restaurantes').doc(currentUser.uid).collection('horarios').doc(record_id).delete()
-    .then(
-      res => resolve(res),
-      err => reject(err)
-    )
-  })
-}
+  }
+ 
 }

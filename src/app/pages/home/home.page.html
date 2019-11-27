@@ -16,6 +16,13 @@
               <div class="boxBanner">
                   <ion-slides [options]="slideOptsOne">
 
+                    <ion-slide class="changeStyle" *ngFor="let img of slider">
+                      <img class="imgBanner" src="{{img.payload.doc.data().image}}"/>
+                      <div class="divEdit" color="bluelight">
+                        <ion-icon class="iconEditBanner" color="white" name="create" (click)="editslider()"></ion-icon>
+                      </div>
+                    </ion-slide>
+            
                       <ion-slide class="changeStyle">
                         <div class="divWhite">
                         </div>
@@ -23,15 +30,7 @@
                                   <ion-icon class="addIcon" color="bluedark" name="add-circle-outline" (click)="addslider()"></ion-icon>
                               </div>
                       </ion-slide>
-              
-                      <ion-slide class="changeStyle" *ngFor="let img of slider">
-                        <img class="imgBanner" src="{{img.payload.doc.data().image}}"/>
-                        <div class="divEdit" color="bluelight">
-                          <ion-icon class="iconEditBanner" color="white" name="create" (click)="editslider()"></ion-icon>
-                        </div>
-                      </ion-slide>
-              
-              
+                      
                     </ion-slides>
                   <ion-avatar class="avatar" routerLink="/perfil">
                       <img class="imgAvatar" src="assets/img/rest1.jpg" alt="avatar perfil">
@@ -69,7 +68,7 @@
                   <div *ngIf="ln?.schedules?.length == 0 || ln?.status == false">Cerrado</div>
                   <div *ngIf="ln.status == true">
                 <div *ngFor="let s of ln.schedules">
-                  <div>{{s.start}} a {{s.end}}</div>
+                  <div>{{s.start| date: 'H:mm'}} a {{s.end| date: 'H:mm'}}</div>
               </div>
               </div>
               </div>
@@ -82,7 +81,7 @@
                   <div *ngIf="ln?.schedules?.length == 0 || ln?.status == false">Cerrado</div>
                   <div  *ngIf="ln.status == true">
                   <div *ngFor="let s of ln.schedules">
-                    <div>{{s.start}} a {{s.end}}</div>
+                    <div>{{s.start| date: 'H:mm'}} a {{s.end| date: 'H:mm'}}</div>
                 </div>
                 </div>
                 </div>
@@ -94,7 +93,7 @@
                   <div *ngIf="ln?.schedules?.length == 0 || ln?.status == false">Cerrado</div>
                   <div  *ngIf="ln.status == true">
                   <div *ngFor="let s of ln.schedules">
-                    <div>{{s.start}} a {{s.end}}</div>
+                    <div>{{s.start| date: 'H:mm'}} a {{s.end| date: 'H:mm'}}</div>
                   </div>
                 </div>
                 </div>
@@ -106,7 +105,7 @@
                   <div *ngIf="ln?.schedules?.length == 0 || ln?.status == false">Cerrado</div>
                   <div  *ngIf="ln.status == true">
                   <div *ngFor="let s of ln.schedules">
-                    <div>{{s.start}} a {{s.end}}</div>
+                    <div>{{s.start| date: 'H:mm'}} a {{s.end| date: 'H:mm'}}</div>
                 </div>
                 </div>
                 </div>
@@ -118,7 +117,7 @@
                   <div *ngIf="ln?.schedules?.length == 0 || ln?.status == false">Cerrado</div>
                   <div  *ngIf="ln.status == true">
                   <div *ngFor="let s of ln.schedules">
-                    <div>{{s.start}} a {{s.end}}</div>
+                    <div>{{s.start| date: 'H:mm'}} a {{s.end| date: 'H:mm'}}</div>
                 </div>
                 </div>
               </div>
@@ -130,7 +129,7 @@
                   <div *ngIf="ln?.schedules?.length == 0 || ln?.status == false">Cerrado</div>
                   <div  *ngIf="ln.status == true">
                   <div *ngFor="let s of ln.schedules">
-                    <div>{{s.start}} a {{s.end}}</div>
+                    <div>{{s.start| date: 'H:mm'}} a {{s.end| date: 'H:mm'}}</div>
                 </div>
                 </div>
                 </div>
@@ -142,7 +141,7 @@
                   <div *ngIf="ln?.schedules?.length == 0 || ln?.status == false">Cerrado</div>
                   <div  *ngIf="ln.status == true">
                   <div *ngFor="let s of ln.schedules">
-                    <div>{{s.start}} a {{s.end}}</div>
+                    <div>{{s.start| date: 'H:mm'}} a {{s.end| date: 'H:mm'}}</div>
                 </div>
                 </div>
                 </div>
@@ -188,15 +187,15 @@
                   </ion-col>
                   <ion-col class="ion-no-padding" size="5">
                     <p class="my-0 hgPCarta  customDarkText">
-                      <span class="font25">10</span>
-                      <span class="font12 decimalCarta">,50€</span>
+                      <span class="font12">{{product.price_with_iva| currency:'EUR':true:'1.2-2'}}</span>
+                      <!-- <span class="font12 decimalCarta">,50€</span> -->
                     </p>
                   </ion-col>
                 </ion-row>
                 <ion-row>
                     <ion-col class="ion-no-padding ion-align-self-center" size="8">
-                     <p class="hgPCarta my-0 customDarkText font9">
-                        {{ product.ingredients.toString() }}
+                     <p class="hgPCarta my-0 customDarkText font9" *ngFor="let i of product.ingredients">
+                        {{ i.name }},
                      </p> 
                     </ion-col>
                     <ion-col class="ion-no-padding ion-align-self-center ion-text-right" size="2">

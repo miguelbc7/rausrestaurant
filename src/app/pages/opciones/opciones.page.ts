@@ -7,6 +7,8 @@ import { AgregarconfirmarPage } from '../modals/agregarconfirmar/agregarconfirma
 import { CierrePage } from '../cierre/cierre.page';
 // import { DineromodalPage } from '../modals/dineromodal/dineromodal.page';
 import { SaldoService } from 'src/app/services/saldo.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-opciones',
@@ -70,7 +72,7 @@ export class OpcionesPage implements OnInit {
     },
   ];
 
-  constructor(private modalCtrl: ModalController, private router: Router, private saldoService:SaldoService) { }
+  constructor(private modalCtrl: ModalController, private router: Router, private saldoService:SaldoService, private authService: AuthService, private storage:Storage) { }
 
   changeIcon(index: number){
     if(this.datas[index].status == false){
@@ -112,6 +114,8 @@ export class OpcionesPage implements OnInit {
         break;
         
       case (7):
+          this.authService.logoutUser();
+          this.storage.clear();
           this.router.navigate(['/login']);
         break;
     }

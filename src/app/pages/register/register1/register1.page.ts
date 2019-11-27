@@ -25,6 +25,9 @@ export class Register1Page implements OnInit {
   passwordShown2: boolean = false;
   data: { username: any; password: any; };
   tags:[{ nombre: "#hoteleria"},{ nombre: "#restaurante"} ];
+  categories;
+  errorMessage:string = "";
+
 
 
   constructor( public formBuilder: FormBuilder, private router: Router,private authService: AuthService,private nativeGeocoder: NativeGeocoder, private storage: Storage) {
@@ -74,18 +77,16 @@ export class Register1Page implements OnInit {
         Validators.required,
         Validators.maxLength(15),
         Validators.minLength(8),
-        Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&.])[A-Za-z\d$@$!%*?&.].{8,15}')
+        Validators.pattern('(?=.*[a-zñ])(?=.*[A-ZÑ])(?=.*[0-9])(?=.*[$@$!%*?&#.$($)-_])[A-Za-zñÑ\d$@$!%*?&#.$($)-_].{7,15}')
       ])],
       repeat_password: ['', Validators.compose([
         Validators.required,
         Validators.maxLength(15),
         Validators.minLength(8),
-        Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&.])[A-Za-z\d$@$!%*?&.].{8,15}')
+        Validators.pattern('(?=.*[a-zñ])(?=.*[A-ZÑ])(?=.*[0-9])(?=.*[$@$!%*?&#.$($)-_])[A-Za-zñÑ\d$@$!%*?&#.$($)-_].{7,15}')
       ])],
   });
   }
-
-  errorMessage: string = '';
 
   validation_messages = {
     'business_name': [
@@ -118,19 +119,20 @@ export class Register1Page implements OnInit {
       'email': [
         { type: 'required', message: 'Debe ingresar un Correo electrónico.' },
         { type: 'minlength', message: 'Debe ser mayor de 5 caracteres.' },
-        { type: 'maxlength', message: 'Debe ser menor de 30 caracteres.' }
+        { type: 'maxlength', message: 'Debe ser menor de 30 caracteres.' },
+        { type: 'pattern', message: 'Debe ingresar un formato valido.' },
       ],
       'password': [
         { type: 'required', message: 'Contraseña Requerida' },
         { type: 'minlength', message: 'Debe ser mayor de 8 caracteres' },
         { type: 'maxlength', message: 'Debe ser menor de 15 caracteres.' },
-        { type: 'pattern', message: 'Su contraseña debe contener al menos una mayúscula, una minúscula y un número.' }
+        { type: 'pattern', message: 'Su contraseña debe contener al menos una mayúscula, una minúscula, un número y un caracter especial(@!%*?&#.$-_).' }
       ],
       'repeat_password': [
         { type: 'required', message: 'Contraseña Requerida' },
         { type: 'minlength', message: 'Debe ser mayor de 8 caracteres' },
         { type: 'maxlength', message: 'Debe ser menor de 15 caracteres.' },
-        { type: 'pattern', message: 'Su contraseña debe contener al menos una mayúscula, una minúscula y un número.' }
+        { type: 'pattern', message: 'Su contraseña debe contener al menos una mayúscula, una minúscula, un número y un caracter especial(@!%*?&#.$-_).' }
       ],
       // 'categories': [
       //   { type: 'required', message: 'Debe ingresar por lo menos una actividad de tu empresa.' },
@@ -155,20 +157,24 @@ export class Register1Page implements OnInit {
       .catch((error: any) => console.log(error));
       
     delete values.address;
+    if(values.categories){
+      for (let index = 0; index < values.categories.length; index++) {
+        delete values.categories[index].value;
+      }
+    }
     console.log(values);
     this.authService.registerUser(values)
     .subscribe(res => {
       this.errorMessage = "";
-      // this.data.username = values.email;
-      // this.data.password = values.password;
-      // this.authService.loginUser(this.data);
       this.router.navigate(["/welcome"]);
-
-    },err => {
-      this.errorMessage = "Hubo un error durante el proceso del registro, por favor intente de nuevo.";
-      // console.log(err.msg);
-    })
-    // this.router.navigate(["/welcome"]);
+    },(err) => {
+      console.error(err.error);
+      if(err.error){
+        this.errorMessage = err.error.error;
+      }
+    }
+      // this.errorMessage = "Hubo un error durante el proceso del registro, por favor intente más tarde.";
+    );
   }
 
   ngOnInit() {

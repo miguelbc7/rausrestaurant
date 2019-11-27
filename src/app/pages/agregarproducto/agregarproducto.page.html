@@ -5,7 +5,8 @@
 </ion-header> -->
 
 <ion-content>
-  <form [formGroup]="productoForm" (ngSubmit)="onSubmit(productoForm.value)"  class="ion-margin-horizontal">
+  <form [formGroup]="productoForm" (ngSubmit)="onSubmit(productoForm.value)" class="ion-margin-horizontal">
+    <!-- <form [formGroup]="productoForm" (ngSubmit)="onUpdate(productoForm.value)" *ngIf="type == edit"  class="ion-margin-horizontal"> -->
     <ion-row>
         <ion-col size="7" class="ion-align-self-center">
             Vegetalia Restaurant
@@ -44,6 +45,12 @@
           <div class="boxBanner">
               <ion-slides [options]="slideOptsOne">
   
+                <ion-slide class="changeStyle" *ngFor="let img of aImages">
+                  <img class="imgBanner" src="{{img}}"/>
+                  <div class="divEdit" color="bluelight">
+                    <ion-icon class="iconEditBanner" color="white" name="create" (click)="addslider()"></ion-icon>
+                  </div>
+                </ion-slide>
                   <ion-slide class="changeStyle">
                     <div class="divWhite borderGris">
                     </div>
@@ -53,12 +60,6 @@
                           <div class="textP">
                             <p class="ion-text-center my-0 font14">Agregar imagenes al carrusel</p>
                           </div>
-                  </ion-slide>
-                  <ion-slide class="changeStyle" *ngFor="let img of aImages">
-                    <img class="imgBanner" src="{{img}}"/>
-                    <div class="divEdit" color="bluelight">
-                      <ion-icon class="iconEditBanner" color="white" name="create" (click)="addslider()"></ion-icon>
-                    </div>
                   </ion-slide>
                 </ion-slides>          
           </div>
