@@ -12,7 +12,7 @@ import { CreditCardService } from 'src/app/services/credit-card.service';
 export class AgregarPage implements OnInit {
 
   data:any;
-  value = 0;
+  value:number;
   public sum : number = 0;
   // public total(items){
   //   this.sum = 0;

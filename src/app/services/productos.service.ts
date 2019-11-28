@@ -165,18 +165,19 @@ export class ProductosService {
       _id : id,
       images: item
     }
+    console.log(data);
     await this.storage.get('_token').then(res=>{
         this.token = res.token;
       });
       return this.http
-        .post<any>(this.base_path+'products/images',JSON.stringify(data) ,{
+        .put<any>(this.base_path+'products/images',JSON.stringify(data) ,{
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         // 'Authorization': this.token,
       }),
-      params: {
-        token: this.token,
-      }
+      // params: {
+        // token: this.token,
+      // }
     })
     .pipe(
       catchError(this.handleError)

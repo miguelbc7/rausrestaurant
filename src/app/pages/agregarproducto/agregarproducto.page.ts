@@ -264,11 +264,11 @@ export class AgregarproductoPage implements OnInit {
    if(this.type == 'create'){
      console.log(this.type);
      this.productosService.createItem(values).then((response) => {
-       response.subscribe((data) => {
+       response.subscribe(async (data) => {
         //  this.productos = data.products;
         console.log(data);
-        if(this.aImages.lenght > 0){
-          this.uploadImage(data._id);
+        if(this.aImages.length > 0){
+        await  this.uploadImage(data._id);
         }
          this.presentPromocion(data._id);
          this.router.navigate(['home']);
@@ -281,13 +281,15 @@ export class AgregarproductoPage implements OnInit {
    }else if(this.type == 'edit'){
     console.log(this.type);
       this.productosService.updateItem(this.productos._id,values).then((response) => {
-        response.subscribe((data) => {
+        response.subscribe(async (data) => {
         //  this.productos = data.products;
         console.log(data);
-        if(this.aImages.lenght > 0){
-          this.uploadImage(data._id);
+        console.log(this.productos._id);
+        if(this.aImages.length > 0){
+          console.log('imagenes1')
+         await this.uploadImage(this.productos._id);
         }
-          this.presentPromocion(data._id);
+          this.presentPromocion(this.productos._id);
           this.router.navigate(['home']);
       }, err => {
       console.log(err);
@@ -298,14 +300,17 @@ export class AgregarproductoPage implements OnInit {
    }
  }
 
- uploadImage(id){
-
-  this.productosService.uploadItem(id, this.aImages).then((response) => {
+ async uploadImage(id){
+   console.log('uploadimage');
+  console.log(this.aImages);
+  await this.productosService.uploadItem(id, this.aImages).then((response) => {
     response.subscribe((data) => {
-     //  this.productos = data.products;
-     console.log(data);
-      this.presentPromocion(data.products.id);
-      this.router.navigate(['home']);
+      //  this.productos = data.products;
+      console.log('uploadimage data');
+      console.log(data);
+      // this.presentPromocion(data.products.id);
+      // this.router.navigate(['home']);
+      
   }, err => {
       console.error(err);
     });
