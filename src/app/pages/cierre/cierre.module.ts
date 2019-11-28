@@ -23,6 +23,10 @@ const routes: Routes = [
     RouterModule.forChild(routes)
   ],
   declarations: [
+<<<<<<< HEAD
+=======
+
+>>>>>>> b596b387ee63cf2358cd32674c4c7417e9d68ab5
     DineromodalPage
   ],
   entryComponents: [

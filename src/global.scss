@@ -237,9 +237,9 @@
 // Menu Restaurante
 
 .imgBanner {
-    width: 100%;
-    height: auto;
-    max-height: 230px;
+    width: 100% !important;
+    height: auto !important;
+    max-height: 230px !important;
 }
 
 .divWhite {
@@ -616,8 +616,8 @@ ion-textarea.textareaCustom{
  }
  .sizeModalPlanes .modal-wrapper {
     height: auto;
-    max-height: 470px;
-    width: 340px;
+    max-height: 570px;
+    width: 95%;
     top: 0%;
     bottom: 0;
     left: 0;
