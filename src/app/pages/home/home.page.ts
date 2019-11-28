@@ -182,7 +182,6 @@ export class HomePage implements OnInit {
       response.subscribe((data) => {
         console.log(data);
         this.productos =data.products;
-        console.log(this.productos[0].images[0].img)
       }, err => {
         console.log(err);
       });
