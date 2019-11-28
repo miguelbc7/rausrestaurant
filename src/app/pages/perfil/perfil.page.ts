@@ -98,7 +98,8 @@ export class PerfilPage implements OnInit {
     }
 
 
-  async editperfil() {
+  async editperfil(img) {
+    this.storage.set('imgPreview', img);
     const modal = await this.modalCtrl.create({
       component: ModalEditavatarPage,
     });

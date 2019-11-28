@@ -73,16 +73,16 @@ export class AgregarproductoPage implements OnInit {
           ])],
           nutritional_values: [this.nutritional_values],
           fat: [this.name, Validators.compose([
-            Validators.required,
+            // Validators.required,
           ])],
           carbohydrates: [this.carbohydrates, Validators.compose([
-            Validators.required,
+            // Validators.required,
           ])],
           protein: [this.protein, Validators.compose([
-            Validators.required,
+            // Validators.required,
           ])],
           total_calories: [this.total_calories, Validators.compose([
-            Validators.required,
+            // Validators.required,
           ])],
           price_with_iva: [this.price_with_iva, Validators.compose([
             Validators.required,
@@ -334,7 +334,7 @@ export class AgregarproductoPage implements OnInit {
     this.camera.getPicture(options).then((imageData) => {
       // imageData is either a base64 encoded string or a file URI
       // If it's base64 (DATA_URL):
-      let base64Image = 'data:image/jpeg;base64,' + imageData;
+      let base64Image = 'data:image/jpeg;base64,' + imageData.subString(23);
       this.aImages.push({img : base64Image}) ;
       console.log(this.aImages);
       

@@ -129,22 +129,24 @@
         </ion-label>
         <tag-input  class="ion-text-center inputTag"
           formControlName="categories" 
-          [(ngModel)]="categories" 
           [placeholder]="' Agregar Tag'"
           [secondaryPlaceholder]="'#hostelería #restauración'" 
           [maxItems]='3'  
           [separatorKeyCodes]="[32, 138]"
-          theme='minimal'
-          required="true"
           [onlyFromAutocomplete]="true"
+          [theme]="'minimal'"
         >
         <tag-input-dropdown 
-        [autocompleteItems]="[{name:'#Comer'},{name:'#Salud'},{name:'#Cuidado Personal'} ,{name:'#Fuel'} ,{name:'#Entretenimiento'},{name:'#Kids'} ,{name:'#Deporte'}
-        ,{name:'#Viajes Hoteles'} , {name:'#Alimentos'}, {name:'#Transporte'} ]"
+        [autocompleteItems]="[ '#Comer', '#Salud', '#Cuidado Personal', '#Fuel', '#Entretenimiento', '#Kids',
+        '#Deporte', '#Viajes Hoteles', '#Alimentos', '#Transporte' ]"
           [displayBy]="'name'"
-          [showDropdownIfEmpty]="true"
+          [showDropdownIfEmpty]="false"
+          [minimumTextLength]="0"
         >
-        </tag-input-dropdown>
+      </tag-input-dropdown>
+          <ng-template let-item="item" let-index="index">
+            {{item.display}}
+        </ng-template>
       </tag-input>
       </ion-item>
   <br>

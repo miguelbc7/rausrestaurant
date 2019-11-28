@@ -148,24 +148,19 @@ export class Register1Page implements OnInit {
     values.lat = -4.0000000;
     values.lng = 40.0000000;
     this.nativeGeocoder.forwardGeocode(values.address)
-    .then((
-      result: NativeGeocoderResult[]
-      ) => {
+    .then(
+      ( result: NativeGeocoderResult[]) => {
         console.log('The coordinates are latitude=' + result[0].latitude + ' and longitude=' + result[0].longitude)
         
         values.lat = result[0].latitude;
         values.lng = result[0].longitude;
         
       }
-      )
-      .catch((error: any) => console.log(error));
-      if(values.categories){
-        for (let index = 0; index < values.categories.length; index++) {
-          delete values.categories[index].value;
-        }
-      }
+    )
+    .catch((error: any) => console.error(error));
     values.direction = values.address;
     console.log(values);
+
     this.authService.registerUser(values)
     .subscribe(async res => {
       console.log(res);
@@ -173,12 +168,12 @@ export class Register1Page implements OnInit {
       this.storage.set('_uid', res.uid);
       this.errorMessage = "";
       console.log(values)
-      await this.authService.loginUser({email: values.email, password: values.password}).then(resp => {
+      await this.authService.loginUser({username: values.email, password: values.password}).then(resp => {
         this.errorMessage = "";
         console.log(resp);
         this.authService.getToken(resp.user.uid).subscribe(token =>{
           this.storage.set('_token', token);
-          this.router.navigate(["/home"]);
+          this.router.navigate(["/welcome"]);
         });
       },err => {
         console.error(err);
@@ -187,6 +182,8 @@ export class Register1Page implements OnInit {
       console.error(err.error);
       if(err.error){
         this.errorMessage = err.error.error;
+      }else{
+        this.errorMessage = 'Hubo un problema durante el registro, por favor intente más tarde';
       }
     }
       // this.errorMessage = "Hubo un error durante el proceso del registro, por favor intente más tarde.";

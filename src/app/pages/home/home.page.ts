@@ -17,6 +17,8 @@ import { SliderHomeService } from 'src/app/services/slider-home.service';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { Camera, CameraOptions } from '@ionic-native/Camera/ngx';
+import { LoadingController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-home',
@@ -51,6 +53,7 @@ export class HomePage implements OnInit {
     private horarioService:HorarioService,
     private authService: AuthService,
     private camera: Camera,
+    public loadingController: LoadingController,
     public router:Router) {
     this.productos = [];
     this.storage.get('_token').then(val =>{
@@ -251,13 +254,10 @@ export class HomePage implements OnInit {
   }
 
   async editslider(img){
-    console.log(img);
+    this.storage.set('imgPreview', img);
     const modal = await this.modalCtrl.create({
       component: AddsliderPage,
       componentProps:[
-        {
-          img:img
-        }
       ]
     });
     await modal.present();

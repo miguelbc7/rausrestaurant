@@ -48,6 +48,13 @@ export class AuthService {
 
   registerUser(value): Observable<Restaurant>{
     console.log(value);
+    if(value.categories){
+      for (let index = 0; index < value.categories.length; index++) {
+        delete value.categories[index].value;
+        value.categories[index].name = value.categories[index].display;
+        delete value.categories[index].display;
+      }
+    }
     delete value.address;
     return this.http.post<Restaurant>(`${this.url}restaurants`, JSON.stringify(value), this.httpOptions)
               .pipe(
