@@ -143,22 +143,30 @@ export class ModalPlanesPage implements OnInit {
   }
 
   add(){
-    if(this.qtyBuy<= 0)
-      this.qtyBuy++;
+    if(!this.qtyBuy)
+      this.qtyBuy = 0;
+    if(this.qtyBuy>= 0)
+      this.qtyBuy= this.qtyBuy+1;
   }
 
   remove(){
-    if(this.qtyBuy >= 0)
-      this.qtyBuy--;
+    if(!this.qtyBuy)
+      this.qtyBuy = 0;
+    if(this.qtyBuy > 0)
+      this.qtyBuy=this.qtyBuy- 1;
   }
 
   add2(){
-    if(this.qtyValue<= 0)
-    this.qtyValue++;
+    if(!this.qtyValue)
+      this.qtyValue = 0;
+    if(this.qtyValue >= 0)
+    this.qtyValue= this.qtyValue+ 1;
   }
 
   remove2(){
-    if(this.qtyValue >= 0)
-    this.qtyValue--;
+    if(!this.qtyValue)
+      this.qtyValue = 0;
+    if(this.qtyValue > 0)
+    this.qtyValue = this.qtyValue - 1;
   }
 }

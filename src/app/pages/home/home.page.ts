@@ -38,13 +38,13 @@ export class HomePage implements OnInit {
   sabado:any = [];
   domingo:any = [];
   slider: any;
-  avatar;
   aImages:any = [];
   ingredientes;
   profile:any = {
     business_name: '',
     direction: '',
   };
+  avatar = 'assets/img/avatar.png';
 
   constructor(private modalCtrl: ModalController, 
     public productosService: ProductosService, 
