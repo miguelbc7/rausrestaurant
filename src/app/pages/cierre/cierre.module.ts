@@ -23,10 +23,10 @@ const routes: Routes = [
     RouterModule.forChild(routes)
   ],
   declarations: [
-    DineromodalPage
+    
   ],
   entryComponents: [
-    DineromodalPage
+    
   ]
 })
 export class CierrePageModule {}
