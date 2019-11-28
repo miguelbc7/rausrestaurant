@@ -141,4 +141,32 @@ export class ModalPlanesPage implements OnInit {
     // recordRow.isEdit = false;
     await this.modalController.dismiss();
   }
+
+  add(){
+    if(!this.qtyBuy)
+      this.qtyBuy = 0;
+    if(this.qtyBuy>= 0)
+      this.qtyBuy= this.qtyBuy+1;
+  }
+
+  remove(){
+    if(!this.qtyBuy)
+      this.qtyBuy = 0;
+    if(this.qtyBuy > 0)
+      this.qtyBuy=this.qtyBuy- 1;
+  }
+
+  add2(){
+    if(!this.qtyValue)
+      this.qtyValue = 0;
+    if(this.qtyValue >= 0)
+    this.qtyValue= this.qtyValue+ 1;
+  }
+
+  remove2(){
+    if(!this.qtyValue)
+      this.qtyValue = 0;
+    if(this.qtyValue > 0)
+    this.qtyValue = this.qtyValue - 1;
+  }
 }

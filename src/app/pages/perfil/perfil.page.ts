@@ -23,6 +23,7 @@ export class PerfilPage implements OnInit {
   email;
   passwordType: string  = 'password';
   passwordShown: any;
+  avatar = 'assets/img/avatar.png';
 
   constructor(private modalCtrl: ModalController, public formBuilder: FormBuilder, private router: Router,
     private authService: AuthService, private storage: Storage, private nativeGeocoder: NativeGeocoder, ) { 
@@ -98,7 +99,8 @@ export class PerfilPage implements OnInit {
     }
 
 
-  async editperfil() {
+  async editperfil(img) {
+    this.storage.set('imgPreview', img);
     const modal = await this.modalCtrl.create({
       component: ModalEditavatarPage,
     });

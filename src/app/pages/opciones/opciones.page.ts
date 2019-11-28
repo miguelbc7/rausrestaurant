@@ -24,6 +24,7 @@ export class OpcionesPage implements OnInit {
     business_name: '',
     direction: '',
   };
+  avatar = 'assets/img/avatar.png';
 
   datas = [
     {

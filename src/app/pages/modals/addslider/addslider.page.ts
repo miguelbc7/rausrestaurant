@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, NavParams } from '@ionic/angular';
 import { BuscarfotoPage} from '../buscarfoto/buscarfoto.page';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-addslider',
@@ -9,12 +10,15 @@ import { BuscarfotoPage} from '../buscarfoto/buscarfoto.page';
 })
 export class AddsliderPage implements OnInit {
 
-  public value = this.navParams.get('img');
+  public value:any ;
 
-  constructor(private modalCtrl: ModalController,  private navParams: NavParams,) { }
+  constructor(private modalCtrl: ModalController,  private navParams: NavParams, private storage: Storage ) { }
 
   ngOnInit() {
-    console.log(this.value);
+    this.storage.get('imgPreview').then(res =>{
+      this.value = res;
+      console.log(this.value);
+    })
   }
 
   async buscarfoto() {
