@@ -24,7 +24,8 @@ export class Register1Page implements OnInit {
   passwordType2: string = "password";
   passwordShown2: boolean = false;
   data: { username: any; password: any; };
-  tags:[{ nombre: "hoteleria"},{ nombre: "restaurante"} ];
+  tags:[{name:'#Comer'},{name:'#Salud'},{name:'#Cuidado Personal'} ,{name:'#Fuel'} ,{name:'#Entretenimiento'},{name:'#Kids'} ,{name:'#Deporte'}
+  ,{name:'#Viajes Hoteles'} , {name:'#Alimentos'}, {name:'#Transporte'}  ];
   categories;
   errorMessage:string = "";
 
@@ -166,16 +167,22 @@ export class Register1Page implements OnInit {
     values.direction = values.address;
     console.log(values);
     this.authService.registerUser(values)
-    .subscribe(res => {
+    .subscribe(async res => {
       console.log(res);
       console.log(res.uid);
-      this.errorMessage = "";
       this.storage.set('_uid', res.uid);
-      this.authService.getToken(res.uid).subscribe(token =>{
-        this.storage.set('_token', token);
-        this.router.navigate(["/welcome"]);
+      this.errorMessage = "";
+      console.log(values)
+      await this.authService.loginUser({email: values.email, password: values.password}).then(resp => {
+        this.errorMessage = "";
+        console.log(resp);
+        this.authService.getToken(resp.user.uid).subscribe(token =>{
+          this.storage.set('_token', token);
+          this.router.navigate(["/home"]);
+        });
+      },err => {
+        console.error(err);
       });
-      // this.router.navigate(["/welcome"]);
     },(err) => {
       console.error(err.error);
       if(err.error){

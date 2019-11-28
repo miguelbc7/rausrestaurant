@@ -44,12 +44,6 @@ export class HomePage implements OnInit {
     direction: '',
   };
 
-  // aImgProd:any = [
-  //   {img: "C:/Users/Jia Qui/Pictures/1.jpg"},
-  //   {img: 'C:/Users/Jia Qui/Pictures/2.png'},
-  //   {img: 'C:/Users/Jia Qui/Pictures/3.jpg'},
-  // ];
-
   constructor(private modalCtrl: ModalController, 
     public productosService: ProductosService, 
     private storage: Storage, 
