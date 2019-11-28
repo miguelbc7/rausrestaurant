@@ -34,7 +34,7 @@ export class PerfilPage implements OnInit {
             Validators.maxLength(300),
             Validators.minLength(5)
           ])],
-          address: ['', Validators.compose([
+          direction: ['', Validators.compose([
             Validators.required,
             Validators.maxLength(300),
             Validators.minLength(5)
@@ -74,8 +74,9 @@ export class PerfilPage implements OnInit {
         { type: 'minlength', message: 'Debe ser mayor de 5 caracteres.' },
         { type: 'maxlength', message: 'Debe ser menor de 300 caracteres.' }
       ],
-      'address': [
+      'direction': [
         { type: 'required', message: 'Debe ingresar una dirección.' },
+        { type: 'minlength', message: 'Debe ser mayor de 5 caracteres.' },
       ],
       'phone': [
         { type: 'required', message: 'Debe ingresar un Teléfono.' },
@@ -99,8 +100,9 @@ export class PerfilPage implements OnInit {
     }
 
 
-  async editperfil(img) {
-    this.storage.set('imgPreview', img);
+  async editperfil() {
+    console.log(this.avatar);
+    this.storage.set('imgPreview', this.avatar);
     const modal = await this.modalCtrl.create({
       component: ModalEditavatarPage,
     });

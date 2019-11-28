@@ -11,11 +11,11 @@
         </ion-button>
   </div>
   <div class="boxImg">
-      <img class="imgPreviuw" src="assets/img/rest1.jpg" alt="previuw">
+      <img class="imgPreviuw" src="{{avatar}}" alt="previuw">
   </div>
     <ion-row class="btnNuevoGuardar">
         <ion-col size="12" class="ion-text-center">
-            <ion-button class="font15" color="bluedark" >Buscar</ion-button>
+            <ion-button class="font15" color="bluedark" (click)="pickImage()" >Buscar</ion-button>
         </ion-col>
     </ion-row>
 </ion-content>

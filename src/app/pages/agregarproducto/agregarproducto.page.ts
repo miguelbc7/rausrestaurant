@@ -62,14 +62,14 @@ export class AgregarproductoPage implements OnInit {
             Validators.minLength(10)
           ])],
           ingredientes: [this.ingredientes, Validators.compose([
-            Validators.required,
-            Validators.maxLength(300),
-            Validators.minLength(5)
+            // Validators.required,
+            // Validators.maxLength(300),
+            // Validators.minLength(5)
           ])],
           no_ingredientes: [this.no_ingredientes, Validators.compose([
-            Validators.required,
-            Validators.maxLength(300),
-            Validators.minLength(5)
+            // Validators.required,
+            // Validators.maxLength(300),
+            // Validators.minLength(5)
           ])],
           nutritional_values: [this.nutritional_values],
           fat: [this.name, Validators.compose([
@@ -232,6 +232,7 @@ export class AgregarproductoPage implements OnInit {
 
   async addslider(img) {
     console.log(img);
+    this.storage.set('imgPreview', img);
     console.log('addslier');
     const modal = await this.modalCtrl.create({
       component: AddsliderPage,
@@ -271,7 +272,7 @@ export class AgregarproductoPage implements OnInit {
         if(this.aImages.length > 0){
         await  this.uploadImage(data._id);
         }else{
-          await this.presentPromocion(data._id);
+          // await this.presentPromocion(data._id);
           await this.router.navigate(['home']);
         }
      }, err => {
@@ -291,7 +292,7 @@ export class AgregarproductoPage implements OnInit {
           console.log('imagenes1')
           await this.uploadImage(this.productos._id);
         }else{
-           await this.presentPromocion(this.productos._id);
+          //  await this.presentPromocion(this.productos._id);
            await this.router.navigate(['home']);
         }
       }, err => {
@@ -311,7 +312,7 @@ export class AgregarproductoPage implements OnInit {
       //  this.productos = data.products;
       console.log('uploadimage data');
       console.log(data);
-      await this.presentPromocion(id);
+      // await this.presentPromocion(id);
       await this.router.navigate(['home']);
       
   }, err => {

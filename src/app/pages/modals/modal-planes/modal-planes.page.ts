@@ -15,9 +15,9 @@ export class ModalPlanesPage implements OnInit {
   from: string;
   to: string;
   qtyValue: number;
-  value: string;
+  value: number;
   qtyBuy: number;
-  buy: string;
+  buy: number;
   status:boolean = false;
   public type = this.navParams.get('type');
   public item = this.navParams.get('data');
@@ -72,10 +72,10 @@ export class ModalPlanesPage implements OnInit {
           Validators.required,
         ])],
         buy: ['', Validators.compose([
-          Validators.required,
+          // Validators.required,
         ])],
         qtyBuy: ['', Validators.compose([
-          Validators.required,
+          // Validators.required,
         ])],
         status: [false],
     });
@@ -112,9 +112,9 @@ export class ModalPlanesPage implements OnInit {
       this.from = '';
       this.to = '';
       this.qtyValue = 0;
-      this.value = '';
+      this.value = 0;
       this.qtyBuy = 0;
-      this.buy = '';
+      this.buy = 0;
       this.status = false;
      await this.modalController.dismiss();
     })
@@ -168,5 +168,51 @@ export class ModalPlanesPage implements OnInit {
       this.qtyValue = 0;
     if(this.qtyValue > 0)
     this.qtyValue = this.qtyValue - 1;
+  }
+
+  validValue(type)
+  {
+    console.log(type);
+    if(type == 'value'){
+      console.log('s');
+      console.log(this.loyaltyForm.valid);
+      this.loyaltyForm.controls["buy"].clearValidators();
+      this.loyaltyForm.controls["qtyBuy"].clearValidators();
+      this.loyaltyForm.controls["buy"].updateValueAndValidity({onlySelf:false, emitEvent:true});
+      this.loyaltyForm.controls["qtyBuy"].updateValueAndValidity({onlySelf:false, emitEvent:true});
+
+      if( (!this.value  || this.value == 0 ) && (!this.qtyValue   || this.qtyValue == 0 ) )
+      {
+        console.log('d')
+        console.log(this.loyaltyForm.valid);
+        this.loyaltyForm.controls["value"].clearValidators();
+        this.loyaltyForm.controls["qtyValue"].clearValidators();
+        this.loyaltyForm.controls["buy"].updateValueAndValidity({onlySelf:false, emitEvent:true});
+        this.loyaltyForm.controls["qtyBuy"].updateValueAndValidity({onlySelf:false, emitEvent:true});
+      }
+    }
+
+    if(type == 'buy'){
+      console.log('ss');
+      console.log(this.loyaltyForm.valid);
+      this.loyaltyForm.controls["buy"].setValidators([Validators.required]);
+      this.loyaltyForm.controls["qtyBuy"].setValidators([Validators.required]);
+      this.loyaltyForm.controls["value"].clearValidators();
+      this.loyaltyForm.controls["qtyValue"].clearValidators();
+      this.loyaltyForm.controls["buy"].updateValueAndValidity({onlySelf:false, emitEvent:true});
+      this.loyaltyForm.controls["qtyBuy"].updateValueAndValidity({onlySelf:false, emitEvent:true});
+      this.loyaltyForm.controls["value"].updateValueAndValidity({onlySelf:false, emitEvent:true});
+      this.loyaltyForm.controls["qtyValue"].updateValueAndValidity({onlySelf:false, emitEvent:true});
+
+      if( (!this.buy  || this.buy == 0 ) && (!this.qtyBuy   || this.qtyBuy == 0 ) )
+      {
+        console.log('dd')
+        console.log(this.loyaltyForm.valid);
+        this.loyaltyForm.controls["buy"].clearValidators();
+        this.loyaltyForm.controls["qtyBuy"].clearValidators();
+        this.loyaltyForm.controls["buy"].updateValueAndValidity({onlySelf:false, emitEvent:true});
+        this.loyaltyForm.controls["qtyBuy"].updateValueAndValidity({onlySelf:false, emitEvent:true});
+      }
+    }
   }
 }
