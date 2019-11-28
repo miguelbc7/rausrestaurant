@@ -132,16 +132,17 @@
           [(ngModel)]="categories" 
           [placeholder]="' Agregar Tag'"
           [secondaryPlaceholder]="'#hostelería #restauración'" 
-          [editable]='true' 
           [maxItems]='3'  
           [separatorKeyCodes]="[32, 138]"
           theme='minimal'
-          [displayBy]="'name'"
           required="true"
+          [onlyFromAutocomplete]="true"
         >
         <tag-input-dropdown 
-        [autocompleteItems]="[{name:'#restaurante'},{name:'#hoteleria'}]"
+        [autocompleteItems]="[{name:'#Comer'},{name:'#Salud'},{name:'#Cuidado Personal'} ,{name:'#Fuel'} ,{name:'#Entretenimiento'},{name:'#Kids'} ,{name:'#Deporte'}
+        ,{name:'#Viajes Hoteles'} , {name:'#Alimentos'}, {name:'#Transporte'} ]"
           [displayBy]="'name'"
+          [showDropdownIfEmpty]="true"
         >
         </tag-input-dropdown>
       </tag-input>

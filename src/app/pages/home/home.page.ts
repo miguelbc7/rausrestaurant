@@ -44,12 +44,6 @@ export class HomePage implements OnInit {
     direction: '',
   };
 
-  // aImgProd:any = [
-  //   {img: "C:/Users/Jia Qui/Pictures/1.jpg"},
-  //   {img: 'C:/Users/Jia Qui/Pictures/2.png'},
-  //   {img: 'C:/Users/Jia Qui/Pictures/3.jpg'},
-  // ];
-
   constructor(private modalCtrl: ModalController, 
     public productosService: ProductosService, 
     private storage: Storage, 
@@ -182,7 +176,6 @@ export class HomePage implements OnInit {
       response.subscribe((data) => {
         console.log(data);
         this.productos =data.products;
-        console.log(this.productos[0].images[0].img)
       }, err => {
         console.log(err);
       });

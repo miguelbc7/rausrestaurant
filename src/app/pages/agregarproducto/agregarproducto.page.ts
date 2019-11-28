@@ -193,6 +193,7 @@ export class AgregarproductoPage implements OnInit {
         this.wear = res.wear;
         this.delivery = res.delivery;
         this.status = res.status;
+        this.aImages = res.images;
       }
 
       });
@@ -269,9 +270,10 @@ export class AgregarproductoPage implements OnInit {
         console.log(data);
         if(this.aImages.length > 0){
         await  this.uploadImage(data._id);
+        }else{
+          await this.presentPromocion(data._id);
+          await this.router.navigate(['home']);
         }
-         this.presentPromocion(data._id);
-         this.router.navigate(['home']);
      }, err => {
       console.log(err);
     });
@@ -287,10 +289,11 @@ export class AgregarproductoPage implements OnInit {
         console.log(this.productos._id);
         if(this.aImages.length > 0){
           console.log('imagenes1')
-         await this.uploadImage(this.productos._id);
+          await this.uploadImage(this.productos._id);
+        }else{
+           await this.presentPromocion(this.productos._id);
+           await this.router.navigate(['home']);
         }
-          this.presentPromocion(this.productos._id);
-          this.router.navigate(['home']);
       }, err => {
       console.log(err);
     });
@@ -300,16 +303,16 @@ export class AgregarproductoPage implements OnInit {
    }
  }
 
- async uploadImage(id){
+  uploadImage(id){
    console.log('uploadimage');
   console.log(this.aImages);
-  await this.productosService.uploadItem(id, this.aImages).then((response) => {
-    response.subscribe((data) => {
+   this.productosService.uploadItem(id, this.aImages).then((response) => {
+    response.subscribe(async (data) => {
       //  this.productos = data.products;
       console.log('uploadimage data');
       console.log(data);
-      // this.presentPromocion(data.products.id);
-      // this.router.navigate(['home']);
+      await this.presentPromocion(id);
+      await this.router.navigate(['home']);
       
   }, err => {
       console.error(err);
