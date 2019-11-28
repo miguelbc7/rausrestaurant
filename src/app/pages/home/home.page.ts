@@ -18,7 +18,6 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { Camera, CameraOptions } from '@ionic-native/Camera/ngx';
 
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
@@ -45,6 +44,12 @@ export class HomePage implements OnInit {
     direction: '',
   };
 
+  // aImgProd:any = [
+  //   {img: "C:/Users/Jia Qui/Pictures/1.jpg"},
+  //   {img: 'C:/Users/Jia Qui/Pictures/2.png'},
+  //   {img: 'C:/Users/Jia Qui/Pictures/3.jpg'},
+  // ];
+
   constructor(private modalCtrl: ModalController, 
     public productosService: ProductosService, 
     private storage: Storage, 
@@ -67,13 +72,12 @@ export class HomePage implements OnInit {
     this.getProfile();
    }
   ngOnInit() {
-  
+    
   }
 
   getProfile(){
     this.authService.getProfile().then(res =>{
       res.subscribe(data =>{
-        console.log(data);
         this.profile.business_name = data.business_name;
         this.profile.direction = data.direction;
       })
@@ -94,8 +98,10 @@ export class HomePage implements OnInit {
       this.aImages.push(base64Image) ;
         this.sliderService.create_NewItem({image:base64Image}).then((response) => {
           response.subscribe((data) => {
+            console.log(data);
+            this.getSlider();
         }, err => {
-            console.log(err);
+            console.error(err);
           });
        });
     
@@ -175,7 +181,8 @@ export class HomePage implements OnInit {
      this.productosService.getList().then(response => {
       response.subscribe((data) => {
         console.log(data);
-        this.productos = data.products;
+        this.productos =data.products;
+        console.log(this.productos[0].images[0].img)
       }, err => {
         console.log(err);
       });
@@ -192,14 +199,12 @@ export class HomePage implements OnInit {
     this.domingo = [];
      this.horarioService.getList().then(response => {
       response.subscribe((data) => {
-        console.log(data);
         if(data.schedules.schedules){
           for(let index = 0 ; index < data.schedules.schedules.length; index++){
             
               switch(data.schedules.schedules[index].name){
                 case('Lunes'):
                 this.lunes.push(data.schedules.schedules[index]);
-                console.log(this.lunes);
                   break;
                 case('Martes'):
                   this.martes.push(data.schedules.schedules[index]);
@@ -212,7 +217,6 @@ export class HomePage implements OnInit {
                   break;
                 case('Viernes'):
                   this.viernes.push(data.schedules.schedules[index]);
-                  console.log(this.viernes);
                   break;
                 case('Sabado'):
                 this.sabado.push(data.schedules.schedules[index]);

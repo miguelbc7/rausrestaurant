@@ -23,7 +23,6 @@ const routes: Routes = [
     RouterModule.forChild(routes)
   ],
   declarations: [
-    CierrePage,
     DineromodalPage
   ],
   entryComponents: [

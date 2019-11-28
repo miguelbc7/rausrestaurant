@@ -21,38 +21,40 @@ export class PerfilPage implements OnInit {
   profile:any ={};
   address:any = 'Carrer de Aribau 655. 08021. Barcelona';
   email;
+  passwordType: string  = 'password';
+  passwordShown: any;
 
   constructor(private modalCtrl: ModalController, public formBuilder: FormBuilder, private router: Router,
     private authService: AuthService, private storage: Storage, private nativeGeocoder: NativeGeocoder, ) { 
 
       this.profileForm = this.formBuilder.group({
-        business_name: ['', Validators.compose([
-          Validators.required,
-          Validators.maxLength(300),
-          Validators.minLength(5)
-        ])],
-        address: ['', Validators.compose([
-          Validators.required,
-          Validators.maxLength(300),
-          Validators.minLength(5)
-        ])],
-        phone: ['', Validators.compose([
-          Validators.required,
-          Validators.maxLength(20)
-        ])],
-        email: ['', Validators.compose([
-          Validators.required,
-          Validators.maxLength(30),
-          Validators.minLength(5),
-          Validators.pattern('[A-Za-z0-9._%+-]{2,}@[a-zA-Z-_.]{2,}[.]{1}[a-zA-Z]{2,}'),
-        ])],
-        password: ['', Validators.compose([
-          Validators.required,
-          Validators.maxLength(15),
-          Validators.minLength(8),
-          Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&.])[A-Za-z\d$@$!%*?&.].{8,15}')
-        ])],
-    });
+          business_name: ['', Validators.compose([
+            Validators.required,
+            Validators.maxLength(300),
+            Validators.minLength(5)
+          ])],
+          address: ['', Validators.compose([
+            Validators.required,
+            Validators.maxLength(300),
+            Validators.minLength(5)
+          ])],
+          phone: ['', Validators.compose([
+            Validators.required,
+            Validators.maxLength(20)
+          ])],
+          email: ['', Validators.compose([
+            // Validators.required,
+            Validators.maxLength(30),
+            // Validators.minLength(5),
+            Validators.pattern('[A-Za-z0-9._%+-]{2,}@[a-zA-Z-_.]{2,}[.]{1}[a-zA-Z]{2,}'),
+          ])],
+          password: ['', Validators.compose([
+            // Validators.required,
+            // Validators.maxLength(15),
+            // Validators.minLength(8),
+            Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&.])[A-Za-z\d$@$!%*?&.].{7,15}')
+          ])],
+      });
 
     }
 
@@ -146,5 +148,14 @@ export class PerfilPage implements OnInit {
     console.error(error);
   })
  }
+ public togglePassword() {
+  if(this.passwordShown){
+    this.passwordShown = false;
+    this.passwordType = 'password';
+  }else {
+    this.passwordShown = true;
+    this.passwordType = 'text';
+  }
+}
 
 }

@@ -134,11 +134,8 @@ export class OpcionesPage implements OnInit {
     this.saldoService.read_Items().then(data => {
       data.subscribe(e => {
        this.data = e;
-       console.log(this.data);
        let valor = 0;
            for(let i = 0; i<this.data.length; i++){
-             console.log(this.data[i].payload.doc.data().value);
-             console.log(this.data[i].payload.doc.data());
               valor = Number(valor) + Number(this.data[i].payload.doc.data().value);    
             }
             this.value = valor;
@@ -177,7 +174,6 @@ export class OpcionesPage implements OnInit {
   getProfile(){
     this.authService.getProfile().then(res =>{
       res.subscribe(data =>{
-        console.log(data);
         this.profile.business_name = data.business_name;
         this.profile.direction = data.direction;
       })
