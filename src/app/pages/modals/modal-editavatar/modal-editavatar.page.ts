@@ -15,6 +15,7 @@ export class ModalEditavatarPage implements OnInit {
   public value:any = 'assets/img/avatar.png';
   aImages: any = [];
   avatar;
+  image;
 
   constructor(private modalCtrl: ModalController, private storage: Storage,private camera: Camera,private authService: AuthService, public platform: Platform ) { }
 
@@ -29,7 +30,7 @@ export class ModalEditavatarPage implements OnInit {
     await this.modalCtrl.dismiss();
   }
 
- pickImage() {
+ pickImage(str:any) {
    
     // let destinationType = this.camera.DestinationType.FILE_URI;
     // if(this.platform.is('ios')){
@@ -49,9 +50,15 @@ export class ModalEditavatarPage implements OnInit {
       // let base64Image = 'data:image/jpeg;base64,' + imageData.subString(23);
       // this.avatar = base64Image;
       // this.authService.updateAvatar(base64Image);
-      
+
       this.avatar = imageData;
-      this.authService.updateAvatar(imageData);
+
+      const formData = new FormData();
+      this.image=str.target.files[0];
+      formData.append('files[]', this.image);
+      
+      console.log(formData,this.image);
+      this.authService.updateAvatar(formData);
     }, (err) => {
       // Handle error
       console.error(err);
