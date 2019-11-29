@@ -21,8 +21,9 @@
           
         </ion-col>
         <ion-col class="ion-justify-center ion-align-self-center ion-text-center">
-            <ion-icon class="font20" name="megaphone" (click)="presentPromocion()"></ion-icon>
-            <div class="font8">Promoción</div>  
+            <!-- <ion-icon class="font20" name="megaphone" (click)="presentPromocion()"></ion-icon> -->
+            <ion-icon  class="promo-icon" src="assets/img/icon/parlantepromo.svg" (click)="presentPromocion()"></ion-icon>
+            <div class="font8 promo-mg">Promoción</div>  
         </ion-col>
       </ion-row>
       <ion-row>
@@ -73,7 +74,7 @@
             formControlName="description"
             [(ngModel)]="description"
             class="font11 ion-no-padding textareaCustom"
-            rows="7" 
+            rows="8" 
             cols="20" 
             placeholder="Descripción: Escribe un mensaje descriptivo y motivador, ej: pasta fresca con una salsa de verduras y algas, muy nutritiva y demasiado rica!">
           </ion-textarea>
@@ -100,7 +101,7 @@
               formControlName="no_ingredientes"
               [(ngModel)]="no_ingredientes"
                 class="font11"
-                rows="7" 
+                rows="8" 
                 cols="20" 
                 placeholder="Alergenos: Escribe aca todos los ingredientes que puedan causar alergias o reacciones en personas sensibles a ciertas sustancias ej: Gluten, Nueces, Cacahuates, Mariscos">
               </ion-textarea>

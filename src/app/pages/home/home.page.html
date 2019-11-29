@@ -48,12 +48,12 @@
               <ion-col size="12">
                   <p class="ion-text-center ion-no-margin font11 pDirection">
                     {{profile.direction}} 
-                      <ion-icon color="bluedark" name="create" routerLink="/perfil"></ion-icon>
+                      <ion-icon class="font16" color="bluedark" name="create" routerLink="/perfil"></ion-icon>
                   </p>
               </ion-col>
               <ion-col size="12">
                   <p class="ion-text-center ion-no-margin">
-                      <ion-icon class="font20" color="bluedark" name="time"></ion-icon>
+                      <ion-icon class="font24" color="bluedark" name="time"></ion-icon>
                   </p>
                   <p class="ion-text-center ion-no-margin font12 blue-dark2">
                       Presiona para modificar los horarios
@@ -147,11 +147,14 @@
                 </div>
             </ion-col>
           </ion-row>
-          <ion-row>
-            <ion-col class="font12 ion-text-center blue-dark2">
-              
-                <span  (click)="addProduct()"><ion-icon color="bluedark" name="add-circle-outline"></ion-icon> Agregar productos</span>
-              
+          <ion-row class="ion-align-items-center">
+            <ion-col class="font12 ion-text-center blue-dark2"  (click)="addProduct()">
+              <ion-button fill="clear" color="bluedark" class="blue-dark">
+                <ion-icon color="bluedark" class="font25" slot="start" name="add-circle-outline"></ion-icon>
+                Agregar productos
+              </ion-button>
+              <!-- <ion-icon class="font20" color="bluedark" name="add-circle-outline"></ion-icon> 
+              <p class="my-0">Agregar productos</p> -->
             </ion-col>
           </ion-row>
   </ion-grid>

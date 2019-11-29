@@ -1,19 +1,18 @@
-.iconHist{
-    position: absolute;
-    left: 45%;
-    font-size: 45px;
-}
-.mt-config{
-    margin-top: -20pt;
-}
-.f-historial{
-    margin-top:35px;
-    color:#89acdb;
-}
 .iconBack{
-    position: relative;
+    position: absolute;
+    top: 10%;
     font-size: 45px;
-    left: 2%;
+    left: 5%;
+}
+.iconHist{
+    font-size: 50pt;
+}
+// .mt-config{
+//     margin-top: -20pt;
+// }
+.f-historial{
+    margin-top:15px;
+    color:#89acdb;
 }
 .card-expandable{
     box-shadow: none !important;
@@ -141,6 +140,7 @@
 }
 .boxLogo{
     margin-top: 30pt;
+    margin-bottom: 30px;
 }
 .logoImg{
     width: 25%;
@@ -148,6 +148,3 @@
 .derechos-reserv{
     margin: 0;
 }
-// .content-expandable{
-//     height: 78px;
-// }
