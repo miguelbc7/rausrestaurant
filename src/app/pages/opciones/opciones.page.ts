@@ -27,6 +27,8 @@ export class OpcionesPage implements OnInit {
   };
   avatar = 'assets/img/avatar.png';
 
+  fontSize = 'font60';
+
   datas = [
     {
       status: false,

@@ -63,7 +63,6 @@ export class HomePage implements OnInit {
 
    ionViewWillEnter(){
     // this.ngOnInit();
-    this.loading.showLoader();
     this.getProfile();
     this.getSlider();
     this.getListHorario();
@@ -181,6 +180,7 @@ export class HomePage implements OnInit {
    
    getListProductos()
    {
+    this.loading.present(10000);
      this.productosService.getList().then(response => {
        console.log('response list prod')
        response.subscribe((data) => {

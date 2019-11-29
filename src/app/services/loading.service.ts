@@ -9,10 +9,10 @@ export class LoadingService {
 
   constructor(public loadingController: LoadingController) { }
 
-  async present() {
+  async present(duration) {
     this.isLoading = true;
     return await this.loadingController.create({
-      duration: 5000,
+      duration: duration,
     }).then(a => {
       a.present().then(() => {
         console.log('presented');
@@ -46,8 +46,9 @@ export class LoadingService {
  
   async hideLoader() {
     console.log('hide');
-    setTimeout(() => {
-      this.loadingController.dismiss();
+    return await setTimeout(() => {
+      console.log('dismmiss');
+     this.loadingController.dismiss();
     }, 1000);
   }
 }
