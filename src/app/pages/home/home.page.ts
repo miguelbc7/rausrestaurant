@@ -72,6 +72,11 @@ export class HomePage implements OnInit {
     
   }
 
+  goToOpcion()
+  {
+    this.router.navigate(['/opciones']);
+  }
+
   getProfile(){
     this.authService.getProfile().then(res =>{
       res.subscribe(data =>{

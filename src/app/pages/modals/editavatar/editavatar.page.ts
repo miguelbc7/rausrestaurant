@@ -10,7 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class EditavatarPage implements OnInit {
 
-  avatar = 'assets/img/rest1.jpg';
+  avatar = 'assets/img/avatar.png';
 
   constructor(private modalCtrl: ModalController, private camera: Camera,private authService:AuthService ) { }
 

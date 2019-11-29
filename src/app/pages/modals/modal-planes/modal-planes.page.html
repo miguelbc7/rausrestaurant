@@ -58,15 +58,15 @@
   <ion-row>
     <ion-col size="6" class="ion-text-center" >
         <div class="inline">
-            <ion-icon class="iconMargin" name="remove" (click)="remove2()"></ion-icon>
-            <ion-input  [(ngModel)]="qtyValue"  type="number" min="0" formControlName="qtyValue" class="inputCustom2 ion-text-center"></ion-input>
-            <ion-icon class="iconMargin" name="add" (click)="add2()"></ion-icon>
+            <ion-icon class="iconMargin" name="remove" (keyup)="validValue('value')" (click)="remove2()"></ion-icon>
+            <ion-input  [(ngModel)]="qtyValue" (keyup)="validValue('value')" type="number" min="0" formControlName="qtyValue" class="inputCustom2 ion-text-center"></ion-input>
+            <ion-icon class="iconMargin" name="add" (keyup)="validValue('value')" (click)="add2()"></ion-icon>
         </div>
         <span class="ml-1 font10">por cada</span>
     </ion-col>
       <ion-col size="6" class="ion-text-left" >
         <div class="inline ml-2">
-          <ion-input  [(ngModel)]="value"  type="number" min="0"  formControlName="value" class="inputCustom2 ion-text-center"></ion-input>
+          <ion-input  [(ngModel)]="value" (keyup)="validValue('value')"  type="number" min="0"  formControlName="value" class="inputCustom2 ion-text-center"></ion-input>
         </div>
         <span class="ml-2 font10">euros</span>
       </ion-col>
@@ -88,16 +88,16 @@
   <ion-row>
       <ion-col size="6" class="ion-text-center" >
           <div class="inline">
-              <ion-icon class="iconMargin" name="remove" (click)=" remove() "></ion-icon>
-              <ion-input  [(ngModel)]="qtyBuy" type="number" min="0"  formControlName="qtyBuy" class="inputCustom2 ion-text-center"></ion-input>
-              <ion-icon class="iconMargin" name="add" (click)="  add() "></ion-icon>
+              <ion-icon class="iconMargin" name="remove" (keyup)="validValue('buy')" (click)=" remove() "></ion-icon>
+              <ion-input  [(ngModel)]="qtyBuy" type="number" (keyup)="validValue('buy')" min="0"  formControlName="qtyBuy" class="inputCustom2 ion-text-center"></ion-input>
+              <ion-icon class="iconMargin" name="add" (keyup)="validValue('buy')" (click)="  add() "></ion-icon>
           </div>
           <span class="ml-1 font10">por cada</span>
         </ion-col>
         
         <ion-col size="6" class="ion-text-left" >
           <div class="inline ml-2">
-            <ion-input  [(ngModel)]="buy" type="number" min="0"  formControlName="buy" class="inputCustom2 ion-text-center"></ion-input>
+            <ion-input  [(ngModel)]="buy" type="number" min="0" (keyup)="validValue('buy')" formControlName="buy" class="inputCustom2 ion-text-center"></ion-input>
           </div>
           <span class="ml-2 font10">compras</span>
         </ion-col>
