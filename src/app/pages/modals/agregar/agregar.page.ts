@@ -12,7 +12,7 @@ import { CreditCardService } from 'src/app/services/credit-card.service';
 export class AgregarPage implements OnInit {
 
   data:any;
-  value:number;
+  value:string;
   public sum : number = 0;
   // public total(items){
   //   this.sum = 0;
@@ -22,6 +22,8 @@ export class AgregarPage implements OnInit {
   //   return this.sum;
   // }
   erroMessage = '';
+
+  fontSize='32';
 
 
   constructor(private modalCtrl: ModalController , private creditCardService:CreditCardService) { }
@@ -45,7 +47,7 @@ export class AgregarPage implements OnInit {
 
   async openConfirmarAgregar(cardID) {
     console.log(this.value);
-    if(this.value > 0){
+    if(this.value.length > 0){
       this.erroMessage = '';
       await this.modalCtrl.dismiss();
       const modal = await this.modalCtrl.create({
@@ -57,7 +59,7 @@ export class AgregarPage implements OnInit {
         cssClass: 'sizeModalConfirmacion'
       });
       modal.onDidDismiss().then(data =>{
-        this.value = 0;
+        this.value = '';
       });
       await modal.present();
     }else{
@@ -68,5 +70,16 @@ export class AgregarPage implements OnInit {
   RemoveRecord(rowID){
     this.creditCardService.delete_Item(rowID);
   }
+
+  inputSize(){
+    // var x=document.getElementById("inputTarjetaValue");
+    //     var initialSize= 25-this.value.length;
+    //     initialSize=initialSize<=10?10:initialSize;
+    // x.style.fontSize = initialSize + "px";
+
+    if (this.value.length >= 4 ){
+      this.fontSize = '20';
+    }
+    }
 
 }

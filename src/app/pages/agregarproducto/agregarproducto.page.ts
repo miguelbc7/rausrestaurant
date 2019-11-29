@@ -118,12 +118,12 @@ export class AgregarproductoPage implements OnInit {
         { type: 'maxlength', message: 'Debe ser menor de 300 caracteres.' }
       ],
       'ingredientes': [
-        { type: 'required', message: 'Debe ingresar los ingredientes.' },
+        { type: 'required', message: 'Debe ingresar al menos un ingrediente.' },
         { type: 'minlength', message: 'Debe ser menor de 5 caracteres.' },
         { type: 'maxlength', message: 'Debe ser menor de 300 caracteres.' }
       ],
       'no_ingredientes': [
-        { type: 'required', message: 'Debe ingresar los alergenos.' },
+        { type: 'required', message: 'Debe ingresar al menos un alergeno.' },
         { type: 'minlength', message: 'Debe ser menor de 5 caracteres.' },
         { type: 'maxlength', message: 'Debe ser menor de 300 caracteres.' }
       ],

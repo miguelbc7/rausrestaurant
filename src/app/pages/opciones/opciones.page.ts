@@ -51,8 +51,8 @@ export class OpcionesPage implements OnInit {
     {
       status: false,
       name: 'Fidelización',
-      iconoazul: 'assets/img/icon/menu/cierreazul.svg',
-      iconogris: 'assets/img/icon/menu/cierregris.svg'
+      iconoazul: 'assets/img/icon/menu/iconofidelizacion.svg',
+      iconogris: 'assets/img/icon/menu/iconofidelizacion.svg'
     },
     {
       status: false,
@@ -85,6 +85,7 @@ export class OpcionesPage implements OnInit {
   ionViewWillEnter(){
     this.loading.showLoader();
     this.getProfile();
+
    }
 
   changeIcon(index: number){
@@ -145,6 +146,12 @@ export class OpcionesPage implements OnInit {
             }
             this.value = valor;
             this.decimal = this.value.toFixed(2).toString().split('.'); 
+            console.log(this.decimal[0]);
+            if(this.decimal[0].length >= 5){
+              this.fontSize = 'font27';
+            }else if(this.decimal[0].length >= 3){
+              this.fontSize = 'font40';
+            }
      })
    });
   }

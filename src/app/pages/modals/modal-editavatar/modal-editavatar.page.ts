@@ -38,6 +38,7 @@ export class ModalEditavatarPage implements OnInit {
     const options: CameraOptions = {
       quality: 100,
       sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+      // destinationType: destinationType,
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE
@@ -45,9 +46,12 @@ export class ModalEditavatarPage implements OnInit {
     this.camera.getPicture(options).then((imageData) => {
       // imageData is either a base64 encoded string or a file URI
       // If it's base64 (DATA_URL):
-      let base64Image = 'data:image/jpeg;base64,' + imageData.subString(23);
-      this.avatar = base64Image;
-      this.authService.updateAvatar(base64Image);
+      // let base64Image = 'data:image/jpeg;base64,' + imageData.subString(23);
+      // this.avatar = base64Image;
+      // this.authService.updateAvatar(base64Image);
+      
+      this.avatar = imageData;
+      this.authService.updateAvatar(imageData);
     }, (err) => {
       // Handle error
       console.error(err);
