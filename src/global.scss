@@ -26,19 +26,35 @@
 @import "~@ionic/angular/css/flex-utils.css";
 
 
-.scroll-content
-  {
-    padding-bottom: 0 !important;
-  }
-
-
-
 .error-message
 {
   color:#c70000;
   font-size: 14px;
   margin-left: 10px;
   margin-top: 10px;
+}
+
+.titleHeader {
+    font-size: 18pt;
+    color:#657b9f;
+}
+
+.iconHeader {
+    font-size: 50pt;
+    color:#4e5d6a;
+}
+
+.iconHeader2 {
+   font-size: 70pt;
+    color:#4e5d6a; 
+}
+
+.backHeader{
+    position: absolute;
+    top: 2%;
+    font-size: 45px;
+    left: 5%;
+    z-index: 2;
 }
 
 .bold {
@@ -343,7 +359,7 @@
 }
 
 .decimalCarta {
-    position: absolute;
+    position: relative;
     top: 5px;
 }
 
@@ -599,6 +615,13 @@ ion-textarea.textareaCustom{
 
 
 // Tamaño de modales Variados
+
+.modalBack {
+    font-size: 25pt;
+    position: absolute;
+    // margin-top: 30px;
+    z-index: 2;
+}
 
 .sizeCodigo .modal-wrapper {
     height: 200px;

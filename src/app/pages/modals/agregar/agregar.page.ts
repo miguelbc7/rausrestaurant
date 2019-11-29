@@ -83,4 +83,8 @@ export class AgregarPage implements OnInit {
     // }
     }
 
+    async closeModal() {
+    await this.modalCtrl.dismiss();
+  }
+
 }

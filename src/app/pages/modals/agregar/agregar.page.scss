@@ -4,7 +4,7 @@ ion-content{
 }
 
 .saldoModal {
-    font-size: 60pt;
+    font-size: 50pt;
     color: #fff;
 }
 
@@ -29,4 +29,11 @@ ion-item.itemSaldo {
 
 .focusLabel:target {
     background-color: #222;
+}
+
+.euro {
+    position: absolute;
+    right: 10px;
+    font-size: 30pt;
+    color:#fff;
 }

@@ -34,49 +34,57 @@ export class OpcionesPage implements OnInit {
       status: false,
       name: 'Cierre día',
       iconoazul: 'assets/img/icon/menu/cierreazul.svg',
-      iconogris: 'assets/img/icon/menu/cierregris.svg'
+      iconogris: 'assets/img/icon/menu/cierregris.svg',
+      class: 'iconButton'
     },
     {
       status: false,
       name: 'Agregar',
       iconoazul: 'assets/img/icon/menu/agregarazul.svg',
-      iconogris: 'assets/img/icon/menu/agregargris.svg'
+      iconogris: 'assets/img/icon/menu/agregargris.svg',
+      class: 'iconButton'
     },
     {
       status: false,
       name: 'Historial',
       iconoazul: 'assets/img/icon/menu/historialazul.svg',
-      iconogris: 'assets/img/icon/menu/historialgris.svg'
+      iconogris: 'assets/img/icon/menu/historialgris.svg',
+      class: 'iconButton'
       },
     {
       status: false,
       name: 'Fidelización',
       iconoazul: 'assets/img/icon/menu/iconofidelizacion.svg',
-      iconogris: 'assets/img/icon/menu/iconofidelizacion.svg'
+      iconogris: 'assets/img/icon/menu/iconofidelizacion.svg',
+      class: 'iconButton2'
     },
     {
       status: false,
       name: 'Analíticas',
       iconoazul: 'assets/img/icon/menu/analiticasazul.svg',
-      iconogris: 'assets/img/icon/menu/analiticasgris.svg'
+      iconogris: 'assets/img/icon/menu/analiticasgris.svg',
+      class: 'iconButton'
     },
     {
       status: false,
       name: 'Perfil',
       iconoazul: 'assets/img/icon/menu/perfilazul.svg',
-      iconogris: 'assets/img/icon/menu/perfilgris.svg'
+      iconogris: 'assets/img/icon/menu/perfilgris.svg',
+      class: 'iconButton'
       },
     {
       status: false,
       name: 'Config',
       iconoazul: 'assets/img/icon/menu/configuracionazul.svg',
-      iconogris: 'assets/img/icon/menu/configuraciongris.svg'
+      iconogris: 'assets/img/icon/menu/configuraciongris.svg',
+      class: 'iconButton'
     },
     {
       status: false,
       name: 'Salir',
       iconoazul: 'assets/img/icon/menu/salirazul.svg',
-      iconogris: 'assets/img/icon/menu/salirgris.svg'
+      iconogris: 'assets/img/icon/menu/salirgris.svg',
+      class: 'iconButton'
     },
   ];
 
@@ -159,7 +167,9 @@ export class OpcionesPage implements OnInit {
   async openAgregarSaldo() {
     const modal = await this.modalCtrl.create({
       component: AgregarPage,
-      cssClass: 'sizeModalAgregarProducto'
+      cssClass: 'sizeModalAgregarProducto',
+      backdropDismiss:false,
+      showBackdrop:true,
     });
 
     await modal.present();
@@ -169,7 +179,8 @@ export class OpcionesPage implements OnInit {
     await this.modalCtrl.dismiss();
     const modal = await this.modalCtrl.create({
       component: AgregarconfirmarPage,
-      cssClass: 'sizeModalConfirmacion'
+      cssClass: 'sizeModalConfirmacion',
+      backdropDismiss:false,
     });
     await modal.present();
   }
@@ -177,7 +188,8 @@ export class OpcionesPage implements OnInit {
   async openCierreModal() {
     const modal = await this.modalCtrl.create({
       component: CierrePage,
-      cssClass: 'sizeModalCierreModal'
+      cssClass: 'sizeModalCierreModal',
+      backdropDismiss:false,
     });
     await modal.present();
   }
