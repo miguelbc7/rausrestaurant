@@ -16,6 +16,8 @@ export class AgregartarjetaPage implements OnInit {
   nombre;
   cvc;
   fechaExp;
+  year;
+  month;
 
   public cardForm: FormGroup;
   validation_messages = {
@@ -50,7 +52,10 @@ export class AgregartarjetaPage implements OnInit {
         Validators.required,
         Validators.minLength(3)
       ])],
-      fechaExp: ['', Validators.compose([
+      year: ['', Validators.compose([
+        Validators.required,
+      ])],
+      month: ['', Validators.compose([
         Validators.required,
       ])],
       numero: ['', Validators.compose([
@@ -70,7 +75,7 @@ export class AgregartarjetaPage implements OnInit {
     record['nombre'] = this.nombre;
     record['numero'] = this.numero;
     record['cvc'] = this.cvc;
-    record['fechaExp'] = this.fechaExp;
+    record['fechaExp'] = {month: this.month ,year: this.year};
 
     console.log(record);
     this.creditCardService.create_NewItem(record).then(async resp => {
@@ -78,6 +83,8 @@ export class AgregartarjetaPage implements OnInit {
       this.numero = '';
       this.cvc = '';
       this.fechaExp = '';
+      this.month = '';
+      this.year = '';
      
       await this.modalCtrl.dismiss();
       const modal = await this.modalCtrl.create({
