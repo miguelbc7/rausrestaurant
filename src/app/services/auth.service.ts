@@ -72,7 +72,8 @@ export class AuthService {
     return new Promise<any>((resolve, reject) => {
       firebase.auth().signInWithEmailAndPassword(value.username, value.password)
       .then(
-        res => {         
+        res => {     
+          this.loading.hideLoader();    
           resolve(res)
         },
         err =>{ 
