@@ -26,7 +26,8 @@
           <ion-col size="6" class="ion-no-padding">
               <ion-item class="ion-no-padding">
                   <ion-label class="font14" position="floating">Fecha exp.</ion-label>
-                  <ion-datetime clearInput="true" displayFormat="MM/YY" min="1970" max="3000" formControlName="fechaExp" [(ngModel)]="fechaExp"></ion-datetime>
+                  <ion-datetime clearInput="true" displayFormat="YY" min="1970" max="3000" formControlName="year" [(ngModel)]="year"></ion-datetime>
+                  <ion-datetime clearInput="true" displayFormat="MM" formControlName="month" [(ngModel)]="month"></ion-datetime>
               </ion-item> 
           </ion-col>
           <ion-col size="6" class="ion-no-padding">

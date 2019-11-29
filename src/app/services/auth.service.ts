@@ -61,6 +61,7 @@ export class AuthService {
     return this.http.post<Restaurant>(`${this.url}restaurants`, JSON.stringify(value), this.httpOptions)
               .pipe(
                   catchError(e => {
+                    this.loading.hideLoader();
                    return throwError(e);
                 })
     )
@@ -176,7 +177,14 @@ export class AuthService {
     await this.storage.get('_token').then(res=>{
       this.token = res.token;
     });
-    return this.http.put<Restaurant>(this.url+'users/photo/', JSON.stringify(item),{
+    await this.storage.get('uid').then(res=>{
+      this.uid = res;
+    });
+    let data = {
+      uid: this.uid,
+      files: item,
+    }
+    return this.http.put<Restaurant>(this.url+'users/photo/', JSON.stringify(data),{
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'Authorization': this.token,
