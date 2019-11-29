@@ -9,6 +9,7 @@ import { CierrePage } from '../cierre/cierre.page';
 import { SaldoService } from 'src/app/services/saldo.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { Storage } from '@ionic/storage';
+import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
   selector: 'app-opciones',
@@ -77,9 +78,10 @@ export class OpcionesPage implements OnInit {
     },
   ];
 
-  constructor(private modalCtrl: ModalController, private router: Router, private saldoService:SaldoService, private authService: AuthService, private storage:Storage) { }
+  constructor(private modalCtrl: ModalController, private router: Router, private saldoService:SaldoService, private authService: AuthService, private storage:Storage, public loading: LoadingService ) { }
    
   ionViewWillEnter(){
+    this.loading.showLoader();
     this.getProfile();
    }
 
@@ -177,6 +179,7 @@ export class OpcionesPage implements OnInit {
       res.subscribe(data =>{
         this.profile.business_name = data.business_name;
         this.profile.direction = data.direction;
+        this.loading.hideLoader();
       })
     });
   }

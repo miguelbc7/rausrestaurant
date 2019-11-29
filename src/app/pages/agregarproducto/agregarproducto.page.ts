@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { ProductosService } from '../../services/productos.service';
 import { Camera, CameraOptions } from '@ionic-native/Camera/ngx';
 import { Storage } from '@ionic/storage';
+import { LoadingService } from 'src/app/services/loading.service';
 
 
 @Component({
@@ -48,6 +49,7 @@ export class AgregarproductoPage implements OnInit {
     private productosService: ProductosService, 
     private camera: Camera,
     private storage:Storage,
+    public loading: LoadingService,
     ) {
   
         this.productoForm = this.formBuilder.group({
@@ -247,6 +249,7 @@ export class AgregarproductoPage implements OnInit {
 
  onSubmit(values)
  {
+  this.loading.showLoader();
    let aIngredients = values.ingredientes.split(',');
    let aNoIngredients = values.no_ingredientes.split(',');
    console.log(aIngredients);
@@ -293,6 +296,7 @@ export class AgregarproductoPage implements OnInit {
           await this.uploadImage(this.productos._id);
         }else{
           //  await this.presentPromocion(this.productos._id);
+          this.loading.hideLoader();
            await this.router.navigate(['home']);
         }
       }, err => {
@@ -313,6 +317,7 @@ export class AgregarproductoPage implements OnInit {
       console.log('uploadimage data');
       console.log(data);
       // await this.presentPromocion(id);
+      this.loading.hideLoader();
       await this.router.navigate(['home']);
       
   }, err => {
