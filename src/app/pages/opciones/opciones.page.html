@@ -5,7 +5,7 @@
     <ion-row>
         <ion-col size="7" class="hgLine  px-0">
             <p class="font16 my-0 ml-10">Balance</p>
-            <p class="my-0 text-dorado"> <span class="font60">{{decimal[0] }}</span> <span class="font18 decimal">,{{decimal[1]? decimal[1] : 00 }}€</span></p> <br>
+            <p class="my-0 text-dorado"> <span [class]="fontSize" >{{decimal[0] }}</span> <span class="font18 decimal">,{{decimal[1]? decimal[1] : 00 }}€</span></p> <br>
             <ion-icon class="iconBack" src="assets/img/icon/back.svg" routerLink="/home"></ion-icon>
         </ion-col>
         <ion-col size="5">

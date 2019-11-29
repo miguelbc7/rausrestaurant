@@ -23,10 +23,8 @@ const routes: Routes = [
     RouterModule.forChild(routes)
   ],
   declarations: [
-    
   ],
   entryComponents: [
-    
   ]
 })
 export class CierrePageModule {}

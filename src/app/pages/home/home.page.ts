@@ -17,7 +17,7 @@ import { SliderHomeService } from 'src/app/services/slider-home.service';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { Camera, CameraOptions } from '@ionic-native/Camera/ngx';
-import { LoadingController } from '@ionic/angular';
+import { LoadingService } from 'src/app/services/loading.service';
 
 
 @Component({
@@ -53,7 +53,7 @@ export class HomePage implements OnInit {
     private horarioService:HorarioService,
     private authService: AuthService,
     private camera: Camera,
-    public loadingController: LoadingController,
+    public loading: LoadingService,
     public router:Router) {
     this.productos = [];
     this.storage.get('_token').then(val =>{
@@ -63,13 +63,18 @@ export class HomePage implements OnInit {
 
    ionViewWillEnter(){
     // this.ngOnInit();
-    this.getListProductos();
-    this.getListHorario();
-    this.getSlider();
     this.getProfile();
+    this.getSlider();
+    this.getListHorario();
+    this.getListProductos();
    }
   ngOnInit() {
     
+  }
+
+  goToOpcion()
+  {
+    this.router.navigate(['/opciones']);
   }
 
   getProfile(){
@@ -175,14 +180,17 @@ export class HomePage implements OnInit {
    
    getListProductos()
    {
+    this.loading.present(15000);
      this.productosService.getList().then(response => {
-      response.subscribe((data) => {
-        console.log(data);
-        this.productos =data.products;
-      }, err => {
-        console.log(err);
+       console.log('response list prod')
+       response.subscribe((data) => {
+         console.log(data);
+         this.productos =data.products;
+         this.loading.hideLoader();
+        }, err => {
+          console.log(err);
+        });
       });
-    });
    }
 
    getListHorario(){

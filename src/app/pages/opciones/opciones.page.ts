@@ -9,6 +9,7 @@ import { CierrePage } from '../cierre/cierre.page';
 import { SaldoService } from 'src/app/services/saldo.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { Storage } from '@ionic/storage';
+import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
   selector: 'app-opciones',
@@ -25,6 +26,8 @@ export class OpcionesPage implements OnInit {
     direction: '',
   };
   avatar = 'assets/img/avatar.png';
+
+  fontSize = 'font60';
 
   datas = [
     {
@@ -48,8 +51,8 @@ export class OpcionesPage implements OnInit {
     {
       status: false,
       name: 'Fidelización',
-      iconoazul: 'assets/img/icon/menu/cierreazul.svg',
-      iconogris: 'assets/img/icon/menu/cierregris.svg'
+      iconoazul: 'assets/img/icon/menu/iconofidelizacion.svg',
+      iconogris: 'assets/img/icon/menu/iconofidelizacion.svg'
     },
     {
       status: false,
@@ -77,10 +80,12 @@ export class OpcionesPage implements OnInit {
     },
   ];
 
-  constructor(private modalCtrl: ModalController, private router: Router, private saldoService:SaldoService, private authService: AuthService, private storage:Storage) { }
+  constructor(private modalCtrl: ModalController, private router: Router, private saldoService:SaldoService, private authService: AuthService, private storage:Storage, public loading: LoadingService ) { }
    
   ionViewWillEnter(){
+    this.loading.showLoader();
     this.getProfile();
+
    }
 
   changeIcon(index: number){
@@ -141,6 +146,12 @@ export class OpcionesPage implements OnInit {
             }
             this.value = valor;
             this.decimal = this.value.toFixed(2).toString().split('.'); 
+            console.log(this.decimal[0]);
+            if(this.decimal[0].length >= 5){
+              this.fontSize = 'font27';
+            }else if(this.decimal[0].length >= 3){
+              this.fontSize = 'font40';
+            }
      })
    });
   }
@@ -177,6 +188,7 @@ export class OpcionesPage implements OnInit {
       res.subscribe(data =>{
         this.profile.business_name = data.business_name;
         this.profile.direction = data.direction;
+        this.loading.hideLoader();
       })
     });
   }

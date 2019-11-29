@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { Storage } from '@ionic/storage';
 import { NativeGeocoder, NativeGeocoderResult } from '@ionic-native/native-geocoder/ngx';
+import { LoadingService } from 'src/app/services/loading.service';
 
 
 
@@ -26,7 +27,7 @@ export class PerfilPage implements OnInit {
   avatar = 'assets/img/avatar.png';
 
   constructor(private modalCtrl: ModalController, public formBuilder: FormBuilder, private router: Router,
-    private authService: AuthService, private storage: Storage, private nativeGeocoder: NativeGeocoder, ) { 
+    private authService: AuthService, private storage: Storage, private nativeGeocoder: NativeGeocoder, public loading: LoadingService ) { 
 
       this.profileForm = this.formBuilder.group({
           business_name: ['', Validators.compose([
@@ -34,7 +35,7 @@ export class PerfilPage implements OnInit {
             Validators.maxLength(300),
             Validators.minLength(5)
           ])],
-          address: ['', Validators.compose([
+          direction: ['', Validators.compose([
             Validators.required,
             Validators.maxLength(300),
             Validators.minLength(5)
@@ -60,13 +61,14 @@ export class PerfilPage implements OnInit {
     }
 
  ionViewWillEnter(){
+  this.loading.showLoader();
     this.ngOnInit();
    }
 
   
   ngOnInit() {
-    this.getUserDetail();
     this.getMe();
+   this.getUserDetail();
   }
   validation_messages = {
     'business_name': [
@@ -74,8 +76,9 @@ export class PerfilPage implements OnInit {
         { type: 'minlength', message: 'Debe ser mayor de 5 caracteres.' },
         { type: 'maxlength', message: 'Debe ser menor de 300 caracteres.' }
       ],
-      'address': [
+      'direction': [
         { type: 'required', message: 'Debe ingresar una dirección.' },
+        { type: 'minlength', message: 'Debe ser mayor de 5 caracteres.' },
       ],
       'phone': [
         { type: 'required', message: 'Debe ingresar un Teléfono.' },
@@ -99,8 +102,9 @@ export class PerfilPage implements OnInit {
     }
 
 
-  async editperfil(img) {
-    this.storage.set('imgPreview', img);
+  async editperfil() {
+    console.log(this.avatar);
+    this.storage.set('imgPreview', this.avatar);
     const modal = await this.modalCtrl.create({
       component: ModalEditavatarPage,
     });
@@ -121,6 +125,7 @@ export class PerfilPage implements OnInit {
       data.address = this.address;
       this.profile = data;
       console.log(this.profile);
+      this.loading.hideLoader();
     })
   });
  }

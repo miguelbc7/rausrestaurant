@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { ProductosService } from '../../services/productos.service';
 import { Camera, CameraOptions } from '@ionic-native/Camera/ngx';
 import { Storage } from '@ionic/storage';
+import { LoadingService } from 'src/app/services/loading.service';
 
 
 @Component({
@@ -48,6 +49,7 @@ export class AgregarproductoPage implements OnInit {
     private productosService: ProductosService, 
     private camera: Camera,
     private storage:Storage,
+    public loading: LoadingService,
     ) {
   
         this.productoForm = this.formBuilder.group({
@@ -62,14 +64,14 @@ export class AgregarproductoPage implements OnInit {
             Validators.minLength(10)
           ])],
           ingredientes: [this.ingredientes, Validators.compose([
-            Validators.required,
-            Validators.maxLength(300),
-            Validators.minLength(5)
+            // Validators.required,
+            // Validators.maxLength(300),
+            // Validators.minLength(5)
           ])],
           no_ingredientes: [this.no_ingredientes, Validators.compose([
-            Validators.required,
-            Validators.maxLength(300),
-            Validators.minLength(5)
+            // Validators.required,
+            // Validators.maxLength(300),
+            // Validators.minLength(5)
           ])],
           nutritional_values: [this.nutritional_values],
           fat: [this.name, Validators.compose([
@@ -116,12 +118,12 @@ export class AgregarproductoPage implements OnInit {
         { type: 'maxlength', message: 'Debe ser menor de 300 caracteres.' }
       ],
       'ingredientes': [
-        { type: 'required', message: 'Debe ingresar los ingredientes.' },
+        { type: 'required', message: 'Debe ingresar al menos un ingrediente.' },
         { type: 'minlength', message: 'Debe ser menor de 5 caracteres.' },
         { type: 'maxlength', message: 'Debe ser menor de 300 caracteres.' }
       ],
       'no_ingredientes': [
-        { type: 'required', message: 'Debe ingresar los alergenos.' },
+        { type: 'required', message: 'Debe ingresar al menos un alergeno.' },
         { type: 'minlength', message: 'Debe ser menor de 5 caracteres.' },
         { type: 'maxlength', message: 'Debe ser menor de 300 caracteres.' }
       ],
@@ -232,6 +234,7 @@ export class AgregarproductoPage implements OnInit {
 
   async addslider(img) {
     console.log(img);
+    this.storage.set('imgPreview', img);
     console.log('addslier');
     const modal = await this.modalCtrl.create({
       component: AddsliderPage,
@@ -246,6 +249,7 @@ export class AgregarproductoPage implements OnInit {
 
  onSubmit(values)
  {
+  this.loading.showLoader();
    let aIngredients = values.ingredientes.split(',');
    let aNoIngredients = values.no_ingredientes.split(',');
    console.log(aIngredients);
@@ -271,7 +275,7 @@ export class AgregarproductoPage implements OnInit {
         if(this.aImages.length > 0){
         await  this.uploadImage(data._id);
         }else{
-          await this.presentPromocion(data._id);
+          // await this.presentPromocion(data._id);
           await this.router.navigate(['home']);
         }
      }, err => {
@@ -291,7 +295,8 @@ export class AgregarproductoPage implements OnInit {
           console.log('imagenes1')
           await this.uploadImage(this.productos._id);
         }else{
-           await this.presentPromocion(this.productos._id);
+          //  await this.presentPromocion(this.productos._id);
+          this.loading.hideLoader();
            await this.router.navigate(['home']);
         }
       }, err => {
@@ -311,7 +316,8 @@ export class AgregarproductoPage implements OnInit {
       //  this.productos = data.products;
       console.log('uploadimage data');
       console.log(data);
-      await this.presentPromocion(id);
+      // await this.presentPromocion(id);
+      this.loading.hideLoader();
       await this.router.navigate(['home']);
       
   }, err => {

@@ -21,8 +21,9 @@
           
         </ion-col>
         <ion-col class="ion-justify-center ion-align-self-center ion-text-center">
-            <ion-icon class="font20" name="megaphone" (click)="presentPromocion()"></ion-icon>
-            <div class="font8">Promoción</div>  
+            <!-- <ion-icon class="font20" name="megaphone" (click)="presentPromocion()"></ion-icon> -->
+            <ion-icon  class="promo-icon" src="assets/img/icon/parlantepromo.svg" (click)="presentPromocion()"></ion-icon>
+            <div class="font8 promo-mg">Promoción</div>  
         </ion-col>
       </ion-row>
       <ion-row>
@@ -48,7 +49,7 @@
                 <ion-slide class="changeStyle" *ngFor="let img of aImages">
                   <img class="imgBanner" src="{{img.img}}"/>
                   <div class="divEdit" color="bluelight">
-                    <ion-icon class="iconEditBanner" color="white" name="create" (click)="addslider(img)"></ion-icon>
+                    <ion-icon class="iconEditBanner" color="white" name="create" (click)="addslider(img.img)"></ion-icon>
                   </div>
                 </ion-slide>
                   <ion-slide class="changeStyle">
@@ -73,7 +74,7 @@
             formControlName="description"
             [(ngModel)]="description"
             class="font11 ion-no-padding textareaCustom"
-            rows="7" 
+            rows="8" 
             cols="20" 
             placeholder="Descripción: Escribe un mensaje descriptivo y motivador, ej: pasta fresca con una salsa de verduras y algas, muy nutritiva y demasiado rica!">
           </ion-textarea>
@@ -100,7 +101,7 @@
               formControlName="no_ingredientes"
               [(ngModel)]="no_ingredientes"
                 class="font11"
-                rows="7" 
+                rows="8" 
                 cols="20" 
                 placeholder="Alergenos: Escribe aca todos los ingredientes que puedan causar alergias o reacciones en personas sensibles a ciertas sustancias ej: Gluten, Nueces, Cacahuates, Mariscos">
               </ion-textarea>
@@ -185,7 +186,7 @@
                     <span>Iva 4%</span>
                 </ion-col>
                 <ion-col size="4">
-                    <input type="radio" class="radio1" value="4" formControlName="iva" name="iva" [(ngModel)]="iva"  />
+                    <input type="radio" class="radio1" value="4" formControlName="iva" name="iva" [(ngModel)]="iva" [checked]="iva == 4"  />
                 </ion-col>
               </ion-row>
               <ion-row>
@@ -193,7 +194,7 @@
                       <span>Iva 10%</span>
                   </ion-col>
                   <ion-col size="4">
-                      <input type="radio" class="radio1" value="10" formControlName="iva" name="iva" [(ngModel)]="iva" />
+                      <input type="radio" class="radio1" value="10" formControlName="iva" name="iva" [(ngModel)]="iva" [checked]="iva == 10" />
                   </ion-col>
                 </ion-row>
                 <ion-row>
@@ -201,7 +202,7 @@
                         <span>Iva 21%</span>
                     </ion-col>
                     <ion-col size="4">
-                        <input type="radio" class="radio1" value="21" formControlName="iva" name="iva" [(ngModel)]="iva" />
+                        <input type="radio" class="radio1" value="21" formControlName="iva" name="iva" [(ngModel)]="iva" [checked]="iva == 21" />
                     </ion-col>
                 </ion-row>
                 <ion-row>
@@ -209,7 +210,7 @@
                           <span>Exento</span>
                       </ion-col>
                       <ion-col size="4">
-                          <input type="radio" class="radio1" value="0" formControlName="iva" name="iva" [(ngModel)]="iva" />
+                          <input type="radio" class="radio1" value="0" formControlName="iva" name="iva" [(ngModel)]="iva" [checked]="iva == 0" />
                       </ion-col>
                 </ion-row>
               <ion-row class="padding-section">

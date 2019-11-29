@@ -7,12 +7,12 @@
 </div>
 <ion-grid>
 <!-- Switch -->
-<form [formGroup]="loyaltyForm"  class="ion-margin-horizontal">
-<div class="onoffswitch ion-float-right">
+<form [formGroup]="loyaltyForm"  class="mx-0">
+<div class="onoffswitch ion-float-right ion-margin-horizontal">
     <input type="checkbox" formControlName="status" class="onoffswitch-checkbox" id="myonoffswitch"  [(ngModel)]="item?.status? item.status:status" checked>
     <label class="onoffswitch-label" for="myonoffswitch"></label>
 </div><br>
-<ion-row>
+<ion-row class="ion-margin-horizontal">
   <ion-col size="12">
       <ion-item>
           <ion-input  [(ngModel)]=" name" formControlName="name" class="font10 ion-text-center" autocorrect="on" clearInput="true" clearOnEdit="true" color="blue-dark2" inputmode="text" placeholder="Nombre del Plan" required="true"></ion-input>
@@ -26,8 +26,8 @@
       </div>
   </ion-col>
 </ion-row>
-<ion-row>
-    <ion-col size="6">
+<ion-row class="ion-margin-horizontal">
+    <ion-col size="6" class="px-0">
         <ion-item>
             <ion-datetime  [(ngModel)]=" from" formControlName="from" class="font10 ion-text-center" autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" color="blue-dark2" inputmode="text" min="1970" max="3000" placeholder="del dd/mm/aaaa" displayFormat="DD/MM/YYYY"  required="true"></ion-datetime>
         </ion-item>
@@ -39,7 +39,7 @@
         </label>
         </div>
     </ion-col>
-    <ion-col size="6">
+    <ion-col size="6" class="px-0">
       <ion-item>
         <ion-datetime  [(ngModel)]=" to" formControlName="to" class="font10 ion-text-center" autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" color="blue-dark2" inputmode="text" min="1970" max="3000" placeholder="hasta dd/mm/aaaa" displayFormat="DD/MM/YYYY" required="true"></ion-datetime>
       </ion-item>
@@ -52,21 +52,23 @@
         </label>
       </div>
   </ion-row>
-  <div class="ion-text-center">
+  <br>
+  <div class="ion-text-center ion-margin-top">
     <p>Valor</p>
   </div>
-  <ion-row>
-    <ion-col size="6" class="ion-text-center" >
+  <br>
+  <ion-row class="ion-align-items-center">
+    <ion-col size="6" class="" >
         <div class="inline">
-            <ion-icon class="iconMargin" name="remove" (click)="remove2()"></ion-icon>
-            <ion-input  [(ngModel)]="qtyValue"  type="number" min="0" formControlName="qtyValue" class="inputCustom2 ion-text-center"></ion-input>
-            <ion-icon class="iconMargin" name="add" (click)="add2()"></ion-icon>
+            <ion-icon class="iconMargin" name="remove" (keyup)="validValue('value')" (click)="remove2()"></ion-icon>
+            <ion-input  [(ngModel)]="qtyValue" (keyup)="validValue('value')" type="number" min="0" formControlName="qtyValue" class="inputCustom2 ion-text-center"></ion-input>
+            <ion-icon class="iconMargin" name="add" (keyup)="validValue('value')" (click)="add2()"></ion-icon>
         </div>
-        <span class="ml-1 font10">por cada</span>
+        <span class="ml-2 font12">por cada</span>
     </ion-col>
-      <ion-col size="6" class="ion-text-left" >
+      <ion-col size="6" class="" >
         <div class="inline ml-2">
-          <ion-input  [(ngModel)]="value"  type="number" min="0"  formControlName="value" class="inputCustom2 ion-text-center"></ion-input>
+          <ion-input  [(ngModel)]="value" (keyup)="validValue('value')"  type="number" min="0"  formControlName="value" class="inputCustom2 ion-text-center"></ion-input>
         </div>
         <span class="ml-2 font10">euros</span>
       </ion-col>
@@ -85,19 +87,19 @@
   </ion-row>
   <br>
   <br>
-  <ion-row>
-      <ion-col size="6" class="ion-text-center" >
+  <ion-row class="ion-align-items-center">
+      <ion-col size="6" class="" >
           <div class="inline">
-              <ion-icon class="iconMargin" name="remove" (click)=" remove() "></ion-icon>
-              <ion-input  [(ngModel)]="qtyBuy" type="number" min="0"  formControlName="qtyBuy" class="inputCustom2 ion-text-center"></ion-input>
-              <ion-icon class="iconMargin" name="add" (click)="  add() "></ion-icon>
+              <ion-icon class="iconMargin" name="remove" (keyup)="validValue('buy')" (click)=" remove() "></ion-icon>
+              <ion-input  [(ngModel)]="qtyBuy" type="number" (keyup)="validValue('buy')" min="0"  formControlName="qtyBuy" class="inputCustom2 ion-text-center"></ion-input>
+              <ion-icon class="iconMargin" name="add" (keyup)="validValue('buy')" (click)="  add() "></ion-icon>
           </div>
-          <span class="ml-1 font10">por cada</span>
+          <span class="ml-2 font12">por cada</span>
         </ion-col>
         
         <ion-col size="6" class="ion-text-left" >
           <div class="inline ml-2">
-            <ion-input  [(ngModel)]="buy" type="number" min="0"  formControlName="buy" class="inputCustom2 ion-text-center"></ion-input>
+            <ion-input  [(ngModel)]="buy" type="number" min="0" (keyup)="validValue('buy')" formControlName="buy" class="inputCustom2 ion-text-center"></ion-input>
           </div>
           <span class="ml-2 font10">compras</span>
         </ion-col>
@@ -114,12 +116,14 @@
                   </label>
             </div>
   </ion-row>
+</form>
+</ion-grid>
+</ion-content>
+<ion-footer no-border>
   <ion-row class="">
       <ion-col size="12" class="ion-text-center">
           <ion-button class="font14" color="bluedark" *ngIf="type == 'create'" [disabled]="!loyaltyForm.valid" (click)="CreateRecord()" >Guardar</ion-button>
           <ion-button class="font14" color="bluedark" *ngIf="type == 'edit'" [disabled]="!loyaltyForm.valid" (click)="UpdateRecord(item.id)" type="submit" >Actualizar</ion-button>
       </ion-col>
   </ion-row>
-</form>
-</ion-grid>
-</ion-content>
+</ion-footer>

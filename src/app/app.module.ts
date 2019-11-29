@@ -34,6 +34,7 @@ import { FilePath } from '@ionic-native/file-path/ngx'
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { LoadingService } from './services/loading.service';
 
 
 @NgModule({
@@ -72,6 +73,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
     File,
     WebView,
     FilePath,
+    LoadingService
   
   ],
   bootstrap: [AppComponent]
