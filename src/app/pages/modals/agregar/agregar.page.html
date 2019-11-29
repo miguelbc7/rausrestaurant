@@ -10,7 +10,7 @@
         <ion-item class="itemSaldo ion-padding-horizontal">
             <!-- <ion-label class="font14" position="floating">Dirección</ion-label> -->
             <!-- <ion-icon class="mx-0 iconWhite font24" name="logo-euro" color="" slot="start" align-self-center></ion-icon> -->
-            <ion-input class="saldoModal ion-text-center" (keypress)="inputSize()" size="10" [(ngModel)]="value" name="value" type="number" placeholder="0.00" required>€</ion-input>
+            <ion-input class="saldoModal ion-text-center" [(ngModel)]="value" name="value" type="number" placeholder="0.00" required>€</ion-input>
         </ion-item>
         <label >{{errorMessage}} </label>
     </div>

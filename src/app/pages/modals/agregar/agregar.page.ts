@@ -12,7 +12,7 @@ import { CreditCardService } from 'src/app/services/credit-card.service';
 export class AgregarPage implements OnInit {
 
   data:any;
-  value:string;
+  value:number;
   public sum : number = 0;
   // public total(items){
   //   this.sum = 0;
@@ -23,7 +23,7 @@ export class AgregarPage implements OnInit {
   // }
   erroMessage = '';
 
-  fontSize='32';
+  // fontSize='32';
 
 
   constructor(private modalCtrl: ModalController , private creditCardService:CreditCardService) { }
@@ -32,6 +32,7 @@ export class AgregarPage implements OnInit {
     this.creditCardService.read_Items().then(data => {
        data.subscribe(e => {
         this.data = e;
+        console.log(this.data);
       })
     });
   }
@@ -47,7 +48,7 @@ export class AgregarPage implements OnInit {
 
   async openConfirmarAgregar(cardID) {
     console.log(this.value);
-    if(this.value.length > 0){
+    if(this.value > 0){
       this.erroMessage = '';
       await this.modalCtrl.dismiss();
       const modal = await this.modalCtrl.create({
@@ -59,7 +60,7 @@ export class AgregarPage implements OnInit {
         cssClass: 'sizeModalConfirmacion'
       });
       modal.onDidDismiss().then(data =>{
-        this.value = '';
+        this.value = null;
       });
       await modal.present();
     }else{
@@ -77,9 +78,9 @@ export class AgregarPage implements OnInit {
     //     initialSize=initialSize<=10?10:initialSize;
     // x.style.fontSize = initialSize + "px";
 
-    if (this.value.length >= 4 ){
-      this.fontSize = '20';
-    }
+    // if (this.value.length >= 4 ){
+    //   this.fontSize = '20';
+    // }
     }
 
 }
