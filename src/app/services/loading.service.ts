@@ -31,6 +31,7 @@ export class LoadingService {
   async showLoader() {
    return await this.loadingController.create({
       // message: 'This Loader will Not AutoHide'
+      duration: 20000,
     }).then((res) => {
       res.present().then(()=>{
         // this.hideLoader();
