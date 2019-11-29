@@ -482,6 +482,11 @@ ion-label{
     font-size: 14pt !important;
 }
 
+ion-datetime {
+    color: #d4d8c3 !important;
+    font-size: 14pt !important;
+}
+
 
 .label-floating.sc-ion-label-md-h,
 .label-stacked.sc-ion-label-md-h {
@@ -703,8 +708,8 @@ ion-textarea.textareaCustom{
 
  .sizeModalAgregarTajerta .modal-wrapper {
     height: auto;
-    max-height: 48%;
-    width: 310px;
+    max-height: 55%;
+    width: 90%;
     top: 0%;
     bottom: 0;
     left: 0;

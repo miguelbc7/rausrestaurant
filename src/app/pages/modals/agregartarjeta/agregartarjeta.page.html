@@ -23,14 +23,21 @@
           </ng-container>
         </div>
       <ion-row>
-          <ion-col size="6" class="ion-no-padding">
+          <ion-col size="4" class="ion-no-padding">
               <ion-item class="ion-no-padding">
-                  <ion-label class="font14" position="floating">Fecha exp.</ion-label>
-                  <ion-datetime clearInput="true" displayFormat="YY" min="1970" max="3000" formControlName="year" [(ngModel)]="year"></ion-datetime>
-                  <ion-datetime clearInput="true" displayFormat="MM" formControlName="month" [(ngModel)]="month"></ion-datetime>
+                  <!-- <ion-label class="font14" position="floating">Fecha exp.</ion-label> -->
+                  <ion-datetime class="mtInputFecha" clearInput="true" placeholder="Año" displayFormat="YYYY" min="1970" max="3000" formControlName="year" [(ngModel)]="year" cancelText="Cancelar" doneText="Guardar"></ion-datetime>
+
               </ion-item> 
           </ion-col>
-          <ion-col size="6" class="ion-no-padding">
+          <ion-col size="4" class="ion-no-padding">
+              <ion-item class="ion-no-padding">
+                  <!-- <ion-label class="font14" position="floating">&nbsp;</ion-label> -->
+
+                  <ion-datetime class="mtInputFecha" placeholder="Mes" clearInput="true" displayFormat="MM" formControlName="month" [(ngModel)]="month" ancelText="Cancelar" doneText="Guardar"></ion-datetime>
+              </ion-item> 
+          </ion-col>
+          <ion-col size="4" class="ion-no-padding">
               <ion-item class="ion-no-padding">
                   <ion-label class="font14" position="floating">CVC</ion-label>
                   <ion-input clearInput="true" type="number" formControlName="cvc" [(ngModel)]="cvc"></ion-input>
@@ -66,6 +73,7 @@
             </div>
           </ng-container>
         </div>
+        <br>
         <ion-row class="btnNuevo">
             <ion-col size="6" class="ion-text-center">
                 <ion-button class="font15" color="bluedark" [disabled]="!cardForm.valid" (click)="openAgregarSaldo()">Guardar</ion-button>
