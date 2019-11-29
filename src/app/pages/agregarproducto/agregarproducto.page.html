@@ -185,7 +185,7 @@
                     <span>Iva 4%</span>
                 </ion-col>
                 <ion-col size="4">
-                    <input type="radio" class="radio1" value="4" formControlName="iva" name="iva" [(ngModel)]="iva"  />
+                    <input type="radio" class="radio1" value="4" formControlName="iva" name="iva" [(ngModel)]="iva" [checked]="iva == 4"  />
                 </ion-col>
               </ion-row>
               <ion-row>
@@ -193,7 +193,7 @@
                       <span>Iva 10%</span>
                   </ion-col>
                   <ion-col size="4">
-                      <input type="radio" class="radio1" value="10" formControlName="iva" name="iva" [(ngModel)]="iva" />
+                      <input type="radio" class="radio1" value="10" formControlName="iva" name="iva" [(ngModel)]="iva" [checked]="iva == 10" />
                   </ion-col>
                 </ion-row>
                 <ion-row>
@@ -201,7 +201,7 @@
                         <span>Iva 21%</span>
                     </ion-col>
                     <ion-col size="4">
-                        <input type="radio" class="radio1" value="21" formControlName="iva" name="iva" [(ngModel)]="iva" />
+                        <input type="radio" class="radio1" value="21" formControlName="iva" name="iva" [(ngModel)]="iva" [checked]="iva == 21" />
                     </ion-col>
                 </ion-row>
                 <ion-row>
@@ -209,7 +209,7 @@
                           <span>Exento</span>
                       </ion-col>
                       <ion-col size="4">
-                          <input type="radio" class="radio1" value="0" formControlName="iva" name="iva" [(ngModel)]="iva" />
+                          <input type="radio" class="radio1" value="0" formControlName="iva" name="iva" [(ngModel)]="iva" [checked]="iva == 0" />
                       </ion-col>
                 </ion-row>
               <ion-row class="padding-section">

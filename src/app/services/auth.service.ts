@@ -6,6 +6,7 @@ import { environment } from '../../environments/environment';
 import { catchError } from 'rxjs/operators';
 import {  Observable, throwError } from 'rxjs';
 import { Storage } from '@ionic/storage';
+import { LoadingService } from './loading.service';
 
 
 @Injectable({
@@ -42,11 +43,12 @@ export class AuthService {
   };
 
 
-  constructor(private http: HttpClient, private storage: Storage) { }
+  constructor(private http: HttpClient, private storage: Storage,public loading: LoadingService) { }
 
 
 
   registerUser(value): Observable<Restaurant>{
+    this.loading.showLoader();
     console.log(value);
     if(value.categories){
       for (let index = 0; index < value.categories.length; index++) {
@@ -65,13 +67,18 @@ export class AuthService {
    }
   
    loginUser(value){
+    this.loading.showLoader();
     return new Promise<any>((resolve, reject) => {
       firebase.auth().signInWithEmailAndPassword(value.username, value.password)
       .then(
         res => {         
           resolve(res)
         },
-        err =>{ console.log('login auth service error'+ err) ; reject(err) })
+        err =>{ 
+          this.loading.hideLoader();
+          console.log('login auth service error'+ err) ; 
+          reject(err) ;
+        })
     })
    }
 

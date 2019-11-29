@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { Storage } from '@ionic/storage';
 import { NativeGeocoder, NativeGeocoderResult } from '@ionic-native/native-geocoder/ngx';
+import { LoadingService } from 'src/app/services/loading.service';
 
 
 
@@ -26,7 +27,7 @@ export class PerfilPage implements OnInit {
   avatar = 'assets/img/avatar.png';
 
   constructor(private modalCtrl: ModalController, public formBuilder: FormBuilder, private router: Router,
-    private authService: AuthService, private storage: Storage, private nativeGeocoder: NativeGeocoder, ) { 
+    private authService: AuthService, private storage: Storage, private nativeGeocoder: NativeGeocoder, public loading: LoadingService ) { 
 
       this.profileForm = this.formBuilder.group({
           business_name: ['', Validators.compose([
@@ -60,13 +61,14 @@ export class PerfilPage implements OnInit {
     }
 
  ionViewWillEnter(){
+  this.loading.showLoader();
     this.ngOnInit();
    }
 
   
   ngOnInit() {
-    this.getUserDetail();
     this.getMe();
+   this.getUserDetail();
   }
   validation_messages = {
     'business_name': [
@@ -123,6 +125,7 @@ export class PerfilPage implements OnInit {
       data.address = this.address;
       this.profile = data;
       console.log(this.profile);
+      this.loading.hideLoader();
     })
   });
  }
