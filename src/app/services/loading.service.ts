@@ -39,7 +39,7 @@ export class LoadingService {
  
       res.onDidDismiss().then((dis) => {
         console.log('Loading dismissed!');
-        this.loadingController.dismiss();
+        this.hideLoader();
       });
     });
   }

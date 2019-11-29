@@ -61,13 +61,13 @@ export class HomePage implements OnInit {
     })
    }
 
-  async ionViewWillEnter(){
+   ionViewWillEnter(){
     // this.ngOnInit();
     this.loading.showLoader();
-    await this.getProfile();
-    await this.getSlider();
-    await this.getListHorario();
-    await this.getListProductos();
+    this.getProfile();
+    this.getSlider();
+    this.getListHorario();
+    this.getListProductos();
    }
   ngOnInit() {
     
@@ -182,14 +182,15 @@ export class HomePage implements OnInit {
    getListProductos()
    {
      this.productosService.getList().then(response => {
-      response.subscribe((data) => {
-        console.log(data);
-        this.productos =data.products;
-        this.loading.hideLoader();
-      }, err => {
-        console.log(err);
+       console.log('response list prod')
+       response.subscribe((data) => {
+         console.log(data);
+         this.productos =data.products;
+         this.loading.hideLoader();
+        }, err => {
+          console.log(err);
+        });
       });
-    });
    }
 
    getListHorario(){
