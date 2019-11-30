@@ -138,6 +138,7 @@ export class PerfilPage implements OnInit {
  }
  
  getMe(){
+   console.log('me');
    this.authService.me().then(res =>{
     res.subscribe(data =>{
       console.log(data);
