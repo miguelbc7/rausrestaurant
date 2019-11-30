@@ -4,18 +4,20 @@
   </ion-toolbar>
 </ion-header> -->
 
-<ion-content>
+<ion-content >
   <div class="ion-text-end">
-      <ion-button class="font16" color="white" fill="clear" (click)="closeModal()">
-          <ion-icon slot="end" name="close"></ion-icon>
-        </ion-button>
+    <ion-button class="font16" color="white" fill="clear" (click)="closeModal()">
+      <ion-icon slot="end" name="close"></ion-icon>
+    </ion-button>
   </div>
+  <ion-item *ngFor="let img of images; index as pos">
   <div class="boxImg">
-      <img class="imgPreviuw" src="{{avatar}}" alt="previuw">
+      <img class="imgPreviuw" src="img.path" alt="previuw">
   </div>
+</ion-item>
     <ion-row class="btnNuevoGuardar">
         <ion-col size="12" class="ion-text-center">
-            <ion-input class="font15"  type="file" color="bluedark" (onchange)="pickImage($event)" >Buscar</ion-input>
+            <ion-button class="font15"  color="bluedark" (click)="takePicture()" >Buscar</ion-button>
         </ion-col>
     </ion-row>
 </ion-content>

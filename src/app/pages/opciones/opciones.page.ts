@@ -83,7 +83,7 @@ export class OpcionesPage implements OnInit {
   constructor(private modalCtrl: ModalController, private router: Router, private saldoService:SaldoService, private authService: AuthService, private storage:Storage, public loading: LoadingService ) { }
    
   ionViewWillEnter(){
-    this.loading.showLoader();
+    this.loading.showLoader(5000);
     this.getProfile();
 
    }

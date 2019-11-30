@@ -180,11 +180,10 @@ export class HomePage implements OnInit {
    
    getListProductos()
    {
-    this.loading.present(15000);
+    this.loading.present(6000);
      this.productosService.getList().then(response => {
        console.log('response list prod')
        response.subscribe((data) => {
-         console.log(data);
          this.productos =data.products;
          this.loading.hideLoader();
         }, err => {
