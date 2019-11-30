@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { ModalController, Platform } from '@ionic/angular';
+import { ModalController, Platform, NavParams } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { Camera, CameraOptions } from '@ionic-native/Camera/ngx';
 import { AuthService } from 'src/app/services/auth.service';
@@ -16,16 +16,19 @@ export class ModalEditavatarPage implements OnInit {
   aImages: any = [{image: 'assets/img/avatar.png'}];
   avatar = 'assets/img/avatar.png';
   image;
+  public type = this.navParams.get('type');
+  id;
 
   images = [];
 
-  constructor(private modalCtrl: ModalController, private storage: Storage,private camera: Camera,private authService: AuthService, public platform: Platform,
+  constructor(private modalCtrl: ModalController, private storage: Storage,private camera: Camera,private authService: AuthService, public platform: Platform, public navParams: NavParams,
     ) { }
 
   ngOnInit() {
     this.storage.get('avatar').then(res =>{
       console.log(res);
-      this.avatar = res;
+      if(res)
+        this.avatar = res;
       console.log(this.avatar);
     });
 
@@ -38,7 +41,7 @@ export class ModalEditavatarPage implements OnInit {
     await this.modalCtrl.dismiss();
   }
 
- pickImage() {
+ pickImage(type) {
    
     // let destinationType = this.camera.DestinationType.FILE_URI;
     // if(this.platform.is('ios')){
@@ -57,6 +60,7 @@ export class ModalEditavatarPage implements OnInit {
       // If it's base64 (DATA_URL):
       let base64Image = 'data:image/jpeg;base64,' + imageData;
       this.aImages = {image:base64Image} ;
+      if(type == 'create'){
         this.authService.createAvatar(this.aImages).then((response) => {
           response.subscribe((data) => {
             console.log(data);
@@ -66,6 +70,17 @@ export class ModalEditavatarPage implements OnInit {
             console.error(err);
           });
        });
+      }else{
+        this.authService.updateAvatar(this.id,this.aImages).then((response) => {
+          response.subscribe((data) => {
+            console.log(data);
+            this.storage.set('avatar',data);
+            this.getAvatar(data.id);
+        }, err => {
+            console.error(err);
+          });
+       });
+      }
     
     }, (err) => {
       // Handle error
@@ -75,7 +90,7 @@ export class ModalEditavatarPage implements OnInit {
   getAvatar(id){
     this.authService.getAvatar(id).then(response => {
       response.subscribe((data) => {
-        this.aImages = data;
+        this.avatar = data.image;
         console.log(this.avatar);
      }, err => {
       console.log(err);

@@ -6,6 +6,9 @@ import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { Storage } from '@ionic/storage';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireAuth } from '@angular/fire/auth';
+import * as firebase from 'firebase/app';
 
 @Injectable({
   providedIn: 'root'
@@ -15,9 +18,10 @@ export class ProductosService {
   token:any ;
   uid:any;
   base_path = environment.url;
+  snapshotChangesSubscription: any;
 
 
-  constructor(private http: HttpClient, private storage: Storage) { 
+  constructor(private http: HttpClient, private storage: Storage,private afs: AngularFirestore,public afAuth: AngularFireAuth) { 
   }  
  
   // Handle API errors
@@ -165,23 +169,28 @@ export class ProductosService {
       _id : id,
       images: item
     }
-    console.log(data);
-    await this.storage.get('_token').then(res=>{
-        this.token = res.token;
-      });
-      return this.http
-        .put<any>(this.base_path+'products/images',JSON.stringify(data) ,{
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        // 'Authorization': this.token,
-      }),
-      // params: {
-        // token: this.token,
-      // }
+    return new Promise<any>((resolve, reject) => {
+      let currentUser = firebase.auth().currentUser;
+      this.afs.collection('restaurantes').doc(currentUser.uid).collection('productos').add(data)
+      .then(
+        res => resolve(res),
+        err => reject(err)
+      )
     })
-    .pipe(
-      catchError(this.handleError)
-    )
   }
 
+  getImagen(id){
+    return new Promise<any>((resolve, reject) => {
+      this.afAuth.user.subscribe(currentUser => {
+        if(currentUser){
+          this.snapshotChangesSubscription = this.afs.doc<any>('restaurantes/' + currentUser.uid + '/productos/' + id).valueChanges()
+          .subscribe(snapshots => {
+            resolve(snapshots);
+          }, err => {
+            reject(err)
+          })
+        }
+      })
+    });
+  }
 }
