@@ -35,7 +35,7 @@
     margin: 0px;
     background: #4e5d6a;
     position: absolute;
-    top: 2px;
+    top: 1.5px;
     bottom: 0;
     right: 32px;
     /* border: 2px solid #000; */
@@ -47,7 +47,7 @@
 .onoffswitch-label2 {
     display: block; overflow: hidden; cursor: pointer;
     height: 15px; padding: 0; line-height: 15px;
-    border: 2px solid #4e5d6a; border-radius: 7px;
+    border: 2px solid #eee; border-radius: 7px;
     background-color: #fff;
     transition: background-color 0.3s ease-in;
 }
@@ -60,7 +60,7 @@
     margin: 0px;
     background: #4e5d6a;
     position: absolute;
-    top: 2px;
+    top: 1.5px;
     bottom: 0;
     right: 31px;
     /* border: 2px solid #000; */
@@ -73,7 +73,7 @@
     
 }
 .onoffswitch-checkbox:checked + .onoffswitch-label, .onoffswitch-checkbox:checked + .onoffswitch-label:before {
-    // border: 2px solid #eee;
+    border: 1px solid #4e5d6a;
 }
 .onoffswitch-checkbox:checked + .onoffswitch-label:before {
     right: 4px;
@@ -84,7 +84,7 @@
     
 }
 .onoffswitch-checkbox:checked + .onoffswitch-label2, .onoffswitch-checkbox:checked + .onoffswitch-label2:before {
-    // border: 2px solid #eee;
+    border: 1px solid #4e5d6a;
 }
 .onoffswitch-checkbox:checked + .onoffswitch-label2:before {
     right: 4px;
@@ -184,4 +184,11 @@ input[type="radio"].radio1:after {
 }
 input[type="radio"].radio1:checked:after {
 	background-color: #4e5d6a;
+}
+
+.euro {
+    position: absolute;
+    right: 10px;
+    font-size: 30pt;
+    color:#fff;
 }

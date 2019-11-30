@@ -1,0 +1,84 @@
+.onoffswitch {
+    position: relative; width: 45px;
+    margin-left: 11px;
+    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+}
+.onoffswitch-valores {
+    position: relative; width: 45px;
+    margin-left: -4px;
+    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+}
+.onoffswitch-checkbox {
+    display: none;
+}
+.onoffswitch-label {
+    display: block; overflow: hidden; cursor: pointer;
+    height: 15px; padding: 0; line-height: 15px;
+    border: 2px solid #eee; border-radius: 5px;
+    background-color: #fff;
+    transition: background-color 0.3s ease-in;
+}
+
+.onoffswitch-label:before {
+    content: "";
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    margin: 0px;
+    background: #4e5d6a;
+    position: absolute;
+    top: 2px;
+    bottom: 0;
+    right: 32px;
+    /* border: 2px solid #000; */
+    border-radius: 50%;
+    -webkit-transition: all 0.3s ease-in 0s;
+    transition: all 0.3s ease-in 0s;
+}
+
+.onoffswitch-label2 {
+    display: block; overflow: hidden; cursor: pointer;
+    height: 15px; padding: 0; line-height: 15px;
+    border: 2px solid #4e5d6a; border-radius: 7px;
+    background-color: #fff;
+    transition: background-color 0.3s ease-in;
+}
+.onoffswitch-label2:before {
+    content: "";
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-radius: 7px;
+    margin: 0px;
+    background: #4e5d6a;
+    position: absolute;
+    top: 2px;
+    bottom: 0;
+    right: 31px;
+    /* border: 2px solid #000; */
+    border-radius: 50%;
+    -webkit-transition: all 0.3s ease-in 0s;
+    transition: all 0.3s ease-in 0s;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label {
+    background-color: #fff;
+    
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label, .onoffswitch-checkbox:checked + .onoffswitch-label:before {
+    border: 2px solid #4e5d6a;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label:before {
+    right: 4px;
+}
+
+.onoffswitch-checkbox:checked + .onoffswitch-label2 {
+    background-color: #fff;
+    
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label2, .onoffswitch-checkbox:checked + .onoffswitch-label2:before {
+    // border: 2px solid #eee;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label2:before {
+    right: 4px;
+}

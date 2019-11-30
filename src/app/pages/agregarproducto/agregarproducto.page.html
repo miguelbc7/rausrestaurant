@@ -23,7 +23,7 @@
         <ion-col class="ion-justify-center ion-align-self-center ion-text-center">
             <!-- <ion-icon class="font20" name="megaphone" (click)="presentPromocion()"></ion-icon> -->
             <ion-icon  class="promo-icon" src="assets/img/icon/parlantepromo.svg" (click)="presentPromocion()"></ion-icon>
-            <div class="font8 promo-mg">Promoción</div>  
+            <div class="font8 promo-mg">Promociónar</div>  
         </ion-col>
       </ion-row>
       <ion-row>
@@ -166,7 +166,8 @@
                 </p>
                 <p class="my-0 boxP"> 
                   <!-- <span class="font40">10</span> <span class="font12 decimal">,50€</span> -->
-                  <ion-input aria-placeholder="10,50" type="tel" formControlName="price_with_iva" [(ngModel)]="price_with_iva">€ </ion-input> 
+                  <ion-input aria-placeholder="10,50" type="tel" formControlName="price_with_iva" [(ngModel)]="price_with_iva"></ion-input> 
+                  <span class="euro">€</span>
                 </p>
           </ion-text>
           </ion-item>
@@ -216,7 +217,7 @@
               <ion-row class="padding-section">
                 <ion-col size="6" class="ion-align-self-center ion-text-center">
                     <ion-icon class="font20" name="restaurant"></ion-icon>
-                    <p class="my-0 font8">Comer en restaurante</p>
+                    <p class="my-0 font7">Comer en restaurante</p>
                     <!-- <span>Exento</span> -->
                 </ion-col>
                 <ion-col size="6" class="ion-align-self-center">
@@ -229,7 +230,7 @@
               <ion-row class="padding-section">
                   <ion-col size="6" class="ion-align-self-center ion-text-center">
                       <ion-icon class="font20" name="appstore"></ion-icon>
-                      <p class="my-0 font8">Llevar</p>
+                      <p class="my-0 font7">Llevar</p>
                       <!-- <span>Exento</span> -->
                   </ion-col>
                   <ion-col size="6" class="ion-align-self-center">
@@ -242,7 +243,7 @@
               <ion-row class="padding-section">
                   <ion-col size="6" class="ion-align-self-center ion-text-center">
                         <ion-icon class="font20" name="bicycle"></ion-icon>
-                        <p class="my-0 font8">Delivery</p>
+                        <p class="my-0 font7">Delivery</p>
                         <!-- <span>Exento</span> -->
                   </ion-col>
                   <ion-col size="6" class="ion-align-self-center">

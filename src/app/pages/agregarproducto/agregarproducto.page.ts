@@ -221,7 +221,8 @@ export class AgregarproductoPage implements OnInit {
       componentProps:{
         productID: productID,
       },
-      cssClass: 'sizeModalPromocion'
+      cssClass: 'sizeModalPromocion',
+      backdropDismiss:false,
     });
 
     await modal.present();
@@ -230,7 +231,8 @@ export class AgregarproductoPage implements OnInit {
     await this.modalCtrl.dismiss();
     const modal = await this.modalCtrl.create({
       component: ExcelentePage,
-      cssClass: 'sizeModalPromocion'
+      cssClass: 'sizeModalPromocion',
+      backdropDismiss:false,
     });
     await modal.present();
   }

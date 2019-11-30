@@ -1,15 +1,13 @@
-<!-- <ion-header>
-  <ion-toolbar>
-    <ion-title>horarios</ion-title>
-    <ion-buttons slot="primary" class="xModal">
-        <ion-button color="dark" fill="clear" (click)="closeModal()">
-          <ion-icon slot="end" name="close"></ion-icon>
-        </ion-button>
-      </ion-buttons>
-  </ion-toolbar>
-</ion-header> -->
-
 <ion-content>
+<!--   <ion-row class="ion-justify-end">
+    <ion-col>
+      <div class="ml-2 onoffswitch">
+        <input type="checkbox" name="onoffswitch" formControlName="status" [(ngModel)]="status" class="onoffswitch-checkbox" id="myonoffswitch" checked>
+        <label class="onoffswitch-label" for="myonoffswitch"></label>
+      </div>
+    </ion-col>
+  </ion-row> -->
+  
     <div class="ion-margin-horizontal">
       <ion-buttons slot="primary" class="xModal">
         <ion-button color="dark" fill="clear" (click)="closeModal()">
@@ -56,16 +54,16 @@
     <ion-grid>
       <form #form="ngForm" (ngSubmit)="createForm()">
       <ion-row>
-        <ion-col size="12" size-md="6">
+        <ion-col size="6">
           <ion-item>
             <ion-label class="font14">Hora Inicio</ion-label>
-            <ion-datetime [(ngModel)]="start" name="start" pickerFormat="h:mm a" displayFormat="h:mm a" minuteValues="0,15,30,45"></ion-datetime>
+            <ion-datetime [(ngModel)]="start" name="start" pickerFormat="HH:mm a" displayFormat="HH:mm a" minuteValues="0,15,30,45"></ion-datetime>
           </ion-item>
         </ion-col>
-        <ion-col size="12" size-md="6">
+        <ion-col size="6">
           <ion-item>
             <ion-label class="font14">Hora Final</ion-label>
-            <ion-datetime  [(ngModel)]="end" name="end" pickerFormat="h:mm a" displayFormat="h:mm a" minuteValues="0,15,30,45"></ion-datetime>
+            <ion-datetime  [(ngModel)]="end" name="end" pickerFormat="HH:mm a" displayFormat="HH:mm a" minuteValues="0,15,30,45"></ion-datetime>
           </ion-item>
         </ion-col>
       </ion-row>
