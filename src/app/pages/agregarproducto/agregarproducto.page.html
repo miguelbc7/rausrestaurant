@@ -119,7 +119,7 @@
                         </div>
                   </ion-col>
               </ion-row>
-              <ion-row>
+              <ion-row [hidden]="!nutritional_values">
                   <ion-col size="9" class="ion-align-self-center">
                         <p class="my-0 font10">Grasas:</p>
                         <!-- <span>Exento</span> -->
@@ -128,7 +128,7 @@
                       <ion-input type="number" class="inputCustom3 ion-text-center" formControlName="fat" [(ngModel)]="fat"></ion-input>
                   </ion-col>
               </ion-row>
-              <ion-row>
+              <ion-row [hidden]="!nutritional_values">
                   <ion-col size="9" class="ion-align-self-center">
                         <p class="my-0 font10">Proteínas:</p>
                         <!-- <span>Exento</span> -->
@@ -137,7 +137,7 @@
                       <ion-input type="number" class="inputCustom3 ion-text-center" formControlName="protein" [(ngModel)]="protein"></ion-input>
                   </ion-col>
               </ion-row>
-              <ion-row>
+              <ion-row [hidden]="!nutritional_values">
                   <ion-col size="9" class="ion-align-self-center">
                         <p class="my-0 font10">Carbohidratos:</p>
                         <!-- <span>Exento</span> -->
@@ -146,7 +146,7 @@
                       <ion-input type="number" class="inputCustom3 ion-text-center" formControlName="carbohydrates" [(ngModel)]="carbohydrates"></ion-input>
                   </ion-col>
               </ion-row>
-              <ion-row>
+              <ion-row [hidden]="!nutritional_values">
                   <ion-col size="9" class="ion-align-self-center">
                         <p class="my-0 font10">Total calorías:</p>
                         <!-- <span>Exento</span> -->
