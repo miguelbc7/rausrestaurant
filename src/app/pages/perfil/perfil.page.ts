@@ -25,6 +25,8 @@ export class PerfilPage implements OnInit {
   passwordType: string  = 'password';
   passwordShown: any;
   avatar = 'assets/img/avatar.png';
+  type = 'create';
+  id;
 
   constructor(private modalCtrl: ModalController, public formBuilder: FormBuilder, private router: Router,
     private authService: AuthService, private storage: Storage, private nativeGeocoder: NativeGeocoder, public loading: LoadingService ) { 
@@ -108,6 +110,10 @@ export class PerfilPage implements OnInit {
     this.storage.set('imgPreview', this.avatar);
     const modal = await this.modalCtrl.create({
       component: ModalEditavatarPage,
+      componentProps:[
+       { type: this.type,
+        id: this.id}
+      ]
     });
     await modal.present();
  }
@@ -134,6 +140,7 @@ export class PerfilPage implements OnInit {
  getMe(){
    this.authService.me().then(res =>{
     res.subscribe(data =>{
+      console.log(data);
       this.email = data.user.email;
 
       // console.log(this.email);
@@ -144,7 +151,14 @@ export class PerfilPage implements OnInit {
  getAvatar(){
    this.authService.readAvatar().then(res=>{
      res.subscribe(data=>{
-       this.avatar = data? data[0].image: 'assets/img/avatar.png';
+       if(data){
+         this.avatar= 'assets/img/avatar.png';
+         this.type = 'create';
+       }else{
+         this.avatar = data[0].image;
+         this.id = data[0].id;
+         this.type = 'edit';
+       }
      });
    })
  }

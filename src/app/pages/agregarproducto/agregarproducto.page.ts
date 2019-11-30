@@ -40,7 +40,7 @@ export class AgregarproductoPage implements OnInit {
   delivery:boolean = true;
   status:boolean = true;
   type;
-  
+  stock;
 
   constructor(
     private modalCtrl: ModalController, 
@@ -97,9 +97,9 @@ export class AgregarproductoPage implements OnInit {
           delivery: [this.delivery],
           status: [this.status],
           // images: [],
-          // stock: ['', Validators.compose([
-          //   Validators.required,
-          // ])],
+          stock: ['', Validators.compose([
+            Validators.required,
+          ])],
       });
 
    }
@@ -153,6 +153,9 @@ export class AgregarproductoPage implements OnInit {
       ],
       'delivery': [
       ],
+      'stock':[
+        
+      ]
     }
     ionViewWillEnter(){
       console.log(this.type);

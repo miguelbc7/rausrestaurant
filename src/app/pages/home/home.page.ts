@@ -185,6 +185,16 @@ export class HomePage implements OnInit {
        console.log('response list prod')
        response.subscribe((data) => {
          this.productos =data.products;
+         for (let index = 0; index < this.productos.length; index++) {
+           const element = this.productos[index];
+           this.productosService.getImagen(element.id).then(res=>{
+             console.log(res);
+             res.subscribe(data=>{
+               this.productos.iamges = data;
+
+             })
+           })
+         }
          this.loading.hideLoader();
         }, err => {
           console.log(err);
