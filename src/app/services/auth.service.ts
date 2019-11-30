@@ -7,12 +7,15 @@ import { catchError } from 'rxjs/operators';
 import {  Observable, throwError } from 'rxjs';
 import { Storage } from '@ionic/storage';
 import { LoadingService } from './loading.service';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  private snapshotChangesSubscription: any;
 
   url = environment.url;
   token:string;
@@ -43,7 +46,7 @@ export class AuthService {
   };
 
 
-  constructor(private http: HttpClient, private storage: Storage,public loading: LoadingService) { }
+  constructor(private http: HttpClient, private storage: Storage,public loading: LoadingService, private afs: AngularFirestore,public afAuth: AngularFireAuth ) { }
 
 
 
@@ -174,25 +177,54 @@ export class AuthService {
       )
    }
 
-   async updateAvatar(item): Promise<any> {
-    await this.storage.get('_token').then(res=>{
-      this.token = res.token;
-    });
-    await this.storage.get('uid').then(res=>{
-      this.uid = res;
-    });
-    let data = {
-      uid: this.uid,
-      files: item,
-    }
-    return this.http.put<Restaurant>(this.url+'users/photo/', JSON.stringify(data),{
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': this.token,
+    updateAvatar(recordID,record): Promise<any> {
+    console.log(record);
+    return new Promise<any>((resolve, reject) => {
+      let currentUser = firebase.auth().currentUser;
+      this.afs.collection('restaurantes').doc(currentUser.uid).collection('avatar').doc(recordID).set(record)
+      .then(
+        res => resolve(res),
+        err => reject(err)
+      )
+    })
+ }
+
+ createAvatar(record) {
+  return new Promise<any>((resolve, reject) => {
+    let currentUser = firebase.auth().currentUser;
+    this.afs.collection('restaurantes').doc(currentUser.uid).collection('avatar').add(record)
+    .then(
+      res => resolve(res),
+      err => reject(err)
+    )
+  })
+}
+ 
+  readAvatar() {
+    return new Promise<any>((resolve, reject) => {
+      this.afAuth.user.subscribe(currentUser => {
+        if(currentUser){
+          this.snapshotChangesSubscription = this.afs.collection('restaurantes').doc(currentUser.uid).collection('avatar').snapshotChanges();
+          resolve(this.snapshotChangesSubscription);
+        }
       })
     })
-    .pipe(
-      catchError(this.handleError)
-    )
- }
+  }
+
+  getAvatar(itemID){
+    return new Promise<any>((resolve, reject) => {
+      this.afAuth.user.subscribe(currentUser => {
+        if(currentUser){
+          this.snapshotChangesSubscription = this.afs.doc<any>('restaurantes/' + currentUser.uid + '/avatar/' + itemID).valueChanges()
+          .subscribe(snapshots => {
+            resolve(snapshots);
+          }, err => {
+            reject(err)
+          })
+        }
+      })
+    });
+  }
+
+
 }
