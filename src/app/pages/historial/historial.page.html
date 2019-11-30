@@ -12,7 +12,7 @@
 <!-- Ingresos -->
     <ion-card class="card-expandable" (click)="expandItem(item)" *ngFor="let item of items">
         <ion-card-header class="margin-header" (click)="toggleZipped()">
-          <ion-card-title class="font18 color-font">Ingresos <ion-icon class="arrow-icon" color="bluedark" [name]="zipped ? 'arrow-dropright' : 'arrow-dropdown'"></ion-icon>
+          <ion-card-title class="font14 color-font">Ingresos <ion-icon class="arrow-icon" color="bluedark" [name]="zipped ? 'arrow-dropright' : 'arrow-dropdown'"></ion-icon>
           </ion-card-title>
         </ion-card-header>
         <ion-card-content class="content-expandable">
@@ -32,7 +32,7 @@
 <!-- Egresos -->
     <ion-card class="card-expandable" (click)="expandItem2(item)" *ngFor="let item of items">
           <ion-card-header class="margin-header" (click)="toggleZipped2()">
-            <ion-card-title class="font18 color-font">Egresos <ion-icon class="arrow-icon" color="bluedark" [name]="zipped2 ? 'arrow-dropright' : 'arrow-dropdown'"></ion-icon>
+            <ion-card-title class="font14 color-font">Egresos <ion-icon class="arrow-icon" color="bluedark" [name]="zipped2 ? 'arrow-dropright' : 'arrow-dropdown'"></ion-icon>
             </ion-card-title>
           </ion-card-header>
           <ion-card-content class="content-expandable">
@@ -52,7 +52,7 @@
 <!-- Puntos Otorgados -->
 <ion-card class="card-expandable" (click)="expandItem3(item)" *ngFor="let item of items">
     <ion-card-header class="margin-header" (click)="toggleZipped3()">
-      <ion-card-title class="font18 color-font">Puntos otorgados <ion-icon class="arrow-icon" color="bluedark" [name]="zipped3 ? 'arrow-dropright' : 'arrow-dropdown'"></ion-icon></ion-card-title>
+      <ion-card-title class="font14 color-font">Puntos otorgados <ion-icon class="arrow-icon" color="bluedark" [name]="zipped3 ? 'arrow-dropright' : 'arrow-dropdown'"></ion-icon></ion-card-title>
     </ion-card-header>
     <ion-card-content class="content-expandable">
       <app-expandable expandHeight="120px" [expanded]="item.expanded3">
@@ -71,7 +71,7 @@
 <!-- Puntos Canjeados -->
 <ion-card class="card-expandable" (click)="expandItem4(item)" *ngFor="let item of items">
     <ion-card-header class="margin-header" (click)="toggleZipped4()">
-      <ion-card-title class="font18 color-font">Puntos canjeados <ion-icon class="arrow-icon" color="bluedark" [name]="zipped4 ? 'arrow-dropright' : 'arrow-dropdown'"></ion-icon></ion-card-title>
+      <ion-card-title class="font14 color-font">Puntos canjeados <ion-icon class="arrow-icon" color="bluedark" [name]="zipped4 ? 'arrow-dropright' : 'arrow-dropdown'"></ion-icon></ion-card-title>
     </ion-card-header>
     <ion-card-content class="content-expandable">
       <app-expandable expandHeight="120px" [expanded]="item.expanded4">

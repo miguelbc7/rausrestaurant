@@ -131,11 +131,13 @@
         <tag-input  class="ion-text-center inputTag"
           formControlName="categories" 
           [placeholder]="' Agregar Tag'"
-          [secondaryPlaceholder]="'#hostelería #restauración'" 
+          [secondaryPlaceholder]="'#Comer #Salud'" 
           [maxItems]='1'  
           [separatorKeyCodes]="[32, 138]"
           [onlyFromAutocomplete]="true"
           [theme]="'minimal'"
+          (focus)="textFocus()"
+          (blur)="textBlur()"
         >
         <tag-input-dropdown 
         [autocompleteItems]="[ '#Comer', '#Salud', '#Cuidado Personal', '#Fuel', '#Entretenimiento', '#Kids',
@@ -160,6 +162,13 @@
     <label class="error-message" >{{errorMessage}}</label>
   </div>
   </form>
+  <ion-row>
+    <ion-col size="12" [hidden]="keyboard" >
+      <div class="keyboard-height">
+      </div>
+    </ion-col>
+  </ion-row>
+  
 </ion-content>
 
 <!-- [disabled]="!register1.valid" , [autocompleteItems]="['#restaurante','#hoteleria']" -->
