@@ -43,7 +43,7 @@ export class Register1Page implements OnInit {
         Validators.required,
         Validators.maxLength(300),
         Validators.minLength(5),
-        Validators.pattern('[A-Za-zñÑ\s]{5,300}'),
+        Validators.pattern('[A-Za-zñÑ ]{5,300}'),
       ])],
       cif_nic: ['', Validators.compose([
         Validators.required,

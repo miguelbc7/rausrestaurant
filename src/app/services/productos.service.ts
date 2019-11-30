@@ -164,7 +164,7 @@ export class ProductosService {
       )
   }
 
-  async uploadItem(id, item): Promise<any>{
+  async uploadImage(id, item): Promise<any>{
     let data = {
       _id : id,
       images: item
@@ -178,6 +178,44 @@ export class ProductosService {
       )
     })
   }
+
+  
+  async uploadItem(id, item): Promise<any>{
+    let data = {
+      _id : id,
+      images: item
+    }
+    console.log(data);
+    await this.storage.get('_token').then(res=>{
+        this.token = res.token;
+      });
+      return this.http
+        .put<any>(this.base_path+'products/images',JSON.stringify(data) ,{
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        // 'Authorization': this.token,
+      }),
+      // params: {
+        // token: this.token,
+      // }
+    })
+    .pipe(
+      catchError(this.handleError)
+    )
+  }
+
+  
+  updateImagen(id, record): Promise<any> {
+    console.log(record);
+    return new Promise<any>((resolve, reject) => {
+      let currentUser = firebase.auth().currentUser;
+      this.afs.collection('restaurantes').doc(currentUser.uid).collection('productos').doc(id).set(record)
+      .then(
+        res => resolve(res),
+        err => reject(err)
+      )
+    })
+ }
 
   getImagen(id){
     return new Promise<any>((resolve, reject) => {

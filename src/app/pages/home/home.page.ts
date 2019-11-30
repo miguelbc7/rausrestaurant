@@ -190,7 +190,7 @@ export class HomePage implements OnInit {
            this.productosService.getImagen(element.id).then(res=>{
              console.log(res);
              res.subscribe(data=>{
-               this.productos.iamges = data;
+               this.productos[index].iamges = data;
 
              })
            })
