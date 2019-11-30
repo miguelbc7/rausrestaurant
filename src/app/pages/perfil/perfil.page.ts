@@ -69,6 +69,7 @@ export class PerfilPage implements OnInit {
   ngOnInit() {
     this.getMe();
    this.getUserDetail();
+   this.getAvatar();
   }
   validation_messages = {
     'business_name': [
@@ -138,6 +139,14 @@ export class PerfilPage implements OnInit {
       // console.log(this.email);
     })
   });
+ }
+
+ getAvatar(){
+   this.authService.readAvatar().then(res=>{
+     res.subscribe(data=>{
+       this.avatar = data? data[0].image: 'assets/img/avatar.png';
+     });
+   })
  }
 
  onSubmit(values){
