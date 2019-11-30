@@ -161,7 +161,7 @@ export class AuthService {
         lat: '40',
         lng: '-49.00012',
         phone: item.phone,
-        direction: item.address,
+        direction: item.direction,
       }
 
 
