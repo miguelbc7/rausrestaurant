@@ -3,7 +3,7 @@
     	<!-- <form [formGroup]="productoForm" (ngSubmit)="onUpdate(productoForm.value)" *ngIf="type == edit"  class="ion-margin-horizontal"> -->
     	<ion-row>
         	<ion-col size="6" class="ion-align-self-center">
-            	Vegetalia Restaurant
+            	{{profile.business_name}}
         	</ion-col>
         	<ion-col class="ion-justify-center ion-align-self-center ion-text-center">
             	<div class="font8">activo/inactivo</div>  
@@ -148,7 +148,7 @@
 							<span class="mr-2">Stock</span>
 							<div class="inline">
 								<ion-icon class="iconMargin" name="remove" (click)="remove()"></ion-icon>
-								<ion-input class="inputCustom2 ion-text-center" formControlName="stock" [(ngModel)]="stock"></ion-input>
+								<ion-input class="inputCustom2 ion-text-center" type="number" formControlName="stock" [(ngModel)]="stock"></ion-input>
 								<ion-icon class="iconMargin" name="add" (click)="add()"></ion-icon>
 							</div>
 						</ion-col>

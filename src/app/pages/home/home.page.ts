@@ -83,6 +83,7 @@ export class HomePage implements OnInit {
       res.subscribe(data =>{
         this.profile.business_name = data.business_name;
         this.profile.direction = data.direction;
+        this.storage.set('profile',data);
       })
     });
   }
@@ -192,7 +193,7 @@ export class HomePage implements OnInit {
            this.productosService.getImagen(element.id).then(res=>{
              console.log(res);
              res.subscribe(data=>{
-               this.productos[index].iamges = data;
+               this.productos[index].images = data;
 
              })
            })
@@ -275,7 +276,8 @@ export class HomePage implements OnInit {
   getAvatar(){
     this.authService.getAvatar().then(response => {
       console.log('response', response);
-      this.avatar = response.image;
+      if(response)
+        this.avatar = response.image;
     });
   }
 

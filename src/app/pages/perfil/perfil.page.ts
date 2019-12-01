@@ -7,7 +7,7 @@ import { AuthService } from '../../services/auth.service';
 import { Storage } from '@ionic/storage';
 import { NativeGeocoder, NativeGeocoderResult } from '@ionic-native/native-geocoder/ngx';
 import { LoadingService } from 'src/app/services/loading.service';
-
+import { Camera, CameraOptions } from '@ionic-native/Camera/ngx';
 
 
 @Component({
@@ -27,9 +27,10 @@ export class PerfilPage implements OnInit {
   avatar = 'assets/img/avatar.png';
   type = 'create';
   idAvatar;
+  aImages: any = [{image: 'assets/img/avatar.png'}];
 
   constructor(private modalCtrl: ModalController, public formBuilder: FormBuilder, private router: Router,
-    private authService: AuthService, private storage: Storage, private nativeGeocoder: NativeGeocoder, public loading: LoadingService ) { 
+    private authService: AuthService, private storage: Storage, private nativeGeocoder: NativeGeocoder, public loading: LoadingService,private camera: Camera, ) { 
 
       this.profileForm = this.formBuilder.group({
           business_name: ['', Validators.compose([
@@ -157,13 +158,10 @@ export class PerfilPage implements OnInit {
 
   getAvatar(){
     this.authService.getAvatar().then(response => {
-      this.avatar = response.image;
-      /* response.subscribe((data) => {
-        
-        console.log(this.avatar);
-      }, err => {
-        console.log(err);
-      }); */
+      if(response){
+        this.avatar = response.image;
+        this.type ='edit';
+      }
     });
   }
 
@@ -190,6 +188,45 @@ export class PerfilPage implements OnInit {
     this.passwordShown = true;
     this.passwordType = 'text';
   }
+}
+
+pickImage() {
+   
+  const options: CameraOptions = {
+    quality: 100,
+    sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+    destinationType: this.camera.DestinationType.DATA_URL,
+    encodingType: this.camera.EncodingType.JPEG,
+    mediaType: this.camera.MediaType.PICTURE
+  }
+  this.camera.getPicture(options).then((imageData) => {
+    // imageData is either a base64 encoded string or a file URI
+    // If it's base64 (DATA_URL):
+    let base64Image = 'data:image/jpeg;base64,' + imageData;
+    this.aImages = {image:base64Image} ;
+    this.avatar = base64Image;
+    console.log(this.type);
+    console.log(this.avatar);
+    if(this.type == 'create'){
+      this.authService.createAvatar(this.aImages).then((response) => {
+        console.log(response);
+        response.subscribe((data) => {
+          console.log(data);
+          this.storage.set('avatar',data);
+          this.getAvatar();
+      }, err => {
+          console.error(err);
+        });
+     });
+    }else{
+      this.authService.updateAvatar(this.aImages).then((response) => {
+        this.getAvatar();
+     });
+    }
+  
+  }, (err) => {
+    // Handle error
+  });
 }
 
 }

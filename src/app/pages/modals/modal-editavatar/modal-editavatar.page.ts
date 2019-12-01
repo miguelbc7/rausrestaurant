@@ -49,14 +49,9 @@ export class ModalEditavatarPage implements OnInit {
 
  pickImage(type) {
    
-    // let destinationType = this.camera.DestinationType.FILE_URI;
-    // if(this.platform.is('ios')){
-    //   destinationType = this.camera.DestinationType.NATIVE_URI;
-    // }
     const options: CameraOptions = {
       quality: 100,
       sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
-      // destinationType: destinationType,
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE
@@ -80,13 +75,6 @@ export class ModalEditavatarPage implements OnInit {
       }else{
         this.authService.updateAvatar(this.aImages).then((response) => {
           this.getAvatar();
-          /* response.subscribe((data) => {
-            console.log(data);
-            this.storage.set('avatar',data);
-            
-          }, err => {
-            console.error(err);
-          }); */
        });
       }
     
@@ -99,12 +87,6 @@ export class ModalEditavatarPage implements OnInit {
     this.authService.getAvatar().then(response => {
       console.log('response', response);
       this.avatar = response.image;
-      /* response.subscribe((data) => {
-        
-        console.log(this.avatar);
-      }, err => {
-        console.log(err);
-      }); */
     });
   }
 

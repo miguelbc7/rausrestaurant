@@ -47,6 +47,8 @@ export class AgregarproductoPage implements OnInit {
 		slidesPerView: 1
 		// autoplay:true
 	};
+
+	profile:any = {};
 	validation_messages = {
 		'name': [
 			{ type: 'required', message: 'Debe ingresar el nombre del producto.' },
@@ -171,7 +173,13 @@ export class AgregarproductoPage implements OnInit {
 			if(res == 'create'){
 				this.storage.remove('product');
 			}
-    	})
+		})
+		
+		this.storage.get('profile').then(res =>{
+			console.log(res);
+			this.profile = res;
+			console.log(this.profile);
+		})
 
     	this.storage.get('product').then(res =>{
 			console.log(res);

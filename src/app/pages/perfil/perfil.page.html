@@ -9,7 +9,7 @@
   <br><br>
   <ion-avatar class="avatar">
     <img class="imgAvatar" src="{{avatar}}" alt="avatar perfil">
-    <ion-icon class="edit-img" name="create" (click)="editperfil()"></ion-icon>
+    <ion-icon class="edit-img" name="create" (click)="pickImage()"></ion-icon>
   </ion-avatar>
   <ion-grid>
     <form [formGroup]="profileForm" (ngSubmit)="onSubmit(profileForm.value)" class="ion-margin-horizontal">
