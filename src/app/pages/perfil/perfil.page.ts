@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, ActionSheetController } from '@ionic/angular';
 import { ModalEditavatarPage } from '../modals/modal-editavatar/modal-editavatar.page';
 import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -30,7 +30,7 @@ export class PerfilPage implements OnInit {
   aImages: any = [{image: 'assets/img/avatar.png'}];
 
   constructor(private modalCtrl: ModalController, public formBuilder: FormBuilder, private router: Router,
-    private authService: AuthService, private storage: Storage, private nativeGeocoder: NativeGeocoder, public loading: LoadingService,private camera: Camera, ) { 
+    private authService: AuthService, private storage: Storage, private nativeGeocoder: NativeGeocoder, public loading: LoadingService,private camera: Camera, private actionSheetController: ActionSheetController ) { 
 
       this.profileForm = this.formBuilder.group({
           business_name: ['', Validators.compose([
@@ -190,11 +190,35 @@ export class PerfilPage implements OnInit {
   }
 }
 
-pickImage() {
+async selectImage() {
+  const actionSheet = await this.actionSheetController.create({
+      header: "Select Image source",
+      buttons: [{
+              text: 'Usar imagen desde la galería',
+              handler: () => {
+                  this.pickImage(this.camera.PictureSourceType.PHOTOLIBRARY);
+              }
+          },
+          {
+              text: 'Usar Cámara',
+              handler: () => {
+                  this.pickImage(this.camera.PictureSourceType.CAMERA);
+              }
+          },
+          {
+              text: 'Cancelar',
+              role: 'cancel'
+          }
+      ]
+  });
+  await actionSheet.present();
+}
+
+pickImage(sourceType) {
    
   const options: CameraOptions = {
     quality: 100,
-    sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+    sourceType: sourceType,
     destinationType: this.camera.DestinationType.DATA_URL,
     encodingType: this.camera.EncodingType.JPEG,
     mediaType: this.camera.MediaType.PICTURE
@@ -206,7 +230,6 @@ pickImage() {
     this.aImages = {image:base64Image} ;
     this.avatar = base64Image;
     console.log(this.type);
-    console.log(this.avatar);
     if(this.type == 'create'){
       this.authService.createAvatar(this.aImages).then((response) => {
         console.log(response);

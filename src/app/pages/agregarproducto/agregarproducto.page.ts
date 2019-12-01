@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { ModalController, Platform } from '@ionic/angular';
+import { ModalController, Platform, ActionSheetController } from '@ionic/angular';
 import { AddsliderPage } from '../modals/addslider/addslider.page';
 import { ModalPromocionPage } from '../modals/modal-promocion/modal-promocion.page';
 import { ExcelentePage } from '../modals/excelente/excelente.page';
@@ -109,6 +109,7 @@ export class AgregarproductoPage implements OnInit {
 		private camera: Camera,
 		private storage:Storage,
 		public loading: LoadingService,
+		private actionSheetController: ActionSheetController,
     ) {
         this.productoForm = this.formBuilder.group({
         	name: [this.name , Validators.compose([
@@ -162,7 +163,8 @@ export class AgregarproductoPage implements OnInit {
    	}
 	
     ionViewWillEnter(){
-    	console.log(this.type);
+		this.ngOnInit();
+		console.log(this.type);
 	}
 	
   	ngOnInit() {
@@ -209,7 +211,7 @@ export class AgregarproductoPage implements OnInit {
 				this.wear = res.wear;
 				this.delivery = res.delivery;
 				this.status = res.status;
-				this.aImages = res.images;
+				this.aImages.push(res.images);
 			}
       	});
   	}
@@ -354,10 +356,34 @@ export class AgregarproductoPage implements OnInit {
 
  //////////////////// Imagen //////////////////////
 
-	pickImage() {
+ async selectImage() {
+    const actionSheet = await this.actionSheetController.create({
+        header: "Select Image source",
+        buttons: [{
+                text: 'Usar imagen desde la galería',
+                handler: () => {
+                    this.addslider(this.camera.PictureSourceType.PHOTOLIBRARY);
+                }
+            },
+            {
+                text: 'Usar Cámara',
+                handler: () => {
+                    this.addslider(this.camera.PictureSourceType.CAMERA);
+                }
+            },
+            {
+                text: 'Cancelar',
+                role: 'cancel'
+            }
+        ]
+    });
+    await actionSheet.present();
+  }
+
+	pickImage(sourceType) {
 		const options: CameraOptions = {
 			quality: 100,
-			sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+			sourceType: sourceType,
 			destinationType: this.camera.DestinationType.DATA_URL,
 			encodingType: this.camera.EncodingType.JPEG,
 			mediaType: this.camera.MediaType.PICTURE

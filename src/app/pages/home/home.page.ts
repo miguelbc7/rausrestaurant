@@ -9,7 +9,7 @@ import { EditdireccionPage } from '../modals/editdireccion/editdireccion.page';
 // import { AgregarPage } from '../modals/agregar/agregar.page';
 // import { CierrePage } from '../cierre/cierre.page';
 // import { AgregartarjetaPage } from '../modals/agregartarjeta/agregartarjeta.page';
-import { ModalController, NavController } from '@ionic/angular';
+import { ModalController, NavController, ActionSheetController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { ProductosService } from '../../services/productos.service';
 import { HorarioService } from 'src/app/services/horario.service';
@@ -54,6 +54,7 @@ export class HomePage implements OnInit {
     private authService: AuthService,
     private camera: Camera,
     public loading: LoadingService,
+    private actionSheetController: ActionSheetController,
     public router:Router) {
     this.productos = [];
     this.storage.get('_token').then(val =>{
@@ -87,10 +88,35 @@ export class HomePage implements OnInit {
       })
     });
   }
-  async addslider() {
+
+  async selectImage() {
+    const actionSheet = await this.actionSheetController.create({
+        header: "Select Image source",
+        buttons: [{
+                text: 'Usar imagen desde la galería',
+                handler: () => {
+                    this.addslider(this.camera.PictureSourceType.PHOTOLIBRARY);
+                }
+            },
+            {
+                text: 'Usar Cámara',
+                handler: () => {
+                    this.addslider(this.camera.PictureSourceType.CAMERA);
+                }
+            },
+            {
+                text: 'Cancelar',
+                role: 'cancel'
+            }
+        ]
+    });
+    await actionSheet.present();
+  }
+
+   addslider(sourceType) {
     const options: CameraOptions = {
       quality: 100,
-      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+      sourceType: sourceType,
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE
@@ -251,6 +277,7 @@ export class HomePage implements OnInit {
    }
    
    editProduct(product) {
+     console.log(product);
      this.storage.set('product', product);
      this.storage.set('typeProduct', 'edit');
      this.router.navigate(['/agregarproducto']);
