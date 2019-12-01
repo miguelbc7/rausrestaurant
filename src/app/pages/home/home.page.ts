@@ -67,6 +67,7 @@ export class HomePage implements OnInit {
     this.getSlider();
     this.getListHorario();
     this.getListProductos();
+    this.getAvatar();
    }
   ngOnInit() {
     
@@ -184,7 +185,8 @@ export class HomePage implements OnInit {
      this.productosService.getList().then(response => {
        console.log('response list prod')
        response.subscribe((data) => {
-         this.productos =data.products;
+         console.log('data', data);
+         this.productos = data.products;
          for (let index = 0; index < this.productos.length; index++) {
            const element = this.productos[index];
            this.productosService.getImagen(element.id).then(res=>{
@@ -267,6 +269,13 @@ export class HomePage implements OnInit {
      }, err => {
       console.log(err);
     });
+    });
+  }
+
+  getAvatar(){
+    this.authService.getAvatar().then(response => {
+      console.log('response', response);
+      this.avatar = response.image;
     });
   }
 

@@ -169,7 +169,7 @@
                 <!-- <img class="imgCarta" src="assets/img/pasta2.jpg" alt="avatar perfil"> -->
                 <ion-slides *ngIf="product.images.length > 0">
                   <ion-slide class="changeStyle"  *ngFor="let img of product.images; let imgIndex = index">
-                    <img class="imgCarta3" src="{{img.iamge}}"/>
+                    <img class="imgCarta3" src="{{img.img}}"/>
                   </ion-slide>
                 </ion-slides>
                 <ion-slides *ngIf="product.images.length == 0">

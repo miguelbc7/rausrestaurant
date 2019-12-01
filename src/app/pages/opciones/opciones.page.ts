@@ -93,7 +93,7 @@ export class OpcionesPage implements OnInit {
   ionViewWillEnter(){
     this.loading.showLoader(5000);
     this.getProfile();
-
+    this.getAvatar();
    }
 
   changeIcon(index: number){
@@ -183,6 +183,13 @@ export class OpcionesPage implements OnInit {
       backdropDismiss:false,
     });
     await modal.present();
+  }
+
+  getAvatar(){
+    this.authService.getAvatar().then(response => {
+      console.log('response', response);
+      this.avatar = response.image;
+    });
   }
 
   async openCierreModal() {

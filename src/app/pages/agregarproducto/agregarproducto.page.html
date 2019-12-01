@@ -1,263 +1,235 @@
-<!-- <ion-header no-border>
-  <ion-toolbar>
-    
-  </ion-toolbar>
-</ion-header> -->
-
 <ion-content>
-  <form [formGroup]="productoForm" (ngSubmit)="onSubmit(productoForm.value)" class="ion-margin-horizontal">
-    <!-- <form [formGroup]="productoForm" (ngSubmit)="onUpdate(productoForm.value)" *ngIf="type == edit"  class="ion-margin-horizontal"> -->
-    <ion-row>
-        <ion-col size="6" class="ion-align-self-center">
-            Vegetalia Restaurant
-        </ion-col>
-        <ion-col class="ion-justify-center ion-align-self-center ion-text-center">
-            <div class="font8">activo/inactivo</div>  
-            <!-- <ion-toggle class="toggleCustom"></ion-toggle> -->
-            <div class="ml-2 onoffswitch">
-              <input type="checkbox" name="onoffswitch" formControlName="status" [(ngModel)]="status" class="onoffswitch-checkbox" id="myonoffswitch" checked>
-              <label class="onoffswitch-label" for="myonoffswitch"></label>
-          </div>
-          
-        </ion-col>
-        <ion-col class="ion-justify-center ion-align-self-center ion-text-center">
-            <!-- <ion-icon class="font20" name="megaphone" (click)="presentPromocion()"></ion-icon> -->
-            <ion-icon  class="promo-icon" src="assets/img/icon/parlantepromo.svg" (click)="presentPromocion()"></ion-icon>
-            <div class="font8 promo-mg">Promoción</div>  
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col size="2">
-          <ion-icon (click)="back()" class="iconBack" src="assets/img/icon/back.svg"></ion-icon>
-        </ion-col>
-        <ion-col class="ion-text-center">
-          <ion-input class="font13" color="custondark" formControlName="name" clearInput  [(ngModel)]="name" placeholder="Escribe aqui el nombre del producto"></ion-input> 
-        </ion-col>
-      </ion-row>
-          <div class="validation-errors">
+	<form [formGroup]="productoForm" (ngSubmit)="onSubmit(productoForm.value)" class="ion-margin-horizontal">
+    	<!-- <form [formGroup]="productoForm" (ngSubmit)="onUpdate(productoForm.value)" *ngIf="type == edit"  class="ion-margin-horizontal"> -->
+    	<ion-row>
+        	<ion-col size="6" class="ion-align-self-center">
+            	Vegetalia Restaurant
+        	</ion-col>
+        	<ion-col class="ion-justify-center ion-align-self-center ion-text-center">
+            	<div class="font8">activo/inactivo</div>  
+            	<!-- <ion-toggle class="toggleCustom"></ion-toggle> -->
+            	<div class="ml-2 onoffswitch">
+             		<input type="checkbox" name="onoffswitch" formControlName="status" [(ngModel)]="status" class="onoffswitch-checkbox" id="myonoffswitch" checked>
+              		<label class="onoffswitch-label" for="myonoffswitch"></label>
+          		</div>
+        	</ion-col>
+    		<ion-col class="ion-justify-center ion-align-self-center ion-text-center">
+            	<!-- <ion-icon class="font20" name="megaphone" (click)="presentPromocion()"></ion-icon> -->
+            	<ion-icon  class="promo-icon" src="assets/img/icon/parlantepromo.svg" (click)="presentPromocion()"></ion-icon>
+            	<div class="font8 promo-mg">Promoción</div>  
+       		</ion-col>
+      	</ion-row>
+      	<ion-row>
+        	<ion-col size="2">
+          		<ion-icon (click)="back()" class="iconBack" src="assets/img/icon/back.svg"></ion-icon>
+        	</ion-col>
+        	<ion-col class="ion-text-center">
+          	<ion-input class="font13" color="custondark" formControlName="name" clearInput  [(ngModel)]="name" placeholder="Escribe aqui el nombre del producto"></ion-input> 
+        	</ion-col>
+      	</ion-row>
+		
+		<div class="validation-errors">
             <ng-container *ngFor="let validation of validation_messages.name">
-              <div class="error-message" *ngIf="productoForm.get('name').hasError(validation.type) && (productoForm.get('name').dirty || productoForm.get('name').touched)">
-                {{ validation.message }}
-              </div>
+              	<div class="error-message" *ngIf="productoForm.get('name').hasError(validation.type) && (productoForm.get('name').dirty || productoForm.get('name').touched)">
+                	{{ validation.message }}
+              	</div>
             </ng-container>
-          </div>
-    <ion-row class="my-0">
-        <ion-col class="ion-no-padding">
-          <div class="boxBanner">
-              <ion-slides [options]="slideOptsOne">
-  
-                <ion-slide class="changeStyle" *ngFor="let img of aImages">
-                  <img class="imgBanner" src="{{img.img}}"/>
-                  <div class="divEdit" color="bluelight">
-                    <ion-icon class="iconEditBanner" color="white" name="create" (click)="addslider(img.img)"></ion-icon>
-                  </div>
-                </ion-slide>
-                  <ion-slide class="changeStyle">
-                    <div class="divWhite borderGris">
-                    </div>
-                          <div class="addPhoto" color="">
-                              <ion-icon class="addIcon" color="bluedark" name="add-circle-outline" (click)="pickImage()"></ion-icon>
-                          </div>
-                          <div class="textP">
-                            <p class="ion-text-center my-0 font14">Agregar imagenes al carrusel</p>
-                          </div>
-                  </ion-slide>
-                </ion-slides>          
-          </div>
-        </ion-col>
-    </ion-row>
+		</div>
+		
+   		<ion-row class="my-0">
+        	<ion-col class="ion-no-padding">
+          		<div class="boxBanner">
+              		<ion-slides [options]="slideOptsOne">
+                		<ion-slide class="changeStyle" *ngFor="let img of aImages">
+                  			<img class="imgBanner" src="{{img.img}}"/>
+                  			<div class="divEdit" color="bluelight">
+                    			<ion-icon class="iconEditBanner" color="white" name="create" (click)="addslider(img.img)"></ion-icon>
+                 			</div>
+                		</ion-slide>
+						<ion-slide class="changeStyle">
+							<div class="divWhite borderGris"></div>
+							<div class="addPhoto" color="">
+								<ion-icon class="addIcon" color="bluedark" name="add-circle-outline" (click)="pickImage()"></ion-icon>
+							</div>
+							<div class="textP">
+								<p class="ion-text-center my-0 font14">Agregar imagenes al carrusel</p>
+							</div>
+						</ion-slide>
+               		</ion-slides>          
+          		</div>
+        	</ion-col>
+    	</ion-row>
 
-    <ion-row>
-      <ion-col size="7">
-          <ion-item class="px-0 itemNoPadding">
-          <ion-textarea
-            formControlName="description"
-            [(ngModel)]="description"
-            class="font11 ion-no-padding textareaCustom"
-            rows="8" 
-            cols="20" 
-            placeholder="Descripción: Escribe un mensaje descriptivo y motivador, ej: pasta fresca con una salsa de verduras y algas, muy nutritiva y demasiado rica!">
-          </ion-textarea>
-        </ion-item>
-            <div class="validation-errors">
-                <ng-container *ngFor="let validation of validation_messages.description">
-                  <div class="error-message" *ngIf="productoForm.get('description').hasError(validation.type) && (productoForm.get('description').dirty || productoForm.get('description').touched)">
-                    {{ validation.message }}
-                  </div>
-                </ng-container>
-              </div>
-          <ion-item class="px-0 itemNoPadding">
-              <ion-textarea
-              formControlName="ingredientes"
-              [(ngModel)]="ingredientes"
-                class="font11"
-                rows="4" 
-                cols="20" 
-                placeholder="Ingredientes: Escribe aqui los ingredientes que componen el plato separados por una coma">
-              </ion-textarea>
-          </ion-item>
-          <ion-item class="px-0 itemNoPadding">
-              <ion-textarea
-              formControlName="no_ingredientes"
-              [(ngModel)]="no_ingredientes"
-                class="font11"
-                rows="8" 
-                cols="20" 
-                placeholder="Alergenos: Escribe aca todos los ingredientes que puedan causar alergias o reacciones en personas sensibles a ciertas sustancias ej: Gluten, Nueces, Cacahuates, Mariscos">
-              </ion-textarea>
-          </ion-item>
-          <ion-grid>
-              <ion-row>
-                  <ion-col size="9" class="ion-align-self-center">
-                        <p class="my-0 font10">Valores nutricionales:</p>
-                        <!-- <span>Exento</span> -->
-                  </ion-col>
-                  <ion-col size="3" class="ion-align-self-center">
-                        <div class="onoffswitch-valores">
-                            <input type="checkbox" formControlName="nutritional_values" [(ngModel)]="nutritional_values" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch5" checked>
-                            <label class="onoffswitch-label2" for="myonoffswitch5"></label>
-                        </div>
-                  </ion-col>
-              </ion-row>
-              <ion-row [hidden]="!nutritional_values">
-                  <ion-col size="9" class="ion-align-self-center">
-                        <p class="my-0 font10">Grasas:</p>
-                        <!-- <span>Exento</span> -->
-                  </ion-col>
-                  <ion-col size="3" class="ion-align-self-center">    
-                      <ion-input type="number" class="inputCustom3 ion-text-center" formControlName="fat" [(ngModel)]="fat"></ion-input>
-                  </ion-col>
-              </ion-row>
-              <ion-row [hidden]="!nutritional_values">
-                  <ion-col size="9" class="ion-align-self-center">
-                        <p class="my-0 font10">Proteínas:</p>
-                        <!-- <span>Exento</span> -->
-                  </ion-col>
-                  <ion-col size="3" class="ion-align-self-center">
-                      <ion-input type="number" class="inputCustom3 ion-text-center" formControlName="protein" [(ngModel)]="protein"></ion-input>
-                  </ion-col>
-              </ion-row>
-              <ion-row [hidden]="!nutritional_values">
-                  <ion-col size="9" class="ion-align-self-center">
-                        <p class="my-0 font10">Carbohidratos:</p>
-                        <!-- <span>Exento</span> -->
-                  </ion-col>
-                  <ion-col size="3" class="ion-align-self-center">
-                      <ion-input type="number" class="inputCustom3 ion-text-center" formControlName="carbohydrates" [(ngModel)]="carbohydrates"></ion-input>
-                  </ion-col>
-              </ion-row>
-              <ion-row [hidden]="!nutritional_values">
-                  <ion-col size="9" class="ion-align-self-center">
-                        <p class="my-0 font10">Total calorías:</p>
-                        <!-- <span>Exento</span> -->
-                  </ion-col>
-                  <ion-col size="3" class="ion-align-self-center">
-                      <ion-input type="number" class="inputCustom3 ion-text-center" formControlName="total_calories" [(ngModel)]="total_calories"></ion-input>
-                  </ion-col>
-              </ion-row>
-          </ion-grid>
+    	<ion-row>
+      		<ion-col size="7">
+         		<ion-item class="px-0 itemNoPadding">
+          			<ion-textarea formControlName="description" [(ngModel)]="description" class="font11 ion-no-padding textareaCustom" rows="8" cols="20" placeholder="Descripción: Escribe un mensaje descriptivo y motivador, ej: pasta fresca con una salsa de verduras y algas, muy nutritiva y demasiado rica!"></ion-textarea>
+       			</ion-item>
+            	<div class="validation-errors">
+                	<ng-container *ngFor="let validation of validation_messages.description">
+                  		<div class="error-message" *ngIf="productoForm.get('description').hasError(validation.type) && (productoForm.get('description').dirty || productoForm.get('description').touched)">
+                    		{{ validation.message }}
+                  		</div>
+               	 	</ng-container>
+              	</div>
+          		<ion-item class="px-0 itemNoPadding">
+             		<ion-textarea formControlName="ingredientes" [(ngModel)]="ingredientes" class="font11" rows="4" cols="20" placeholder="Ingredientes: Escribe aqui los ingredientes que componen el plato separados por una coma"></ion-textarea>
+          		</ion-item>
+          		<ion-item class="px-0 itemNoPadding">
+              		<ion-textarea formControlName="no_ingredientes" [(ngModel)]="no_ingredientes" class="font11" rows="8" cols="20"  placeholder="Alergenos: Escribe aca todos los ingredientes que puedan causar alergias o reacciones en personas sensibles a ciertas sustancias ej: Gluten, Nueces, Cacahuates, Mariscos"></ion-textarea>
+          		</ion-item>
+				<ion-grid>
+					<ion-row>
+						<ion-col size="9" class="ion-align-self-center">
+							<p class="my-0 font10">Valores nutricionales:</p>
+							<!-- <span>Exento</span> -->
+						</ion-col>
+						<ion-col size="3" class="ion-align-self-center">
+							<div class="onoffswitch-valores">
+								<input type="checkbox" formControlName="nutritional_values" [(ngModel)]="nutritional_values" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch5" checked>
+								<label class="onoffswitch-label2" for="myonoffswitch5"></label>
+							</div>
+						</ion-col>
+					</ion-row>
+					<ion-row [hidden]="!nutritional_values">
+						<ion-col size="9" class="ion-align-self-center">
+							<p class="my-0 font10">Grasas:</p>
+							<!-- <span>Exento</span> -->
+						</ion-col>
+						<ion-col size="3" class="ion-align-self-center">    
+							<ion-input type="number" class="inputCustom3 ion-text-center" formControlName="fat" [(ngModel)]="fat"></ion-input>
+						</ion-col>
+					</ion-row>
+					<ion-row [hidden]="!nutritional_values">
+						<ion-col size="9" class="ion-align-self-center">
+							<p class="my-0 font10">Proteínas:</p>
+							<!-- <span>Exento</span> -->
+						</ion-col>
+						<ion-col size="3" class="ion-align-self-center">
+							<ion-input type="number" class="inputCustom3 ion-text-center" formControlName="protein" [(ngModel)]="protein"></ion-input>
+						</ion-col>
+					</ion-row>
+					<ion-row [hidden]="!nutritional_values">
+						<ion-col size="9" class="ion-align-self-center">
+							<p class="my-0 font10">Carbohidratos:</p>
+							<!-- <span>Exento</span> -->
+						</ion-col>
+						<ion-col size="3" class="ion-align-self-center">
+							<ion-input type="number" class="inputCustom3 ion-text-center" formControlName="carbohydrates" [(ngModel)]="carbohydrates"></ion-input>
+						</ion-col>
+					</ion-row>
+					<ion-row [hidden]="!nutritional_values">
+						<ion-col size="9" class="ion-align-self-center">
+							<p class="my-0 font10">Total calorías:</p>
+							<!-- <span>Exento</span> -->
+						</ion-col>
+						<ion-col size="3" class="ion-align-self-center">
+							<ion-input type="number" class="inputCustom3 ion-text-center" formControlName="total_calories" [(ngModel)]="total_calories"></ion-input>
+						</ion-col>
+					</ion-row>
+				</ion-grid>
 
-      </ion-col>
-      <ion-col size="5">
-          <ion-item>
-          <ion-text color="bluewelcome">
-              <p class="font11 my-0">
-                  Precio con Iva
-                </p>
-                <p class="my-0 boxP"> 
-                  <!-- <span class="font40">10</span> <span class="font12 decimal">,50€</span> -->
-                  <ion-input aria-placeholder="10,50" type="tel" formControlName="price_with_iva" [(ngModel)]="price_with_iva">€ </ion-input> 
-                </p>
-          </ion-text>
-          </ion-item>
-          <ion-grid class="blue-dark2">
-              <ion-row>
-                  <ion-col size="12" >
-                      <span class="mr-2">Stock</span>
-                      <div class="inline">
-                          <ion-icon class="iconMargin" name="remove" (click)="remove()"></ion-icon>
-                          <ion-input class="inputCustom2 ion-text-center" formControlName="stock" [(ngModel)]="stock"></ion-input>
-                          <ion-icon class="iconMargin" name="add" (click)="add()"></ion-icon>
-                      </div>
-                  </ion-col>
-              </ion-row>
-              <ion-row>
-                <ion-col size="8" class="ion-align-self-center">
-                    <span>Iva 4%</span>
-                </ion-col>
-                <ion-col size="4">
-                    <input type="radio" class="radio1" value="4" formControlName="iva" name="iva" [(ngModel)]="iva" [checked]="iva == 4"  />
-                </ion-col>
-              </ion-row>
-              <ion-row>
-                  <ion-col size="8" class="ion-align-self-center">
-                      <span>Iva 10%</span>
-                  </ion-col>
-                  <ion-col size="4">
-                      <input type="radio" class="radio1" value="10" formControlName="iva" name="iva" [(ngModel)]="iva" [checked]="iva == 10" />
-                  </ion-col>
-                </ion-row>
-                <ion-row>
-                    <ion-col size="8" class="ion-align-self-center">
-                        <span>Iva 21%</span>
-                    </ion-col>
-                    <ion-col size="4">
-                        <input type="radio" class="radio1" value="21" formControlName="iva" name="iva" [(ngModel)]="iva" [checked]="iva == 21" />
-                    </ion-col>
-                </ion-row>
-                <ion-row>
-                      <ion-col size="8" class="ion-align-self-center">
-                          <span>Exento</span>
-                      </ion-col>
-                      <ion-col size="4">
-                          <input type="radio" class="radio1" value="0" formControlName="iva" name="iva" [(ngModel)]="iva" [checked]="iva == 0" />
-                      </ion-col>
-                </ion-row>
-              <ion-row class="padding-section">
-                <ion-col size="6" class="ion-align-self-center ion-text-center">
-                    <ion-icon class="font20" name="restaurant"></ion-icon>
-                    <p class="my-0 font8">Comer en restaurante</p>
-                    <!-- <span>Exento</span> -->
-                </ion-col>
-                <ion-col size="6" class="ion-align-self-center">
-                    <div class="onoffswitch">
-                        <input type="checkbox" name="onoffswitch" formControlName="eat_in_restaurant" [(ngModel)]="eat_in_restaurant" class="onoffswitch-checkbox" id="myonoffswitch2" checked>
-                        <label class="onoffswitch-label2" for="myonoffswitch2"></label>
-                    </div>
-                </ion-col>
-              </ion-row>
-              <ion-row class="padding-section">
-                  <ion-col size="6" class="ion-align-self-center ion-text-center">
-                      <ion-icon class="font20" name="appstore"></ion-icon>
-                      <p class="my-0 font8">Llevar</p>
-                      <!-- <span>Exento</span> -->
-                  </ion-col>
-                  <ion-col size="6" class="ion-align-self-center">
-                      <div class="onoffswitch">
-                          <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" formControlName="wear" [(ngModel)]="wear" id="myonoffswitch3" checked>
-                          <label class="onoffswitch-label2" for="myonoffswitch3"></label>
-                      </div>
-                  </ion-col>
-                </ion-row>
-              <ion-row class="padding-section">
-                  <ion-col size="6" class="ion-align-self-center ion-text-center">
-                        <ion-icon class="font20" name="bicycle"></ion-icon>
-                        <p class="my-0 font8">Delivery</p>
-                        <!-- <span>Exento</span> -->
-                  </ion-col>
-                  <ion-col size="6" class="ion-align-self-center">
-                        <div class="onoffswitch">
-                            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" formControlName="delivery" [(ngModel)]="delivery" id="myonoffswitch4" checked>
-                            <label class="onoffswitch-label2" for="myonoffswitch4"></label>
-                        </div>
-                  </ion-col>
-              </ion-row>
-              <div class="save-button">
-                  <ion-button class="font12 ion-float-right" [disabled]="!productoForm.valid" color="bluedark" type="submit"  >Guardar</ion-button>
-              </div>
-          </ion-grid>
-            <!-- <label for="Disponible" class="fontSizeLabel">Todas</label>  [disabled]="!productoForm.valid"-->
-      </ion-col>
-    </ion-row>
-  </form>
-  </ion-content>
+     		</ion-col>
+			<ion-col size="5">
+				<ion-item>
+					<ion-text color="bluewelcome">
+						<p class="font11 my-0">
+							Precio con Iva
+						</p>
+						<p class="my-0 boxP"> 
+							<!-- <span class="font40">10</span> <span class="font12 decimal">,50€</span> -->
+							<ion-input aria-placeholder="10,50" type="tel" formControlName="price_with_iva" [(ngModel)]="price_with_iva">€ </ion-input> 
+						</p>
+					</ion-text>
+				</ion-item>
+				<ion-grid class="blue-dark2">
+					<ion-row>
+						<ion-col size="12" >
+							<span class="mr-2">Stock</span>
+							<div class="inline">
+								<ion-icon class="iconMargin" name="remove" (click)="remove()"></ion-icon>
+								<ion-input class="inputCustom2 ion-text-center" formControlName="stock" [(ngModel)]="stock"></ion-input>
+								<ion-icon class="iconMargin" name="add" (click)="add()"></ion-icon>
+							</div>
+						</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col size="8" class="ion-align-self-center">
+							<span>Iva 4%</span>
+						</ion-col>
+						<ion-col size="4">
+							<input type="radio" class="radio1" value="4" formControlName="iva" name="iva" [(ngModel)]="iva" [checked]="iva == 4"  />
+						</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col size="8" class="ion-align-self-center">
+							<span>Iva 10%</span>
+						</ion-col>
+						<ion-col size="4">
+							<input type="radio" class="radio1" value="10" formControlName="iva" name="iva" [(ngModel)]="iva" [checked]="iva == 10" />
+						</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col size="8" class="ion-align-self-center">
+							<span>Iva 21%</span>
+						</ion-col>
+						<ion-col size="4">
+							<input type="radio" class="radio1" value="21" formControlName="iva" name="iva" [(ngModel)]="iva" [checked]="iva == 21" />
+						</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col size="8" class="ion-align-self-center">
+							<span>Exento</span>
+						</ion-col>
+						<ion-col size="4">
+							<input type="radio" class="radio1" value="0" formControlName="iva" name="iva" [(ngModel)]="iva" [checked]="iva == 0" />
+						</ion-col>
+					</ion-row>
+					<ion-row class="padding-section">
+						<ion-col size="6" class="ion-align-self-center ion-text-center">
+							<ion-icon class="font20" name="restaurant"></ion-icon>
+							<p class="my-0 font8">Comer en restaurante</p>
+							<!-- <span>Exento</span> -->
+						</ion-col>
+						<ion-col size="6" class="ion-align-self-center">
+							<div class="onoffswitch">
+								<input type="checkbox" name="onoffswitch" formControlName="eat_in_restaurant" [(ngModel)]="eat_in_restaurant" class="onoffswitch-checkbox" id="myonoffswitch2" checked>
+								<label class="onoffswitch-label2" for="myonoffswitch2"></label>
+							</div>
+						</ion-col>
+					</ion-row>
+					<ion-row class="padding-section">
+						<ion-col size="6" class="ion-align-self-center ion-text-center">
+							<ion-icon class="font20" name="appstore"></ion-icon>
+							<p class="my-0 font8">Llevar</p>
+							<!-- <span>Exento</span> -->
+						</ion-col>
+						<ion-col size="6" class="ion-align-self-center">
+							<div class="onoffswitch">
+								<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" formControlName="wear" [(ngModel)]="wear" id="myonoffswitch3" checked>
+								<label class="onoffswitch-label2" for="myonoffswitch3"></label>
+							</div>
+						</ion-col>
+					</ion-row>
+					<ion-row class="padding-section">
+						<ion-col size="6" class="ion-align-self-center ion-text-center">
+							<ion-icon class="font20" name="bicycle"></ion-icon>
+							<p class="my-0 font8">Delivery</p>
+							<!-- <span>Exento</span> -->
+						</ion-col>
+						<ion-col size="6" class="ion-align-self-center">
+							<div class="onoffswitch">
+								<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" formControlName="delivery" [(ngModel)]="delivery" id="myonoffswitch4" checked>
+								<label class="onoffswitch-label2" for="myonoffswitch4"></label>
+							</div>
+						</ion-col>
+					</ion-row>
+					<div class="save-button">
+						<ion-button class="font12 ion-float-right" [disabled]="!productoForm.valid" color="bluedark" type="submit"  >Guardar</ion-button>
+					</div>
+				</ion-grid>
+				<!-- <label for="Disponible" class="fontSizeLabel">Todas</label>  [disabled]="!productoForm.valid"-->
+			</ion-col>
+    	</ion-row>
+  	</form>
+</ion-content>

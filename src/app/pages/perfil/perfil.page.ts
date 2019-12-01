@@ -115,6 +115,12 @@ export class PerfilPage implements OnInit {
         id: this.idAvatar}
       ]
     });
+
+    modal.onDidDismiss().then((data) => {
+      const user = data['data']; // Here's your selected user!
+      this.avatar = data['data'];
+    });
+
     await modal.present();
  }
 
@@ -149,20 +155,17 @@ export class PerfilPage implements OnInit {
   });
  }
 
- getAvatar(){
-   this.authService.readAvatar().then(res=>{
-     res.subscribe(data=>{
-       if(data){
-         this.avatar= 'assets/img/avatar.png';
-         this.type = 'create';
-       }else{
-         this.avatar = data[0].image;
-         this.idAvatar = data[0]._id;
-         this.type = 'edit';
-       }
-     });
-   })
- }
+  getAvatar(){
+    this.authService.getAvatar().then(response => {
+      this.avatar = response.image;
+      /* response.subscribe((data) => {
+        
+        console.log(this.avatar);
+      }, err => {
+        console.log(err);
+      }); */
+    });
+  }
 
  onSubmit(values){
    console.log(values);

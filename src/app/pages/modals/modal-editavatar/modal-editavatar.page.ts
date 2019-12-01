@@ -44,7 +44,7 @@ export class ModalEditavatarPage implements OnInit {
   }
 
   async closeModal() {
-    await this.modalCtrl.dismiss();
+    await this.modalCtrl.dismiss(this.avatar);
   }
 
  pickImage(type) {
@@ -72,20 +72,21 @@ export class ModalEditavatarPage implements OnInit {
           response.subscribe((data) => {
             console.log(data);
             this.storage.set('avatar',data);
-            this.getAvatar(data.id);
+            this.getAvatar();
         }, err => {
             console.error(err);
           });
        });
       }else{
         this.authService.updateAvatar(this.aImages).then((response) => {
-          response.subscribe((data) => {
+          this.getAvatar();
+          /* response.subscribe((data) => {
             console.log(data);
             this.storage.set('avatar',data);
-            this.getAvatar(data.id);
-        }, err => {
+            
+          }, err => {
             console.error(err);
-          });
+          }); */
        });
       }
     
@@ -94,14 +95,16 @@ export class ModalEditavatarPage implements OnInit {
     });
   }
 
-  getAvatar(id){
-    this.authService.getAvatar(id).then(response => {
-      response.subscribe((data) => {
-        this.avatar = data.image;
+  getAvatar(){
+    this.authService.getAvatar().then(response => {
+      console.log('response', response);
+      this.avatar = response.image;
+      /* response.subscribe((data) => {
+        
         console.log(this.avatar);
-     }, err => {
-      console.log(err);
-    });
+      }, err => {
+        console.log(err);
+      }); */
     });
   }
 

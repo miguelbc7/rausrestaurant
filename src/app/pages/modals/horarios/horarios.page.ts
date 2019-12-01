@@ -77,6 +77,7 @@ export class HorariosPage implements OnInit {
   async getHorario(){
    await this.horarioService.getItem(this.name).then(res=>{
       res.subscribe(data =>{
+        console.log(data);
         console.log(data.schedules.status);
         this.list = data.schedules.schedules;
         this.status = data.schedules.status;
