@@ -19,7 +19,7 @@
                     <ion-slide class="changeStyle" *ngFor="let img of slider">
                       <img class="imgBanner" src="{{img.payload.doc.data().image}}"/>
                       <div class="divEdit" color="bluelight">
-                        <ion-icon class="iconEditBanner" color="white" name="create" (click)="editslider(img.payload.doc.data().image)"></ion-icon>
+                        <ion-icon class="iconEditBanner" color="white" name="create" (click)="deleteSlider(img.payload.doc.id)"></ion-icon>
                       </div>
                     </ion-slide>
             
@@ -27,7 +27,7 @@
                         <div class="divWhite">
                         </div>
                               <div class="addPhoto" color="">
-                                  <ion-icon class="addIcon" color="bluedark" name="add-circle-outline" (click)="addslider()"></ion-icon>
+                                  <ion-icon class="addIcon" color="bluedark" name="add-circle-outline" (click)="selectImage()"></ion-icon>
                               </div>
                       </ion-slide>
                       
@@ -168,8 +168,8 @@
               <div class="boxBanner">
                 <!-- <img class="imgCarta" src="assets/img/pasta2.jpg" alt="avatar perfil"> -->
                 <ion-slides *ngIf="product.images.length > 0">
-                  <ion-slide class="changeStyle"  *ngFor="let img of product.images; let imgIndex = index">
-                    <img class="imgCarta3" src="{{img.iamge}}"/>
+                  <ion-slide class="changeStyle"  *ngFor="let img of product.images">
+                    <img class="imgCarta3" src="{{img.img}}"/>
                   </ion-slide>
                 </ion-slides>
                 <ion-slides *ngIf="product.images.length == 0">
@@ -177,7 +177,7 @@
                     <img class="imgCarta3" src="assets/img/pasta1.jpg"/>
                   </ion-slide>
                 </ion-slides>
-                <div class="divEditCard" color="bluelight" (click)="editProduct(product)">
+                <div class="divEditCard" color="bluelight" (click)="editProduct(productos[i])">
                     <ion-icon class="iconEditCard" color="white" name="create"></ion-icon>
                 </div>
               </div>
@@ -197,8 +197,8 @@
                 </ion-row>
                 <ion-row>
                     <ion-col class="ion-no-padding ion-align-self-center" size="8">
-                     <p class="hgPCarta my-0 customDarkText font9" *ngFor="let i of product.ingredients">
-                        {{ i.name }},
+                     <p class="hgPCarta my-0 customDarkText font9" *ngFor="let ingredientes of product.ingredients">
+                        {{ ingredientes.name }},
                      </p> 
                     </ion-col>
                     <ion-col class="ion-no-padding ion-align-self-center ion-text-right" size="2">

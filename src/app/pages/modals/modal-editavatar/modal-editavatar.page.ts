@@ -44,19 +44,14 @@ export class ModalEditavatarPage implements OnInit {
   }
 
   async closeModal() {
-    await this.modalCtrl.dismiss();
+    await this.modalCtrl.dismiss(this.avatar);
   }
 
  pickImage(type) {
    
-    // let destinationType = this.camera.DestinationType.FILE_URI;
-    // if(this.platform.is('ios')){
-    //   destinationType = this.camera.DestinationType.NATIVE_URI;
-    // }
     const options: CameraOptions = {
       quality: 100,
       sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
-      // destinationType: destinationType,
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE
@@ -72,20 +67,14 @@ export class ModalEditavatarPage implements OnInit {
           response.subscribe((data) => {
             console.log(data);
             this.storage.set('avatar',data);
-            this.getAvatar(data.id);
+            this.getAvatar();
         }, err => {
             console.error(err);
           });
        });
       }else{
         this.authService.updateAvatar(this.aImages).then((response) => {
-          response.subscribe((data) => {
-            console.log(data);
-            this.storage.set('avatar',data);
-            this.getAvatar(data.id);
-        }, err => {
-            console.error(err);
-          });
+          this.getAvatar();
        });
       }
     
@@ -94,14 +83,10 @@ export class ModalEditavatarPage implements OnInit {
     });
   }
 
-  getAvatar(id){
-    this.authService.getAvatar(id).then(response => {
-      response.subscribe((data) => {
-        this.avatar = data.image;
-        console.log(this.avatar);
-     }, err => {
-      console.log(err);
-    });
+  getAvatar(){
+    this.authService.getAvatar().then(response => {
+      console.log('response', response);
+      this.avatar = response.image;
     });
   }
 

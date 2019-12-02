@@ -9,7 +9,7 @@ import { EditdireccionPage } from '../modals/editdireccion/editdireccion.page';
 // import { AgregarPage } from '../modals/agregar/agregar.page';
 // import { CierrePage } from '../cierre/cierre.page';
 // import { AgregartarjetaPage } from '../modals/agregartarjeta/agregartarjeta.page';
-import { ModalController, NavController } from '@ionic/angular';
+import { ModalController, NavController, ActionSheetController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { ProductosService } from '../../services/productos.service';
 import { HorarioService } from 'src/app/services/horario.service';
@@ -54,6 +54,7 @@ export class HomePage implements OnInit {
     private authService: AuthService,
     private camera: Camera,
     public loading: LoadingService,
+    private actionSheetController: ActionSheetController,
     public router:Router) {
     this.productos = [];
     this.storage.get('_token').then(val =>{
@@ -67,6 +68,7 @@ export class HomePage implements OnInit {
     this.getSlider();
     this.getListHorario();
     this.getListProductos();
+    this.getAvatar();
    }
   ngOnInit() {
     
@@ -82,13 +84,39 @@ export class HomePage implements OnInit {
       res.subscribe(data =>{
         this.profile.business_name = data.business_name;
         this.profile.direction = data.direction;
+        this.storage.set('profile',data);
       })
     });
   }
-  async addslider() {
+
+  async selectImage() {
+    const actionSheet = await this.actionSheetController.create({
+        header: "Select Image source",
+        buttons: [{
+                text: 'Usar imagen desde la galería',
+                handler: () => {
+                    this.addslider(this.camera.PictureSourceType.PHOTOLIBRARY);
+                }
+            },
+            {
+                text: 'Usar Cámara',
+                handler: () => {
+                    this.addslider(this.camera.PictureSourceType.CAMERA);
+                }
+            },
+            {
+                text: 'Cancelar',
+                role: 'cancel'
+            }
+        ]
+    });
+    await actionSheet.present();
+  }
+
+   addslider(sourceType) {
     const options: CameraOptions = {
       quality: 100,
-      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+      sourceType: sourceType,
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE
@@ -184,16 +212,20 @@ export class HomePage implements OnInit {
      this.productosService.getList().then(response => {
        console.log('response list prod')
        response.subscribe((data) => {
-         this.productos =data.products;
+         console.log('data', data);
+         this.productos = data.products;
          for (let index = 0; index < this.productos.length; index++) {
            const element = this.productos[index];
-           this.productosService.getImagen(element.id).then(res=>{
-             console.log(res);
-             res.subscribe(data=>{
-               this.productos[index].iamges = data;
-
-             })
-           })
+           console.log(element);
+          //  this.productosService.getImagen(element._id).then(res=>{
+          //    console.log(res);
+          //    if(res){
+          //      res.subscribe(data=>{
+          //        this.productos[index].images = data;
+  
+          //      })
+          //    }
+          //  })
          }
          this.loading.hideLoader();
         }, err => {
@@ -248,9 +280,13 @@ export class HomePage implements OnInit {
    }
    
    editProduct(product) {
-     this.storage.set('product', product);
+     console.log('edit',product);
+     delete product.images;
      this.storage.set('typeProduct', 'edit');
-     this.router.navigate(['/agregarproducto']);
+     this.storage.set('product', product).then(()=>{
+
+       this.router.navigate(['/agregarproducto']);
+     }).catch(error => console.error(error));
   }
 
   addProduct()
@@ -270,14 +306,24 @@ export class HomePage implements OnInit {
     });
   }
 
-  async editslider(img){
-    this.storage.set('imgPreview', img);
-    const modal = await this.modalCtrl.create({
-      component: AddsliderPage,
-      componentProps:[
-      ]
+  getAvatar(){
+    this.authService.getAvatar().then(response => {
+      console.log('response', response);
+      if(response)
+        this.avatar = response.image;
     });
-    await modal.present();
+  }
+
+  async deleteSlider(id){
+    // this.storage.set('imgPreview', img);
+    // const modal = await this.modalCtrl.create({
+    //   component: AddsliderPage,
+    //   componentProps:[
+    //   ]
+    // });
+    // await modal.present();
+    console.log(id);
+    this.sliderService.delete_Item(id);
   }
 
   ngOnDestroy(){

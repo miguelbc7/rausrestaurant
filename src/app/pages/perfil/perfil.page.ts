@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, ActionSheetController } from '@ionic/angular';
 import { ModalEditavatarPage } from '../modals/modal-editavatar/modal-editavatar.page';
 import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -7,7 +7,7 @@ import { AuthService } from '../../services/auth.service';
 import { Storage } from '@ionic/storage';
 import { NativeGeocoder, NativeGeocoderResult } from '@ionic-native/native-geocoder/ngx';
 import { LoadingService } from 'src/app/services/loading.service';
-
+import { Camera, CameraOptions } from '@ionic-native/Camera/ngx';
 
 
 @Component({
@@ -27,9 +27,10 @@ export class PerfilPage implements OnInit {
   avatar = 'assets/img/avatar.png';
   type = 'create';
   idAvatar;
+  aImages: any = [{image: 'assets/img/avatar.png'}];
 
   constructor(private modalCtrl: ModalController, public formBuilder: FormBuilder, private router: Router,
-    private authService: AuthService, private storage: Storage, private nativeGeocoder: NativeGeocoder, public loading: LoadingService ) { 
+    private authService: AuthService, private storage: Storage, private nativeGeocoder: NativeGeocoder, public loading: LoadingService,private camera: Camera, private actionSheetController: ActionSheetController ) { 
 
       this.profileForm = this.formBuilder.group({
           business_name: ['', Validators.compose([
@@ -115,6 +116,12 @@ export class PerfilPage implements OnInit {
         id: this.idAvatar}
       ]
     });
+
+    modal.onDidDismiss().then((data) => {
+      const user = data['data']; // Here's your selected user!
+      this.avatar = data['data'];
+    });
+
     await modal.present();
  }
 
@@ -149,20 +156,14 @@ export class PerfilPage implements OnInit {
   });
  }
 
- getAvatar(){
-   this.authService.readAvatar().then(res=>{
-     res.subscribe(data=>{
-       if(data){
-         this.avatar= 'assets/img/avatar.png';
-         this.type = 'create';
-       }else{
-         this.avatar = data[0].image;
-         this.idAvatar = data[0]._id;
-         this.type = 'edit';
-       }
-     });
-   })
- }
+  getAvatar(){
+    this.authService.getAvatar().then(response => {
+      if(response){
+        this.avatar = response.image;
+        this.type ='edit';
+      }
+    });
+  }
 
  onSubmit(values){
    console.log(values);
@@ -187,6 +188,68 @@ export class PerfilPage implements OnInit {
     this.passwordShown = true;
     this.passwordType = 'text';
   }
+}
+
+async selectImage() {
+  const actionSheet = await this.actionSheetController.create({
+      header: "Select Image source",
+      buttons: [{
+              text: 'Usar imagen desde la galería',
+              handler: () => {
+                  this.pickImage(this.camera.PictureSourceType.PHOTOLIBRARY);
+              }
+          },
+          {
+              text: 'Usar Cámara',
+              handler: () => {
+                  this.pickImage(this.camera.PictureSourceType.CAMERA);
+              }
+          },
+          {
+              text: 'Cancelar',
+              role: 'cancel'
+          }
+      ]
+  });
+  await actionSheet.present();
+}
+
+pickImage(sourceType) {
+   
+  const options: CameraOptions = {
+    quality: 100,
+    sourceType: sourceType,
+    destinationType: this.camera.DestinationType.DATA_URL,
+    encodingType: this.camera.EncodingType.JPEG,
+    mediaType: this.camera.MediaType.PICTURE
+  }
+  this.camera.getPicture(options).then((imageData) => {
+    // imageData is either a base64 encoded string or a file URI
+    // If it's base64 (DATA_URL):
+    let base64Image = 'data:image/jpeg;base64,' + imageData;
+    this.aImages = {image:base64Image} ;
+    this.avatar = base64Image;
+    console.log(this.type);
+    if(this.type == 'create'){
+      this.authService.createAvatar(this.aImages).then((response) => {
+        console.log(response);
+        response.subscribe((data) => {
+          console.log(data);
+          this.storage.set('avatar',data);
+          this.getAvatar();
+      }, err => {
+          console.error(err);
+        });
+     });
+    }else{
+      this.authService.updateAvatar(this.aImages).then((response) => {
+        this.getAvatar();
+     });
+    }
+  
+  }, (err) => {
+    // Handle error
+  });
 }
 
 }
