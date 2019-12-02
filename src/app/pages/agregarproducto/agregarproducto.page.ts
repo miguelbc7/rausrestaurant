@@ -278,7 +278,7 @@ export class AgregarproductoPage implements OnInit {
         //  this.productos = data.products;
         console.log(data);
         if(this.aImages.length > 0){
-        await  this.uploadImage(data._id);
+        this.uploadImage(data._id);
         }else{
           // await this.presentPromocion(data._id);
           await this.router.navigate(['home']);
@@ -298,7 +298,7 @@ export class AgregarproductoPage implements OnInit {
         console.log(this.productos._id);
         if(this.aImages.length > 0){
           console.log('imagenes1')
-          await this.uploadImage(this.productos._id);
+          this.uploadImage(this.productos._id);
         }else{
           //  await this.presentPromocion(this.productos._id);
           this.loading.hideLoader();
@@ -316,19 +316,36 @@ export class AgregarproductoPage implements OnInit {
   uploadImage(id){
    console.log('uploadimage');
   console.log(this.aImages);
-   this.productosService.uploadItem(id, this.aImages).then((response) => {
-    response.subscribe(async (data) => {
-      //  this.productos = data.products;
-      console.log('uploadimage data');
-      console.log(data);
-      // await this.presentPromocion(id);
-      this.loading.hideLoader();
-      await this.router.navigate(['home']);
-      
-  }, err => {
-      console.error(err);
+  if(this.type == 'create'){
+    this.productosService.uploadItem(id, this.aImages).then((response) => {
+        response.subscribe(async (data) => {
+          //  this.productos = data.products;
+          console.log('uploadimage data');
+          console.log(data);
+          // await this.presentPromocion(id);
+          this.loading.hideLoader();
+          await this.router.navigate(['home']);
+          
+      }, err => {
+          console.error(err);
+        });
     });
- });
+  }else {
+    this.productosService.uploadItem(id, this.aImages).then((response) => {
+      response.subscribe(async (data) => {
+        //  this.productos = data.products;
+        console.log('uploadimage data');
+        console.log(data);
+        // await this.presentPromocion(id);
+        this.loading.hideLoader();
+        await this.router.navigate(['home']);
+        
+    }, err => {
+        console.error(err);
+      });
+  });
+  }
+
 }
 
  //////////////////// Imagen //////////////////////
@@ -354,5 +371,18 @@ export class AgregarproductoPage implements OnInit {
     });
   }
 
+  add(){
+    if(!this.stock)
+      this.stock = 0;
+    if(this.stock>= 0)
+      this.stock= this.stock+1;
+  }
+
+  remove(){
+    if(!this.stock)
+      this.stock = 0;
+    if(this.stock > 0)
+      this.stock=this.stock- 1;
+  }
 
 }

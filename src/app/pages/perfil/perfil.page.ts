@@ -26,7 +26,7 @@ export class PerfilPage implements OnInit {
   passwordShown: any;
   avatar = 'assets/img/avatar.png';
   type = 'create';
-  id;
+  idAvatar;
 
   constructor(private modalCtrl: ModalController, public formBuilder: FormBuilder, private router: Router,
     private authService: AuthService, private storage: Storage, private nativeGeocoder: NativeGeocoder, public loading: LoadingService ) { 
@@ -112,7 +112,7 @@ export class PerfilPage implements OnInit {
       component: ModalEditavatarPage,
       componentProps:[
        { type: this.type,
-        id: this.id}
+        id: this.idAvatar}
       ]
     });
     await modal.present();
@@ -157,7 +157,7 @@ export class PerfilPage implements OnInit {
          this.type = 'create';
        }else{
          this.avatar = data[0].image;
-         this.id = data[0].id;
+         this.idAvatar = data[0]._id;
          this.type = 'edit';
        }
      });

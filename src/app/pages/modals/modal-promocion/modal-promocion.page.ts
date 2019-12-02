@@ -55,6 +55,7 @@ export class ModalPromocionPage implements OnInit {
         res.subscribe(dat =>{
           console.log(dat);
           this.closeModal();
+          this.addprom();
         });
       });
     },

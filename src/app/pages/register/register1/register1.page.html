@@ -136,8 +136,7 @@
           [separatorKeyCodes]="[32, 138]"
           [onlyFromAutocomplete]="true"
           [theme]="'minimal'"
-          (focus)="textFocus()"
-          (blur)="textBlur()"
+          [removable]="true"
         >
         <tag-input-dropdown 
         [autocompleteItems]="[ '#Comer', '#Salud', '#Cuidado Personal', '#Fuel', '#Entretenimiento', '#Kids',
@@ -147,9 +146,9 @@
           [minimumTextLength]="0"
         >
       </tag-input-dropdown>
-          <ng-template let-item="item" let-index="index">
+          <!-- <ng-template let-item="item" let-index="index">
             {{item.display}}
-        </ng-template>
+        </ng-template> -->
       </tag-input>
       </ion-item>
     </div>

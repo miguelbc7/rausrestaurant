@@ -163,9 +163,6 @@ export class AuthService {
         phone: item.phone,
         direction: item.direction,
       }
-
-
-        console.log(item);
       return this.http.put<Restaurant>(this.url+'restaurants/update/', JSON.stringify(data),{
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
@@ -177,11 +174,11 @@ export class AuthService {
       )
    }
 
-    updateAvatar(recordID,record): Promise<any> {
+    updateAvatar(record): Promise<any> {
     console.log(record);
     return new Promise<any>((resolve, reject) => {
       let currentUser = firebase.auth().currentUser;
-      this.afs.collection('restaurantes').doc(currentUser.uid).collection('avatar').doc(recordID).set(record)
+      this.afs.collection('restaurantes').doc(currentUser.uid).collection('avatar').doc(record._id).set(record)
       .then(
         res => resolve(res),
         err => reject(err)

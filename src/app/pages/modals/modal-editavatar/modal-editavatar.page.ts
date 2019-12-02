@@ -17,7 +17,8 @@ export class ModalEditavatarPage implements OnInit {
   avatar = 'assets/img/avatar.png';
   image;
   public type = this.navParams.get('type');
-  id;
+  public idAvatar = this.navParams.get('idAvatar');
+  uid;
 
   images = [];
 
@@ -30,6 +31,11 @@ export class ModalEditavatarPage implements OnInit {
       if(res)
         this.avatar = res;
       console.log(this.avatar);
+    });
+    this.storage.get('uid').then(res =>{
+      console.log(res);
+      if(res)
+        this.uid = res;
     });
 
     console.log(this.avatar);
@@ -60,6 +66,7 @@ export class ModalEditavatarPage implements OnInit {
       // If it's base64 (DATA_URL):
       let base64Image = 'data:image/jpeg;base64,' + imageData;
       this.aImages = {image:base64Image} ;
+      this.avatar = base64Image;
       if(type == 'create'){
         this.authService.createAvatar(this.aImages).then((response) => {
           response.subscribe((data) => {
@@ -71,7 +78,7 @@ export class ModalEditavatarPage implements OnInit {
           });
        });
       }else{
-        this.authService.updateAvatar(this.id,this.aImages).then((response) => {
+        this.authService.updateAvatar(this.aImages).then((response) => {
           response.subscribe((data) => {
             console.log(data);
             this.storage.set('avatar',data);
