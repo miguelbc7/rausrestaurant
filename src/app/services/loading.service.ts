@@ -12,7 +12,7 @@ export class LoadingService {
   async present(duration) {
     this.isLoading = true;
     return await this.loadingController.create({
-      duration: duration,
+      duration: duration?duration:5000,
     }).then(a => {
       a.present().then(() => {
         console.log('presented');
@@ -28,9 +28,11 @@ export class LoadingService {
     return await this.loadingController.dismiss().then(() => console.log('dismissed'));
   }
 
-  async showLoader() {
+  async showLoader(duration:number = 5000) {
+    console.log(duration);
    return await this.loadingController.create({
       // message: 'This Loader will Not AutoHide'
+      duration: duration,
     }).then((res) => {
       res.present().then(()=>{
         // this.hideLoader();

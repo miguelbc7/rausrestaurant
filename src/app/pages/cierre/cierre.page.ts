@@ -23,4 +23,8 @@ export class CierrePage implements OnInit {
     await modal.present();
  }
 
+ async closeModal() {
+    await this.modalCtrl.dismiss();
+  }
+
 }

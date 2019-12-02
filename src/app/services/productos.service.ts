@@ -6,6 +6,9 @@ import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { Storage } from '@ionic/storage';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireAuth } from '@angular/fire/auth';
+import * as firebase from 'firebase/app';
 
 @Injectable({
   providedIn: 'root'
@@ -15,18 +18,21 @@ export class ProductosService {
   token:any ;
   uid:any;
   base_path = environment.url;
+  snapshotChangesSubscription: any;
 
 
-  constructor(private http: HttpClient, private storage: Storage) { 
+  constructor(private http: HttpClient, private storage: Storage,private afs: AngularFirestore,public afAuth: AngularFireAuth) { 
   }  
  
   // Handle API errors
   handleError(error: HttpErrorResponse) {
-    console.log(error);
-    console.log(error.error);
+    console.error(error);
+    console.error(error.error);
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.
       console.error('An error occurred:', error.error.message);
+      return throwError(error.error);
+
     } else {
       // The backend returned an unsuccessful response code.
       // The response body may contain clues as to what went wrong,
@@ -36,7 +42,7 @@ export class ProductosService {
     }
     // return an observable with a user-facing error message
     return throwError(
-      'Something bad happened; please try again later.');
+      error);
   };
 
    // Create a new item
@@ -75,16 +81,18 @@ export class ProductosService {
 
     let data = {
       id_restaurant: this.uid,
+      id: id,
     }
+    console.log(data);
     return this.http
       .post<Producto>(this.base_path+'products/get', JSON.stringify(data),{
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': this.token,
+      // 'Authorization': this.token,
     }),
-    params: {
-      token: this.token,
-    }
+    // params: {
+    //   token: this.token,
+    // }
   })
       .pipe(
         catchError(this.handleError)
@@ -160,6 +168,22 @@ export class ProductosService {
       )
   }
 
+  async uploadImage(id, item): Promise<any>{
+    let data = {
+      _id : id,
+      images: item
+    }
+    return new Promise<any>((resolve, reject) => {
+      let currentUser = firebase.auth().currentUser;
+      this.afs.collection('restaurantes').doc(currentUser.uid).collection('productos').add(data)
+      .then(
+        res => resolve(res),
+        err => reject(err)
+      )
+    })
+  }
+
+  
   async uploadItem(id, item): Promise<any>{
     let data = {
       _id : id,
@@ -184,4 +208,31 @@ export class ProductosService {
     )
   }
 
+  
+  updateImagen(id, record): Promise<any> {
+    console.log(record);
+    return new Promise<any>((resolve, reject) => {
+      let currentUser = firebase.auth().currentUser;
+      this.afs.collection('restaurantes').doc(currentUser.uid).collection('productos').doc(id).set(record)
+      .then(
+        res => resolve(res),
+        err => reject(err)
+      )
+    })
+ }
+
+  getImagen(id){
+    return new Promise<any>((resolve, reject) => {
+      this.afAuth.user.subscribe(currentUser => {
+        if(currentUser){
+          this.snapshotChangesSubscription = this.afs.doc<any>('restaurantes/' + currentUser.uid + '/productos/' + id).valueChanges()
+          .subscribe(snapshots => {
+            resolve(snapshots);
+          }, err => {
+            reject(err)
+          })
+        }
+      })
+    });
+  }
 }

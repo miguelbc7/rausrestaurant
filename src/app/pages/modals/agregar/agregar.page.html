@@ -5,12 +5,20 @@
 </ion-header> -->
 
 <ion-content class="bgAzul">
-
-    <div class="ion-margin-vertical">
-        <ion-item class="itemSaldo ion-padding-horizontal">
+    <ion-row class="my-0">
+      <ion-col class="ion-text-end" size="12">
+        <!-- <ion-icon class="modalAgregar" src="assets/img/icon/back.svg" (click)="closeModal()"></ion-icon> -->
+        <ion-button color="white" fill="clear" (click)="closeModal()">
+          <ion-icon slot="end" name="close"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <div class="">
+        <ion-item class="itemSaldo ">
             <!-- <ion-label class="font14" position="floating">Dirección</ion-label> -->
             <!-- <ion-icon class="mx-0 iconWhite font24" name="logo-euro" color="" slot="start" align-self-center></ion-icon> -->
-            <ion-input class="saldoModal ion-text-center" (keypress)="inputSize()" size="10" [(ngModel)]="value" name="value" type="number" placeholder="0.00" required>€</ion-input>
+            <ion-input class="saldoModal ion-text-center" [(ngModel)]="value" name="value" type="number" placeholder="0.00" required></ion-input>
+            <span class="euro">€</span>
         </ion-item>
         <label >{{errorMessage}} </label>
     </div>

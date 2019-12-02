@@ -36,12 +36,13 @@ export class FidelizacionPage implements OnInit {
       componentProps:{
         type: 'create',
       },
-      cssClass: 'sizeModalPlanes'
+      cssClass: 'sizeModalPlanes',
+      backdropDismiss:false,
     });
     await modal.present();
     
  }
-//  Planes creados
+//  Planes crea
 expandItem(item): void {
   if (item.expanded) {
     item.expanded = false;
@@ -94,7 +95,5 @@ toggleZipped(): void {
     });
     await modal.present();
   }
-
- 
 
 }

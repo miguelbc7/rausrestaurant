@@ -123,6 +123,10 @@ export class ModalPlanesPage implements OnInit {
       });
   }
 
+  async closeModal() {
+    await this.modalController.dismiss();
+  }
+
    
  async UpdateRecord(recordID) {
    console.log(this.item.name);
