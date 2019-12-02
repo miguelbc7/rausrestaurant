@@ -194,13 +194,13 @@ async selectImage() {
   const actionSheet = await this.actionSheetController.create({
       header: "Select Image source",
       buttons: [{
-              text: 'Usar imagen desde la galería',
+              text: 'Cargar imagen',
               handler: () => {
                   this.pickImage(this.camera.PictureSourceType.PHOTOLIBRARY);
               }
           },
           {
-              text: 'Usar Cámara',
+              text: 'Tomar foto',
               handler: () => {
                   this.pickImage(this.camera.PictureSourceType.CAMERA);
               }

@@ -93,13 +93,13 @@ export class HomePage implements OnInit {
     const actionSheet = await this.actionSheetController.create({
         header: "Select Image source",
         buttons: [{
-                text: 'Usar imagen desde la galería',
+                text: 'Cargar imagen',
                 handler: () => {
                     this.addslider(this.camera.PictureSourceType.PHOTOLIBRARY);
                 }
             },
             {
-                text: 'Usar Cámara',
+                text: 'Tomar foto',
                 handler: () => {
                     this.addslider(this.camera.PictureSourceType.CAMERA);
                 }
