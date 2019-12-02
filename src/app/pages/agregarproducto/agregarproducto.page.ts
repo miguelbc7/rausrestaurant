@@ -277,23 +277,27 @@ export class AgregarproductoPage implements OnInit {
 	onSubmit(values) {
 		this.loading.showLoader();
 		let aIngredients;
-		if(values.ingredientes != '')
-			 aIngredients = values.ingredientes.split(',');
+		values.ingredients = [];
+		if(values.ingredientes != ''){
+			aIngredients = values.ingredientes.split(',');
+			for (let index = 0; index < aIngredients.length; index++) {
+				values.ingredients.push ({ 'name' : aIngredients[index] } ) ;
+			}
+
+		}
 		
 		let aNoIngredients;
-		if(values.no_ingredientes != '')
-		 	aNoIngredients = values.no_ingredientes.split(',');
-		// console.log(aIngredients);
-		values.ingredients = [];
-		for (let index = 0; index < aIngredients.length; index++) {
-			values.ingredients.push ({ 'name' : aIngredients[index] } ) ;
-		}
 		values.no_ingredients = [];
-		for (let index = 0; index < aNoIngredients.length; index++) {
-			console.log(aNoIngredients[index]);
-			values.no_ingredients.push( { 'name' : aNoIngredients[index]} ) ;
+		if(values.no_ingredientes != ''){
+			aNoIngredients = values.no_ingredientes.split(',');
+			for (let index = 0; index < aNoIngredients.length; index++) {
+				console.log(aNoIngredients[index]);
+				values.no_ingredients.push( { 'name' : aNoIngredients[index]} ) ;
+			}
+			
+
 		}
-		
+		// console.log(aIngredients);
 		console.log('values', values);
 		console.log('type', this.type);
 		console.log(this.productos);
