@@ -216,13 +216,16 @@ export class HomePage implements OnInit {
          this.productos = data.products;
          for (let index = 0; index < this.productos.length; index++) {
            const element = this.productos[index];
-           this.productosService.getImagen(element.id).then(res=>{
-             console.log(res);
-             res.subscribe(data=>{
-               this.productos[index].images = data;
-
-             })
-           })
+           console.log(element);
+          //  this.productosService.getImagen(element._id).then(res=>{
+          //    console.log(res);
+          //    if(res){
+          //      res.subscribe(data=>{
+          //        this.productos[index].images = data;
+  
+          //      })
+          //    }
+          //  })
          }
          this.loading.hideLoader();
         }, err => {
@@ -277,10 +280,13 @@ export class HomePage implements OnInit {
    }
    
    editProduct(product) {
-     console.log(product);
-     this.storage.set('product', product);
+     console.log('edit',product);
+     delete product.images;
      this.storage.set('typeProduct', 'edit');
-     this.router.navigate(['/agregarproducto']);
+     this.storage.set('product', product).then(()=>{
+
+       this.router.navigate(['/agregarproducto']);
+     }).catch(error => console.error(error));
   }
 
   addProduct()
@@ -308,14 +314,16 @@ export class HomePage implements OnInit {
     });
   }
 
-  async editslider(img){
-    this.storage.set('imgPreview', img);
-    const modal = await this.modalCtrl.create({
-      component: AddsliderPage,
-      componentProps:[
-      ]
-    });
-    await modal.present();
+  async deleteSlider(id){
+    // this.storage.set('imgPreview', img);
+    // const modal = await this.modalCtrl.create({
+    //   component: AddsliderPage,
+    //   componentProps:[
+    //   ]
+    // });
+    // await modal.present();
+    console.log(id);
+    this.sliderService.delete_Item(id);
   }
 
   ngOnDestroy(){

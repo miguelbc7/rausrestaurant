@@ -24,9 +24,9 @@ export class AgregarproductoPage implements OnInit {
 	aImages: any = [];
 	name;
 	description;
-	ingredientes:any =[]  ;
+	ingredientes:any = [];
 	// dingredientes:any = [];
-	no_ingredientes:any =[] ; 
+	no_ingredientes:any = []; 
 	// dno_ingredientes:any = [];
 	nutritional_values:boolean = true;
 	fat;
@@ -163,57 +163,74 @@ export class AgregarproductoPage implements OnInit {
    	}
 	
     ionViewWillEnter(){
-		this.ngOnInit();
-		console.log(this.type);
+		this.storage.get('typeProduct').then(res =>{
+			 this.type = res;
+			 console.log(this.type);
+		   if(res == 'create'){
+			   this.storage.remove('product');
+		   }
+	   });
+	   
+		this.storage.get('profile').then(res =>{
+		   this.profile = res;
+	   });
+	
+		this.storage.get('product').then(res =>{
+		   console.log(res);
+		   
+		   if(res){
+			   this.productos = res;
+			   this.ingredientes = [];
+			   if(res.ingredients.length > 0){
+				   res.ingredients.forEach(key => {
+					   console.log(key);
+				   this.ingredientes.push(key.name);
+				   });
+			   }
+			   this.no_ingredientes = [];
+			   if(res.no_ingredients.length > 0){
+				   res.no_ingredients.forEach(key => {
+				   this.no_ingredientes.push(key.name);
+				   });
+			   }
+			   this.name = res.name;
+			   this.description = res.description;
+			   this.ingredientes = this.ingredientes.toString();
+			   this.no_ingredientes = this.no_ingredientes.toString();
+			   this.nutritional_values = res.nutritional_values;
+			   this.carbohydrates = res.carbohydrates;
+			   this.fat = res.fat;
+			   this.protein = res.protein;
+			   this.total_calories = res.total_calories;
+			   this.price_with_iva = res.price_with_iva;
+			   this.iva = res.iva;
+			   this.eat_in_restaurant = res.eat_in_restaurant;
+			   this.wear = res.wear;
+			   this.delivery = res.delivery;
+			   this.status = res.status;
+			   // if(res.images.length >0){
+			   // 	res.images.forEach(key => {
+			   // 		this.aImages.push(key.img);
+			   // 	});
+			   // }
+			   this.aImages = [];
+			   this.productosService.getItem(res._id).then((data) =>{
+				   data.subscribe(res=>{
+					   console.log(res.product[0].images);
+					   if(res.product[0].images.length > 0){
+						   console.log('img');
+						   res.product[0].images.forEach(key=>{
+							   console.log(key);
+							   this.aImages.push(key);
+						   })
+					   }
+				   })
+			   }).catch(error => console.error(error));
+		   }
+		 });
 	}
 	
   	ngOnInit() {
-    	console.log(this.productos);
-    	this.storage.get('typeProduct').then(res =>{
-      		this.type = res;
-      		console.log(this.type);
-			if(res == 'create'){
-				this.storage.remove('product');
-			}
-		})
-		
-		this.storage.get('profile').then(res =>{
-			console.log(res);
-			this.profile = res;
-			console.log(this.profile);
-		})
-
-    	this.storage.get('product').then(res =>{
-			console.log(res);
-			this.productos = res;
-
-			if(this.productos){
-				res.ingredients.forEach(key => {
-				console.log(key);
-				this.ingredientes.push(key.name);
-				});
-				res.no_ingredients.forEach(key => {
-				console.log(key);
-				this.no_ingredientes.push(key.name);
-				});
-				this.name = res.name;
-				this.description = res.description;
-				this.ingredientes = this.ingredientes.toString();
-				this.no_ingredientes = this.no_ingredientes.toString();
-				this.nutritional_values = res.nutritional_values;
-				this.carbohydrates = res.carbohydrates;
-				this.fat = res.fat;
-				this.protein = res.protein;
-				this.total_calories = res.total_calories;
-				this.price_with_iva = res.price_with_iva;
-				this.iva = res.iva;
-				this.eat_in_restaurant = res.eat_in_restaurant;
-				this.wear = res.wear;
-				this.delivery = res.delivery;
-				this.status = res.status;
-				this.aImages.push(res.images);
-			}
-      	});
   	}
 
 	back(){
@@ -242,55 +259,37 @@ export class AgregarproductoPage implements OnInit {
 		await modal.present();
 	}
 
-	async addslider(img) {
-		console.log(img);
-		this.storage.set('imgPreview', img);
-		console.log('addslier');
-		const modal = await this.modalCtrl.create({
-		component: AddsliderPage,
-		componentProps:[
-		{
-			img:img
-			}
-		]
-		});
-		await modal.present();
+	deleteSlider(index) {
+		console.log(index);
+		this.aImages.splice(index, 1);
 	}
 
 	onSubmit(values) {
 		this.loading.showLoader();
 		let aIngredients = values.ingredientes.split(',');
 		let aNoIngredients = values.no_ingredientes.split(',');
-		console.log(aIngredients);
-
+		// console.log(aIngredients);
+		values.ingredients = [];
 		for (let index = 0; index < aIngredients.length; index++) {
-			values.ingredients = [aIngredients[index]= { 'name' :aIngredients[index] } ] ;
-			
+			values.ingredients.push ({ 'name' : aIngredients[index] } ) ;
 		}
-
+		values.no_ingredients = [];
 		for (let index = 0; index < aNoIngredients.length; index++) {
 			console.log(aNoIngredients[index]);
-			values.no_ingredients = [aNoIngredients[index]= { 'name' :aNoIngredients[index] } ] ;
-			
+			values.no_ingredients.push( { 'name' : aNoIngredients[index]} ) ;
 		}
 		
 		console.log('values', values);
 		console.log('type', this.type);
+		console.log(this.productos);
 		if(this.type == 'create') {
 			console.log('type', this.type);
 			this.productosService.createItem(values).then((response) => {
-			response.subscribe(async (data) => {
-				//  this.productos = data.products;
-				console.log('data', data);
-				console.log('imagenes length:' + this.aImages.length);
-				if(this.aImages.length > 0) {
-					this.uploadImage(data._id);
-				} else {
-					// await this.presentPromocion(data._id);
-					/* await this.router.navigate(['home']); */
-				}
+			response.subscribe( (data) => {
+				this.uploadImage(data._id);
 			}, err => {
 			console.log(err);
+			this.loading.hideLoader();this.loading.hideLoader();
 			});
 			
 			// this.router.navigate(['list']);
@@ -298,60 +297,35 @@ export class AgregarproductoPage implements OnInit {
 		} else if(this.type == 'edit') {
 			console.log(this.type);
 			this.productosService.updateItem(this.productos._id,values).then((response) => {
-				response.subscribe(async (data) => {
-				//  this.productos = data.products;
-				console.log(this.productos._id);
-				
-				if(this.aImages.length > 0) {
-					console.log('imagenes1')
-				} else {
-					//  await this.presentPromocion(this.productos._id);
-					this.loading.hideLoader();
-					await this.router.navigate(['home']);
-				}
+				response.subscribe( () => {
+				 this.uploadImage(this.productos._id);
 			}, err => {
 			console.log(err);
+			this.loading.hideLoader();
 			});
 			
 			// this.router.navigate(['list']);
-			});
+			}).catch(error=>{console.error(error)});
 		}
 	}
 
 	uploadImage(id){
 		console.log('uploadimage');
-		console.log(this.aImages);
-		console.log(this.type);
 
-		if(this.type == 'create') {
-			this.productosService.uploadItem(id, this.aImages).then((response) => {
-				response.subscribe(async (data) => {
-				//  this.productos = data.products;
-				console.log('uploadimage data');
-				console.log(data);
-				// await this.presentPromocion(id);
-				this.loading.hideLoader();
-				await this.router.navigate(['home']);
-				
-			}, err => {
-				console.error(err);
-				});
+		this.productosService.uploadItem(id, this.aImages).then((response) => {
+			response.subscribe(async (data) => {
+			//  this.productos = data.products;
+			console.log('uploadimage data');
+			console.log(data);
+			// await this.presentPromocion(id);
+			this.loading.hideLoader();
+			await this.router.navigate(['home']);
+			
+		}, err => {
+			console.error(err);
+			this.loading.hideLoader();
 			});
-		} else {
-			this.productosService.uploadItem(id, this.aImages).then((response) => {
-				response.subscribe(async (data) => {
-					//  this.productos = data.products;
-					console.log('uploadimage data');
-					console.log(data);
-					// await this.presentPromocion(id);
-					this.loading.hideLoader();
-					await this.router.navigate(['home']);
-					
-				}, err => {
-					console.error(err);
-				});
-			});
-		}
+		}).catch(error => console.error(error));
 	}
 
  //////////////////// Imagen //////////////////////
@@ -362,13 +336,13 @@ export class AgregarproductoPage implements OnInit {
         buttons: [{
                 text: 'Usar imagen desde la galería',
                 handler: () => {
-                    this.addslider(this.camera.PictureSourceType.PHOTOLIBRARY);
+                    this.pickImage(this.camera.PictureSourceType.PHOTOLIBRARY);
                 }
             },
             {
                 text: 'Usar Cámara',
                 handler: () => {
-                    this.addslider(this.camera.PictureSourceType.CAMERA);
+                    this.pickImage(this.camera.PictureSourceType.CAMERA);
                 }
             },
             {
