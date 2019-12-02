@@ -297,6 +297,10 @@ export class AgregarproductoPage implements OnInit {
 			
 
 		}
+		values.fat = values.fat?values.fat:0;
+		values.carbohydrates = values.carbohydrates?values.carbohydrates:0;
+		values.total_calories = values.total_calories?values.total_calories:0;
+		values.protein = values.protein?values.protein:0;
 		// console.log(aIngredients);
 		console.log('values', values);
 		console.log('type', this.type);
