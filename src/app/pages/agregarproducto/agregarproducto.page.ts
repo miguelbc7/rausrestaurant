@@ -9,6 +9,7 @@ import { ProductosService } from '../../services/productos.service';
 import { Camera, CameraOptions } from '@ionic-native/Camera/ngx';
 import { Storage } from '@ionic/storage';
 import { LoadingService } from 'src/app/services/loading.service';
+import { ProductocreadoPage } from '../modals/productocreado/productocreado.page';
 
 @Component({
 	selector: 'app-agregarproducto',
@@ -231,7 +232,15 @@ export class AgregarproductoPage implements OnInit {
 	}
 	
   	ngOnInit() {
-  	}
+	  }
+	  
+	async productoCreado() {
+  		const modal = await this.modalCtrl.create({
+    	component: ProductocreadoPage,
+    	cssClass: 'sizeModalProductoCreado'
+  	});
+  		await modal.present();
+	}
 
 	back(){
 		this.storage.remove('product');

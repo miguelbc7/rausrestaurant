@@ -127,6 +127,10 @@
 
 // Fuentes
 
+.font7 {
+    font-size: 7pt !important;
+}
+
 .font8 {
     font-size: 8pt !important;
 }
@@ -663,8 +667,8 @@ ion-textarea.textareaCustom{
  }
  .sizeModalPromocion .modal-wrapper {
     height: auto;
-    max-height: 470px;
-    width: 340px;
+    max-height: 75%;
+    width: 90%;
     top: 0%;
     bottom: 0;
     left: 0;
@@ -788,6 +792,34 @@ ion-textarea.textareaCustom{
  .sizeModalCierreModal .modal-wrapper {
     height: auto;
     max-height: 80%;
+    width: 310px;
+    top: 0%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    position: absolute; 
+    display: block;  
+    overflow: hidden;
+ }
+
+ .sizeModalProductoCreado .modal-wrapper {
+    height: auto;
+    max-height: 30%;
+    width: 310px;
+    top: 0%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    position: absolute; 
+    display: block;  
+    overflow: hidden;
+ }
+
+ .sizeModalHorario .modal-wrapper {
+    height: auto;
+    max-height:340px;
     width: 310px;
     top: 0%;
     bottom: 0;

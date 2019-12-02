@@ -28,6 +28,7 @@ export class Register1Page implements OnInit {
   ,{name:'#Viajes Hoteles'} , {name:'#Alimentos'}, {name:'#Transporte'}  ];
   categories;
   errorMessage:string = "";
+  keyboard = false;
 
 
 
@@ -235,6 +236,14 @@ export class Register1Page implements OnInit {
       this.passwordShown2 = true;
       this.passwordType2 = "text";
     }
+  }
+
+  textFocus(){
+    this.keyboard = true;
+  }
+
+  textBlur(){
+    this.keyboard = false;
   }
 
 }

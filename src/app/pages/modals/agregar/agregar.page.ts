@@ -41,7 +41,8 @@ export class AgregarPage implements OnInit {
     await this.modalCtrl.dismiss();
     const modal = await this.modalCtrl.create({
       component: AgregartarjetaPage,
-      cssClass: 'sizeModalAgregarTajerta'
+      cssClass: 'sizeModalAgregarTajerta',
+      backdropDismiss:false,
     });
     await modal.present();
   }
@@ -57,7 +58,8 @@ export class AgregarPage implements OnInit {
           value: this.value,
           cardID:cardID
         },
-        cssClass: 'sizeModalConfirmacion'
+        cssClass: 'sizeModalConfirmacion',
+        backdropDismiss:false,
       });
       modal.onDidDismiss().then(data =>{
         this.value = null;

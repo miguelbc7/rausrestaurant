@@ -25,6 +25,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AddsliderPage } from './pages/modals/addslider/addslider.page';
 import { ExcelentePage } from './pages/modals/excelente/excelente.page';
 import { ModalPromocionPage } from './pages/modals/modal-promocion/modal-promocion.page';
+import { ProductocreadoPage } from './pages/modals/productocreado/productocreado.page';
 import { IonicStorageModule } from '@ionic/storage';
 import { Camera } from '@ionic-native/Camera/ngx';
 import { File } from '@ionic-native/File/ngx';
@@ -42,6 +43,7 @@ import { LoadingService } from './services/loading.service';
     AppComponent,
     AddsliderPage,
     ExcelentePage,
+    ProductocreadoPage,
     ModalPromocionPage,
     // ExpandableComponent
   ],
@@ -49,6 +51,7 @@ import { LoadingService } from './services/loading.service';
     AddsliderPage,
     ExcelentePage,
     ModalPromocionPage,
+    ProductocreadoPage,
     // ExpandableComponent
   ],
   imports: [

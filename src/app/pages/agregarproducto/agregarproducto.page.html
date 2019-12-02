@@ -48,8 +48,8 @@
                 		</ion-slide>
 						<ion-slide class="changeStyle">
 							<div class="divWhite borderGris"></div>
-							<div class="addPhoto" color="">
-								<ion-icon class="addIcon" color="bluedark" name="add-circle-outline" (click)="selectImage()"></ion-icon>
+							<div class="addPhotoProducto" color="">
+								<ion-icon class="addPrdocuto" color="bluedark" src="assets/img/icon/producto/addAzulProducto.svg" (click)="selectImage()"></ion-icon>
 							</div>
 							<div class="textP">
 								<p class="ion-text-center my-0 font14">Agregar imagenes al carrusel</p>
@@ -186,8 +186,8 @@
 						</ion-col>
 					</ion-row>
 					<ion-row class="padding-section">
-						<ion-col size="6" class="ion-align-self-center ion-text-center">
-							<ion-icon class="font20" name="restaurant"></ion-icon>
+						<ion-col size="6" class="ion-align-self-center ion-text-center hgPCarta">
+							<ion-icon class="fontIconosMenu"  src="assets/img/icon/producto/restaurante.svg"></ion-icon>
 							<p class="my-0 font8">Comer en restaurante</p>
 							<!-- <span>Exento</span> -->
 						</ion-col>
@@ -199,21 +199,8 @@
 						</ion-col>
 					</ion-row>
 					<ion-row class="padding-section">
-						<ion-col size="6" class="ion-align-self-center ion-text-center">
-							<ion-icon class="font20" name="appstore"></ion-icon>
-							<p class="my-0 font8">Llevar</p>
-							<!-- <span>Exento</span> -->
-						</ion-col>
-						<ion-col size="6" class="ion-align-self-center">
-							<div class="onoffswitch">
-								<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" formControlName="wear" [(ngModel)]="wear" id="myonoffswitch3" checked>
-								<label class="onoffswitch-label2" for="myonoffswitch3"></label>
-							</div>
-						</ion-col>
-					</ion-row>
-					<ion-row class="padding-section">
-						<ion-col size="6" class="ion-align-self-center ion-text-center">
-							<ion-icon class="font20" name="bicycle"></ion-icon>
+						<ion-col size="6" class="ion-align-self-center ion-text-center hgPCarta">
+							<ion-icon class="fontIconosMenu"  src="assets/img/icon/producto/take.svg"></ion-icon>
 							<p class="my-0 font8">Delivery</p>
 							<!-- <span>Exento</span> -->
 						</ion-col>
@@ -224,8 +211,22 @@
 							</div>
 						</ion-col>
 					</ion-row>
+					<ion-row class="padding-section">
+							<ion-col size="6" class="ion-align-self-center ion-text-center hgPCarta">
+								<ion-icon class="fontIconosMenu"  src="assets/img/icon/producto/delivery.svg"></ion-icon>
+								<p class="my-0 font8">Llevar</p>
+								<!-- <span>Exento</span> -->
+							</ion-col>
+							<ion-col size="6" class="ion-align-self-center">
+								<div class="onoffswitch">
+									<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" formControlName="wear" [(ngModel)]="wear" id="myonoffswitch3" checked>
+									<label class="onoffswitch-label2" for="myonoffswitch3"></label>
+								</div>
+							</ion-col>
+						</ion-row>
 					<div class="save-button">
 						<ion-button class="font12 ion-float-right" [disabled]="!productoForm.valid" color="bluedark" type="submit"  >Guardar</ion-button>
+						<ion-button class="font12 ion-float-right" color="bluedark" (click)="productoCreado()">modal</ion-button>
 					</div>
 				</ion-grid>
 				<br>

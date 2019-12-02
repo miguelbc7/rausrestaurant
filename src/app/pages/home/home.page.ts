@@ -143,6 +143,7 @@ export class HomePage implements OnInit {
   async openHorarios(dia, data) {
     const modal = await this.modalCtrl.create({
       component: HorariosPage,
+      cssClass: 'sizeModalHorario',
       componentProps: { 
         name: dia,
         schedules: data,

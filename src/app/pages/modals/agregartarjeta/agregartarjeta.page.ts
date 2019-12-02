@@ -50,7 +50,8 @@ export class AgregartarjetaPage implements OnInit {
       ])],
       cvc: ['', Validators.compose([
         Validators.required,
-        Validators.minLength(3)
+        Validators.minLength(3),
+        Validators.maxLength(3)
       ])],
       year: ['', Validators.compose([
         Validators.required,
