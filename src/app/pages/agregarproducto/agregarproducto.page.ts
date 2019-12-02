@@ -10,6 +10,7 @@ import { Camera, CameraOptions } from '@ionic-native/Camera/ngx';
 import { Storage } from '@ionic/storage';
 import { LoadingService } from 'src/app/services/loading.service';
 import { ProductocreadoPage } from '../modals/productocreado/productocreado.page';
+import { ProductoguardadoPage } from '../modals/productoguardado/productoguardado.page';
 
 @Component({
 	selector: 'app-agregarproducto',
@@ -275,8 +276,13 @@ export class AgregarproductoPage implements OnInit {
 
 	onSubmit(values) {
 		this.loading.showLoader();
-		let aIngredients = values.ingredientes.split(',');
-		let aNoIngredients = values.no_ingredientes.split(',');
+		let aIngredients;
+		if(values.ingredientes != '')
+			 aIngredients = values.ingredientes.split(',');
+		
+		let aNoIngredients;
+		if(values.no_ingredientes != '')
+		 	aNoIngredients = values.no_ingredientes.split(',');
 		// console.log(aIngredients);
 		values.ingredients = [];
 		for (let index = 0; index < aIngredients.length; index++) {
@@ -328,6 +334,10 @@ export class AgregarproductoPage implements OnInit {
 			console.log(data);
 			// await this.presentPromocion(id);
 			this.loading.hideLoader();
+			if(this.type == 'create')
+				this.productoCreado();
+			else
+				this.productoGuardado();
 			await this.router.navigate(['home']);
 			
 		}, err => {
@@ -336,6 +346,14 @@ export class AgregarproductoPage implements OnInit {
 			this.loading.hideLoader();
 			});
 		}).catch(error => console.error(error));
+	}
+
+	async productoGuardado(){
+		const modal = await this.modalCtrl.create({
+			component: ProductoguardadoPage,
+			cssClass: 'sizeModalProductoCreado'
+		  });
+			  await modal.present();
 	}
 
  //////////////////// Imagen //////////////////////

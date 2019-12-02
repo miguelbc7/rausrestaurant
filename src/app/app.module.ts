@@ -26,6 +26,7 @@ import { AddsliderPage } from './pages/modals/addslider/addslider.page';
 import { ExcelentePage } from './pages/modals/excelente/excelente.page';
 import { ModalPromocionPage } from './pages/modals/modal-promocion/modal-promocion.page';
 import { ProductocreadoPage } from './pages/modals/productocreado/productocreado.page';
+import { ProductoguardadoPage } from './pages/modals/productoguardado/productoguardado.page';
 import { IonicStorageModule } from '@ionic/storage';
 import { Camera } from '@ionic-native/Camera/ngx';
 import { File } from '@ionic-native/File/ngx';
@@ -45,6 +46,7 @@ import { LoadingService } from './services/loading.service';
     ExcelentePage,
     ProductocreadoPage,
     ModalPromocionPage,
+    ProductoguardadoPage,
     // ExpandableComponent
   ],
   entryComponents: [
@@ -52,6 +54,7 @@ import { LoadingService } from './services/loading.service';
     ExcelentePage,
     ModalPromocionPage,
     ProductocreadoPage,
+    ProductoguardadoPage,
     // ExpandableComponent
   ],
   imports: [
