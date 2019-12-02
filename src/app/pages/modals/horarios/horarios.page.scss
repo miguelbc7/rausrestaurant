@@ -22,13 +22,13 @@
 .onoffswitch-label:before {
     content: "";
     display: block;
-    width: 10px;
-    height: 10px;
-    border-radius: 5px;
+    width: 9px;
+    height: 9px;
+    // border-radius: 4.5px;
     margin: 0px;
     background: #4e5d6a;
     position: absolute;
-    top: 2px;
+    top: 1px;
     bottom: 0;
     right: 32px;
     /* border: 2px solid #000; */
@@ -81,4 +81,11 @@
 }
 .onoffswitch-checkbox:checked + .onoffswitch-label2:before {
     right: 4px;
+}
+
+
+.btnVolver {
+    border:2px solid #4e5d6a;
+    background-color: #fff !important;
+    color:#4e5d6a;
 }

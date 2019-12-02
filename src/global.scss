@@ -803,6 +803,34 @@ ion-textarea.textareaCustom{
     overflow: hidden;
  }
 
+ .sizeModalProductoCreado .modal-wrapper {
+    height: auto;
+    max-height: 30%;
+    width: 310px;
+    top: 0%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    position: absolute; 
+    display: block;  
+    overflow: hidden;
+ }
+
+ .sizeModalHorario .modal-wrapper {
+    height: auto;
+    max-height:340px;
+    width: 310px;
+    top: 0%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    position: absolute; 
+    display: block;  
+    overflow: hidden;
+ }
+
 
 
  .xModal {

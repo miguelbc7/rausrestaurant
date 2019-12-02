@@ -9,6 +9,7 @@ import { ProductosService } from '../../services/productos.service';
 import { Camera, CameraOptions } from '@ionic-native/Camera/ngx';
 import { Storage } from '@ionic/storage';
 import { LoadingService } from 'src/app/services/loading.service';
+import { ProductocreadoPage } from '../modals/productocreado/productocreado.page';
 
 @Component({
 	selector: 'app-agregarproducto',
@@ -231,7 +232,15 @@ export class AgregarproductoPage implements OnInit {
 	}
 	
   	ngOnInit() {
-  	}
+	  }
+	  
+	async productoCreado() {
+  		const modal = await this.modalCtrl.create({
+    	component: ProductocreadoPage,
+    	cssClass: 'sizeModalProductoCreado'
+  	});
+  		await modal.present();
+	}
 
 	back(){
 		this.storage.remove('product');
@@ -309,47 +318,8 @@ export class AgregarproductoPage implements OnInit {
 		}
 	}
 
-<<<<<<< HEAD
-   async presentPromocion(productID:any) {
-    const modal = await this.modalCtrl.create({
-      component: ModalPromocionPage,
-      componentProps:{
-        productID: productID,
-      },
-      cssClass: 'sizeModalPromocion',
-      backdropDismiss:false,
-    });
-
-    await modal.present();
-  }
-  async addprom() {
-    await this.modalCtrl.dismiss();
-    const modal = await this.modalCtrl.create({
-      component: ExcelentePage,
-      cssClass: 'sizeModalPromocion',
-      backdropDismiss:false,
-    });
-    await modal.present();
-  }
-
-  async addslider(img) {
-    console.log(img);
-    this.storage.set('imgPreview', img);
-    console.log('addslier');
-    const modal = await this.modalCtrl.create({
-      component: AddsliderPage,
-      componentProps:[
-       {
-          img:img
-        }
-      ]
-    });
-    await modal.present();
- }
-=======
 	uploadImage(id){
 		console.log('uploadimage');
->>>>>>> 9b95a18c7239345430cbabe468da7e06e73d4623
 
 		this.productosService.uploadItem(id, this.aImages).then((response) => {
 			response.subscribe(async (data) => {
@@ -374,13 +344,13 @@ export class AgregarproductoPage implements OnInit {
     const actionSheet = await this.actionSheetController.create({
         header: "Select Image source",
         buttons: [{
-                text: 'Usar imagen desde la galería',
+                text: 'Cargar imagen',
                 handler: () => {
                     this.pickImage(this.camera.PictureSourceType.PHOTOLIBRARY);
                 }
             },
             {
-                text: 'Usar Cámara',
+                text: 'Tomar foto',
                 handler: () => {
                     this.pickImage(this.camera.PictureSourceType.CAMERA);
                 }
