@@ -41,7 +41,7 @@ export class AgregarproductoPage implements OnInit {
 	status:boolean = true;
 	type;
 	stock;
-	errorMessage: string = '';
+	errorMessage = '';
 	slideOptsOne = {
 		initialSlide: 0,
 		slidesPerView: 1
@@ -361,7 +361,8 @@ export class AgregarproductoPage implements OnInit {
 			await this.router.navigate(['home']);
 			
 		}, err => {
-			console.error(err);
+			console.error(err.error.error);
+			this.errorMessage  = err.error.error;
 			this.loading.hideLoader();
 			});
 		}).catch(error => console.error(error));
