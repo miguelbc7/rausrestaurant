@@ -32,7 +32,12 @@ export class Register1Page implements OnInit {
 
 
 
-  constructor( public formBuilder: FormBuilder, private router: Router,private authService: AuthService,private nativeGeocoder: NativeGeocoder, private storage: Storage) {
+  constructor(
+    public formBuilder: FormBuilder,
+    private router: Router,
+    private authService: AuthService,
+    private nativeGeocoder: NativeGeocoder,
+    private storage: Storage) {
 
     this.register1 = formBuilder.group({
       business_name: ['', Validators.compose([
@@ -245,5 +250,13 @@ export class Register1Page implements OnInit {
   textBlur(){
     this.keyboard = false;
   }
+
+  // async editAvatar() {
+  //   const modal = await this.modalCtrl.create({
+  //     component: EditavatarPage,
+  //     cssClass: 'sizeModalAvatar'
+  //   });
+  //   await modal.present();
+  // }
 
 }

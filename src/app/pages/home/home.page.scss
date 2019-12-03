@@ -65,6 +65,19 @@ ion-slide.changeStyle img {
     height: 135px;
     object-fit: cover !important;
 }
+
+.addPhotoProducto {
+    position: absolute;
+    left: 50%;
+    top: 48%;
+    transform: translate(-50%, -50%);
+    // width: 300px;
+    // height: 300px;
+    border:3px solid #fff;
+    padding: 2px;
+    border-radius: 30px;
+    z-index: 2;
+}
  
  ion-button {
 	ion-badge {

@@ -1,0 +1,44 @@
+// .logoImg {
+//     width: 65%;
+//     height: auto;
+//     text-align: center;
+//     margin-top: 15%;
+// }
+
+.swiper-slide {
+    display: block;
+  }
+
+  .bgSlide {
+      background-image: url('/assets/img/fondoslid.jpg');
+      background-size: cover;
+  }
+
+  .swiper-slide {
+    display: block;
+  }
+  .swiper-container {
+    height: 100vh;
+}
+
+.logoWelcome {
+    width: 60%;
+    max-width: 400px;
+    height: auto;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.pWerlcome {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    font-size: 21pt;
+    line-height: 1.5;
+    color:#4e5d6a;
+}
