@@ -47,7 +47,7 @@
               <ion-item class="ion-no-padding itemTransparent">
                   <ion-label class="font14" position="floating">Dirección</ion-label>
                   <ion-input type="text" formControlName="address"  required></ion-input>
-                  <ion-icon name="pin" color="bluedark" slot="end" align-self-end></ion-icon>
+                  <ion-icon class="ion-align-self-end" name="pin" color="bluedark" slot="end"  (click)="map()"></ion-icon>
                 </ion-item>
           </div>
           <div class="validation-errors">
@@ -99,7 +99,7 @@
     <ion-item class="ion-no-padding itemTransparent">
       <ion-label class="font14" position="floating">Contraseña</ion-label>
       <ion-input [(ngModel)]="pass" formControlName="password"  [type]="passwordType"></ion-input>
-      <ion-icon [name]="passwordShown === true ? 'eye-off' : 'eye'" [color]="passwordShown === true ? 'bluelight' : 'bluedark' " slot="end" align-self-end (click)="togglePassword()"></ion-icon>
+      <ion-icon class="ion-align-self-end" [name]="passwordShown === true ? 'eye-off' : 'eye'" [color]="passwordShown === true ? 'bluelight' : 'bluedark' " slot="end" (click)="togglePassword()"></ion-icon>
     </ion-item>
     <div class="validation-errors">
       <ng-container *ngFor="let validation of validation_messages.password">
@@ -112,7 +112,7 @@
     <ion-item class="ion-margin-bottom ion-no-padding itemTransparent">
       <ion-label class="font14" position="floating">Confirmar contraseña</ion-label>
       <ion-input [(ngModel)]="cpass" formControlName="repeat_password"  [type]="passwordType2"></ion-input>
-      <ion-icon [name]="passwordShown2 === true ? 'eye-off' : 'eye'" [color]="passwordShown2 === true ? 'bluelight' : 'bluedark' " slot="end" align-self-end (click)="revelarConfirmacion()"></ion-icon>
+      <ion-icon class="ion-align-self-end" [name]="passwordShown2 === true ? 'eye-off' : 'eye'" [color]="passwordShown2 === true ? 'bluelight' : 'bluedark' " slot="end" (click)="revelarConfirmacion()"></ion-icon>
     </ion-item>
     <div class="validation-errors">
       <ng-container *ngFor="let validation of validation_messages.repeat_password">

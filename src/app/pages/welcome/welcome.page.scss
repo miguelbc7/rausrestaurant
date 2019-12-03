@@ -6,12 +6,25 @@
     height: 100vh;
 }
 
+ion-icon.iconCheck {
+    font-size: 12em;
+}
+
 .logoImg {
     width: 65%;
     height: auto;
     text-align: center;
-    margin-top: 15%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    // margin-top: 15%;
 }
+
+// .logoImg {
+//     width: 65%;
+//     height: auto;
+//     text-align: center;
+//     margin-top: 15%;
+// }
 
 .boxLogo p {
     font-size: 1.6em;
