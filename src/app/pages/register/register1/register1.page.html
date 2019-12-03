@@ -136,12 +136,14 @@
           [separatorKeyCodes]="[32, 138]"
           [onlyFromAutocomplete]="true"
           [theme]="'minimal'"
+          [displayBy]="name"
         >
         <tag-input-dropdown 
         [autocompleteItems]="[ '#Comer', '#Salud', '#Cuidado Personal', '#Fuel', '#Entretenimiento', '#Kids',
         '#Deporte', '#Viajes Hoteles', '#Alimentos', '#Transporte' ]"
           [showDropdownIfEmpty]="false"
           [minimumTextLength]="0"
+          [displayBy]="name"
         >
       </tag-input-dropdown>
           <!-- <ng-template let-item="item" let-index="index">

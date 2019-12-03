@@ -30,6 +30,7 @@ export class Register1Page implements OnInit {
   categories;
   errorMessage:string = "";
   keyboard = false;
+  tempCat;
 
 
 
@@ -179,6 +180,8 @@ export class Register1Page implements OnInit {
     };
     console.log(values);
 
+    this.tempCat = values.categories;
+
     this.authService.registerUser(values)
     .subscribe(async res => {
       console.log(res);
@@ -197,6 +200,7 @@ export class Register1Page implements OnInit {
         console.error(err);
       });
     },(err) => {
+      this.categories = this.tempCat;
       console.error(err.error);
       if(err.error.error){
         this.errorMessage = err.error.error;
@@ -263,7 +267,8 @@ export class Register1Page implements OnInit {
     this.keyboard = false;
   }
 
- async map() {
+  async map() {
+    // this.router.navigate(['map']);
   const modal = await this.modalCtrl.create({
     component: MapPage,
   });

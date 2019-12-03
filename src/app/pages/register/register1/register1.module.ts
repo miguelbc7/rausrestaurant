@@ -28,11 +28,11 @@ const routes: Routes = [
     RouterModule.forChild(routes)
   ],
   entryComponents: [
-    MapPage
+    
   ],
   declarations: [
     Register1Page,
-    MapPage
+    
     ]
 })
 export class Register1PageModule {}
