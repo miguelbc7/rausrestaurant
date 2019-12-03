@@ -140,11 +140,17 @@ export class AuthService {
 		await this.storage.get('_token').then(res=>{
 			this.token = res.token;
 		});
-		return this.http.get(this.url+'auth/me',{
+		await this.storage.get('_uid').then(res=>{
+			this.uid = res;
+		});
+		return this.http.get(this.url+'auth/me/'+this.uid,{
 			headers: new HttpHeaders({
 				'Content-Type': 'application/json',
 				'Authorization': this.token,
-			})
+			}),
+			// params:{
+			// 	id : this.uid,
+			// }
 		}).pipe(
 			catchError(this.handleError)
 		)

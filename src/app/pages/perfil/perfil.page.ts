@@ -129,17 +129,17 @@ export class PerfilPage implements OnInit {
  getUserDetail(){
   this.authService.getProfile().then(res=>{
     res.subscribe(data =>{
-
-      this.nativeGeocoder.reverseGeocode(data.address.lat,data.address.lon)
-          .then(
-            (result: NativeGeocoderResult[]) => {
-            this.address = result[0];
-            // console.log(JSON.stringify( result[0] ) )
-            })
-          .catch((error: any) => console.log(error));
-      data.address = this.address;
+      console.log(data);
+      // this.nativeGeocoder.reverseGeocode(data.direction.lat,data.direction.lon)
+      //     .then(
+      //       (result: NativeGeocoderResult[]) => {
+      //       this.address = result[0];
+      //       console.log(JSON.stringify( result[0] ) )
+      //       })
+      //     .catch((error: any) => console.log(error));
       this.profile = data;
-      console.log(this.profile);
+      this.profile.address = data.direction.street;
+      // console.log(this.profile.direction.street);
       this.loading.hideLoader();
     })
   });

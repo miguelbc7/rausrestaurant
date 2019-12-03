@@ -136,12 +136,10 @@
           [separatorKeyCodes]="[32, 138]"
           [onlyFromAutocomplete]="true"
           [theme]="'minimal'"
-          [removable]="true"
         >
         <tag-input-dropdown 
         [autocompleteItems]="[ '#Comer', '#Salud', '#Cuidado Personal', '#Fuel', '#Entretenimiento', '#Kids',
         '#Deporte', '#Viajes Hoteles', '#Alimentos', '#Transporte' ]"
-          [displayBy]="'name'"
           [showDropdownIfEmpty]="false"
           [minimumTextLength]="0"
         >
@@ -154,7 +152,7 @@
     </div>
   <br>
   <div class="ion-text-center">
-    <ion-button type="submit" class="font15" [disabled]="!register1.valid" color="bluedark">
+    <ion-button type="submit" class="font15"  color="bluedark">
       Listo
     </ion-button>
     <br>

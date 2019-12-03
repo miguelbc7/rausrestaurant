@@ -74,7 +74,7 @@ export class Register1Page implements OnInit {
       //   Validators.required,
       // ])],
       categories: ['', Validators.compose([
-        // Validators.required,
+        Validators.required,
       ])],
       password: ['', Validators.compose([
         Validators.required,
@@ -139,27 +139,37 @@ export class Register1Page implements OnInit {
         { type: 'maxlength', message: 'Debe ser menor de 15 caracteres.' },
         { type: 'pattern', message: 'Su contraseña debe contener al menos una mayúscula, una minúscula, un número y un caracter especial(@!%*?&#.$-_).' }
       ],
-      // 'categories': [
-      //   { type: 'required', message: 'Debe ingresar por lo menos una actividad de tu empresa.' },
-      // ],
+      'categories': [
+        { type: 'required', message: 'Debe ingresar una actividad de tu empresa.' },
+      ],
     }
 
   async onSubmit(values){
    await this.storage.set('user', values);
-    values.lat = -4.0000000;
-    values.lng = 40.0000000;
+   let data:any ={};
+    data.lat = -4.0000000;
+    data.lng = 40.0000000;
     this.nativeGeocoder.forwardGeocode(values.address)
     .then(
       ( result: NativeGeocoderResult[]) => {
         console.log('The coordinates are latitude=' + result[0].latitude + ' and longitude=' + result[0].longitude)
-        
-        values.lat = result[0].latitude;
-        values.lng = result[0].longitude;
-        
+        console.log(result);
+        data.lat = result[0].latitude;
+        data.lng = result[0].longitude;
+        data.zipcode = result[0].postalCode;
       }
     )
     .catch((error: any) => console.error(error));
-    values.direction = values.address;
+
+    values.direction = {
+      street: values.address,
+      lat: data.lat,
+      lng: data.lng,
+      zipcode: data.zipcode,
+      city: 'cucuta',
+      state: 'cucuta',
+      country: 'colombia',
+    };
     console.log(values);
 
     this.authService.registerUser(values)
@@ -181,7 +191,7 @@ export class Register1Page implements OnInit {
       });
     },(err) => {
       console.error(err.error);
-      if(err.error){
+      if(err.error.error){
         this.errorMessage = err.error.error;
       }else{
         this.errorMessage = 'Hubo un problema durante el registro, por favor intente más tarde';
