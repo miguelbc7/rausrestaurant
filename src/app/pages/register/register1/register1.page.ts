@@ -267,12 +267,12 @@ export class Register1Page implements OnInit {
     this.keyboard = false;
   }
 
-  async map() {
-    // this.router.navigate(['map']);
-  const modal = await this.modalCtrl.create({
-    component: MapPage,
-  });
-  await modal.present();
+  map() {
+    this.router.navigate(['map']);
+  // const modal = await this.modalCtrl.create({
+  //   component: MapPage,
+  // });
+  // await modal.present();
 }
 
 }

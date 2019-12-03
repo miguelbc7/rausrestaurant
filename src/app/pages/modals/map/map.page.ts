@@ -13,6 +13,7 @@ import {
   Platform,
   LoadingController
 } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-map',
@@ -29,7 +30,8 @@ export class MapPage implements OnInit {
     private modalCtrl: ModalController,
     public loadingCtrl: LoadingController,
     public toastCtrl: ToastController,
-    private platform: Platform
+    private platform: Platform,
+    private router: Router
     ) { }
 
  async ngOnInit() {
@@ -37,7 +39,8 @@ export class MapPage implements OnInit {
   }
 
   async closeModal() {
-    await this.modalCtrl.dismiss();
+    // await this.modalCtrl.dismiss();
+    this.router.navigate(['register1']);
   }
 
   async ionViewDidEnter(){
@@ -80,8 +83,8 @@ export class MapPage implements OnInit {
 
       // add a marker
       let marker: Marker = this.map.addMarkerSync({
-        title: '@ionic-native/google-maps plugin!',
-        snippet: 'This plugin is awesome!',
+        // title: '@ionic-native/google-maps plugin!',
+        // snippet: 'This plugin is awesome!',
         position: location.latLng,
         animation: GoogleMapsAnimation.BOUNCE
       });
@@ -91,7 +94,7 @@ export class MapPage implements OnInit {
 
       // If clicked it, display the alert
       marker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(() => {
-        this.showToast('clicked!');
+        // this.showToast('clicked!');
       });
     })
     .catch(err => {

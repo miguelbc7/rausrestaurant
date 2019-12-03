@@ -3,7 +3,7 @@
     <name>Raus</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="hi@ionicframework.com" href="http://ionicframework.com/">Ionic Framework Team</author>
-    <content original-src="index.html" src="http://localhost:8100" />
+    <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -20,6 +20,8 @@
     <preference name="SplashShowOnlyFirstTime" value="false" />
     <preference name="SplashScreen" value="screen" />
     <preference name="SplashScreenDelay" value="3000" />
+    <preference name="GOOGLE_MAPS_ANDROID_API_KEY" value="AIzaSyBUhsxeoY9tYVFFD31lLygBdRROqHU7s6k" />
+    <preference name="GOOGLE_MAPS_IOS_API_KEY" value="AIzaSyBUhsxeoY9tYVFFD31lLygBdRROqHU7s6k" />
     <platform name="android">
         <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application" xmlns:android="http://schemas.android.com/apk/res/android">
             <application android:usesCleartextTraffic="true" />
