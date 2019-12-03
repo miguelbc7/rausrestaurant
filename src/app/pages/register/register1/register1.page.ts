@@ -31,7 +31,7 @@ export class Register1Page implements OnInit {
   errorMessage:string = "";
   keyboard = false;
   tempCat;
-
+  address = '';
 
 
   constructor(
@@ -82,7 +82,7 @@ export class Register1Page implements OnInit {
       //   Validators.required,
       // ])],
       categories: ['', Validators.compose([
-        Validators.required,
+        // Validators.required,
       ])],
       password: ['', Validators.compose([
         Validators.required,
@@ -155,8 +155,9 @@ export class Register1Page implements OnInit {
   async onSubmit(values){
    await this.storage.set('user', values);
    let data:any ={};
-    data.lat = -4.0000000;
-    data.lng = 40.0000000;
+    data.lat = "-4.0000000";
+    data.lng = "40.0000000";
+    data.zipcode = '33100';
     this.nativeGeocoder.forwardGeocode(values.address)
     .then(
       ( result: NativeGeocoderResult[]) => {
@@ -268,6 +269,8 @@ export class Register1Page implements OnInit {
   }
 
   map() {
+    console.log(this.address);
+    this.storage.set('address', this.address);
     this.router.navigate(['map']);
   // const modal = await this.modalCtrl.create({
   //   component: MapPage,

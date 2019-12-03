@@ -55,8 +55,8 @@ export class AuthService {
 		if(value.categories){
 			for (let index = 0; index < value.categories.length; index++) {
 				delete value.categories[index].value;
-				value.categories[index].name = value.categories[index].display;
-				delete value.categories[index].display;
+				value.categories[index].name = value.categories[index].undefined;
+				delete value.categories[index].undefined;
 			}
 		}
 

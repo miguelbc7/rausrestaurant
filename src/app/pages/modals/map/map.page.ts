@@ -14,6 +14,7 @@ import {
   LoadingController
 } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-map',
@@ -25,17 +26,22 @@ export class MapPage implements OnInit {
   map: GoogleMap;
   loading: any;
   map_canvas;
+  address;
 
   constructor(
     private modalCtrl: ModalController,
     public loadingCtrl: LoadingController,
     public toastCtrl: ToastController,
     private platform: Platform,
-    private router: Router
+    private router: Router,
+    private storage: Storage
     ) { }
 
  async ngOnInit() {
-    
+   await this.storage.get('address').then(data=>{
+      this.address = data;
+      console.log(data);
+    })
   }
 
   async closeModal() {
