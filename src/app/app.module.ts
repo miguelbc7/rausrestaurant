@@ -38,6 +38,8 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { LoadingService } from './services/loading.service';
 
+import { Welcome1Page } from './pages/welcome1/welcome1.page';
+
 
 @NgModule({
   declarations: [
@@ -47,7 +49,7 @@ import { LoadingService } from './services/loading.service';
     ProductocreadoPage,
     ModalPromocionPage,
     ProductoguardadoPage,
-    // ExpandableComponent
+    Welcome1Page
   ],
   entryComponents: [
     AddsliderPage,
@@ -55,7 +57,7 @@ import { LoadingService } from './services/loading.service';
     ModalPromocionPage,
     ProductocreadoPage,
     ProductoguardadoPage,
-    // ExpandableComponent
+    Welcome1Page
   ],
   imports: [
     BrowserModule,

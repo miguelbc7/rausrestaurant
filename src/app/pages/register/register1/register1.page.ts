@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { Validators, FormBuilder, FormGroup, FormControl} from '@angular/forms';
+import { ModalController} from '@ionic/angular';
 import { Router } from '@angular/router';
-// import { TagsHelper } from '../../helpers/tags-helper';
-// import { MustMatch } from '../../validators/must-match.validator';
 import { AuthService } from '../../../services/auth.service';
 import { NativeGeocoder, NativeGeocoderResult } from '@ionic-native/native-geocoder/ngx';
 import { Storage } from '@ionic/storage';
+
+import { MapPage } from '../../modals/map/map.page';
 
 
 @Component({
@@ -32,7 +33,13 @@ export class Register1Page implements OnInit {
 
 
 
-  constructor( public formBuilder: FormBuilder, private router: Router,private authService: AuthService,private nativeGeocoder: NativeGeocoder, private storage: Storage) {
+  constructor(
+    private modalCtrl: ModalController,
+    public formBuilder: FormBuilder,
+    private router: Router,
+    private authService: AuthService,
+    private nativeGeocoder: NativeGeocoder,
+    private storage: Storage) {
 
     this.register1 = formBuilder.group({
       business_name: ['', Validators.compose([
@@ -255,5 +262,12 @@ export class Register1Page implements OnInit {
   textBlur(){
     this.keyboard = false;
   }
+
+ async map() {
+  const modal = await this.modalCtrl.create({
+    component: MapPage,
+  });
+  await modal.present();
+}
 
 }

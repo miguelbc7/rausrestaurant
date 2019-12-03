@@ -27,8 +27,6 @@
               <ion-item class="ion-no-padding">
                   <!-- <ion-label class="font14" position="floating">Fecha exp.</ion-label> -->
                   <ion-datetime class="mtInputFecha" placeholder="Mes" clearInput="true" displayFormat="MM" formControlName="month" [(ngModel)]="month" ancelText="Cancelar" doneText="Guardar"></ion-datetime>
-                  
-
               </ion-item> 
           </ion-col>
           <ion-col size="4" class="ion-no-padding">
@@ -84,4 +82,27 @@
          </ion-row>
          <label>{{errorMessage}}</label>
     </form>
+    <ion-item>
+        <ion-label>Notifications</ion-label>
+        <ion-select value="notifications" interface="action-sheet">
+          <ion-select-option value="enable">Enable</ion-select-option>
+          <ion-select-option value="mute">Mute</ion-select-option>
+          <ion-select-option value="mute_week">Mute for a week</ion-select-option>
+          <ion-select-option value="mute_year">Mute for a year</ion-select-option>
+        </ion-select>
+      </ion-item>
+    <select name="mes" form="mes">
+      <option value="Enero">Enero</option>
+      <option value="Febrero">Febrero</option>
+      <option value="Marzo">Marzo</option>
+      <option value="Abril">Abril</option>
+      <option value="Mayo">Mayo</option>
+      <option value="Junio">Junio</option>
+      <option value="Julio">Julio</option>
+      <option value="Agosto">Agosto</option>
+      <option value="Septiembre">Septiembre</option>
+      <option value="Octubre">Octubre</option>
+      <option value="Noviembre">Noviembre</option>
+      <option value="Diciembre">Diciembre</option>
+    </select>
 </ion-content>
