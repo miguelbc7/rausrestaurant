@@ -41,7 +41,7 @@ import { LoadingService } from './services/loading.service';
 // import { Welcome1Page } from './pages/welcome1/welcome1.page';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';
-
+import { BrMaskerModule } from 'br-mask';
 
 @NgModule({
   declarations: [
@@ -71,7 +71,8 @@ import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';
     IonicStorageModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    BrMaskerModule
   ],
   providers: [
     StatusBar,

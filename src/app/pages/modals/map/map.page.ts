@@ -78,14 +78,14 @@ export class MapPage implements OnInit {
   async mapStart() {
     this.map.clear();
 
-    this.loading = await this.loadingCtrl.create({
-      message: 'Por favor espera un momento...'
-    });
-    await this.loading.present();
+    // this.loading = await this.loadingCtrl.create({
+    //   message: 'Por favor espera un momento...'
+    // });
+    // await this.loading.present();
 
     // Get the location of you
     this.map.getMyLocation().then((location: MyLocation) => {
-      this.loading.dismiss();
+      // this.loading.dismiss();
       console.log(JSON.stringify(location, null ,2));
       this.markerlatlong = location.latLng;
       // Move the map camera to the location with animation
@@ -112,7 +112,7 @@ export class MapPage implements OnInit {
       this.geocoderMap(this.markerlatlong);
     })
     .catch(err => {
-      this.loading.dismiss();
+      // this.loading.dismiss();
       this.showToast(err.error_message);
     });
   }
@@ -129,10 +129,10 @@ export class MapPage implements OnInit {
 
  async geocoderMap(latlng){
     console.log(latlng);
-    this.loading = await this.loadingCtrl.create({
+    // this.loading = await this.loadingCtrl.create({
       // message: 'Por favor espera un momento...'
-    });
-    await this.loading.present();
+    // });
+    // await this.loading.present();
     let options = {
       position: latlng
     };
@@ -140,14 +140,14 @@ export class MapPage implements OnInit {
       this.direccion = results[0];
       this.direccion.extra.lines.pop();
       this.address = this.direccion.extra.lines.join(', ');
-      this.loading.dismiss();
+      // this.loading.dismiss();
     }).catch(error =>{
-      this.loading.dismiss();
+      // this.loading.dismiss();
       console.error(error);
       this.showToast(error.error_message);
     })
     
-    await this.loading.dismiss();
+    // await this.loading.dismiss();
   }
 
   save()
@@ -172,17 +172,23 @@ export class MapPage implements OnInit {
   
   async closeModal() {
     // await this.modalCtrl.dismiss();
-    this.router.navigate(['register1']);
+    this.url = localStorage.getItem('url');
+    if(this.url == 'register'){
+      this.router.navigate(['register1']);
+    }
+    else if (this.url == 'home'){
+      this.router.navigate(['home']);
+    }
+  }
+
+  
+  ionViewDidLeave(){
+    this.platform.backButton.observers.pop();
   }
 
 
+
   ionViewWillLeave() {
-
-      // const nodeList = document.querySelectorAll('._gmaps_cdv_');
-
-      // for (let k = 0; k < nodeList.length; ++k) {
-      //     nodeList.item(k).classList.remove('_gmaps_cdv_');
-      // }
 
   }
 
