@@ -1,13 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder, FormGroup, FormControl} from '@angular/forms';
-import { ModalController} from '@ionic/angular';
+import { ModalController, ToastController} from '@ionic/angular';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
-import { NativeGeocoder, NativeGeocoderResult } from '@ionic-native/native-geocoder/ngx';
 import { Storage } from '@ionic/storage';
 
-import { MapPage } from '../../modals/map/map.page';
-
+// import { MapPage } from '../../modals/map/map.page';
+import {
+  MyLocation,
+  Geocoder,
+  GeocoderResult,
+  LocationService
+} from '@ionic-native/google-maps';
 
 @Component({
   selector: 'app-register1',
@@ -32,6 +36,7 @@ export class Register1Page implements OnInit {
   keyboard = false;
   tempCat;
   address = '';
+  direction;
 
 
   constructor(
@@ -39,8 +44,9 @@ export class Register1Page implements OnInit {
     public formBuilder: FormBuilder,
     private router: Router,
     private authService: AuthService,
-    private nativeGeocoder: NativeGeocoder,
-    private storage: Storage) {
+    private storage: Storage,
+    private toastCtrl: ToastController,
+    ) {
 
     this.register1 = formBuilder.group({
       business_name: ['', Validators.compose([
@@ -154,31 +160,21 @@ export class Register1Page implements OnInit {
 
   async onSubmit(values){
    await this.storage.set('user', values);
-   let data:any ={};
-    data.lat = "-4.0000000";
-    data.lng = "40.0000000";
-    data.zipcode = '33100';
-    this.nativeGeocoder.forwardGeocode(values.address)
-    .then(
-      ( result: NativeGeocoderResult[]) => {
-        console.log('The coordinates are latitude=' + result[0].latitude + ' and longitude=' + result[0].longitude)
-        console.log(result);
-        data.lat = result[0].latitude;
-        data.lng = result[0].longitude;
-        data.zipcode = result[0].postalCode;
-      }
-    )
-    .catch((error: any) => console.error(error));
 
-    values.direction = {
-      street: values.address,
-      lat: data.lat,
-      lng: data.lng,
-      zipcode: data.zipcode,
-      city: 'cucuta',
-      state: 'cucuta',
-      country: 'colombia',
-    };
+   if(this.direction){
+     values.direction = {
+       street: values.address,
+       lat: this.direction.lat,
+       lng: this.direction.lng,
+       zipcode: this.direction.postalCode,
+       city: this.direction.locality,
+       state: this.direction.adminArea,
+       country: this.direction.country,
+     };
+   }else{
+     this.errorMessage = "";
+   }
+
     console.log(values);
 
     this.tempCat = values.categories;
@@ -213,7 +209,19 @@ export class Register1Page implements OnInit {
     );
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+    
+    await this.storage.get('direction').then((data)=>{
+      console.log(data);
+      if(data){
+        data.extra.lines.pop();
+        this.direction = data;
+        this.address = data.extra.lines.join(', ');
+        this.storage.remove('direction');
+      }else{
+        this.myLocation();
+      }
+    });
   }
 
   // upload(form) {
@@ -276,6 +284,40 @@ export class Register1Page implements OnInit {
   //   component: MapPage,
   // });
   // await modal.present();
+}
+
+myLocation(){
+  LocationService.getMyLocation().then((myLocation: MyLocation) => {
+    console.log(myLocation);
+    this.geocoderMap(myLocation.latLng);
+  });
+}
+
+ geocoderMap(latlng){
+  console.log(latlng);
+  let options = {
+    position: latlng
+  };
+  Geocoder.geocode(options).then( (results: GeocoderResult[])=>{
+   console.log(results[0]);
+    this.direction = results[0];
+    this.direction.extra.lines.pop();
+    this.address = this.direction.extra.lines.join(', ');
+  }).catch(error =>{
+    console.error(error);
+    this.showToast(error.error_message);
+  })
+  
+}
+
+async showToast(message: string) {
+  let toast = await this.toastCtrl.create({
+    message: message,
+    duration: 2000,
+    position: 'middle'
+  });
+
+  toast.present();
 }
 
 }

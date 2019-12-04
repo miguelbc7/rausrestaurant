@@ -6,7 +6,10 @@ import {
   GoogleMapsEvent,
   Marker,
   GoogleMapsAnimation,
-  MyLocation
+  MyLocation,
+  Geocoder,
+  GeocoderResult,
+  Environment
 } from '@ionic-native/google-maps';
 import {
   ToastController,
@@ -25,8 +28,9 @@ export class MapPage implements OnInit {
 
   map: GoogleMap;
   loading: any;
-  map_canvas;
   address;
+  markerlatlong;
+  direccion;
 
   constructor(
     private modalCtrl: ModalController,
@@ -52,9 +56,15 @@ export class MapPage implements OnInit {
   async ionViewDidEnter(){
     await this.platform.ready();
     await this.loadMap();
+   
   }
 
+
   async loadMap() {
+    Environment.setEnv({
+      API_KEY_FOR_BROWSER_RELEASE: "AIzaSyBUhsxeoY9tYVFFD31lLygBdRROqHU7s6k",
+      API_KEY_FOR_BROWSER_DEBUG: "AIzaSyBUhsxeoY9tYVFFD31lLygBdRROqHU7s6k"
+    });
    this.map = GoogleMaps.create('map_canvas', {
       camera: {
         target: {
@@ -71,7 +81,7 @@ export class MapPage implements OnInit {
     this.map.clear();
 
     this.loading = await this.loadingCtrl.create({
-      message: 'Please wait...'
+      message: 'Por favor espera un momento...'
     });
     await this.loading.present();
 
@@ -79,7 +89,7 @@ export class MapPage implements OnInit {
     this.map.getMyLocation().then((location: MyLocation) => {
       this.loading.dismiss();
       console.log(JSON.stringify(location, null ,2));
-
+      this.markerlatlong = location.latLng;
       // Move the map camera to the location with animation
       this.map.animateCamera({
         target: location.latLng,
@@ -88,20 +98,20 @@ export class MapPage implements OnInit {
       });
 
       // add a marker
-      let marker: Marker = this.map.addMarkerSync({
-        // title: '@ionic-native/google-maps plugin!',
-        // snippet: 'This plugin is awesome!',
+      this.map.addMarker({
         position: location.latLng,
-        animation: GoogleMapsAnimation.BOUNCE
-      });
-
-      // show the infoWindow
-      marker.showInfoWindow();
-
-      // If clicked it, display the alert
-      marker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(() => {
-        // this.showToast('clicked!');
-      });
+        animation: GoogleMapsAnimation.DROP,
+        draggable: true,
+      }).then(marker =>{
+        marker.on(GoogleMapsEvent.MARKER_DRAG_END)
+          .subscribe(() => {
+            
+            this.markerlatlong = marker.getPosition();
+            this.geocoderMap(this.markerlatlong);
+          });
+        });
+        
+      this.geocoderMap(this.markerlatlong);
     })
     .catch(err => {
       this.loading.dismiss();
@@ -119,14 +129,43 @@ export class MapPage implements OnInit {
     toast.present();
   }
 
+ async geocoderMap(latlng){
+    console.log(latlng);
+    this.loading = await this.loadingCtrl.create({
+      // message: 'Por favor espera un momento...'
+    });
+    await this.loading.present();
+    let options = {
+      position: latlng
+    };
+   await Geocoder.geocode(options).then( (results: GeocoderResult[])=>{
+      this.direccion = results[0];
+      this.direccion.extra.lines.pop();
+      this.address = this.direccion.extra.lines.join(', ');
+    }).catch(error =>{
+      this.loading.dismiss();
+      console.error(error);
+      this.showToast(error.error_message);
+    })
+    
+    await this.loading.dismiss();
+  }
+
+  save()
+  {
+    this.storage.set('direction',this.direccion);
+    this.router.navigate(['register1']);
+  }
+
   ionViewWillLeave() {
 
-    const nodeList = document.querySelectorAll('._gmaps_cdv_');
+      // const nodeList = document.querySelectorAll('._gmaps_cdv_');
 
-    for (let k = 0; k < nodeList.length; ++k) {
-        nodeList.item(k).classList.remove('_gmaps_cdv_');
-    }
+      // for (let k = 0; k < nodeList.length; ++k) {
+      //     nodeList.item(k).classList.remove('_gmaps_cdv_');
+      // }
 
-}
+  }
+
 
 }

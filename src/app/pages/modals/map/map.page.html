@@ -11,13 +11,13 @@
 			<div class="ion-margin-vertical">
 				<ion-item class="itemTransparent">
 					<!-- <ion-label class="font14" position="floating">Dirección</ion-label> -->
-					<ion-input type="text" [(ngModel)]="address"></ion-input>
+					<ion-input type="text" [(ngModel)]="address" ></ion-input>
 					<ion-icon class="ion-align-self-end" name="pin" color="bluedark" slot="end"></ion-icon>
 				</ion-item>
 			</div>
 		</ion-col>
 		<ion-col size="12" class="ion-text-center">
-          <ion-button type="button" class="font15 mx-2" color="bluedark">Guardar</ion-button>
+          <ion-button type="button" class="font15 mx-2" color="bluedark" (click)="save()" >Guardar</ion-button>
           <ion-button type="button" class="font15 mx-2" color="bluelight" (click)="closeModal()">Cancelar
           </ion-button>
       	</ion-col>
