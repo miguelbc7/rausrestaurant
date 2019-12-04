@@ -9,6 +9,8 @@ import { Storage } from '@ionic/storage';
 import {
   MyLocation,
   Geocoder,
+  GoogleMap,
+  GoogleMaps,
   GeocoderResult,
   LocationService
 } from '@ionic-native/google-maps';
@@ -21,6 +23,7 @@ import {
 export class Register1Page implements OnInit {
   
   public register1: FormGroup;
+  map: GoogleMap;
   form: FormGroup;
   pass:any;
   cpass:any;
@@ -29,8 +32,8 @@ export class Register1Page implements OnInit {
   passwordType2: string = "password";
   passwordShown2: boolean = false;
   data: { username: any; password: any; };
-  tags:[{name:'#Comer'},{name:'#Salud'},{name:'#Cuidado Personal'} ,{name:'#Fuel'} ,{name:'#Entretenimiento'},{name:'#Kids'} ,{name:'#Deporte'}
-  ,{name:'#Viajes Hoteles'} , {name:'#Alimentos'}, {name:'#Transporte'}  ];
+  // tags:[{name:'#Comer'},{name:'#Salud'},{name:'#Cuidado Personal'} ,{name:'#Fuel'} ,{name:'#Entretenimiento'},{name:'#Kids'} ,{name:'#Deporte'}
+  // ,{name:'#Viajes Hoteles'} , {name:'#Alimentos'}, {name:'#Transporte'}  ];
   categories;
   errorMessage:string = "";
   keyboard = false;
@@ -87,7 +90,7 @@ export class Register1Page implements OnInit {
       // code: ['', Validators.compose([
       //   Validators.required,
       // ])],
-      categories: ['', Validators.compose([
+      tags: ['', Validators.compose([
         // Validators.required,
       ])],
       password: ['', Validators.compose([
@@ -153,7 +156,7 @@ export class Register1Page implements OnInit {
         { type: 'maxlength', message: 'Debe ser menor de 15 caracteres.' },
         { type: 'pattern', message: 'Su contraseña debe contener al menos una mayúscula, una minúscula, un número y un caracter especial(@!%*?&#.$-_).' }
       ],
-      'categories': [
+      'tags': [
         { type: 'required', message: 'Debe ingresar una actividad de tu empresa.' },
       ],
     }
@@ -164,8 +167,8 @@ export class Register1Page implements OnInit {
    if(this.direction){
      values.direction = {
        street: values.address,
-       lat: this.direction.lat,
-       lng: this.direction.lng,
+       lat: this.direction.position.lat.toString(),
+       lng: this.direction.position.lng.toString(),
        zipcode: this.direction.postalCode,
        city: this.direction.locality,
        state: this.direction.adminArea,
@@ -176,8 +179,6 @@ export class Register1Page implements OnInit {
    }
 
     console.log(values);
-
-    this.tempCat = values.categories;
 
     this.authService.registerUser(values)
     .subscribe(async res => {
@@ -197,7 +198,7 @@ export class Register1Page implements OnInit {
         console.error(err);
       });
     },(err) => {
-      this.categories = this.tempCat;
+      // this.categories = this.tempCat;
       console.error(err.error);
       if(err.error.error){
         this.errorMessage = err.error.error;
@@ -276,7 +277,7 @@ export class Register1Page implements OnInit {
     this.keyboard = false;
   }
 
-  map() {
+  getMap() {
     console.log(this.address);
     this.storage.set('address', this.address);
     this.router.navigate(['map']);
@@ -287,6 +288,7 @@ export class Register1Page implements OnInit {
 }
 
 myLocation(){
+ 
   LocationService.getMyLocation().then((myLocation: MyLocation) => {
     console.log(myLocation);
     this.geocoderMap(myLocation.latLng);
