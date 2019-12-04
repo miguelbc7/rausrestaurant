@@ -326,6 +326,12 @@ export class HomePage implements OnInit {
     this.sliderService.delete_Item(id);
   }
 
+  getMap()
+  {
+    localStorage.setItem('url','home');
+    this.router.navigate(['map']);
+  }
+
   ngOnDestroy(){
     
   }

@@ -47,7 +47,7 @@
             </div>
           </ng-container>
         </div>
-        <ion-item>
+        <!-- <ion-item>
           <ion-input class="font14" formControlName="direction" value="{{profile.address}}" autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" color="blue-dark2" inputmode="text" placeholder="Carrer de Aribau 355" required="true"></ion-input>
           <ion-icon class="iconn" name="pin"  slot="end" align-self-center></ion-icon>
         </ion-item>
@@ -57,7 +57,7 @@
               {{ validation.message }}
             </div>
           </ng-container>
-        </div>
+        </div> -->
         <ion-item>
           <ion-input class="font14" formControlName="password" autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" color="blue-dark2" inputmode="text" placeholder="Cambiar contraseña" [type]="passwordType"></ion-input>
           <ion-icon align-self-end style="margin-top: 5px;" [name]="passwordShown === true ? 'eye-off' : 'eye'" [color]="passwordShown === true ? 'bluelight' : 'bluedark' " slot="end" (click)="togglePassword()"></ion-icon>

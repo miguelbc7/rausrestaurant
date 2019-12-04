@@ -18,6 +18,7 @@ import {
 } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-map',
@@ -31,6 +32,7 @@ export class MapPage implements OnInit {
   address;
   markerlatlong;
   direccion;
+  url;
 
   constructor(
     private modalCtrl: ModalController,
@@ -38,7 +40,8 @@ export class MapPage implements OnInit {
     public toastCtrl: ToastController,
     private platform: Platform,
     private router: Router,
-    private storage: Storage
+    private storage: Storage,
+    private authService: AuthService,
     ) { }
 
  async ngOnInit() {
@@ -46,11 +49,6 @@ export class MapPage implements OnInit {
       this.address = data;
       console.log(data);
     })
-  }
-
-  async closeModal() {
-    // await this.modalCtrl.dismiss();
-    this.router.navigate(['register1']);
   }
 
   async ionViewDidEnter(){
@@ -154,9 +152,29 @@ export class MapPage implements OnInit {
 
   save()
   {
+    this.direccion.street = this.address;
+    console.log(this.direccion);
     this.storage.set('direction',this.direccion);
+
+    this.url = localStorage.getItem('url');
+    console.log(this.url);
+    if(this.url == 'register'){
+      console.log('s');
+      this.router.navigate(['register1']);
+    }
+    else if (this.url == 'home'){
+      console.log('ss');
+      this.authService.updateAddress(this.address);
+      this.router.navigate(['home']);
+    }
+  }
+
+  
+  async closeModal() {
+    // await this.modalCtrl.dismiss();
     this.router.navigate(['register1']);
   }
+
 
   ionViewWillLeave() {
 

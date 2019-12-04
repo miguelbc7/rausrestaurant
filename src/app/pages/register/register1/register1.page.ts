@@ -215,7 +215,7 @@ export class Register1Page implements OnInit {
   }
 
   async ngOnInit() {
-    
+
     this.checkGPSPermission();
     
     await this.storage.get('direction').then((data)=>{
@@ -223,8 +223,8 @@ export class Register1Page implements OnInit {
       if(data){
         data.extra.lines.pop();
         this.direction = data;
-        this.address = data.extra.lines.join(', ');
-        this.storage.remove('direction');
+        this.address = data.street;
+        // this.storage.remove('direction');
       }else{
         this.myLocation();
       }
@@ -286,6 +286,7 @@ export class Register1Page implements OnInit {
   getMap() {
     console.log(this.address);
     this.storage.set('address', this.address);
+    localStorage.setItem('url','register');
     this.router.navigate(['map']);
   // const modal = await this.modalCtrl.create({
   //   component: MapPage,
@@ -328,6 +329,7 @@ async showToast(message: string) {
   toast.present();
 }
 
+///////////////////////// GPS Google Maps //////////////////////////////////////
 checkGPSPermission() {
   this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION).then(
     result => {
@@ -342,7 +344,7 @@ checkGPSPermission() {
       }
     },
     err => {
-      alert(err);
+      console.error(err);
     }
   );
 }
@@ -361,7 +363,7 @@ requestGPSPermission() {
           },
           error => {
             //Show alert if user click on 'No Thanks'
-            alert('requestPermission Error requesting location permissions ' + error)
+            console.error('requestPermission Error requesting location permissions 1' + error)
           }
         );
     }
@@ -373,7 +375,7 @@ askToTurnOnGPS() {
       // When GPS Turned ON call method to get Accurate location coordinates
       this.myLocation()
     },
-    error => alert('Error requesting location permissions ' + JSON.stringify(error))
+    error => console.error('Error requesting location permissions 2' + JSON.stringify(error))
   );
 }
 

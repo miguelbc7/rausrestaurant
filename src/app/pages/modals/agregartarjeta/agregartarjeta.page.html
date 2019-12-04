@@ -26,7 +26,7 @@
       <ion-col size="7" class="ion-no-padding">
         <ion-item class="ion-no-padding">
           <ion-label class="ion-no-padding">mes</ion-label>
-          <ion-select class="ion-text-center ion-no-padding select-space" value="notifications" interface="action-sheet" cancelText="Cerrar">
+          <ion-select class="ion-text-center ion-no-padding select-space" value="notifications" [(ngModel)]="month" formControlName="month"  interface="action-sheet" cancelText="Cerrar">
             <ion-select-option class="ion-text-center" value="Enero">Enero</ion-select-option>
             <ion-select-option class="ion-text-center" value="Febrero">Febrero</ion-select-option>
             <ion-select-option class="ion-text-center" value="Marzo">Marzo</ion-select-option>
@@ -48,7 +48,7 @@
               <ion-col size="5" class="ion-no-padding">
                 <ion-item class="ion-no-padding">
                   <ion-label class="ion-no-padding">año</ion-label>
-                  <ion-select class="ion-text-center ion-no-padding select-space" value="notifications" interface="action-sheet" cancelText="Cerrar">
+                  <ion-select class="ion-text-center ion-no-padding select-space" value="notifications" [(ngModel)]="year" formControlName="year" interface="action-sheet" cancelText="Cerrar">
                     <ion-select-option value="2020">2020</ion-select-option>
                     <ion-select-option value="2021">2021</ion-select-option>
                     <ion-select-option value="2022">2022</ion-select-option>

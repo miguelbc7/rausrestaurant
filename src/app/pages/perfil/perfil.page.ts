@@ -39,11 +39,11 @@ export class PerfilPage implements OnInit {
             Validators.maxLength(300),
             Validators.minLength(5)
           ])],
-          direction: ['', Validators.compose([
-            Validators.required,
-            Validators.maxLength(300),
-            Validators.minLength(5)
-          ])],
+          // direction: ['', Validators.compose([
+          //   Validators.required,
+          //   Validators.maxLength(300),
+          //   Validators.minLength(5)
+          // ])],
           phone: ['', Validators.compose([
             Validators.required,
             Validators.maxLength(20)
@@ -81,10 +81,10 @@ export class PerfilPage implements OnInit {
         { type: 'minlength', message: 'Debe ser mayor de 5 caracteres.' },
         { type: 'maxlength', message: 'Debe ser menor de 300 caracteres.' }
       ],
-      'direction': [
-        { type: 'required', message: 'Debe ingresar una dirección.' },
-        { type: 'minlength', message: 'Debe ser mayor de 5 caracteres.' },
-      ],
+      // 'direction': [
+      //   { type: 'required', message: 'Debe ingresar una dirección.' },
+      //   { type: 'minlength', message: 'Debe ser mayor de 5 caracteres.' },
+      // ],
       'phone': [
         { type: 'required', message: 'Debe ingresar un Teléfono.' },
         { type: 'minlength', message: 'Debe ser mayor de 5 caracteres.' },
@@ -138,7 +138,7 @@ export class PerfilPage implements OnInit {
       //       })
       //     .catch((error: any) => console.log(error));
       this.profile = data;
-      this.profile.address = data.direction.street;
+      // this.profile.address = data.direction.street;
       // console.log(this.profile.direction.street);
       this.loading.hideLoader();
     })

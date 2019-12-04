@@ -46,7 +46,7 @@
           </ion-row>
           <ion-row class="ion-no-padding">
               <ion-col size="12" class="font12 ion-text-center blue-dark2">
-                  <ion-button fill="clear" color="bluedark" class="blue-dark bold ion-text-center ion-text-wrap">
+                  <ion-button fill="clear" color="bluedark" class="blue-dark bold ion-text-center ion-text-wrap" (click)="getMap()">
                     {{profile.direction.street}}
                     <ion-icon color="bluedark" class="iconLapiz " slot="end" src="assets/img/icon/lapiz.svg"></ion-icon>
                   </ion-button>
@@ -197,9 +197,10 @@
                 </ion-row>
                 <ion-row>
                     <ion-col class="ion-no-padding ion-align-self-center" size="8">
-                     <p class="hgPCarta my-0 customDarkText font9" *ngFor="let ingredientes of product.ingredients">
+                     <!-- <p class="hgPCarta my-0 customDarkText font9" *ngFor="let ingredientes of product.ingredients">
                         {{ ingredientes.name }},
-                     </p> 
+                     </p>  -->
+                     <p  class="hgPCarta my-0 customDarkText font9"> {{product.description}} </p>
                     </ion-col>
                     <ion-col class="ion-no-padding ion-align-self-center ion-text-right" size="2">
                         <ion-icon class="font24" color="bluedark" src="assets/img/icon/compartir.svg"></ion-icon>
