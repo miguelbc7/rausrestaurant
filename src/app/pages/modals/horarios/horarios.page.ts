@@ -15,6 +15,8 @@ export class HorariosPage implements OnInit {
   name;
   start:'12:00';
   end:'';
+  start2;
+  end2;
   status = false;
   list:any;
   errorMessage: any;

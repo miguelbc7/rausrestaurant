@@ -279,6 +279,7 @@ export class AgregarproductoPage implements OnInit {
 		let aIngredients;
 		values.ingredients = [];
 		if(values.ingredientes != ''){
+			console.log(values.ingredientes);
 			aIngredients = values.ingredientes.split(',');
 			for (let index = 0; index < aIngredients.length; index++) {
 				values.ingredients.push ({ 'name' : aIngredients[index] } ) ;
