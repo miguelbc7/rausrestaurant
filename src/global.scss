@@ -202,9 +202,6 @@
 .font60 {
     font-size: 60pt !important;
 }
-.font120 {
-    font-size: 120pt !important;
-}
 
 // CARTAS
 
@@ -217,8 +214,8 @@
 .card-content-md {
     padding-left: 5px;
     padding-right: 5px;
-    padding-top: 0px;
-    padding-bottom: 0px;
+    padding-top: 5px;
+    padding-bottom: 3px;
 }
 
 .imgCarta {
@@ -329,13 +326,13 @@
 
 .divEditCard {
     position: absolute;
-    width: 30px;
-    height: 30px;
-    right: 10px;
-    top: 70%;
-    border:3px solid #fff;
+    // width: 30px;
+    // height: 30px;
+    right: -7px;
+    top: 55%;
+    // border:3px solid #fff;
     padding: 2px;
-    background-color: #657b97;
+    // background-color: #657b97;
     border-radius: 15px;
     z-index: 2;
 }
@@ -346,7 +343,7 @@
     right: 1px;
     bottom: 1px;
     margin:auto;
-    font-size: 14pt;
+    font-size: 4rem;
 }
 
 .imgMap {
@@ -478,7 +475,6 @@ tag-input .ng2-tag-input.minimal-theme {
     
 }
 
-
 // Generales
 
 body {
@@ -517,18 +513,9 @@ ion-datetime {
     padding-bottom: 7px;
 }
 
-
-// .item-label-floating{
-//     --min-height: 50px !important;
-// }
-
-// .item-label-stacked {
-//     --min-height: 50px;
-// }
-
-// .item-has-focus .label-floating.sc-ion-label-md-h {
-//     transform: translate3d(0,10%,0) scale(0.90)!important;
-// }
+.itemSeparado {
+    padding-bottom: 0px !important;
+}
 
 .input-clear-icon.sc-ion-input-md {
     background-image: url("data:image/svg+xml;charset=utf-8,<svg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20512%20512'><polygon%20fill='var(--ion-color-step-600,%20%23666666)'%20points='405,136.798%20375.202,107%20256,226.202%20136.798,107%20107,136.798%20226.202,256%20107,375.202%20136.798,405%20256,285.798%20375.202,405%20405,375.202%20285.798,256'/></svg>");
@@ -545,10 +532,10 @@ ion-datetime {
     font-size: inherit;
 }
 
-.item-label-floating.sc-ion-input-md-h,
+.item-label-floating .sc-ion-input-md-h,
 .item-label-floating .sc-ion-input-md-h,
 .item-label-stacked.sc-ion-input-md-h,
-.item-label-stacked .sc-ion-input-md-h {
+.item-label-stacked.sc-ion-input-md-h {
     --padding-top: 0px;
     --padding-bottom: 0px;
     --padding-start: 0;
@@ -609,6 +596,16 @@ ion-datetime {
 
 .boxBottom {
     position: absolute; bottom: 20px;
+}
+
+.sc-ion-action-sheet-md-h {
+    --color: initial;
+    --min-width: auto;
+    --width: 100%;
+    --max-width: 500px;
+    --min-height: auto;
+    --height: 100%;
+    --max-height: 50%;
 }
 
 

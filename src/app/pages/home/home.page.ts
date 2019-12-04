@@ -171,7 +171,8 @@ export class HomePage implements OnInit {
       componentProps:{
         productID:productID,
       },
-      cssClass: 'sizeModalPromocion'
+      cssClass: 'sizeModalPromocion',
+      backdropDismiss:false,
     });
     await modal.present();
   }

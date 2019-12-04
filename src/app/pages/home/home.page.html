@@ -45,12 +45,18 @@
             </ion-col>
           </ion-row>
           <ion-row class="ion-no-padding">
-              <ion-col size="12">
+              <ion-col size="12" class="font12 ion-text-center blue-dark2">
+                  <ion-button fill="clear" color="bluedark" class="blue-dark bold ion-text-center ion-text-wrap">
+                    {{profile.direction}}
+                    <ion-icon color="bluedark" class="iconLapiz " slot="end" src="assets/img/icon/lapiz.svg"></ion-icon>
+                  </ion-button>
+              </ion-col>
+              <!-- <ion-col size="12">
                   <p class="ion-text-center ion-no-margin font11 pDirection">
                     {{profile.direction}} 
-                      <ion-icon class="font16" color="bluedark" name="create" routerLink="/perfil"></ion-icon>
+                      <ion-icon class="iconLapiz" color="bluedark" src="assets/img/icon/lapiz.svg" routerLink="/perfil"></ion-icon>
                   </p>
-              </ion-col>
+              </ion-col> -->
               <ion-col size="12">
                   <p class="ion-text-center ion-no-margin">
                       <ion-icon class="font24" color="bluedark" name="time"></ion-icon>
@@ -151,22 +157,17 @@
             <ion-col class="font12 ion-text-center blue-dark2"  (click)="addProduct()">
               <ion-button fill="clear" color="bluedark" class="blue-dark bold">
                 <ion-icon color="bluedark" class="font25 " slot="start" name="add-circle-outline"></ion-icon>
+                <!-- <ion-icon color="bluedark" class="font25 " slot="start" src="assets/img/icon/agregarProducto.svg"></ion-icon> -->
                 Agregar productos
               </ion-button>
-              <!-- <ion-icon class="font20" color="bluedark" name="add-circle-outline"></ion-icon> 
-              <p class="my-0">Agregar productos</p> -->
             </ion-col>
           </ion-row>
   </ion-grid>
-  <!-- <ion-text color="bluelight" class="font16">
-      <p class="ion-text-center">Tus promociones</p>
-  </ion-text> -->
   <ion-grid class="px-0">
     <ion-row >
       <ion-col class="px-0" size="6" *ngFor="let product of productos; let i = index">
           <ion-card class="customCard">
               <div class="boxBanner">
-                <!-- <img class="imgCarta" src="assets/img/pasta2.jpg" alt="avatar perfil"> -->
                 <ion-slides *ngIf="product.images.length > 0">
                   <ion-slide class="changeStyle"  *ngFor="let img of product.images">
                     <img class="imgCarta3" src="{{img.img}}"/>
@@ -178,7 +179,7 @@
                   </ion-slide>
                 </ion-slides>
                 <div class="divEditCard" color="bluelight" (click)="editProduct(productos[i])">
-                    <ion-icon class="iconEditCard" color="white" name="create"></ion-icon>
+                    <ion-icon class="iconEditCard" color="white" src="assets/img/icon/lapizEdit.svg"></ion-icon>
                 </div>
               </div>
               <ion-card-content>
@@ -191,7 +192,6 @@
                   <ion-col class="ion-no-padding" size="5">
                     <p class="my-0 hgPCarta  customDarkText">
                       <span class="font12">{{product.price_with_iva| currency:'EUR':true:'1.2-2'}}</span>
-                      <!-- <span class="font12 decimalCarta">,50€</span> -->
                     </p>
                   </ion-col>
                 </ion-row>
@@ -202,32 +202,15 @@
                      </p> 
                     </ion-col>
                     <ion-col class="ion-no-padding ion-align-self-center ion-text-right" size="2">
-                        <ion-icon color="bluedark" name="share"></ion-icon>
+                        <ion-icon class="font24" color="bluedark" src="assets/img/icon/compartir.svg"></ion-icon>
                     </ion-col>
                     <ion-col class="ion-no-padding ion-align-self-center ion-text-right" size="2" (click)="addpromocion(product._id)">
-                        <ion-icon color="bluedark" name="megaphone"></ion-icon>
+                        <ion-icon class="font24" color="bluedark" src="assets/img/icon/parlantepromo.svg"></ion-icon>
                     </ion-col>
                   </ion-row>
               </ion-card-content>
           </ion-card>
       </ion-col>
-     
     </ion-row>
   </ion-grid>
-<!-- 
-  <div class="ion-text-center">
-    <ion-button class="font14 blue-dark" fill="clear" routerLink="/historial">historial</ion-button>
-  </div>
-
-  <div class="ion-text-center">
-      <ion-button class="font14 blue-dark" fill="clear" (click)="openAgregarSaldo()">agregar</ion-button>
-  </div>
-  <div class="ion-text-center">
-      <ion-button class="font14 blue-dark" fill="clear" routerLink="/analiticas">analitica
-      </ion-button>
-  </div>
-  <div class="ion-text-center">
-    <ion-button class="font14 blue-dark" fill="clear" (click)="openCierreModal()">cierre
-    </ion-button>
-  </div> -->
 </ion-content>
