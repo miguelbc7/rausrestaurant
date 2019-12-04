@@ -39,6 +39,8 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { LoadingService } from './services/loading.service';
 
 import { Welcome1Page } from './pages/welcome1/welcome1.page';
+import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
+import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';
 
 
 @NgModule({
@@ -81,7 +83,9 @@ import { Welcome1Page } from './pages/welcome1/welcome1.page';
     File,
     WebView,
     FilePath,
-    LoadingService
+    LoadingService,
+    AndroidPermissions,
+    LocationAccuracy,
   
   ],
   bootstrap: [AppComponent]

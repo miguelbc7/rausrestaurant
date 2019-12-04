@@ -56,16 +56,16 @@
         <ion-col size="5" >
           <ion-item style="width: 100px;" class="ion-float-right">
             <!-- <ion-label class="font14">Hora Inicio</ion-label> -->
-            <ion-datetime  [(ngModel)]="start" name="start" pickerFormat="HH:mm" displayFormat="HH:mm" minuteValues="0,15,30,45"></ion-datetime>
+            <ion-datetime  [(ngModel)]="start" name="start" pickerFormat="HH:mm" (ionChange)="validar()" displayFormat="HH:mm" minuteValues="0,15,30,45"></ion-datetime>
           </ion-item>
         </ion-col>
         <ion-col size="2" class="ion-text-center ion-align-self-center">
           a
-        </ion-col>
+        </ion-col>  
         <ion-col size="5" class="ion-justify-content-end">
           <ion-item style="width: 100px;">
             <!-- <ion-label class="font14">Hora Final</ion-label> -->
-            <ion-datetime   [(ngModel)]="end" name="end" pickerFormat="HH:mm" displayFormat="HH:mm" minuteValues="0,15,30,45"></ion-datetime>
+            <ion-datetime   [(ngModel)]="end" name="end" pickerFormat="HH:mm" (ionChange)="validar()" displayFormat="HH:mm" minuteValues="0,15,30,45"></ion-datetime>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -73,7 +73,7 @@
           <ion-col size="5" >
             <ion-item style="width: 100px;" class="ion-float-right">
               <!-- <ion-label class="font14">Hora Inicio</ion-label> -->
-              <ion-datetime  [(ngModel)]="start2" name="start2" pickerFormat="HH:mm" displayFormat="HH:mm" minuteValues="0,15,30,45"></ion-datetime>
+              <ion-datetime  [(ngModel)]="start2" name="start2" pickerFormat="HH:mm" (ionChange)="validar()" displayFormat="HH:mm" minuteValues="0,15,30,45"></ion-datetime>
             </ion-item>
           </ion-col>
           <ion-col size="2" class="ion-text-center ion-align-self-center">
@@ -82,14 +82,14 @@
           <ion-col size="5" class="ion-justify-content-end">
             <ion-item style="width: 100px;">
               <!-- <ion-label class="font14">Hora Final</ion-label> -->
-              <ion-datetime   [(ngModel)]="end2" name="end2" pickerFormat="HH:mm" displayFormat="HH:mm" minuteValues="0,15,30,45"></ion-datetime>
+              <ion-datetime   [(ngModel)]="end2" name="end2" pickerFormat="HH:mm" (ionChange)="validar()" displayFormat="HH:mm" minuteValues="0,15,30,45"></ion-datetime>
             </ion-item>
           </ion-col>
         </ion-row>
         <br>
       <ion-row class="ion-justify-content-between">
           <ion-col size="12" class="ion-text-center">
-              <ion-button type="submit"  class="font15 mx-2" color="bluedark">Guardar</ion-button>
+              <ion-button type="submit"  class="font15 mx-2" color="bluedark" [disabled]="isValid">Guardar</ion-button>
               <ion-button class="font15 btnVolver mx-2" color="white">Volver</ion-button>
           </ion-col>
           <label class="error-message" >{{errorMessage}}</label>
