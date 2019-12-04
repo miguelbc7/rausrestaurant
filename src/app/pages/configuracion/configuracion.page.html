@@ -6,13 +6,13 @@
       <p class="my-0">
         <ion-icon class="iconHeader" src="assets/img/icon/config.svg"></ion-icon>
       </p>
-      <p class="titleHeader my-0">Configuración</p>
+      <p class="titleHeader blue-dark2 my-0">Configuración</p>
     </ion-col>
   </ion-row>
     <ion-list class="list-panel">
       <!-- Notificaciones -->
-      <ion-item class="item-ion-style">
-        <ion-label class="font14 color-font" style="padding-bottom:10pt;">Notificaciones</ion-label>
+      <ion-item class="item-ion-stylE">
+        <ion-label class="blue-dark2 font12">Notificaciones</ion-label>
         <div class="onoffswitch">
             <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
             <label class="onoffswitch-label" for="myonoffswitch"></label>
@@ -20,7 +20,7 @@
       </ion-item>
       <!-- Vibracion -->
       <ion-item class="item-ion-style">
-        <ion-label class="font14 color-font" style="padding-bottom:10pt;">Vibración</ion-label>
+        <ion-label class="blue-dark2 font12">Vibración</ion-label>
         <div class="onoffswitch">
             <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch2" checked>
             <label class="onoffswitch-label2" for="myonoffswitch2"></label>
@@ -30,18 +30,18 @@
     <!-- Soporte -->
         <ion-card class="card-expandable" (click)="expandItem(item)" *ngFor="let item of items">
             <ion-card-header class="margin-header" (click)="toggleZipped()">
-              <ion-card-title class="font14 color-font">Soporte <ion-icon class="arrow-icon ion-float-right" color="bluedark" [name]="zipped ? 'arrow-dropright' : 'arrow-dropdown'"></ion-icon>
+              <ion-card-title class="blue-dark2 font12 no-p">Soporte <ion-icon class="arrow-icon ion-float-right" color="bluedark" [name]="zipped ? 'arrow-dropright' : 'arrow-dropdown'"></ion-icon>
               </ion-card-title>
             </ion-card-header>
             <ion-card-content class="content-expandable">
               <app-expandable expandHeight="120px" [expanded]="item.expanded">
-                <p class="font14">
+                <p class="blue-dark2 font12">
                   Opciones
                 </p>
-                <p class="font14">
+                <p class="blue-dark2 font12">
                Opciones
                 </p>
-                <p class="font14">
+                <p class="blue-dark2 font12">
                Opciones
                 </p>
               </app-expandable>
@@ -50,18 +50,18 @@
     <!-- Sobre Raus -->
         <ion-card class="card-expandable" (click)="expandItem2(item)" *ngFor="let item of items">
               <ion-card-header class="margin-header" (click)="toggleZipped2()">
-                <ion-card-title class="font14 color-font">Sobre Raus <ion-icon class="arrow-icon ion-float-right" color="bluedark" [name]="zipped2 ? 'arrow-dropright' : 'arrow-dropdown'"></ion-icon>
+                <ion-card-title class="blue-dark2 font12 no-p">Sobre Raus <ion-icon class="arrow-icon ion-float-right" color="bluedark" [name]="zipped2 ? 'arrow-dropright' : 'arrow-dropdown'"></ion-icon>
                 </ion-card-title>
               </ion-card-header>
               <ion-card-content class="content-expandable">
                 <app-expandable expandHeight="120px" [expanded]="item.expanded2">
-                  <p class="font14">
+                  <p class="blue-dark2 font12">
                     Opciones
                   </p>
-                  <p class="font14">
+                  <p class="blue-dark2 font12">
                  Opciones
                   </p>
-                  <p class="font14">
+                  <p class="blue-dark2 font12">
                  Opciones
                   </p>
                 </app-expandable>
@@ -70,17 +70,17 @@
     <!-- FAQ -->
     <ion-card class="card-expandable" (click)="expandItem3(item)" *ngFor="let item of items">
         <ion-card-header class="margin-header" (click)="toggleZipped3()">
-          <ion-card-title class="font14 color-font">FAQ <ion-icon class="arrow-icon ion-float-right" color="bluedark" [name]="zipped3 ? 'arrow-dropright' : 'arrow-dropdown'"></ion-icon></ion-card-title>
+          <ion-card-title class="blue-dark2 font12 no-p">FAQ <ion-icon class="arrow-icon ion-float-right" color="bluedark" [name]="zipped3 ? 'arrow-dropright' : 'arrow-dropdown'"></ion-icon></ion-card-title>
         </ion-card-header>
         <ion-card-content class="content-expandable">
           <app-expandable expandHeight="120px" [expanded]="item.expanded3">
-            <p class="font14">
+            <p class="blue-dark2 font12">
               Opciones
             </p>
-            <p class="font14">
+            <p class="blue-dark2 font12">
            Opciones
             </p>
-            <p class="font14">
+            <p class="blue-dark2 font12">
            Opciones
             </p>
           </app-expandable>
@@ -89,17 +89,17 @@
     <!-- Cerrar Cuenta -->
     <ion-card class="card-expandable" (click)="expandItem4(item)" *ngFor="let item of items">
         <ion-card-header class="margin-header" (click)="toggleZipped4()">
-          <ion-card-title class="font14 color-font">Cerrar cuenta <ion-icon class="arrow-icon ion-float-right" color="bluedark" [name]="zipped4 ? 'arrow-dropright' : 'arrow-dropdown'"></ion-icon></ion-card-title>
+          <ion-card-title class="blue-dark2 font12 no-p">Cerrar cuenta <ion-icon class="arrow-icon ion-float-right" color="bluedark" [name]="zipped4 ? 'arrow-dropright' : 'arrow-dropdown'"></ion-icon></ion-card-title>
         </ion-card-header>
         <ion-card-content class="content-expandable">
           <app-expandable expandHeight="120px" [expanded]="item.expanded4">
-            <p class="font14">
+            <p class="blue-dark2 font12">
               Opciones
             </p>
-            <p class="font14">
+            <p class="blue-dark2 font12">
            Opciones
             </p>
-            <p class="font14">
+            <p class="blue-dark2 font12">
            Opciones
             </p>
           </app-expandable>
@@ -108,17 +108,17 @@
     <!-- Condiciones y Terminos -->
     <ion-card class="card-expandable" (click)="expandItem5(item)" *ngFor="let item of items">
         <ion-card-header class="margin-header" (click)="toggleZipped5()">
-          <ion-card-title class="font14 color-font">Condiciones y terminos <ion-icon class="arrow-icon ion-float-right" color="bluedark" [name]="zipped4 ? 'arrow-dropright' : 'arrow-dropdown'"></ion-icon></ion-card-title>
+          <ion-card-title class="blue-dark2 font12 no-p">Condiciones y terminos <ion-icon class="arrow-icon ion-float-right" color="bluedark" [name]="zipped4 ? 'arrow-dropright' : 'arrow-dropdown'"></ion-icon></ion-card-title>
         </ion-card-header>
         <ion-card-content class="content-expandable">
           <app-expandable expandHeight="120px" [expanded]="item.expanded5">
-            <p class="font14">
+            <p class="blue-dark2 font12">
               Opciones
             </p>
-            <p class="font14">
+            <p class="blue-dark2 font12">
            Opciones
             </p>
-            <p class="font14">
+            <p class="blue-dark2 font12">
            Opciones
             </p>
           </app-expandable>
@@ -127,17 +127,17 @@
     <!-- Politicas de Privacidad -->
     <ion-card class="card-expandable" (click)="expandItem6(item)" *ngFor="let item of items">
         <ion-card-header class="margin-header" (click)="toggleZipped6()">
-          <ion-card-title class="font14 color-font">Politicas de privacidad <ion-icon class="arrow-icon ion-float-right" color="bluedark" [name]="zipped4 ? 'arrow-dropright' : 'arrow-dropdown'"></ion-icon></ion-card-title>
+          <ion-card-title class="blue-dark2 font12 no-p">Politicas de privacidad <ion-icon class="arrow-icon ion-float-right" color="bluedark" [name]="zipped4 ? 'arrow-dropright' : 'arrow-dropdown'"></ion-icon></ion-card-title>
         </ion-card-header>
         <ion-card-content class="content-expandable">
           <app-expandable expandHeight="120px" [expanded]="item.expanded6">
-            <p class="font14">
+            <p class="blue-dark2 font12">
               Opciones
             </p>
-            <p class="font14">
+            <p class="blue-dark2 font12">
            Opciones
             </p>
-            <p class="font14">
+            <p class="blue-dark2 font12">
            Opciones
             </p>
           </app-expandable>
@@ -146,23 +146,23 @@
     <!-- Acerca de -->
     <ion-card class="card-expandable" (click)="expandItem7(item)" *ngFor="let item of items">
         <ion-card-header class="margin-header" (click)="toggleZipped7()">
-          <ion-card-title class="font14 color-font">Acerca de <ion-icon class="arrow-icon ion-float-right" color="bluedark" [name]="zipped4 ? 'arrow-dropright' : 'arrow-dropdown'"></ion-icon></ion-card-title>
+          <ion-card-title class="blue-dark2 font12 no-p">Acerca de <ion-icon class="arrow-icon ion-float-right" color="bluedark" [name]="zipped4 ? 'arrow-dropright' : 'arrow-dropdown'"></ion-icon></ion-card-title>
         </ion-card-header>
         <ion-card-content class="content-expandable">
           <app-expandable expandHeight="120px" [expanded]="item.expanded7">
-            <p class="font14">
+            <p class="blue-dark2 font12">
               Opciones
             </p>
-            <p class="font14">
-           Opciones
+            <p class="blue-dark2 font12">
+           Opciones 
             </p>
-            <p class="font14">
+            <p class="blue-dark2 font12">
            Opciones
             </p>
           </app-expandable>
         </ion-card-content>
     </ion-card>
-    <ion-button class="font14 button-salir" fill="clear">Salir de Raus</ion-button>
+    <ion-button class="blue-dark2 font12 button-salir" fill="clear">Salir de Raus</ion-button>
     <div class="ion-text-center boxLogo">
         <img class="logoImg" src="assets/img/logo-raus.png" alt="logotipo">
         <p class="color-font derechos-reserv">Todos los derechos reservados</p>

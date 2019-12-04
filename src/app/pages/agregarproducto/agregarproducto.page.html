@@ -6,7 +6,7 @@
             	{{profile.business_name}}
         	</ion-col>
         	<ion-col class="ion-justify-center ion-align-self-center ion-text-center">
-            	<div class="font8">activo/inactivo</div>  
+            	<div class="font8">inactivo/activo</div>  
             	<!-- <ion-toggle class="toggleCustom"></ion-toggle> -->
             	<div class="ml-2 onoffswitch">
              		<input type="checkbox" name="onoffswitch" formControlName="status" [(ngModel)]="status" class="onoffswitch-checkbox" id="myonoffswitch" checked>
@@ -138,13 +138,13 @@
 						</p>
 						<p class="my-0 boxP"> 
 							<!-- <span class="font40">10</span> <span class="font12 decimal">,50€</span> -->
-							<ion-input aria-placeholder="10,50" type="tel" formControlName="price_with_iva" [(ngModel)]="price_with_iva">€ </ion-input> 
+							<ion-input class="intest" aria-placeholder="10,50" type="tel" formControlName="price_with_iva" [(ngModel)]="price_with_iva"> </ion-input> 
 						</p>
 					</ion-text>
 				</ion-item>
 				<ion-grid class="blue-dark2">
 					<ion-row>
-						<ion-col size="12" >
+						<ion-col size="12" style="text-align: center;" >
 							<span class="mr-2">Stock</span>
 							<div class="inline">
 								<ion-icon class="iconMargin" name="remove" (click)="remove()"></ion-icon>

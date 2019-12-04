@@ -3,101 +3,102 @@
 <ion-content>
   <ion-row class="my-0">
     <ion-col size="12">
-    <ion-icon class="modalBack" src="assets/img/icon/back.svg" (click)="closeModal()"></ion-icon>
-  </ion-col>
-  </ion-row>
-<div class="font18 ion-text-center line-title">
-  <p>Modificar plan de</p>
-  <p>fidelización</p>
-</div>
-<ion-grid>
-<!-- Switch -->
-<form [formGroup]="loyaltyForm"  class="mx-0">
-<div class="onoffswitch ion-float-right ion-margin-horizontal">
-    <input type="checkbox" formControlName="status" class="onoffswitch-checkbox" id="myonoffswitch"  [(ngModel)]="item?.status? item.status:status" checked>
-    <label class="onoffswitch-label" for="myonoffswitch"></label>
-</div><br>
-<ion-row class="ion-margin-horizontal">
-  <ion-col size="12">
-      <ion-item>
-          <ion-input  [(ngModel)]=" name" formControlName="name" class="font10 ion-text-center" autocorrect="on" clearInput="true" clearOnEdit="true" color="blue-dark2" inputmode="text" placeholder="Nombre del Plan" required="true"></ion-input>
-      </ion-item>
-      <div class="validation-errors">
-        <label *ngFor="let validation of validation_messages.name">
-          <div class="error-message" *ngIf="loyaltyForm.get('name').hasError(validation.type) && (loyaltyForm.get('name').dirty || loyaltyForm.get('name').touched)">
-            {{ validation.message }}
-          </div>
-        </label>
-      </div>
-  </ion-col>
-</ion-row>
-<ion-row class="ion-margin-horizontal">
-    <ion-col size="6" class="px-0">
-        <ion-item>
-            <ion-datetime  [(ngModel)]=" from" formControlName="from" class="font10 ion-text-center" autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" color="blue-dark2" inputmode="text" min="1970" max="3000" placeholder="del dd/mm/aaaa" displayFormat="DD/MM/YYYY"  required="true"></ion-datetime>
-        </ion-item>
-        <div class="validation-errors">
-        <label *ngFor="let validation of validation_messages.from">
-          <div class="error-message" *ngIf="loyaltyForm.get('from').hasError(validation.type) && (loyaltyForm.get('from').dirty || loyaltyForm.get('from').touched)">
-            {{ validation.message }}
-          </div>
-        </label>
-        </div>
+      <ion-icon class="modalBack" src="assets/img/icon/back.svg" (click)="closeModal()"></ion-icon>
     </ion-col>
-    <ion-col size="6" class="px-0">
-      <ion-item>
-        <ion-datetime  [(ngModel)]=" to" formControlName="to" class="font10 ion-text-center" autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" color="blue-dark2" inputmode="text" min="1970" max="3000" placeholder="hasta dd/mm/aaaa" displayFormat="DD/MM/YYYY" required="true"></ion-datetime>
-      </ion-item>
-    </ion-col>
-    <div class="validation-errors">
-        <label *ngFor="let validation of validation_messages.to">
-          <div class="error-message" *ngIf="loyaltyForm.get('to').hasError(validation.type) && (loyaltyForm.get('to').dirty || loyaltyForm.get('to').touched)">
-            {{ validation.message }}
-          </div>
-        </label>
-      </div>
   </ion-row>
-  <br>
-  <div class="ion-text-center ion-margin-top">
-    <p>Valor</p>
+  <div class="font18 ion-text-center line-title">
+    <p>Modificar plan de</p>
+    <p>fidelización</p>
   </div>
-  <br>
-  <ion-row class="ion-align-items-center">
-    <ion-col size="6" class="" >
-        <div class="inline">
+  <ion-grid>
+    <!-- Switch -->
+    <form [formGroup]="loyaltyForm"  class="mx-0">
+      <div class="onoffswitch ion-float-right ion-margin-horizontal">
+        <input type="checkbox" formControlName="status" class="onoffswitch-checkbox" id="myonoffswitch"  [(ngModel)]="item?.status? item.status:status" checked>
+        <label class="onoffswitch-label" for="myonoffswitch"></label>
+      </div><br>
+      <ion-row class="ion-margin-horizontal">
+        <ion-col size="12">
+          <ion-item>
+            <ion-input  [(ngModel)]=" name" formControlName="name" class="font10 ion-text-center" autocorrect="on" clearInput="true" clearOnEdit="true" color="blue-dark2" inputmode="text" placeholder="Nombre del Plan" required="true"></ion-input>
+          </ion-item>
+          <div class="validation-errors">
+            <label *ngFor="let validation of validation_messages.name">
+              <div class="error-message" *ngIf="loyaltyForm.get('name').hasError(validation.type) && (loyaltyForm.get('name').dirty || loyaltyForm.get('name').touched)">
+                {{ validation.message }}
+              </div>
+            </label>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-margin-horizontal">
+        <ion-col size="6" class="px-0">
+          <ion-item>
+            <ion-datetime  [(ngModel)]=" from" formControlName="from" class="font10 ion-text-center" autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" color="blue-dark2" inputmode="text" min="1970" max="3000" placeholder="del dd/mm/aaaa" displayFormat="DD/MM/YYYY"  required="true"></ion-datetime>
+          </ion-item>
+          <div class="validation-errors">
+            <label *ngFor="let validation of validation_messages.from">
+              <div class="error-message" *ngIf="loyaltyForm.get('from').hasError(validation.type) && (loyaltyForm.get('from').dirty || loyaltyForm.get('from').touched)">
+                {{ validation.message }}
+              </div>
+            </label>
+          </div>
+        </ion-col>
+        <ion-col size="6" class="px-0">
+          <ion-item>
+            <ion-datetime  [(ngModel)]=" to" formControlName="to" class="font10 ion-text-center" autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" color="blue-dark2" inputmode="text" min="1970" max="3000" placeholder="hasta dd/mm/aaaa" displayFormat="DD/MM/YYYY" required="true"></ion-datetime>
+          </ion-item>
+        </ion-col>
+        <div class="validation-errors">
+          <label *ngFor="let validation of validation_messages.to">
+            <div class="error-message" *ngIf="loyaltyForm.get('to').hasError(validation.type) && (loyaltyForm.get('to').dirty || loyaltyForm.get('to').touched)">
+              {{ validation.message }}
+            </div>
+          </label>
+        </div>
+      </ion-row>
+      <br>
+      <div class="ion-text-center ion-margin-top">
+        <p>Valor</p>
+      </div>
+      <br>
+      <ion-row class="ion-align-items-center">
+        <ion-col size="6" class="" >
+          <div class="inline">
             <ion-icon class="iconMargin" name="remove" (keyup)="validValue('value')" (click)="remove2()"></ion-icon>
             <ion-input  [(ngModel)]="qtyValue" (keyup)="validValue('value')" type="number" min="0" formControlName="qtyValue" class="inputCustom2 ion-text-center"></ion-input>
             <ion-icon class="iconMargin" name="add" (keyup)="validValue('value')" (click)="add2()"></ion-icon>
-        </div>
-        <span class="ml-2 font12">por cada</span>
-    </ion-col>
-      <ion-col size="6" class="" >
-        <div class="inline ml-2">
-          <ion-input  [(ngModel)]="value" (keyup)="validValue('value')"  type="number" min="0"  formControlName="value" class="inputCustom2 ion-text-center"></ion-input>
-        </div>
-        <span class="ml-2 font10">euros</span>
-      </ion-col>
-      <div class="validation-errors">
-        <label *ngFor="let validation of validation_messages.qtyValue">
-          <div class="error-message" *ngIf="loyaltyForm.get('qtyValue').hasError(validation.type) && (loyaltyForm.get('qtyValue').dirty || loyaltyForm.get('qtyValue').touched)">
-            {{ validation.message }}
           </div>
-        </label>
-        <label *ngFor="let validation of validation_messages.value">
-          <div class="error-message" *ngIf="loyaltyForm.get('value').hasError(validation.type) && (loyaltyForm.get('value').dirty || loyaltyForm.get('value').touched)">
-            {{ validation.message }}
+          <span class="ml-2 font12">por cada</span>
+        </ion-col>
+        <ion-col size="6" class="" >
+          <div class="inline ml-2">
+            <ion-input  [(ngModel)]="value" (keyup)="validValue('value')"  type="number" min="0"  formControlName="value" class="inputCustom2 ion-text-center"></ion-input>
           </div>
-        </label>
-      </div>
-  </ion-row>
-  <br>
-  <br>
-  <ion-row class="ion-align-items-center">
-      <ion-col size="6" class="" >
+          <span class="ml-2 font10">euros<img class="InFoIcon" src="assets/img/icon/informacion.svg" alt="informacion">
+          </span>
+        </ion-col>
+        <div class="validation-errors">
+          <label *ngFor="let validation of validation_messages.qtyValue">
+            <div class="error-message" *ngIf="loyaltyForm.get('qtyValue').hasError(validation.type) && (loyaltyForm.get('qtyValue').dirty || loyaltyForm.get('qtyValue').touched)">
+              {{ validation.message }}
+            </div>
+          </label>
+          <label *ngFor="let validation of validation_messages.value">
+            <div class="error-message" *ngIf="loyaltyForm.get('value').hasError(validation.type) && (loyaltyForm.get('value').dirty || loyaltyForm.get('value').touched)">
+              {{ validation.message }}
+            </div>
+          </label>
+        </div>
+      </ion-row>
+      <br>
+      <br>
+      <ion-row class="ion-align-items-center">
+        <ion-col size="6" class="" >
           <div class="inline">
-              <ion-icon class="iconMargin" name="remove" (keyup)="validValue('buy')" (click)=" remove() "></ion-icon>
-              <ion-input  [(ngModel)]="qtyBuy" type="number" (keyup)="validValue('buy')" min="0"  formControlName="qtyBuy" class="inputCustom2 ion-text-center"></ion-input>
-              <ion-icon class="iconMargin" name="add" (keyup)="validValue('buy')" (click)="  add() "></ion-icon>
+            <ion-icon class="iconMargin" name="remove" (keyup)="validValue('buy')" (click)=" remove() "></ion-icon>
+            <ion-input  [(ngModel)]="qtyBuy" type="number" (keyup)="validValue('buy')" min="0"  formControlName="qtyBuy" class="inputCustom2 ion-text-center"></ion-input>
+            <ion-icon class="iconMargin" name="add" (keyup)="validValue('buy')" (click)="  add() "></ion-icon>
           </div>
           <span class="ml-2 font12">por cada</span>
         </ion-col>
@@ -108,27 +109,27 @@
           </div>
           <span class="ml-2 font10">compras</span>
         </ion-col>
-            <div class="validation-errors">
-              <label *ngFor="let validation of validation_messages.qtyBuy">
-                <div class="error-message" *ngIf="loyaltyForm.get('qtyBuy').hasError(validation.type) && (loyaltyForm.get('qtyBuy').dirty || loyaltyForm.get('qtyBuy').touched)">
-                  {{ validation.message }}
-                </div>
-              </label>
-                  <label *ngFor="let validation of validation_messages.buy">
-                    <div class="error-message" *ngIf="loyaltyForm.get('buy').hasError(validation.type) && (loyaltyForm.get('buy').dirty || loyaltyForm.get('buy').touched)">
-                      {{ validation.message }}
-                    </div>
-                  </label>
+        <div class="validation-errors">
+          <label *ngFor="let validation of validation_messages.qtyBuy">
+            <div class="error-message" *ngIf="loyaltyForm.get('qtyBuy').hasError(validation.type) && (loyaltyForm.get('qtyBuy').dirty || loyaltyForm.get('qtyBuy').touched)">
+              {{ validation.message }}
             </div>
-  </ion-row>
-</form>
-</ion-grid>
+          </label>
+          <label *ngFor="let validation of validation_messages.buy">
+            <div class="error-message" *ngIf="loyaltyForm.get('buy').hasError(validation.type) && (loyaltyForm.get('buy').dirty || loyaltyForm.get('buy').touched)">
+              {{ validation.message }}
+            </div>
+          </label>
+        </div>
+      </ion-row>
+    </form>
+  </ion-grid>
 </ion-content>
 <ion-footer no-border>
   <ion-row class="">
-      <ion-col size="12" class="ion-text-center">
-          <ion-button class="font14" color="bluedark" *ngIf="type == 'create'" [disabled]="!loyaltyForm.valid" (click)="CreateRecord()" >Guardar</ion-button>
-          <ion-button class="font14" color="bluedark" *ngIf="type == 'edit'" [disabled]="!loyaltyForm.valid" (click)="UpdateRecord(item.id)" type="submit" >Actualizar</ion-button>
-      </ion-col>
+    <ion-col size="12" class="ion-text-center">
+      <ion-button class="font14" color="bluedark" *ngIf="type == 'create'" [disabled]="!loyaltyForm.valid" (click)="CreateRecord()" >Guardar</ion-button>
+      <ion-button class="font14" color="bluedark" *ngIf="type == 'edit'" [disabled]="!loyaltyForm.valid" (click)="UpdateRecord(item.id)" type="submit" >Actualizar</ion-button>
+    </ion-col>
   </ion-row>
 </ion-footer>

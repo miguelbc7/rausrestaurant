@@ -13,11 +13,23 @@
     margin-top: 2.5rem;
 }
 
+// .ng2-tag-input__text-input {
+
+//     background-color: transparent !important;
+//     display: inline;
+//     vertical-align: middle;
+//     border: none;
+//     padding: 0 .5rem;
+//     height: 38px;
+//     font-size: 1em;
+//     font-family: 'SEGUIHIS' !important;
+// }
+
+
 tag-input.inputTag {
-    // color:red;
     font-family: 'SEGUIHIS' !important;
-    // font-family: Roboto,"Helvetica Neue",sans-serif;
-    --background: transparent !important; 
+    --background: transparent !important;
+    background-color: transparent !important; 
 }
 
 .itemTransparent  {
@@ -25,6 +37,9 @@ tag-input.inputTag {
 }
 
 
+:ng-deep .ng2-tag-input__text-input.minimal {
+    background-color: transparent !important;
+}
 
 
 ion-content.bgSlide{
