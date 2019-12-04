@@ -6,9 +6,6 @@ import { EditavatarPage } from '../modals/editavatar/editavatar.page';
 import { ModalAddproductPage } from '../modals/modal-addproduct/modal-addproduct.page';
 import { ModalPromocionPage } from '../modals/modal-promocion/modal-promocion.page';
 import { EditdireccionPage } from '../modals/editdireccion/editdireccion.page';
-// import { AgregarPage } from '../modals/agregar/agregar.page';
-// import { CierrePage } from '../cierre/cierre.page';
-// import { AgregartarjetaPage } from '../modals/agregartarjeta/agregartarjeta.page';
 import { ModalController, NavController, ActionSheetController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { ProductosService } from '../../services/productos.service';
@@ -46,7 +43,8 @@ export class HomePage implements OnInit {
   };
   avatar = 'assets/img/avatar.png';
 
-  constructor(private modalCtrl: ModalController, 
+  constructor(
+    private modalCtrl: ModalController, 
     public productosService: ProductosService, 
     private storage: Storage, 
     private sliderService: SliderHomeService, 
@@ -93,13 +91,13 @@ export class HomePage implements OnInit {
     const actionSheet = await this.actionSheetController.create({
         header: "Select Image source",
         buttons: [{
-                text: 'Usar imagen desde la galería',
+                text: 'Cargar imagen',
                 handler: () => {
                     this.addslider(this.camera.PictureSourceType.PHOTOLIBRARY);
                 }
             },
             {
-                text: 'Usar Cámara',
+                text: 'Tomar foto',
                 handler: () => {
                     this.addslider(this.camera.PictureSourceType.CAMERA);
                 }
@@ -143,6 +141,7 @@ export class HomePage implements OnInit {
   async openHorarios(dia, data) {
     const modal = await this.modalCtrl.create({
       component: HorariosPage,
+      cssClass: 'sizeModalHorario',
       componentProps: { 
         name: dia,
         schedules: data,
@@ -172,7 +171,8 @@ export class HomePage implements OnInit {
       componentProps:{
         productID:productID,
       },
-      cssClass: 'sizeModalPromocion'
+      cssClass: 'sizeModalPromocion',
+      backdropDismiss:false,
     });
     await modal.present();
   }

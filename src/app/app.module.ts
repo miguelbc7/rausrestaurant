@@ -25,6 +25,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AddsliderPage } from './pages/modals/addslider/addslider.page';
 import { ExcelentePage } from './pages/modals/excelente/excelente.page';
 import { ModalPromocionPage } from './pages/modals/modal-promocion/modal-promocion.page';
+import { ProductocreadoPage } from './pages/modals/productocreado/productocreado.page';
+import { ProductoguardadoPage } from './pages/modals/productoguardado/productoguardado.page';
 import { IonicStorageModule } from '@ionic/storage';
 import { Camera } from '@ionic-native/Camera/ngx';
 import { File } from '@ionic-native/File/ngx';
@@ -36,20 +38,28 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { LoadingService } from './services/loading.service';
 
+import { Welcome1Page } from './pages/welcome1/welcome1.page';
+import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
+import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     AddsliderPage,
     ExcelentePage,
+    ProductocreadoPage,
     ModalPromocionPage,
-    // ExpandableComponent
+    ProductoguardadoPage,
+    Welcome1Page
   ],
   entryComponents: [
     AddsliderPage,
     ExcelentePage,
     ModalPromocionPage,
-    // ExpandableComponent
+    ProductocreadoPage,
+    ProductoguardadoPage,
+    Welcome1Page
   ],
   imports: [
     BrowserModule,
@@ -73,7 +83,9 @@ import { LoadingService } from './services/loading.service';
     File,
     WebView,
     FilePath,
-    LoadingService
+    LoadingService,
+    AndroidPermissions,
+    LocationAccuracy,
   
   ],
   bootstrap: [AppComponent]

@@ -81,6 +81,13 @@ export class OpcionesPage implements OnInit {
     },
     {
       status: false,
+      name: 'Showcase',
+      iconoazul: 'assets/img/icon/menu/showcaseazul.svg',
+      iconogris: 'assets/img/icon/menu/showcaseazul.svg',
+      class: 'iconButton2'
+    },
+    {
+      status: false,
       name: 'Salir',
       iconoazul: 'assets/img/icon/menu/salirazul.svg',
       iconogris: 'assets/img/icon/menu/salirgris.svg',
@@ -134,8 +141,12 @@ export class OpcionesPage implements OnInit {
       case (6):
           this.router.navigate(['/configuracion']);
         break;
+
+        case (7):
+          // this.router.navigate(['/']);
+        break;
         
-      case (7):
+      case (8):
           this.authService.logoutUser();
           this.storage.clear();
           this.router.navigate(['/login']);
@@ -188,7 +199,8 @@ export class OpcionesPage implements OnInit {
   getAvatar(){
     this.authService.getAvatar().then(response => {
       console.log('response', response);
-      this.avatar = response.image;
+    if(response)
+        this.avatar = response.image;
     });
   }
 

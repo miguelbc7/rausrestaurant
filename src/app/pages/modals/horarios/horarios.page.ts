@@ -4,6 +4,7 @@ import { ModalController } from '@ionic/angular';
 import { HorarioService } from '../../../services/horario.service';
 import { ThrowStmt } from '@angular/compiler';
 import { Router } from '@angular/router';
+import * as moment from "moment"; 
 
 @Component({
   selector: 'app-horarios',
@@ -13,13 +14,16 @@ import { Router } from '@angular/router';
 export class HorariosPage implements OnInit {
 
   name;
-  start:'12:00';
-  end:'';
+  start;
+  end;
+  start2;
+  end2;
   status = false;
   list:any;
   errorMessage: any;
   title = 'Agregar';
   id;
+  isValid = true;
 
   constructor(private modalCtrl: ModalController, private horarioService: HorarioService, private router:Router) { 
     this.name = `${name}`;
@@ -113,6 +117,21 @@ export class HorariosPage implements OnInit {
     },err =>{
       console.error(err);
     });;
+  }
+
+  validar()
+  {
+    // new Date().toISOString();
+    if(this.start)
+    {
+      let start =  moment(this.start).format('HH:mm');
+      console.log(start);
+    }
+    if(this.end)
+    {
+      let end =  moment(this.end).format('HH:mm');
+      console.log(end);
+    }
   }
 
 }

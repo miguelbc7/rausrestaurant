@@ -9,6 +9,8 @@ import { ProductosService } from '../../services/productos.service';
 import { Camera, CameraOptions } from '@ionic-native/Camera/ngx';
 import { Storage } from '@ionic/storage';
 import { LoadingService } from 'src/app/services/loading.service';
+import { ProductocreadoPage } from '../modals/productocreado/productocreado.page';
+import { ProductoguardadoPage } from '../modals/productoguardado/productoguardado.page';
 
 @Component({
 	selector: 'app-agregarproducto',
@@ -231,7 +233,15 @@ export class AgregarproductoPage implements OnInit {
 	}
 	
   	ngOnInit() {
-  	}
+	  }
+	  
+	async productoCreado() {
+  		const modal = await this.modalCtrl.create({
+    	component: ProductocreadoPage,
+    	cssClass: 'sizeModalProductoCreado'
+  	});
+  		await modal.present();
+	}
 
 	back(){
 		this.storage.remove('product');
@@ -266,46 +276,64 @@ export class AgregarproductoPage implements OnInit {
 
 	onSubmit(values) {
 		this.loading.showLoader();
-		let aIngredients = values.ingredientes.split(',');
-		let aNoIngredients = values.no_ingredientes.split(',');
-		// console.log(aIngredients);
+		let aIngredients;
 		values.ingredients = [];
-		for (let index = 0; index < aIngredients.length; index++) {
-			values.ingredients.push ({ 'name' : aIngredients[index] } ) ;
-		}
-		values.no_ingredients = [];
-		for (let index = 0; index < aNoIngredients.length; index++) {
-			console.log(aNoIngredients[index]);
-			values.no_ingredients.push( { 'name' : aNoIngredients[index]} ) ;
+		if(values.ingredientes != ''){
+			console.log(values.ingredientes);
+			aIngredients = values.ingredientes.split(',');
+			for (let index = 0; index < aIngredients.length; index++) {
+				values.ingredients.push ({ 'name' : aIngredients[index] } ) ;
+			}
+
 		}
 		
+		let aNoIngredients;
+		values.no_ingredients = [];
+		if(values.no_ingredientes != ''){
+			aNoIngredients = values.no_ingredientes.split(',');
+			for (let index = 0; index < aNoIngredients.length; index++) {
+				console.log(aNoIngredients[index]);
+				values.no_ingredients.push( { 'name' : aNoIngredients[index]} ) ;
+			}
+			
+
+		}
+		values.fat = values.fat?values.fat:0;
+		values.carbohydrates = values.carbohydrates?values.carbohydrates:0;
+		values.total_calories = values.total_calories?values.total_calories:0;
+		values.protein = values.protein?values.protein:0;
+		// console.log(aIngredients);
 		console.log('values', values);
 		console.log('type', this.type);
 		console.log(this.productos);
-		if(this.type == 'create') {
-			console.log('type', this.type);
-			this.productosService.createItem(values).then((response) => {
-			response.subscribe( (data) => {
-				this.uploadImage(data._id);
-			}, err => {
-			console.log(err);
-			this.loading.hideLoader();this.loading.hideLoader();
-			});
-			
-			// this.router.navigate(['list']);
-			});
-		} else if(this.type == 'edit') {
-			console.log(this.type);
-			this.productosService.updateItem(this.productos._id,values).then((response) => {
-				response.subscribe( () => {
-				 this.uploadImage(this.productos._id);
-			}, err => {
-			console.log(err);
-			this.loading.hideLoader();
-			});
-			
-			// this.router.navigate(['list']);
-			}).catch(error=>{console.error(error)});
+		if(this.aImages.length > 0){
+			if(this.type == 'create') {
+				console.log('type', this.type);
+				this.productosService.createItem(values).then((response) => {
+				response.subscribe( (data) => {
+					this.uploadImage(data._id);
+				}, err => {
+				console.log(err);
+				this.loading.hideLoader();this.loading.hideLoader();
+				});
+				
+				// this.router.navigate(['list']);
+				});
+			} else if(this.type == 'edit') {
+				console.log(this.type);
+				this.productosService.updateItem(this.productos._id,values).then((response) => {
+					response.subscribe( () => {
+					 this.uploadImage(this.productos._id);
+				}, err => {
+				console.log(err);
+				this.loading.hideLoader();
+				});
+				
+				// this.router.navigate(['list']);
+				}).catch(error=>{console.error(error)});
+			}
+		}else{
+			this.errorMessage ="Debe adjuntar por lo menos una imagen.";
 		}
 	}
 
@@ -319,6 +347,10 @@ export class AgregarproductoPage implements OnInit {
 			console.log(data);
 			// await this.presentPromocion(id);
 			this.loading.hideLoader();
+			if(this.type == 'create')
+				this.productoCreado();
+			else
+				this.productoGuardado();
 			await this.router.navigate(['home']);
 			
 		}, err => {
@@ -329,19 +361,27 @@ export class AgregarproductoPage implements OnInit {
 		}).catch(error => console.error(error));
 	}
 
+	async productoGuardado(){
+		const modal = await this.modalCtrl.create({
+			component: ProductoguardadoPage,
+			cssClass: 'sizeModalProductoCreado'
+		  });
+			  await modal.present();
+	}
+
  //////////////////// Imagen //////////////////////
 
  async selectImage() {
     const actionSheet = await this.actionSheetController.create({
         header: "Select Image source",
         buttons: [{
-                text: 'Usar imagen desde la galería',
+                text: 'Cargar imagen',
                 handler: () => {
                     this.pickImage(this.camera.PictureSourceType.PHOTOLIBRARY);
                 }
             },
             {
-                text: 'Usar Cámara',
+                text: 'Tomar foto',
                 handler: () => {
                     this.pickImage(this.camera.PictureSourceType.CAMERA);
                 }

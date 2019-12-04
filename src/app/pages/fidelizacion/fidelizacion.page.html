@@ -5,15 +5,15 @@
       <p class="my-0">
         <ion-icon class="iconHeader2" src="assets/img/icon/menu/fidelizacion.svg"></ion-icon>
       </p>
-      <p class="titleHeader my-0">Fidelización</p>
+      <p class="titleHeader blue-dark2 my-0">Fidelización</p>
     </ion-col>
   </ion-row>
-  <ion-button class="font14 button-salir" fill="clear" (click)="createplan()"><ion-icon name="add"></ion-icon>Crear plan de fidelización
+  <ion-button class="blue-dark2 font12" fill="clear" (click)="createplan()"><ion-icon name="add"></ion-icon>Crear plan de fidelización
   </ion-button>
   <!-- Planes creados -->
   <ion-card class="card-expandable" *ngFor="let item of items">
     <ion-card-header class="margin-header" (click)="toggleZipped()">
-      <ion-card-title class="font14 color-font"  (click)="expandItem(item)">Planes creados <ion-icon class="arrow-icon" color="bluedark" [name]="zipped ? 'arrow-dropright' : 'arrow-dropdown'"></ion-icon>
+      <ion-card-title class="blue-dark2 font12"  (click)="expandItem(item)">Planes creados <ion-icon class="arrow-icon" color="bluedark" [name]="zipped ? 'arrow-dropright' : 'arrow-dropdown'"></ion-icon>
       </ion-card-title>
     </ion-card-header>
     <ion-card-content class="content-expandable" *ngFor="let d of data">

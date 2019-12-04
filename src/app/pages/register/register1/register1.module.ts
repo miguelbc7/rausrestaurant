@@ -5,7 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { TagInputModule } from 'ngx-chips';
 
-
+import { MapPage } from '../../modals/map/map.page';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -27,6 +27,12 @@ const routes: Routes = [
     ReactiveFormsModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [Register1Page]
+  entryComponents: [
+    
+  ],
+  declarations: [
+    Register1Page,
+    
+    ]
 })
 export class Register1PageModule {}

@@ -20,8 +20,10 @@
     border-color: #657b97;
 }
 .margin-header{
-    margin-bottom:4pt;
+    // margin-bottom:4pt;
     margin-left: -8pt;
+    padding-top: 0;
+    // padding-bottom:0;
 }
 .arrow-icon{
     font-size: 22pt;
@@ -47,6 +49,20 @@
     margin-left: -10.6667px;
     overflow-wrap: break-word;
     padding-bottom: 16px;
+    -webkit-padding-end: 16px;
+    padding-inline-end: 16px;
+    -webkit-padding-start: 7px;
+    padding-inline-start: 7px;
+    /* padding-left: 16px; */
+    /* padding-right: 16px; */
+    padding-top: 0px;
+}
+.item-ion-stylE{
+    border-color: #657b97;
+    /* margin-bottom: 5.33333px; */
+    margin-left: -10.6667px;
+    overflow-wrap: break-word;
+    padding-bottom: 0px;
     -webkit-padding-end: 16px;
     padding-inline-end: 16px;
     -webkit-padding-start: 7px;
@@ -135,8 +151,12 @@
 }
 .button-salir{
     --padding-start: 16px !important;
-    color:black !important;
+    // color:black !important;
     font-family: var(--ion-font-family) !important;
+}
+.no-p{
+    padding-top: 0;
+    padding-bottom:0;
 }
 .boxLogo{
     margin-top: 30pt;

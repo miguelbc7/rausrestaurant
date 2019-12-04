@@ -9,7 +9,9 @@ export const environment = {
   //url: 'http://localhost:8080/api/',
   //server
   //  url: 'http://35.197.211.133:8080/api/',
-  url: 'https://cors-anywhere.herokuapp.com/http://35.214.92.171:8080/api/',
+  // url: 'https://cors-anywhere.herokuapp.com/http://35.214.92.171:8080/api/',
+  url: 'https://myraus.com:8282/api/',
+  // url: 'http://35.214.92.171:8282/api/',
 
 
   firebase: 

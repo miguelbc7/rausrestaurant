@@ -1,12 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { Validators, FormBuilder, FormGroup, FormControl} from '@angular/forms';
+import { ModalController, ToastController} from '@ionic/angular';
 import { Router } from '@angular/router';
-// import { TagsHelper } from '../../helpers/tags-helper';
-// import { MustMatch } from '../../validators/must-match.validator';
 import { AuthService } from '../../../services/auth.service';
-import { NativeGeocoder, NativeGeocoderResult } from '@ionic-native/native-geocoder/ngx';
 import { Storage } from '@ionic/storage';
 
+// import { MapPage } from '../../modals/map/map.page';
+import {
+  MyLocation,
+  Geocoder,
+  GoogleMap,
+  GoogleMaps,
+  GeocoderResult,
+  LocationService
+} from '@ionic-native/google-maps';
+import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
+import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';
 
 @Component({
   selector: 'app-register1',
@@ -16,6 +25,7 @@ import { Storage } from '@ionic/storage';
 export class Register1Page implements OnInit {
   
   public register1: FormGroup;
+  map: GoogleMap;
   form: FormGroup;
   pass:any;
   cpass:any;
@@ -24,14 +34,26 @@ export class Register1Page implements OnInit {
   passwordType2: string = "password";
   passwordShown2: boolean = false;
   data: { username: any; password: any; };
-  tags:[{name:'#Comer'},{name:'#Salud'},{name:'#Cuidado Personal'} ,{name:'#Fuel'} ,{name:'#Entretenimiento'},{name:'#Kids'} ,{name:'#Deporte'}
-  ,{name:'#Viajes Hoteles'} , {name:'#Alimentos'}, {name:'#Transporte'}  ];
+  // tags:[{name:'#Comer'},{name:'#Salud'},{name:'#Cuidado Personal'} ,{name:'#Fuel'} ,{name:'#Entretenimiento'},{name:'#Kids'} ,{name:'#Deporte'}
+  // ,{name:'#Viajes Hoteles'} , {name:'#Alimentos'}, {name:'#Transporte'}  ];
   categories;
   errorMessage:string = "";
+  keyboard = false;
+  tempCat;
+  address = '';
+  direction;
 
 
-
-  constructor( public formBuilder: FormBuilder, private router: Router,private authService: AuthService,private nativeGeocoder: NativeGeocoder, private storage: Storage) {
+  constructor(
+    private modalCtrl: ModalController,
+    public formBuilder: FormBuilder,
+    private router: Router,
+    private authService: AuthService,
+    private storage: Storage,
+    private toastCtrl: ToastController,
+    private androidPermissions: AndroidPermissions,
+    private locationAccuracy: LocationAccuracy
+    ) {
 
     this.register1 = formBuilder.group({
       business_name: ['', Validators.compose([
@@ -72,7 +94,7 @@ export class Register1Page implements OnInit {
       // code: ['', Validators.compose([
       //   Validators.required,
       // ])],
-      categories: ['', Validators.compose([
+      tags: ['', Validators.compose([
         // Validators.required,
       ])],
       password: ['', Validators.compose([
@@ -138,27 +160,28 @@ export class Register1Page implements OnInit {
         { type: 'maxlength', message: 'Debe ser menor de 15 caracteres.' },
         { type: 'pattern', message: 'Su contraseña debe contener al menos una mayúscula, una minúscula, un número y un caracter especial(@!%*?&#.$-_).' }
       ],
-      // 'categories': [
-      //   { type: 'required', message: 'Debe ingresar por lo menos una actividad de tu empresa.' },
-      // ],
+      'tags': [
+        { type: 'required', message: 'Debe ingresar una actividad de tu empresa.' },
+      ],
     }
 
   async onSubmit(values){
    await this.storage.set('user', values);
-    values.lat = -4.0000000;
-    values.lng = 40.0000000;
-    this.nativeGeocoder.forwardGeocode(values.address)
-    .then(
-      ( result: NativeGeocoderResult[]) => {
-        console.log('The coordinates are latitude=' + result[0].latitude + ' and longitude=' + result[0].longitude)
-        
-        values.lat = result[0].latitude;
-        values.lng = result[0].longitude;
-        
-      }
-    )
-    .catch((error: any) => console.error(error));
-    values.direction = values.address;
+
+   if(this.direction){
+     values.direction = {
+       street: values.address,
+       lat: this.direction.position.lat.toString(),
+       lng: this.direction.position.lng.toString(),
+       zipcode: this.direction.postalCode,
+       city: this.direction.locality,
+       state: this.direction.adminArea,
+       country: this.direction.country,
+     };
+   }else{
+     this.errorMessage = "";
+   }
+
     console.log(values);
 
     this.authService.registerUser(values)
@@ -179,8 +202,9 @@ export class Register1Page implements OnInit {
         console.error(err);
       });
     },(err) => {
+      // this.categories = this.tempCat;
       console.error(err.error);
-      if(err.error){
+      if(err.error.error){
         this.errorMessage = err.error.error;
       }else{
         this.errorMessage = 'Hubo un problema durante el registro, por favor intente más tarde';
@@ -190,7 +214,21 @@ export class Register1Page implements OnInit {
     );
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+    
+    this.checkGPSPermission();
+    
+    await this.storage.get('direction').then((data)=>{
+      console.log(data);
+      if(data){
+        data.extra.lines.pop();
+        this.direction = data;
+        this.address = data.extra.lines.join(', ');
+        this.storage.remove('direction');
+      }else{
+        this.myLocation();
+      }
+    });
   }
 
   // upload(form) {
@@ -236,5 +274,108 @@ export class Register1Page implements OnInit {
       this.passwordType2 = "text";
     }
   }
+
+  textFocus(){
+    this.keyboard = true;
+  }
+
+  textBlur(){
+    this.keyboard = false;
+  }
+
+  getMap() {
+    console.log(this.address);
+    this.storage.set('address', this.address);
+    this.router.navigate(['map']);
+  // const modal = await this.modalCtrl.create({
+  //   component: MapPage,
+  // });
+  // await modal.present();
+}
+
+myLocation(){
+ 
+  LocationService.getMyLocation().then((myLocation: MyLocation) => {
+    console.log(myLocation);
+    this.geocoderMap(myLocation.latLng);
+  });
+}
+
+ geocoderMap(latlng){
+  console.log(latlng);
+  let options = {
+    position: latlng
+  };
+  Geocoder.geocode(options).then( (results: GeocoderResult[])=>{
+   console.log(results[0]);
+    this.direction = results[0];
+    this.direction.extra.lines.pop();
+    this.address = this.direction.extra.lines.join(', ');
+  }).catch(error =>{
+    console.error(error);
+    this.showToast(error.error_message);
+  })
+  
+}
+
+async showToast(message: string) {
+  let toast = await this.toastCtrl.create({
+    message: message,
+    duration: 2000,
+    position: 'middle'
+  });
+
+  toast.present();
+}
+
+checkGPSPermission() {
+  this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION).then(
+    result => {
+      if (result.hasPermission) {
+
+        //If having permission show 'Turn On GPS' dialogue
+        this.askToTurnOnGPS();
+      } else {
+
+        //If not having permission ask for permission
+        this.requestGPSPermission();
+      }
+    },
+    err => {
+      alert(err);
+    }
+  );
+}
+
+requestGPSPermission() {
+  this.locationAccuracy.canRequest().then((canRequest: boolean) => {
+    if (canRequest) {
+      console.log("4");
+    } else {
+      //Show 'GPS Permission Request' dialogue
+      this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION)
+        .then(
+          () => {
+            // call method to turn on GPS
+            this.askToTurnOnGPS();
+          },
+          error => {
+            //Show alert if user click on 'No Thanks'
+            alert('requestPermission Error requesting location permissions ' + error)
+          }
+        );
+    }
+  });
+}
+askToTurnOnGPS() {
+  this.locationAccuracy.request(this.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY).then(
+    () => {
+      // When GPS Turned ON call method to get Accurate location coordinates
+      this.myLocation()
+    },
+    error => alert('Error requesting location permissions ' + JSON.stringify(error))
+  );
+}
+
 
 }

@@ -8,6 +8,7 @@ import { Storage } from '@ionic/storage';
 import { NativeGeocoder, NativeGeocoderResult } from '@ionic-native/native-geocoder/ngx';
 import { LoadingService } from 'src/app/services/loading.service';
 import { Camera, CameraOptions } from '@ionic-native/Camera/ngx';
+import { ProductoguardadoPage } from '../modals/productoguardado/productoguardado.page';
 
 
 @Component({
@@ -128,17 +129,17 @@ export class PerfilPage implements OnInit {
  getUserDetail(){
   this.authService.getProfile().then(res=>{
     res.subscribe(data =>{
-
-      this.nativeGeocoder.reverseGeocode(data.address.lat,data.address.lon)
-          .then(
-            (result: NativeGeocoderResult[]) => {
-            this.address = result[0];
-            // console.log(JSON.stringify( result[0] ) )
-            })
-          .catch((error: any) => console.log(error));
-      data.address = this.address;
+      console.log(data);
+      // this.nativeGeocoder.reverseGeocode(data.direction.lat,data.direction.lon)
+      //     .then(
+      //       (result: NativeGeocoderResult[]) => {
+      //       this.address = result[0];
+      //       console.log(JSON.stringify( result[0] ) )
+      //       })
+      //     .catch((error: any) => console.log(error));
       this.profile = data;
-      console.log(this.profile);
+      this.profile.address = data.direction.street;
+      // console.log(this.profile.direction.street);
       this.loading.hideLoader();
     })
   });
@@ -194,13 +195,13 @@ async selectImage() {
   const actionSheet = await this.actionSheetController.create({
       header: "Select Image source",
       buttons: [{
-              text: 'Usar imagen desde la galería',
+              text: 'Cargar imagen',
               handler: () => {
                   this.pickImage(this.camera.PictureSourceType.PHOTOLIBRARY);
               }
           },
           {
-              text: 'Usar Cámara',
+              text: 'Tomar foto',
               handler: () => {
                   this.pickImage(this.camera.PictureSourceType.CAMERA);
               }
@@ -237,6 +238,7 @@ pickImage(sourceType) {
           console.log(data);
           this.storage.set('avatar',data);
           this.getAvatar();
+          this.guardado();
       }, err => {
           console.error(err);
         });
@@ -244,12 +246,21 @@ pickImage(sourceType) {
     }else{
       this.authService.updateAvatar(this.aImages).then((response) => {
         this.getAvatar();
+        this.guardado();
      });
     }
   
   }, (err) => {
     // Handle error
   });
+}
+
+async guardado(){
+  const modal = await this.modalCtrl.create({
+    component: ProductoguardadoPage,
+    cssClass: 'sizeModalProductoCreado'
+    });
+      await modal.present();
 }
 
 }
