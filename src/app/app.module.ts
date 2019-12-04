@@ -38,7 +38,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { LoadingService } from './services/loading.service';
 
-import { Welcome1Page } from './pages/welcome1/welcome1.page';
+// import { Welcome1Page } from './pages/welcome1/welcome1.page';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';
 
@@ -51,7 +51,7 @@ import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';
     ProductocreadoPage,
     ModalPromocionPage,
     ProductoguardadoPage,
-    Welcome1Page
+    // Welcome1Page
   ],
   entryComponents: [
     AddsliderPage,
@@ -59,7 +59,7 @@ import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';
     ModalPromocionPage,
     ProductocreadoPage,
     ProductoguardadoPage,
-    Welcome1Page
+    // Welcome1Page
   ],
   imports: [
     BrowserModule,
