@@ -20,10 +20,6 @@
     <preference name="SplashShowOnlyFirstTime" value="false" />
     <preference name="SplashScreen" value="screen" />
     <preference name="SplashScreenDelay" value="3000" />
-
-    <!-- <preference name="FadeSplashScreen" value="false" />
-    <preference name="AutoHideSplashScreen" value="false" /> -->
-
     <preference name="GOOGLE_MAPS_ANDROID_API_KEY" value="AIzaSyBUhsxeoY9tYVFFD31lLygBdRROqHU7s6k" />
     <preference name="GOOGLE_MAPS_IOS_API_KEY" value="AIzaSyBUhsxeoY9tYVFFD31lLygBdRROqHU7s6k" />
     <platform name="android">
