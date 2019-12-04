@@ -20,6 +20,7 @@ export class AuthService {
 	url = environment.url;
 	token:string;
 	uid;
+	direction;
   
 	// Http Options
 	httpOptions = {
@@ -106,6 +107,7 @@ export class AuthService {
 			if(firebase.auth().currentUser){
 				firebase.auth().signOut()
 				.then(() => {
+					this.storage.clear();
 					console.log("LOG Out");
 					resolve();
 				}).catch((error) => {
@@ -173,10 +175,43 @@ export class AuthService {
 			lat: '40',
 			lng: '-49.00012',
 			phone: item.phone,
-			direction: item.direction,
 		}
 
 		return this.http.put<Restaurant>(this.url+'restaurants/update/', JSON.stringify(data),{
+			headers: new HttpHeaders({
+			'Content-Type': 'application/json',
+			'Authorization': this.token,
+			})
+		}).pipe(
+			catchError(this.handleError)
+		)
+	}
+
+	async updateAddress(item){
+		
+		await this.storage.get('direction').then((data)=>{
+			console.log(data);
+			if(data){
+			  data.extra.lines.pop();
+			  this.direction = data;
+			}else{
+			  console.log('no posee direction');
+			}
+		  });
+
+		  let address = {
+			street: item,
+			lat: this.direction.position.lat.toString(),
+			lng: this.direction.position.lng.toString(),
+			zipcode: this.direction.postalCode,
+			city: this.direction.locality,
+			state: this.direction.adminArea,
+			country: this.direction.country,
+		  };
+
+		  console.log(address);
+
+		return this.http.put<Restaurant>(this.url+'restaurants/update/direction', JSON.stringify(address),{
 			headers: new HttpHeaders({
 			'Content-Type': 'application/json',
 			'Authorization': this.token,

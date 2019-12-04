@@ -306,30 +306,34 @@ export class AgregarproductoPage implements OnInit {
 		console.log('values', values);
 		console.log('type', this.type);
 		console.log(this.productos);
-		if(this.type == 'create') {
-			console.log('type', this.type);
-			this.productosService.createItem(values).then((response) => {
-			response.subscribe( (data) => {
-				this.uploadImage(data._id);
-			}, err => {
-			console.log(err);
-			this.loading.hideLoader();this.loading.hideLoader();
-			});
-			
-			// this.router.navigate(['list']);
-			});
-		} else if(this.type == 'edit') {
-			console.log(this.type);
-			this.productosService.updateItem(this.productos._id,values).then((response) => {
-				response.subscribe( () => {
-				 this.uploadImage(this.productos._id);
-			}, err => {
-			console.log(err);
-			this.loading.hideLoader();
-			});
-			
-			// this.router.navigate(['list']);
-			}).catch(error=>{console.error(error)});
+		if(this.aImages.length > 0){
+			if(this.type == 'create') {
+				console.log('type', this.type);
+				this.productosService.createItem(values).then((response) => {
+				response.subscribe( (data) => {
+					this.uploadImage(data._id);
+				}, err => {
+				console.log(err);
+				this.loading.hideLoader();this.loading.hideLoader();
+				});
+				
+				// this.router.navigate(['list']);
+				});
+			} else if(this.type == 'edit') {
+				console.log(this.type);
+				this.productosService.updateItem(this.productos._id,values).then((response) => {
+					response.subscribe( () => {
+					 this.uploadImage(this.productos._id);
+				}, err => {
+				console.log(err);
+				this.loading.hideLoader();
+				});
+				
+				// this.router.navigate(['list']);
+				}).catch(error=>{console.error(error)});
+			}
+		}else{
+			this.errorMessage ="Debe adjuntar por lo menos una imagen.";
 		}
 	}
 

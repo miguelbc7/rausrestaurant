@@ -14,6 +14,8 @@ import {
   GeocoderResult,
   LocationService
 } from '@ionic-native/google-maps';
+import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
+import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';
 
 @Component({
   selector: 'app-register1',
@@ -49,6 +51,8 @@ export class Register1Page implements OnInit {
     private authService: AuthService,
     private storage: Storage,
     private toastCtrl: ToastController,
+    private androidPermissions: AndroidPermissions,
+    private locationAccuracy: LocationAccuracy
     ) {
 
     this.register1 = formBuilder.group({
@@ -211,14 +215,16 @@ export class Register1Page implements OnInit {
   }
 
   async ngOnInit() {
+
+    this.checkGPSPermission();
     
     await this.storage.get('direction').then((data)=>{
       console.log(data);
       if(data){
         data.extra.lines.pop();
         this.direction = data;
-        this.address = data.extra.lines.join(', ');
-        this.storage.remove('direction');
+        this.address = data.street;
+        // this.storage.remove('direction');
       }else{
         this.myLocation();
       }
@@ -280,6 +286,7 @@ export class Register1Page implements OnInit {
   getMap() {
     console.log(this.address);
     this.storage.set('address', this.address);
+    localStorage.setItem('url','register');
     this.router.navigate(['map']);
   // const modal = await this.modalCtrl.create({
   //   component: MapPage,
@@ -321,5 +328,56 @@ async showToast(message: string) {
 
   toast.present();
 }
+
+///////////////////////// GPS Google Maps //////////////////////////////////////
+checkGPSPermission() {
+  this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION).then(
+    result => {
+      if (result.hasPermission) {
+
+        //If having permission show 'Turn On GPS' dialogue
+        this.askToTurnOnGPS();
+      } else {
+
+        //If not having permission ask for permission
+        this.requestGPSPermission();
+      }
+    },
+    err => {
+      console.error(err);
+    }
+  );
+}
+
+requestGPSPermission() {
+  this.locationAccuracy.canRequest().then((canRequest: boolean) => {
+    if (canRequest) {
+      console.log("4");
+    } else {
+      //Show 'GPS Permission Request' dialogue
+      this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION)
+        .then(
+          () => {
+            // call method to turn on GPS
+            this.askToTurnOnGPS();
+          },
+          error => {
+            //Show alert if user click on 'No Thanks'
+            console.error('requestPermission Error requesting location permissions 1' + error)
+          }
+        );
+    }
+  });
+}
+askToTurnOnGPS() {
+  this.locationAccuracy.request(this.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY).then(
+    () => {
+      // When GPS Turned ON call method to get Accurate location coordinates
+      this.myLocation()
+    },
+    error => console.error('Error requesting location permissions 2' + JSON.stringify(error))
+  );
+}
+
 
 }
