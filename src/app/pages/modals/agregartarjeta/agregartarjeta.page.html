@@ -69,7 +69,7 @@
                   <ion-datetime class="mtInputFecha" clearInput="true" placeholder="Año" displayFormat="YYYY" min="1970" max="3000" formControlName="year" [(ngModel)]="year" cancelText="Cancelar" doneText="Guardar"></ion-datetime>
               </ion-item> --> 
           </ion-col>
-                  <div class="validation-errors">
+          <div class="validation-errors">
             <ng-container *ngFor="let validation of validation_messages.fechaExp">
               <div class="error-message" *ngIf="cardForm.get('fechaExp').hasError(validation.type) && (cardForm.get('fechaExp').dirty || cardForm.get('fechaExp').touched)">
                 {{ validation.message }}

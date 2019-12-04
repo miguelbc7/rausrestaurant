@@ -1,13 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder, FormGroup, FormControl} from '@angular/forms';
-import { ModalController} from '@ionic/angular';
+import { ModalController, ToastController} from '@ionic/angular';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
-import { NativeGeocoder, NativeGeocoderResult } from '@ionic-native/native-geocoder/ngx';
 import { Storage } from '@ionic/storage';
 
-import { MapPage } from '../../modals/map/map.page';
-
+// import { MapPage } from '../../modals/map/map.page';
+import {
+  MyLocation,
+  Geocoder,
+  GeocoderResult,
+  LocationService
+} from '@ionic-native/google-maps';
 
 @Component({
   selector: 'app-register1',
@@ -30,7 +34,9 @@ export class Register1Page implements OnInit {
   categories;
   errorMessage:string = "";
   keyboard = false;
-
+  tempCat;
+  address = '';
+  direction;
 
 
   constructor(
@@ -38,8 +44,9 @@ export class Register1Page implements OnInit {
     public formBuilder: FormBuilder,
     private router: Router,
     private authService: AuthService,
-    private nativeGeocoder: NativeGeocoder,
-    private storage: Storage) {
+    private storage: Storage,
+    private toastCtrl: ToastController,
+    ) {
 
     this.register1 = formBuilder.group({
       business_name: ['', Validators.compose([
@@ -146,28 +153,31 @@ export class Register1Page implements OnInit {
         { type: 'maxlength', message: 'Debe ser menor de 15 caracteres.' },
         { type: 'pattern', message: 'Su contraseña debe contener al menos una mayúscula, una minúscula, un número y un caracter especial(@!%*?&#.$-_).' }
       ],
-      // 'categories': [
-      //   { type: 'required', message: 'Debe ingresar por lo menos una actividad de tu empresa.' },
-      // ],
+      'categories': [
+        { type: 'required', message: 'Debe ingresar una actividad de tu empresa.' },
+      ],
     }
 
   async onSubmit(values){
    await this.storage.set('user', values);
-    values.lat = -4.0000000;
-    values.lng = 40.0000000;
-    this.nativeGeocoder.forwardGeocode(values.address)
-    .then(
-      ( result: NativeGeocoderResult[]) => {
-        console.log('The coordinates are latitude=' + result[0].latitude + ' and longitude=' + result[0].longitude)
-        
-        values.lat = result[0].latitude;
-        values.lng = result[0].longitude;
-        
-      }
-    )
-    .catch((error: any) => console.error(error));
-    values.direction = values.address;
+
+   if(this.direction){
+     values.direction = {
+       street: values.address,
+       lat: this.direction.lat,
+       lng: this.direction.lng,
+       zipcode: this.direction.postalCode,
+       city: this.direction.locality,
+       state: this.direction.adminArea,
+       country: this.direction.country,
+     };
+   }else{
+     this.errorMessage = "";
+   }
+
     console.log(values);
+
+    this.tempCat = values.categories;
 
     this.authService.registerUser(values)
     .subscribe(async res => {
@@ -187,8 +197,9 @@ export class Register1Page implements OnInit {
         console.error(err);
       });
     },(err) => {
+      this.categories = this.tempCat;
       console.error(err.error);
-      if(err.error){
+      if(err.error.error){
         this.errorMessage = err.error.error;
       }else{
         this.errorMessage = 'Hubo un problema durante el registro, por favor intente más tarde';
@@ -198,7 +209,19 @@ export class Register1Page implements OnInit {
     );
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+    
+    await this.storage.get('direction').then((data)=>{
+      console.log(data);
+      if(data){
+        data.extra.lines.pop();
+        this.direction = data;
+        this.address = data.extra.lines.join(', ');
+        this.storage.remove('direction');
+      }else{
+        this.myLocation();
+      }
+    });
   }
 
   // upload(form) {
@@ -253,11 +276,48 @@ export class Register1Page implements OnInit {
     this.keyboard = false;
   }
 
- async map() {
-  const modal = await this.modalCtrl.create({
-    component: MapPage,
+  map() {
+    console.log(this.address);
+    this.storage.set('address', this.address);
+    this.router.navigate(['map']);
+  // const modal = await this.modalCtrl.create({
+  //   component: MapPage,
+  // });
+  // await modal.present();
+}
+
+myLocation(){
+  LocationService.getMyLocation().then((myLocation: MyLocation) => {
+    console.log(myLocation);
+    this.geocoderMap(myLocation.latLng);
   });
-  await modal.present();
+}
+
+ geocoderMap(latlng){
+  console.log(latlng);
+  let options = {
+    position: latlng
+  };
+  Geocoder.geocode(options).then( (results: GeocoderResult[])=>{
+   console.log(results[0]);
+    this.direction = results[0];
+    this.direction.extra.lines.pop();
+    this.address = this.direction.extra.lines.join(', ');
+  }).catch(error =>{
+    console.error(error);
+    this.showToast(error.error_message);
+  })
+  
+}
+
+async showToast(message: string) {
+  let toast = await this.toastCtrl.create({
+    message: message,
+    duration: 2000,
+    position: 'middle'
+  });
+
+  toast.present();
 }
 
 }

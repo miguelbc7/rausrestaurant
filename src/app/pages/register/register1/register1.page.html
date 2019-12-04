@@ -46,7 +46,7 @@
             <div class="ion-margin-vertical">
               <ion-item class="ion-no-padding itemTransparent">
                   <ion-label class="font14" position="floating">Dirección</ion-label>
-                  <ion-input type="text" formControlName="address"  required></ion-input>
+                  <ion-input type="text" formControlName="address" [(ngModel)]="address"  required></ion-input>
                   <ion-icon class="ion-align-self-end" name="pin" color="bluedark" slot="end"  (click)="map()"></ion-icon>
                 </ion-item>
           </div>
@@ -136,14 +136,16 @@
           [separatorKeyCodes]="[32, 138]"
           [onlyFromAutocomplete]="true"
           [theme]="'minimal'"
-          [removable]="true"
+          [displayBy]="display"
+          [identifyBy]="name"
         >
         <tag-input-dropdown 
         [autocompleteItems]="[ '#Comer', '#Salud', '#Cuidado Personal', '#Fuel', '#Entretenimiento', '#Kids',
         '#Deporte', '#Viajes Hoteles', '#Alimentos', '#Transporte' ]"
-          [displayBy]="'name'"
           [showDropdownIfEmpty]="false"
           [minimumTextLength]="0"
+          [displayBy]="display"
+          [identifyBy]="name"
         >
       </tag-input-dropdown>
           <!-- <ng-template let-item="item" let-index="index">
@@ -154,7 +156,7 @@
     </div>
   <br>
   <div class="ion-text-center">
-    <ion-button type="submit" class="font15" [disabled]="!register1.valid" color="bluedark">
+    <ion-button type="submit" class="font15"  color="bluedark">
       Listo
     </ion-button>
     <br>

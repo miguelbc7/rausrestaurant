@@ -55,8 +55,8 @@ export class AuthService {
 		if(value.categories){
 			for (let index = 0; index < value.categories.length; index++) {
 				delete value.categories[index].value;
-				value.categories[index].name = value.categories[index].display;
-				delete value.categories[index].display;
+				value.categories[index].name = value.categories[index].undefined;
+				delete value.categories[index].undefined;
 			}
 		}
 
@@ -140,11 +140,17 @@ export class AuthService {
 		await this.storage.get('_token').then(res=>{
 			this.token = res.token;
 		});
-		return this.http.get(this.url+'auth/me',{
+		await this.storage.get('_uid').then(res=>{
+			this.uid = res;
+		});
+		return this.http.get(this.url+'auth/me/'+this.uid,{
 			headers: new HttpHeaders({
 				'Content-Type': 'application/json',
 				'Authorization': this.token,
-			})
+			}),
+			// params:{
+			// 	id : this.uid,
+			// }
 		}).pipe(
 			catchError(this.handleError)
 		)
