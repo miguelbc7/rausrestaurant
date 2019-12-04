@@ -47,7 +47,7 @@
               <ion-item class="ion-no-padding itemTransparent">
                   <ion-label class="font14" position="floating">Dirección</ion-label>
                   <ion-input type="text" formControlName="address" [(ngModel)]="address"  required></ion-input>
-                  <ion-icon class="ion-align-self-end" name="pin" color="bluedark" slot="end"  (click)="map()"></ion-icon>
+                  <ion-icon class="ion-align-self-end" name="pin" color="bluedark" slot="end"  (click)="getMap()"></ion-icon>
                 </ion-item>
           </div>
           <div class="validation-errors">
@@ -129,23 +129,19 @@
           como sugiere el ejemplo
         </ion-label>
         <tag-input  class="ion-text-center inputTag itemTransparent"
-          formControlName="categories" 
+          formControlName="tags" 
           [placeholder]="' Agregar Tag'"
           [secondaryPlaceholder]="'#Comer #Salud'" 
           [maxItems]='1'  
           [separatorKeyCodes]="[32, 138]"
           [onlyFromAutocomplete]="true"
           [theme]="'minimal'"
-          [displayBy]="display"
-          [identifyBy]="name"
         >
         <tag-input-dropdown 
         [autocompleteItems]="[ '#Comer', '#Salud', '#Cuidado Personal', '#Fuel', '#Entretenimiento', '#Kids',
         '#Deporte', '#Viajes Hoteles', '#Alimentos', '#Transporte' ]"
           [showDropdownIfEmpty]="false"
           [minimumTextLength]="0"
-          [displayBy]="display"
-          [identifyBy]="name"
         >
       </tag-input-dropdown>
           <!-- <ng-template let-item="item" let-index="index">

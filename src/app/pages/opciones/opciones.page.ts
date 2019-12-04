@@ -199,7 +199,8 @@ export class OpcionesPage implements OnInit {
   getAvatar(){
     this.authService.getAvatar().then(response => {
       console.log('response', response);
-      this.avatar = response.image;
+      if(response)
+        this.avatar = response.image;
     });
   }
 

@@ -61,10 +61,10 @@ export class MapPage implements OnInit {
 
 
   async loadMap() {
-    Environment.setEnv({
-      API_KEY_FOR_BROWSER_RELEASE: "AIzaSyBUhsxeoY9tYVFFD31lLygBdRROqHU7s6k",
-      API_KEY_FOR_BROWSER_DEBUG: "AIzaSyBUhsxeoY9tYVFFD31lLygBdRROqHU7s6k"
-    });
+    // Environment.setEnv({
+    //   API_KEY_FOR_BROWSER_RELEASE: "AIzaSyBUhsxeoY9tYVFFD31lLygBdRROqHU7s6k",
+    //   API_KEY_FOR_BROWSER_DEBUG: "AIzaSyBUhsxeoY9tYVFFD31lLygBdRROqHU7s6k"
+    // });
    this.map = GoogleMaps.create('map_canvas', {
       camera: {
         target: {
@@ -142,6 +142,7 @@ export class MapPage implements OnInit {
       this.direccion = results[0];
       this.direccion.extra.lines.pop();
       this.address = this.direccion.extra.lines.join(', ');
+      this.loading.dismiss();
     }).catch(error =>{
       this.loading.dismiss();
       console.error(error);
