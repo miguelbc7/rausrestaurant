@@ -9,9 +9,9 @@
     <form class="ion-padding-horizontal" [formGroup]="cardForm">
       <ion-row>
         <ion-col size="12">
-            <ion-item class="ion-no-padding">
-              <ion-label class="font14" position="floating">Tarjeta número</ion-label>
-              <ion-input clearInput="true" type="tel" pattern="[\d]*" required formControlName="numero" [(ngModel)]="numero" ></ion-input>
+            <ion-item class="ion-no-padding ">
+              <ion-label class="font14 itemSeparado" position="floating">Tarjeta número</ion-label>
+              <ion-input class="" clearInput="true" type="tel" pattern="[\d]*" required formControlName="numero" [(ngModel)]="numero" ></ion-input>
             </ion-item>    
         </ion-col>
       </ion-row>
@@ -23,47 +23,83 @@
           </ng-container>
         </div>
       <ion-row>
-          <ion-col size="4" class="ion-no-padding">
-              <ion-item class="ion-no-padding">
-                  <!-- <ion-label class="font14" position="floating">Fecha exp.</ion-label> -->
+          <ion-col size="5" class="ion-no-padding">
+            <ion-item class="ion-no-padding">
+              <ion-label class="ion-no-padding">mes</ion-label>
+              <ion-select class="ion-text-center ion-no-padding" value="notifications" interface="action-sheet" cancelText="Cerrar">
+                <ion-select-option class="ion-text-center" value="01">01</ion-select-option>
+                <ion-select-option class="ion-text-center" value="02">02</ion-select-option>
+                <ion-select-option class="ion-text-center" value="03">03</ion-select-option>
+                <ion-select-option class="ion-text-center" value="04">04</ion-select-option>
+                <ion-select-option class="ion-text-center" value="05">05</ion-select-option>
+                <ion-select-option class="ion-text-center" value="06">06</ion-select-option>
+                <ion-select-option class="ion-text-center" value="07">07</ion-select-option>
+                <ion-select-option class="ion-text-center" value="08">08</ion-select-option>
+                <ion-select-option class="ion-text-center" value="09">09</ion-select-option>
+                <ion-select-option class="ion-text-center" value="10">10</ion-select-option>
+                <ion-select-option class="ion-text-center" value="11">11</ion-select-option>
+                <ion-select-option class="ion-text-center" value="12">12</ion-select-option>
+              </ion-select>
+            </ion-item>
+              <!-- <ion-item class="ion-no-padding">
                   <ion-datetime class="mtInputFecha" placeholder="Mes" clearInput="true" displayFormat="MM" formControlName="month" [(ngModel)]="month" ancelText="Cancelar" doneText="Guardar"></ion-datetime>
-              </ion-item> 
+              </ion-item>  -->
           </ion-col>
-          <ion-col size="4" class="ion-no-padding">
-              <ion-item class="ion-no-padding">
-                  <!-- <ion-label class="font14" position="floating">&nbsp;</ion-label> -->
+          <ion-col size="7" class="ion-no-padding">
+            <ion-item class="ion-no-padding">
+              <ion-label class="ion-no-padding">año</ion-label>
+              <ion-select class="ion-text-center ion-no-padding" value="notifications" interface="action-sheet" cancelText="Cerrar">
+                <ion-select-option value="2020">2020</ion-select-option>
+                <ion-select-option value="2021">2021</ion-select-option>
+                <ion-select-option value="2022">2022</ion-select-option>
+                <ion-select-option value="2023">2023</ion-select-option>
+                <ion-select-option value="2024">2024</ion-select-option>
+                <ion-select-option value="2025">2025</ion-select-option>
+                <ion-select-option value="2026">2026</ion-select-option>
+                <ion-select-option value="2027">2027</ion-select-option>
+                <ion-select-option value="2028">2028</ion-select-option>
+                <ion-select-option value="2029">2029</ion-select-option>
+                <ion-select-option value="2030">2030</ion-select-option>
+                <ion-select-option value="2031">2031</ion-select-option>
+                <ion-select-option value="2032">2032</ion-select-option>
+                <ion-select-option value="2033">2033</ion-select-option>
+              </ion-select>
+            </ion-item>
+              <!-- <ion-item class="ion-no-padding">
                   <ion-datetime class="mtInputFecha" clearInput="true" placeholder="Año" displayFormat="YYYY" min="1970" max="3000" formControlName="year" [(ngModel)]="year" cancelText="Cancelar" doneText="Guardar"></ion-datetime>
-              </ion-item> 
+              </ion-item> --> 
           </ion-col>
-          <ion-col size="4" class="ion-no-padding">
-              <ion-item class="ion-no-padding">
-                  <ion-label class="font14" position="floating">CVC</ion-label>
-                  <ion-input  clearInput="true" type="password" formControlName="cvc" [(ngModel)]="cvc"></ion-input>
-              </ion-item> 
-          </ion-col>
-      </ion-row>
-      <div class="validation-errors">
-          <ng-container *ngFor="let validation of validation_messages.cvc">
-            <div class="error-message" *ngIf="cardForm.get('cvc').hasError(validation.type) && (cardForm.get('cvc').dirty || cardForm.get('cvc').touched)">
-              {{ validation.message }}
-            </div>
-          </ng-container>
-        </div>
-        <div class="validation-errors">
+          <div class="validation-errors">
             <ng-container *ngFor="let validation of validation_messages.fechaExp">
               <div class="error-message" *ngIf="cardForm.get('fechaExp').hasError(validation.type) && (cardForm.get('fechaExp').dirty || cardForm.get('fechaExp').touched)">
                 {{ validation.message }}
               </div>
             </ng-container>
           </div>
-      <ion-row>
-          <ion-col size="12">
-            <ion-item class="ion-no-padding">
-              <ion-label class="font14" position="floating">Nombre en tarjeta</ion-label>
-              <ion-input clearInput="true" type="text" formControlName="nombre" [(ngModel)]="nombre"></ion-input>
-            </ion-item>
-          </ion-col>
+          
       </ion-row>
+
+      <ion-row>
+        <ion-col size="9">
+          <ion-item class="ion-no-padding">
+            <ion-label class="font14 itemSeparado" position="floating">Nombre en tarjeta</ion-label>
+            <ion-input clearInput="true" type="text" formControlName="nombre" [(ngModel)]="nombre"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col size="3">
+          <ion-item class="ion-no-padding">
+            <ion-label class="font14 ion-no-padding itemSeparado" position="floating">CVC</ion-label>
+            <ion-input clearInput="false" type="password" formControlName="cvc" [(ngModel)]="cvc"></ion-input>
+          </ion-item> 
+        </ion-col>
+      </ion-row>
+             <div class="validation-errors">
+          <ng-container *ngFor="let validation of validation_messages.cvc">
+            <div class="error-message" *ngIf="cardForm.get('cvc').hasError(validation.type) && (cardForm.get('cvc').dirty || cardForm.get('cvc').touched)">
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
       <div class="validation-errors">
           <ng-container *ngFor="let validation of validation_messages.nombre">
             <div class="error-message" *ngIf="cardForm.get('nombre').hasError(validation.type) && (cardForm.get('nombre').dirty || cardForm.get('nombre').touched)">
@@ -72,7 +108,14 @@
           </ng-container>
         </div>
         <br>
-        <ion-row class="btnNuevo">
+        
+         <label>{{errorMessage}}</label>
+    </form>
+</ion-content>
+
+<ion-footer class="ion-no-border" no-border>
+  <ion-toolbar>
+    <ion-row class=" ion-no-padding">
             <ion-col size="6" class="ion-text-center">
                 <ion-button class="font15" color="bluedark" [disabled]="!cardForm.valid" (click)="openAgregarSaldo()">Guardar</ion-button>
             </ion-col>
@@ -80,29 +123,5 @@
                 <ion-button class="font15" color="bluelight" (click)="closeModal()">Volver</ion-button>
             </ion-col>
          </ion-row>
-         <label>{{errorMessage}}</label>
-    </form>
-    <ion-item>
-        <ion-label>Notifications</ion-label>
-        <ion-select value="notifications" interface="action-sheet">
-          <ion-select-option value="enable">Enable</ion-select-option>
-          <ion-select-option value="mute">Mute</ion-select-option>
-          <ion-select-option value="mute_week">Mute for a week</ion-select-option>
-          <ion-select-option value="mute_year">Mute for a year</ion-select-option>
-        </ion-select>
-      </ion-item>
-    <select name="mes" form="mes">
-      <option value="Enero">Enero</option>
-      <option value="Febrero">Febrero</option>
-      <option value="Marzo">Marzo</option>
-      <option value="Abril">Abril</option>
-      <option value="Mayo">Mayo</option>
-      <option value="Junio">Junio</option>
-      <option value="Julio">Julio</option>
-      <option value="Agosto">Agosto</option>
-      <option value="Septiembre">Septiembre</option>
-      <option value="Octubre">Octubre</option>
-      <option value="Noviembre">Noviembre</option>
-      <option value="Diciembre">Diciembre</option>
-    </select>
-</ion-content>
+  </ion-toolbar>
+</ion-footer>
