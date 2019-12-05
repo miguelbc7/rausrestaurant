@@ -329,6 +329,7 @@ export class HomePage implements OnInit {
   getMap()
   {
     localStorage.setItem('url','home');
+    localStorage.setItem('street',this.profile.direction.street);
     this.router.navigate(['map']);
   }
 

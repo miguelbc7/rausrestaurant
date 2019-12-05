@@ -45,10 +45,18 @@ export class MapPage implements OnInit {
     ) { }
 
  async ngOnInit() {
-   await this.storage.get('address').then(data=>{
-      this.address = data;
-      console.log(data);
-    })
+
+  this.url = localStorage.getItem('url');
+    if(this.url == 'register'){
+      await this.storage.get('address').then(data=>{
+        this.address = data;
+        console.log(data);
+      });
+    }else if(this.url == 'home'){
+     this.address = localStorage.getItem('street');
+    }
+
+
   }
 
   async ionViewDidEnter(){
@@ -139,7 +147,7 @@ export class MapPage implements OnInit {
    await Geocoder.geocode(options).then( (results: GeocoderResult[])=>{
       this.direccion = results[0];
       this.direccion.extra.lines.pop();
-      this.address = this.direccion.extra.lines.join(', ');
+      // this.address = this.direccion.extra.lines.join(', ');
       // this.loading.dismiss();
     }).catch(error =>{
       // this.loading.dismiss();
@@ -164,15 +172,23 @@ export class MapPage implements OnInit {
     }
     else if (this.url == 'home'){
       console.log('ss');
-      this.authService.updateAddress(this.address);
-      this.router.navigate(['home']);
+      this.authService.updateAddress(this.direccion).then((res) => {
+        res.subscribe(res => {
+          console.log(res);
+          this.router.navigate(['home']);
+        },
+        err =>{
+          console.error(err);
+        })
+      }).catch(error => {
+        console.error(error);
+      });
     }
   }
 
   
   async closeModal() {
     // await this.modalCtrl.dismiss();
-    this.url = localStorage.getItem('url');
     if(this.url == 'register'){
       this.router.navigate(['register1']);
     }
