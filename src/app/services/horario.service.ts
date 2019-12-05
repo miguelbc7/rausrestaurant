@@ -53,17 +53,25 @@ export class HorarioService {
      await this.storage.get('_uid').then(res=>{
         this.uid = res;
       });
+      console.log(item);
       let data = {
         id_restaurant: this.uid,
         schedules:{
           name: item.name,
           status: item.status,
           schedules: [{
-            start: item.schedules.start,
-            end:item.schedules.end
-          }]
+            start: item.schedules[0].start,
+            end:item.schedules[0].end
+          }],
         }
       }
+      // if(item.schedules[1]){
+      //   data.schedules.schedules.push({
+      //     start: item.schedules[1].start,
+      //     end:item.schedules[1].end
+      //   });
+      // }
+      console.log(data);
       return this.http
         .post<Horario>(this.base_path+'schedules', JSON.stringify(data),{
           headers: new HttpHeaders({
@@ -129,7 +137,7 @@ export class HorarioService {
       )
   }
 
-  async updateItem(id, item): Promise<any>{
+  async updateItem( item): Promise<any>{
     await this.storage.get('_token').then(res=>{
       this.token = res.token;
     });
@@ -139,13 +147,18 @@ export class HorarioService {
     });
     let data = {
       id_restaurant: this.uid,
-      name: item.name,
-      // status: item.status,
-      schedule:{
-          id: id,
+      schedules:{name: item.name,
+      status: item.status,
+      schedules:[{
           start: item.schedules.start,
           end:item.schedules.end
-        }
+        }]
+      }}
+      if(item.schedules[1]){
+        data.schedules.schedules.push({
+          start: item.schedules[1].start,
+          end:item.schedules[1].end
+        });
       }
     console.log(data);
     return this.http.put<Horario>(this.base_path+'schedules/update', JSON.stringify(data),{

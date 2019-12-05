@@ -306,12 +306,15 @@ export class AgregarproductoPage implements OnInit {
 		console.log('values', values);
 		console.log('type', this.type);
 		console.log(this.productos);
-		if(this.aImages.length > 0){
+		
 			if(this.type == 'create') {
 				console.log('type', this.type);
 				this.productosService.createItem(values).then((response) => {
 				response.subscribe( (data) => {
-					this.uploadImage(data._id);
+					if(this.aImages.length > 0)
+						this.uploadImage(data._id);
+
+					this.router.navigate(['home']);
 				}, err => {
 				console.log(err);
 				this.loading.hideLoader();this.loading.hideLoader();
@@ -323,7 +326,10 @@ export class AgregarproductoPage implements OnInit {
 				console.log(this.type);
 				this.productosService.updateItem(this.productos._id,values).then((response) => {
 					response.subscribe( () => {
-					 this.uploadImage(this.productos._id);
+					if(this.aImages.length > 0)
+						this.uploadImage(this.productos._id);
+
+					this.router.navigate(['home']);
 				}, err => {
 				console.log(err);
 				this.loading.hideLoader();
@@ -332,14 +338,12 @@ export class AgregarproductoPage implements OnInit {
 				// this.router.navigate(['list']);
 				}).catch(error=>{console.error(error)});
 			}
-		}else{
-			this.errorMessage ="Debe adjuntar por lo menos una imagen.";
-		}
+		
 	}
 
 	uploadImage(id){
 		console.log('uploadimage');
-
+		
 		this.productosService.uploadItem(id, this.aImages).then((response) => {
 			response.subscribe(async (data) => {
 			//  this.productos = data.products;

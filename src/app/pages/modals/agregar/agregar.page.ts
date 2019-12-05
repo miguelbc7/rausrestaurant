@@ -89,4 +89,8 @@ export class AgregarPage implements OnInit {
     await this.modalCtrl.dismiss();
   }
 
+  decimal(event){
+    console.log(event.target.value);
+  }
+
 }

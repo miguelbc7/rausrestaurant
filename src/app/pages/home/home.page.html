@@ -173,9 +173,9 @@
                     <img class="imgCarta3" src="{{img.img}}"/>
                   </ion-slide>
                 </ion-slides>
-                <ion-slides *ngIf="product.images.length == 0">
+                <ion-slides *ngIf="!product.images.length">
                   <ion-slide class="changeStyle">
-                    <img class="imgCarta3" src="assets/img/pasta1.jpg"/>
+                    <img class="imgCarta3" src="assets/img/noimage.jpeg"/>
                   </ion-slide>
                 </ion-slides>
                 <div class="divEditCard" color="bluelight" (click)="editProduct(productos[i])">

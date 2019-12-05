@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import {
   GoogleMaps,
@@ -42,6 +42,7 @@ export class MapPage implements OnInit {
     private router: Router,
     private storage: Storage,
     private authService: AuthService,
+    readonly ngZone: NgZone
     ) { }
 
  async ngOnInit() {
@@ -51,6 +52,8 @@ export class MapPage implements OnInit {
       await this.storage.get('address').then(data=>{
         this.address = data;
         console.log(data);
+      }).catch( error => {
+        this.address = localStorage.getItem('street');
       });
     }else if(this.url == 'home'){
      this.address = localStorage.getItem('street');
@@ -71,7 +74,7 @@ export class MapPage implements OnInit {
     //   API_KEY_FOR_BROWSER_RELEASE: "AIzaSyBUhsxeoY9tYVFFD31lLygBdRROqHU7s6k",
     //   API_KEY_FOR_BROWSER_DEBUG: "AIzaSyBUhsxeoY9tYVFFD31lLygBdRROqHU7s6k"
     // });
-   this.map = GoogleMaps.create('map_canvas', {
+    this.map = GoogleMaps.create('map_canvas', {
       camera: {
         target: {
           lat: 43.0741704,
@@ -81,7 +84,7 @@ export class MapPage implements OnInit {
         tilt: 30
       }
     });
-   await this.mapStart();
+    await this.mapStart();
   }
   async mapStart() {
     this.map.clear();
@@ -103,25 +106,54 @@ export class MapPage implements OnInit {
         tilt: 30
       });
 
-      // add a marker
-      this.map.addMarker({
-        position: location.latLng,
-        animation: GoogleMapsAnimation.DROP,
-        draggable: true,
-      }).then(marker =>{
-        marker.on(GoogleMapsEvent.MARKER_DRAG_END)
-          .subscribe(() => {
-            
-            this.markerlatlong = marker.getPosition();
-            this.geocoderMap(this.markerlatlong);
-          });
+      this.map.on(GoogleMapsEvent.MAP_CLICK)
+      .subscribe((result) => {
+
+        console.log('result', result);
+
+        this.addMarker(result[0]);
+        this.geocoderMap(result[0]);
+        /* this.markerlatlong = marker.getPosition();
+        console.log('pos: ' + this.markerlatlong);
+
+        marker.getPosition().then( latlong => {
+            console.log('pos2: ' + latlong);
         });
-        
-      this.geocoderMap(this.markerlatlong);
+        marker.setPosition(this.markerlatlong);
+        this.geocoderMap(this.markerlatlong); */
+      });
+
+      this.addMarker(location.latLng)
+      this.geocoderMap(location.latLng);
     })
     .catch(err => {
       // this.loading.dismiss();
       this.showToast(err.error_message);
+    });
+  }
+
+  async addMarker(latLng) {
+    // add a marker
+    this.map.clear().then(() => {
+      this.map.addMarker({
+        position: latLng,
+        animation: GoogleMapsAnimation.DROP,
+      }).then(marker =>{
+          console.log('marker', marker);
+        /* marker.on(GoogleMapsEvent.MARKER_DRAG_END) */
+          marker.on(GoogleMapsEvent.MAP_CLICK)
+          .subscribe(() => {
+            alert('map click');
+            this.markerlatlong = marker.getPosition();
+            console.log('pos: ' + this.markerlatlong);
+            this.geocoderMap(this.markerlatlong);
+          });
+  
+         /*  marker.on(GoogleMapsEvent.MARKER_CLICK)
+          .subscribe(() => {
+            console.log('marker click')
+          }); */
+        });
     });
   }
 
@@ -145,8 +177,47 @@ export class MapPage implements OnInit {
       position: latlng
     };
    await Geocoder.geocode(options).then( (results: GeocoderResult[])=>{
+      console.log('geocoderResult', results[0]);
       this.direccion = results[0];
+      console.log('thisDirecion', this.direccion);
       this.direccion.extra.lines.pop();
+      results[0].extra.lines.pop();
+
+      if(results[0].subThoroughfare) {
+        var subThoroughfare = results[0].subThoroughfare;
+      } else {
+        var subThoroughfare = '';
+      }
+
+      if(results[0].thoroughfare) {
+        var thoroughfare = results[0].thoroughfare;
+      } else {
+        var thoroughfare = '';
+      }
+
+      if(results[0].locality) {
+        var locality = results[0].locality;
+      } else {
+        var locality = '';
+      }
+
+      if(results[0].subAdminArea) {
+        var subAdminArea = results[0].subAdminArea;
+      } else {
+        var subAdminArea = '';
+      }
+
+      if(results[0].adminArea) {
+        var adminArea = results[0].adminArea;
+      } else {
+        var adminArea = '';
+      }
+
+      this.ngZone.run(() => {
+        // changes will be detected because we are in a zone.
+        this.address = subThoroughfare + ' ' + thoroughfare + ' ' + subAdminArea + ' ' + adminArea;
+      });
+      console.log('thisAddress', this.address);
       // this.address = this.direccion.extra.lines.join(', ');
       // this.loading.dismiss();
     }).catch(error =>{
@@ -167,7 +238,6 @@ export class MapPage implements OnInit {
     this.url = localStorage.getItem('url');
     console.log(this.url);
     if(this.url == 'register'){
-      console.log('s');
       this.router.navigate(['register1']);
     }
     else if (this.url == 'home'){

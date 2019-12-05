@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { Validators, FormBuilder, FormGroup, FormControl} from '@angular/forms';
 import { ModalController, ToastController} from '@ionic/angular';
 import { Router } from '@angular/router';
@@ -52,7 +52,8 @@ export class Register1Page implements OnInit {
     private storage: Storage,
     private toastCtrl: ToastController,
     private androidPermissions: AndroidPermissions,
-    private locationAccuracy: LocationAccuracy
+    private locationAccuracy: LocationAccuracy,
+    readonly ngZone: NgZone
     ) {
 
     this.register1 = formBuilder.group({
@@ -214,6 +215,10 @@ export class Register1Page implements OnInit {
     );
   }
 
+  ionViewWillEnter(){
+    this.ngOnInit();
+  }
+
   async ngOnInit() {
 
     this.checkGPSPermission();
@@ -223,7 +228,11 @@ export class Register1Page implements OnInit {
       if(data){
         data.extra.lines.pop();
         this.direction = data;
-        this.address = data.street;
+
+        this.ngZone.run(() => {
+          // changes will be detected because we are in a zone.
+          this.address = data.street;
+        });
         // this.storage.remove('direction');
       }else{
         this.myLocation();

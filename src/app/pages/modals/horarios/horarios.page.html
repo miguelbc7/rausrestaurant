@@ -2,7 +2,7 @@
   <ion-row class="ion-margin-top">
     <ion-col class="">
       <div class="ml-2 onoffswitch ion-float-right">
-        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
+        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" (click)="statusItem()" [(ngModel)]="status" id="myonoffswitch" checked>
         <label class="onoffswitch-label" for="myonoffswitch"></label>
       </div>
     </ion-col>
@@ -27,7 +27,7 @@
         <ion-toggle color="bluelight" (click)="statusItem()" name="status" [(ngModel)]="status"></ion-toggle>
       </ion-item> -->
 
-<ion-list>
+<!-- <ion-list>
     <ion-item-sliding *ngFor="let sc of list">
       <ion-item>
         <ion-label>
@@ -45,7 +45,7 @@
         </ion-item-option>
       </ion-item-options>
     </ion-item-sliding>
-</ion-list>
+</ion-list> -->
 
     <!-- <ion-text color="bluedark">
         <h3 class="ion-text-center pr-h3">{{title}}</h3>
@@ -89,8 +89,8 @@
         <br>
       <ion-row class="ion-justify-content-between">
           <ion-col size="12" class="ion-text-center">
-              <ion-button type="submit"  class="font15 mx-2" color="bluedark" [disabled]="isValid">Guardar</ion-button>
-              <ion-button class="font15 btnVolver mx-2" color="white">Volver</ion-button>
+              <ion-button type="submit"  class="font15 mx-2" color="bluedark" [disabled]="disabled">Guardar</ion-button>
+              <ion-button (click)="closeModal()" class="font15 btnVolver mx-2" color="white">Volver</ion-button>
           </ion-col>
           <label class="error-message" >{{errorMessage}}</label>
         </ion-row>

@@ -17,7 +17,7 @@
         <ion-item class="itemSaldo ">
             <!-- <ion-label class="font14" position="floating">Dirección</ion-label> -->
             <!-- <ion-icon class="mx-0 iconWhite font24" name="logo-euro" color="" slot="start" align-self-center></ion-icon> -->
-            <ion-input class="saldoModal ion-text-center" [(ngModel)]="value" name="value" type="text" placeholder="0,00" [brmasker]="{money: true, thousand: '.',  decimalCaracter: ',', decimal: '2'}" required></ion-input>
+            <ion-input class="saldoModal ion-text-center" [(ngModel)]="value" name="value" (keypress)="decimal($event)"  [brmasker]="{money: true, thousand: '.',  decimalCaracter: ',', decimal: '2'}" type="text" placeholder="0,00" required></ion-input>
             <span class="euro">€</span>
         </ion-item>
         <label >{{errorMessage}} </label>

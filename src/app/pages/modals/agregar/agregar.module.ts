@@ -5,9 +5,8 @@ import { Routes, RouterModule } from '@angular/router';
 
 
 import { IonicModule } from '@ionic/angular';
-
 import { AgregarPage } from './agregar.page';
-import { BrMaskerModule } from 'br-mask';
+
 const routes: Routes = [
   {
     path: '',
@@ -21,7 +20,6 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     RouterModule.forChild(routes),
-    BrMaskerModule
   ],
   declarations: [
     // AgregarPage,
