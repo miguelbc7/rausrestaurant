@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, NavParams } from '@ionic/angular';
-import { BuscarfotoPage} from '../buscarfoto/buscarfoto.page';
 import { Storage } from '@ionic/storage';
 import { Camera, CameraOptions } from '@ionic-native/Camera/ngx';
 

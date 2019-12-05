@@ -20,7 +20,7 @@
             <ion-input class="saldoModal ion-text-center" [(ngModel)]="value" name="value" (keypress)="decimal($event)"  [brmasker]="{money: true, thousand: '.',  decimalCaracter: ',', decimal: '2'}" type="text" placeholder="0,00" required></ion-input>
             <span class="euro">€</span>
         </ion-item>
-        <label >{{errorMessage}} </label>
+        <label >{{erroMessage}} </label>
     </div>
   <p class="ion-text-center my-0">
       Seleccionar tarjeta o cuenta

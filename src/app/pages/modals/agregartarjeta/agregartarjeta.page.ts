@@ -32,9 +32,6 @@ export class AgregartarjetaPage implements OnInit {
         { type: 'minlength', message: 'Debe ser máximo 3 digitos.' },
         { type: 'maxlength', message: 'Debe ser máximo 3 digitos.' },
       ],
-      'fechExp': [
-        { type: 'required', message: 'Debe ingresar la fecha de expiración.' },
-      ],
       'numero': [
         { type: 'required', message: 'Debe ingresar el número de la tarjeta.' },
         { type: 'minlength', message: 'Debe ser mayor a 16 digitos.' },

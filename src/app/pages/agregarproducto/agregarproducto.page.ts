@@ -248,11 +248,11 @@ export class AgregarproductoPage implements OnInit {
 		this.router.navigate(['home']);
 	}
 
-	async presentPromocion(productID:any) {
+	async presentPromocion() {
 		const modal = await this.modalCtrl.create({
 		component: ModalPromocionPage,
 		componentProps:{
-			productID: productID,
+			productID: this.productos._id?this.productos._id:null,
 		},
 		cssClass: 'sizeModalPromocion'
 		});
