@@ -41,19 +41,24 @@ export class HorariosPage implements OnInit {
     let item = {
       name: this.name,
       status: this.status,
-      schedules: [{
+      schedules: [],
+    }
+
+    if(this.start && this.end)
+    {
+      item.schedules.push({
         start:  this.start,
         end:  this.end,
-      }],
+      });
     }
-    console.log(item);
-    if(this.start2)
+    if(this.start2 && this.end2)
     {
       item.schedules.push({
         start: this.start2,
         end:  this.end2
       });
     }
+    console.log(item);
     console.log(this.title);
     if(this.title == 'Agregar')
     {
@@ -89,14 +94,14 @@ export class HorariosPage implements OnInit {
    await this.horarioService.getItem(this.name).then(res=>{
       res.subscribe(data =>{
         console.log(data);
-        if(data){
+        if(data.schedules){
           this.title = 'Editar';
           let schedules = data.schedules.schedules;
           this.status = data.schedules.status;
           this.start = schedules[0].start;
-          this.start2 = schedules[0].start2;
           this.end = schedules[0].end;
-          this.end2 = schedules[0].end2;
+          this.start2 = schedules[1].start;
+          this.end2 = schedules[1].end;
           // this.id - data.id;
         }else{
           this.title = "Agregar"
@@ -127,13 +132,16 @@ export class HorariosPage implements OnInit {
       name: this.name,
     }
     console.log(data);
-    this.horarioService.statusItem(data).then(res=>{
-      res.subscribe(data =>{
-        console.log(data);
-      })
-    },err =>{
-      console.error(err);
-    });;
+    if(this.title == 'Editar'){
+      this.horarioService.statusItem(data).then(res=>{
+        res.subscribe(data =>{
+          console.log(data);
+        })
+      },err =>{
+        console.error(err);
+      });;
+
+    }
   }
 
   validar()

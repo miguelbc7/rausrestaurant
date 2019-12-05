@@ -2,7 +2,7 @@
   <ion-row class="ion-margin-top">
     <ion-col class="">
       <div class="ml-2 onoffswitch ion-float-right">
-        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" (click)="statusItem()" [(ngModel)]="status" id="myonoffswitch" checked>
+        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" (click)="statusItem()" [(ngModel)]="status" id="myonoffswitch" [checked]="status">
         <label class="onoffswitch-label" for="myonoffswitch"></label>
       </div>
     </ion-col>

@@ -19,7 +19,7 @@
                     <ion-slide class="changeStyle" *ngFor="let img of slider">
                       <img class="imgBanner" src="{{img.payload.doc.data().image}}"/>
                       <div class="divEdit" color="bluelight">
-                        <ion-icon class="iconEditBanner" color="white" name="create" (click)="deleteSlider(img.payload.doc.id)"></ion-icon>
+                        <ion-icon class="iconEditBanner" color="white" src="assets/img/icon/papelera.svg" name="create" (click)="deleteSlider(img.payload.doc.id)"></ion-icon>
                       </div>
                     </ion-slide>
             
@@ -168,16 +168,18 @@
       <ion-col class="px-0" size="6" *ngFor="let product of productos; let i = index">
           <ion-card class="customCard">
               <div class="boxBanner">
-                <ion-slides *ngIf="product.images.length > 0">
+                <ion-slides *ngIf="product.images.length > 0; else noimage">
                   <ion-slide class="changeStyle"  *ngFor="let img of product.images">
                     <img class="imgCarta3" src="{{img.img}}"/>
                   </ion-slide>
                 </ion-slides>
-                <ion-slides *ngIf="!product.images.length">
+                <ng-template #noimage>
+                <ion-slides >
                   <ion-slide class="changeStyle">
                     <img class="imgCarta3" src="assets/img/noimage.jpeg"/>
                   </ion-slide>
                 </ion-slides>
+              </ng-template>
                 <div class="divEditCard" color="bluelight" (click)="editProduct(productos[i])">
                     <ion-icon class="iconEditCard" color="white" src="assets/img/icon/lapizEdit.svg"></ion-icon>
                 </div>
@@ -186,7 +188,7 @@
                 <ion-row>
                   <ion-col class="ion-no-padding ion-align-self-center " size="7">
                    <p class="hgPCarta my-0 customDarkText font12">
-                     {{product.name}}
+                     {{product.name | slice: 0:15 }}
                    </p> 
                   </ion-col>
                   <ion-col class="ion-no-padding" size="5">
@@ -200,7 +202,7 @@
                      <!-- <p class="hgPCarta my-0 customDarkText font9" *ngFor="let ingredientes of product.ingredients">
                         {{ ingredientes.name }},
                      </p>  -->
-                     <p  class="hgPCarta my-0 customDarkText font9"> {{product.description}} </p>
+                     <p  class="hgPCarta my-0 customDarkText font9"> {{product.description | slice: 0:30}} </p>
                     </ion-col>
                     <ion-col class="ion-no-padding ion-align-self-center ion-text-right" size="2">
                         <ion-icon class="font24" color="bluedark" src="assets/img/icon/compartir.svg"></ion-icon>

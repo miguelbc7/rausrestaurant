@@ -16,7 +16,7 @@ import { AgregarconfirmarPage } from '../modals/agregarconfirmar/agregarconfirma
 import { DineromodalPage } from '../modals/dineromodal/dineromodal.page';
 
 import { CierrePage } from '../cierre/cierre.page';
-// import {NgxMaskIonicModule} from 'ngx-mask-ionic';
+import {NgxMaskIonicModule} from 'ngx-mask-ionic';
 import { BrMaskerModule } from 'br-mask';
 
 const routes: Routes = [
@@ -34,7 +34,7 @@ const routes: Routes = [
     SharedModule,
     RouterModule.forChild(routes),
     ReactiveFormsModule,
-    // NgxMaskIonicModule,
+    NgxMaskIonicModule,
     BrMaskerModule,
   ],
   declarations: [

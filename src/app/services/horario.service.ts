@@ -65,12 +65,12 @@ export class HorarioService {
           }],
         }
       }
-      // if(item.schedules[1]){
-      //   data.schedules.schedules.push({
-      //     start: item.schedules[1].start,
-      //     end:item.schedules[1].end
-      //   });
-      // }
+      if(item.schedules[1]){
+        data.schedules.schedules.push({
+          start: item.schedules[1].start,
+          end:item.schedules[1].end
+        });
+      }
       console.log(data);
       return this.http
         .post<Horario>(this.base_path+'schedules', JSON.stringify(data),{
@@ -78,9 +78,9 @@ export class HorarioService {
             'Content-Type': 'application/json',
             // 'Authorization': this.token,
           }),
-          params: {
-            token: this.token,
-          }
+          // params: {
+          //   token: this.token,
+          // }
         })
         .pipe(
           catchError(this.handleError)
@@ -150,8 +150,8 @@ export class HorarioService {
       schedules:{name: item.name,
       status: item.status,
       schedules:[{
-          start: item.schedules.start,
-          end:item.schedules.end
+          start: item.schedules[0].start,
+          end:item.schedules[0].end
         }]
       }}
       if(item.schedules[1]){

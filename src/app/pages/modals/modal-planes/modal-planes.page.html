@@ -34,7 +34,7 @@
       <ion-row class="ion-margin-horizontal">
         <ion-col size="6" class="px-0">
           <ion-item>
-            <ion-datetime  [(ngModel)]=" from" formControlName="from" class="font10 ion-text-center" autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" color="blue-dark2" inputmode="text" min="1970" max="3000" placeholder="del dd/mm/aaaa" displayFormat="DD/MM/YYYY"  required="true"></ion-datetime>
+            <ion-datetime  [(ngModel)]=" from" formControlName="from" class="font10 ion-text-center" autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" color="blue-dark2" inputmode="text" [min]="today" max="3000" placeholder="del dd/mm/aaaa" displayFormat="DD/MM/YYYY"  required="true"></ion-datetime>
           </ion-item>
           <div class="validation-errors">
             <label *ngFor="let validation of validation_messages.from">
@@ -46,7 +46,7 @@
         </ion-col>
         <ion-col size="6" class="px-0">
           <ion-item>
-            <ion-datetime  [(ngModel)]=" to" formControlName="to" class="font10 ion-text-center" autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" color="blue-dark2" inputmode="text" min="1970" max="3000" placeholder="hasta dd/mm/aaaa" displayFormat="DD/MM/YYYY" required="true"></ion-datetime>
+            <ion-datetime  [(ngModel)]=" to" formControlName="to" class="font10 ion-text-center" autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" color="blue-dark2" inputmode="text" [min]="tomorrow" max="3000" placeholder="hasta dd/mm/aaaa" displayFormat="DD/MM/YYYY" required="true"></ion-datetime>
           </ion-item>
         </ion-col>
         <div class="validation-errors">
@@ -56,6 +56,7 @@
             </div>
           </label>
         </div>
+        <label class="error-message">{{error}}</label>
       </ion-row>
       <br>
       <div class="ion-text-center ion-margin-top">

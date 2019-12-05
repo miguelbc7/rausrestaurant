@@ -246,7 +246,8 @@ export class AuthService {
 	createAvatar(record) {
 		return new Promise<any>((resolve, reject) => {
 			let currentUser = firebase.auth().currentUser;
-			this.afs.collection('restaurantes').doc(currentUser.uid).collection('avatar').add(record)
+			console.log(currentUser);
+			this.afs.collection('restaurantes').doc(currentUser.uid).collection('avatar').doc('imagen').set(record)
 			.then(
 				res => resolve(res),
 				err => reject(err)

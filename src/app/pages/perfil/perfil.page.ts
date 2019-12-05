@@ -232,16 +232,11 @@ pickImage(sourceType) {
     this.avatar = base64Image;
     console.log(this.type);
     if(this.type == 'create'){
-      this.authService.createAvatar(this.aImages).then((response) => {
-        console.log(response);
-        response.subscribe((data) => {
-          console.log(data);
-          this.storage.set('avatar',data);
-          this.getAvatar();
-          this.guardado();
-      }, err => {
-          console.error(err);
-        });
+      this.authService.createAvatar(this.aImages).then(() => {
+        // this.storage.set('avatar',data);
+        this.getAvatar();
+        this.guardado();
+        
      });
     }else{
       this.authService.updateAvatar(this.aImages).then((response) => {

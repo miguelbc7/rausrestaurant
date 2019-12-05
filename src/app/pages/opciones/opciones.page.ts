@@ -28,7 +28,7 @@ export class OpcionesPage implements OnInit {
   avatar = 'assets/img/avatar.png';
 
   fontSize = 'font60';
-
+  mask = '000';
   datas = [
     {
       status: false,
@@ -168,8 +168,22 @@ export class OpcionesPage implements OnInit {
             console.log(this.decimal[0]);
             if(this.decimal[0].length >= 5){
               this.fontSize = 'font27';
+              this.mask = '00.000';
+              if(this.decimal[0].length == 6){
+                this.mask = '000.000';
+              }
+              else if(this.decimal[0].length == 7){
+                this.mask = '0.000.000';
+              }
+              else if(this.decimal[0].length == 8){
+                this.mask = '00.000.000';
+              }
             }else if(this.decimal[0].length >= 3){
               this.fontSize = 'font40';
+              if(this.decimal[0].length == 4)
+              {
+                this.mask = '0.000'
+              }
             }
      })
    });

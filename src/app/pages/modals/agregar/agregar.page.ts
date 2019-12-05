@@ -90,7 +90,20 @@ export class AgregarPage implements OnInit {
   }
 
   decimal(event){
-    console.log(event.target.value);
+    if(this.value.length == 0){
+      if(event.key == '0') {
+        event.preventDefault();
+        // this.value = '0,00';
+      }
+      // else{
+      //   this.value = '0,0'+this.value;
+      // }
+    }
+    // else if(this.value.length > 4){
+      
+    //   console.log(this.value);
+    // }
+    
   }
 
 }

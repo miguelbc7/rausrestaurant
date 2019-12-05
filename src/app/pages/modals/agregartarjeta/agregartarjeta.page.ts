@@ -24,7 +24,8 @@ export class AgregartarjetaPage implements OnInit {
     'nombre': [
         { type: 'required', message: 'Debe ingresar un nombre.' },
         { type: 'minlength', message: 'Debe ser mayor de 5 caracteres.' },
-        { type: 'maxlength', message: 'Debe ser menor de 300 caracteres.' }
+        { type: 'maxlength', message: 'Debe ser menor de 300 caracteres.' },
+        { type: 'pattern', message: 'Debe ingresar solamente letras.' },
       ],
       'cvc': [
         { type: 'required', message: 'Debe ingresar el cvc de la tarjeta.' },
@@ -38,7 +39,7 @@ export class AgregartarjetaPage implements OnInit {
         { type: 'required', message: 'Debe ingresar el número de la tarjeta.' },
         { type: 'minlength', message: 'Debe ser mayor a 16 digitos.' },
         { type: 'maxlength', message: 'Debe ser menor a 20 digitos.' },
-        // { type: 'pattern', message: 'Debe ingresar solo digitos.' },
+        { type: 'pattern', message: 'Debe ingresar solamente digitos.' },
       ],
     }
   errorMessage: any;
@@ -48,7 +49,8 @@ export class AgregartarjetaPage implements OnInit {
       nombre: ['', Validators.compose([
         Validators.required,
         Validators.maxLength(300),
-        Validators.minLength(5)
+        Validators.minLength(5),
+        Validators.pattern('[A-Za-zñÑ .]{5,300}'),
       ])],
       cvc: ['', Validators.compose([
         Validators.required,
@@ -65,7 +67,7 @@ export class AgregartarjetaPage implements OnInit {
         Validators.required,
         Validators.minLength(16),
         Validators.maxLength(19),
-        // Validators.pattern('/^(?=.*\d)[\d]*$/'),
+        Validators.pattern('[0-9]{16}'),
       ])],
   });
   }

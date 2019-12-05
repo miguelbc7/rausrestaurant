@@ -30,19 +30,19 @@ export class AgregarproductoPage implements OnInit {
 	// dingredientes:any = [];
 	no_ingredientes:any = []; 
 	// dno_ingredientes:any = [];
-	nutritional_values:boolean = true;
+	nutritional_values:boolean = false;
 	fat;
 	carbohydrates;
 	protein;
 	total_calories;
 	price_with_iva;
 	iva;
-	eat_in_restaurant:boolean = true;
-	wear:boolean = true;
-	delivery:boolean = true;
-	status:boolean = true;
+	eat_in_restaurant:boolean = false;
+	wear:boolean = false;
+	delivery:boolean = false;
+	status:boolean = false;
 	type;
-	stock;
+	stock = 0;
 	errorMessage = '';
 	slideOptsOne = {
 		initialSlide: 0,
@@ -59,7 +59,7 @@ export class AgregarproductoPage implements OnInit {
 		],
 		'description': [
 			{ type: 'required', message: 'Debe ingresar una descripción.' },
-			{ type: 'minlength', message: 'Debe ser mayor de 10 caracteres.' },
+			{ type: 'minlength', message: 'Debe ser mayor de 15 caracteres.' },
 			{ type: 'maxlength', message: 'Debe ser menor de 300 caracteres.' }
 		],
 		'ingredientes': [
@@ -122,7 +122,7 @@ export class AgregarproductoPage implements OnInit {
 			description: [this.description, Validators.compose([
 				Validators.required,
 				Validators.maxLength(300),
-				Validators.minLength(10)
+				Validators.minLength(15)
 			])],
 			ingredientes: [this.ingredientes, Validators.compose([
 				// Validators.required,
@@ -158,7 +158,7 @@ export class AgregarproductoPage implements OnInit {
 			delivery: [this.delivery],
 			status: [this.status],
 			// images: [],
-			stock: ['', Validators.compose([
+			stock: [this.stock, Validators.compose([
 				Validators.required,
 			])],
       	});
@@ -431,4 +431,21 @@ export class AgregarproductoPage implements OnInit {
 		if(this.stock > 0)
 			this.stock=this.stock- 1;
 	}
+
+	decimal(event){
+		if(this.price_with_iva.length == 0){
+		  if(event.key == '0') {
+			event.preventDefault();
+			// this.value = '0,00';
+		  }
+		  // else{
+		  //   this.value = '0,0'+this.value;
+		  // }
+		}
+		// else if(this.value.length > 4){
+		  
+		//   console.log(this.value);
+		// }
+		
+	  }
 }
