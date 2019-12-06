@@ -18,6 +18,7 @@ export class Welcome1Page implements OnInit {
   }
 
   ionViewDidEnter(){
+    
     setTimeout(()=>{
       this.slides.slideNext();
     },1750)
@@ -27,7 +28,7 @@ export class Welcome1Page implements OnInit {
     
   }
 
-  ionViewDidLeave(){
+  ionViewWillLeave(){
     this.platform.backButton.observers.pop();
   }
 

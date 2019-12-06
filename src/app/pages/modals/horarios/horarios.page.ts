@@ -94,14 +94,16 @@ export class HorariosPage implements OnInit {
    await this.horarioService.getItem(this.name).then(res=>{
       res.subscribe(data =>{
         console.log(data);
-        if(data.schedules){
+        if(data.schedules.schedules){
           this.title = 'Editar';
           let schedules = data.schedules.schedules;
           this.status = data.schedules.status;
           this.start = schedules[0].start;
           this.end = schedules[0].end;
-          this.start2 = schedules[1].start;
-          this.end2 = schedules[1].end;
+          if(schedules[1]){
+            this.start2 = schedules[1].start;
+            this.end2 = schedules[1].end;
+          }
           // this.id - data.id;
         }else{
           this.title = "Agregar"

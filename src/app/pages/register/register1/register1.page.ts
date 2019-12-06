@@ -169,19 +169,19 @@ export class Register1Page implements OnInit {
   async onSubmit(values){
    await this.storage.set('user', values);
 
-   if(this.direction){
-     values.direction = {
-       street: values.address,
-       lat: this.direction.position.lat.toString(),
-       lng: this.direction.position.lng.toString(),
-       zipcode: this.direction.postalCode,
-       city: this.direction.locality,
-       state: this.direction.adminArea,
-       country: this.direction.country,
-     };
-   }else{
-     this.errorMessage = "";
-   }
+   values.direction = {
+     street: values.address,
+     lat: this.direction.position?this.direction.position.lat.toString():'40.000001',
+     lng: this.direction.position?this.direction.position.lng.toString(): '-49.12311122211',
+     zipcode: this.direction.postalCode?this.direction.postalCode:'33150',
+     city: this.direction.locality?this.direction.locality:'barcelona',
+     state: this.direction.adminArea?this.direction.adminArea:'barcelona',
+     country: this.direction.country?this.direction.country:'España',
+   };
+  //  if(this.direction){
+  //  }else{
+  //    this.errorMessage = "";
+  //  }
 
     console.log(values);
 

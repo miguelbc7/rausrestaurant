@@ -298,6 +298,9 @@ export class AgregarproductoPage implements OnInit {
 			
 
 		}
+		let float = this.price_with_iva.split('.').join('');
+		let number = float.split(',').join('.');
+		values.price_with_iva = number;
 		values.fat = values.fat?values.fat:0;
 		values.carbohydrates = values.carbohydrates?values.carbohydrates:0;
 		values.total_calories = values.total_calories?values.total_calories:0;
@@ -405,7 +408,8 @@ export class AgregarproductoPage implements OnInit {
 			sourceType: sourceType,
 			destinationType: this.camera.DestinationType.DATA_URL,
 			encodingType: this.camera.EncodingType.JPEG,
-			mediaType: this.camera.MediaType.PICTURE
+			mediaType: this.camera.MediaType.PICTURE,
+			correctOrientation: true,
 		}
 		this.camera.getPicture(options).then((imageData) => {
 			// imageData is either a base64 encoded string or a file URI

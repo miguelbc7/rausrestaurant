@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { HorariosPage } from '../modals/horarios/horarios.page';
 
 import { AddsliderPage } from '../modals/addslider/addslider.page';
@@ -53,6 +53,7 @@ export class HomePage implements OnInit {
     private camera: Camera,
     public loading: LoadingService,
     private actionSheetController: ActionSheetController,
+    readonly ngZone: NgZone,
     public router:Router) {
     this.productos = [];
     this.storage.get('_token').then(val =>{
@@ -117,7 +118,8 @@ export class HomePage implements OnInit {
       sourceType: sourceType,
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE
+      mediaType: this.camera.MediaType.PICTURE,
+      correctOrientation: true,
     }
     this.camera.getPicture(options).then((imageData) => {
       // imageData is either a base64 encoded string or a file URI
@@ -213,7 +215,9 @@ export class HomePage implements OnInit {
        console.log('response list prod')
        response.subscribe((data) => {
          console.log('data', data);
-         this.productos = data.products;
+         this.ngZone.run(() => {
+          this.productos = data.products;
+        });
          for (let index = 0; index < this.productos.length; index++) {
            const element = this.productos[index];
            console.log(element);
@@ -300,11 +304,12 @@ export class HomePage implements OnInit {
   getSlider(){
     this.sliderService.read_Items().then(response => {
       response.subscribe((data) => {
+        console.log(data);
         this.slider = data;
      }, err => {
       console.log(err);
     });
-    });
+    }).catch(err => console.error(err));
   }
 
   getAvatar(){

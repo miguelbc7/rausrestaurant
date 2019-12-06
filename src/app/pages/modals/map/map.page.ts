@@ -19,6 +19,8 @@ import {
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
 import { AuthService } from 'src/app/services/auth.service';
+import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
+import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';
 
 @Component({
   selector: 'app-map',
@@ -42,6 +44,8 @@ export class MapPage implements OnInit {
     private router: Router,
     private storage: Storage,
     private authService: AuthService,
+    private androidPermissions: AndroidPermissions,
+    private locationAccuracy: LocationAccuracy,
     readonly ngZone: NgZone
     ) { }
 
@@ -58,22 +62,24 @@ export class MapPage implements OnInit {
     }else if(this.url == 'home'){
      this.address = localStorage.getItem('street');
     }
-
+  await this.platform.ready().then(()=>{
+    this.checkGPSPermission();
+  });
+   await this.loadMap();
 
   }
 
   async ionViewDidEnter(){
-    await this.platform.ready();
-    await this.loadMap();
+    
    
   }
 
 
   async loadMap() {
-    // Environment.setEnv({
-    //   API_KEY_FOR_BROWSER_RELEASE: "AIzaSyBUhsxeoY9tYVFFD31lLygBdRROqHU7s6k",
-    //   API_KEY_FOR_BROWSER_DEBUG: "AIzaSyBUhsxeoY9tYVFFD31lLygBdRROqHU7s6k"
-    // });
+    Environment.setEnv({
+      API_KEY_FOR_BROWSER_RELEASE: "AIzaSyBUhsxeoY9tYVFFD31lLygBdRROqHU7s6k",
+      API_KEY_FOR_BROWSER_DEBUG: "AIzaSyBUhsxeoY9tYVFFD31lLygBdRROqHU7s6k"
+    });
     this.map = GoogleMaps.create('map_canvas', {
       camera: {
         target: {
@@ -134,6 +140,7 @@ export class MapPage implements OnInit {
 
   async addMarker(latLng) {
     // add a marker
+    console.log(latLng);
     this.map.clear().then(() => {
       this.map.addMarker({
         position: latLng,
@@ -215,7 +222,7 @@ export class MapPage implements OnInit {
 
       this.ngZone.run(() => {
         // changes will be detected because we are in a zone.
-        this.address = subThoroughfare + ' ' + thoroughfare + ' ' + subAdminArea + ' ' + adminArea;
+        this.address =  this.direccion.extra.lines.join(' ');// subThoroughfare + ' ' + thoroughfare + ' ' + locality + ' ' + subAdminArea + ' ' + adminArea;
       });
       console.log('thisAddress', this.address);
       // this.address = this.direccion.extra.lines.join(', ');
@@ -245,6 +252,7 @@ export class MapPage implements OnInit {
       this.authService.updateAddress(this.direccion).then((res) => {
         res.subscribe(res => {
           console.log(res);
+          this.platform.backButton.observers.pop();
           this.router.navigate(['home']);
         },
         err =>{
@@ -259,6 +267,7 @@ export class MapPage implements OnInit {
   
   async closeModal() {
     // await this.modalCtrl.dismiss();
+    this.platform.backButton.observers.pop();
     if(this.url == 'register'){
       this.router.navigate(['register1']);
     }
@@ -269,14 +278,63 @@ export class MapPage implements OnInit {
 
   
   ionViewDidLeave(){
-    this.platform.backButton.observers.pop();
+    
   }
 
 
 
   ionViewWillLeave() {
-
+    // this.platform.backButton.observers.pop();
   }
 
+  checkGPSPermission() {
+    this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION).then(
+      result => {
+        if (result.hasPermission) {
+  
+          //If having permission show 'Turn On GPS' dialogue
+          this.askToTurnOnGPS();
+        } else {
+  
+          //If not having permission ask for permission
+          this.requestGPSPermission();
+        }
+      },
+      err => {
+        console.error(err);
+      }
+    );
+  }
+  //////////////// GPS GOOGLE MAP /////////////////////
+  requestGPSPermission() {
+    this.locationAccuracy.canRequest().then((canRequest: boolean) => {
+      if (canRequest) {
+        console.log("4");
+      } else {
+        //Show 'GPS Permission Request' dialogue
+        this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION)
+          .then(
+            () => {
+              // call method to turn on GPS
+              this.askToTurnOnGPS();
+            },
+            error => {
+              //Show alert if user click on 'No Thanks'
+              console.error('requestPermission Error requesting location permissions 1' + error)
+            }
+          );
+      }
+    });
+  }
+  askToTurnOnGPS() {
+    this.locationAccuracy.request(this.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY).then(
+      () => {
+        // When GPS Turned ON call method to get Accurate location coordinates
+        this.loadMap();
+      },
+      error => console.error('Error requesting location permissions 2' + JSON.stringify(error))
+    );
+  }
+  
 
 }
