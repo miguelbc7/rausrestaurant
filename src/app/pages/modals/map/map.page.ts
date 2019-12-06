@@ -22,6 +22,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';
 
+declare var google;
 @Component({
   selector: 'app-map',
   templateUrl: './map.page.html',

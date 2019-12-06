@@ -43,6 +43,7 @@ import { LoadingService } from './services/loading.service';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';
 import {NgxMaskIonicModule} from 'ngx-mask-ionic';
+import { GoogleMaps } from '@ionic-native/google-maps';
 
 @NgModule({
   declarations: [
@@ -89,6 +90,7 @@ import {NgxMaskIonicModule} from 'ngx-mask-ionic';
     LoadingService,
     AndroidPermissions,
     LocationAccuracy,
+    GoogleMaps,
   
   ],
   bootstrap: [AppComponent]

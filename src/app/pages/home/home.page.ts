@@ -43,6 +43,7 @@ export class HomePage implements OnInit {
   };
   avatar = 'assets/img/avatar.png';
 
+
   constructor(
     private modalCtrl: ModalController, 
     public productosService: ProductosService, 
@@ -129,7 +130,9 @@ export class HomePage implements OnInit {
         this.sliderService.create_NewItem({image:base64Image}).then((response) => {
           response.subscribe((data) => {
             console.log(data);
+            console.log(this.aImages);
             this.getSlider();
+            this.aImages = [];
         }, err => {
             console.error(err);
           });
@@ -306,6 +309,8 @@ export class HomePage implements OnInit {
       response.subscribe((data) => {
         console.log(data);
         this.slider = data;
+        this.aImages = [];
+
      }, err => {
       console.log(err);
     });
@@ -320,16 +325,16 @@ export class HomePage implements OnInit {
     });
   }
 
-  async deleteSlider(id){
-    // this.storage.set('imgPreview', img);
-    // const modal = await this.modalCtrl.create({
-    //   component: AddsliderPage,
-    //   componentProps:[
-    //   ]
-    // });
-    // await modal.present();
+   deleteSlider(id){
+
     console.log(id);
     this.sliderService.delete_Item(id);
+  }
+
+   deleteTempSlider(index){
+
+    console.log(index);
+    this.aImages.splice(index,1);
   }
 
   getMap()

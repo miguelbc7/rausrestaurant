@@ -22,6 +22,7 @@
     <preference name="SplashScreenDelay" value="3000" />
     <preference name="GOOGLE_MAPS_ANDROID_API_KEY" value="AIzaSyBUhsxeoY9tYVFFD31lLygBdRROqHU7s6k" />
     <preference name="GOOGLE_MAPS_IOS_API_KEY" value="AIzaSyBUhsxeoY9tYVFFD31lLygBdRROqHU7s6k" />
+    <preference name="loadUrlTimeoutValue" value="700000" />
     <platform name="android">
         <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application" xmlns:android="http://schemas.android.com/apk/res/android">
             <application android:usesCleartextTraffic="true" />
