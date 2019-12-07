@@ -310,42 +310,44 @@ export class AgregarproductoPage implements OnInit {
 		console.log('type', this.type);
 		console.log(this.productos);
 		
-			if(this.type == 'create') {
-				console.log('type', this.type);
-				this.productosService.createItem(values).then((response) => {
-				response.subscribe( (data) => {
-					if(this.aImages.length > 0)
-						this.uploadImage(data._id);
-
-					this.router.navigate(['home']);
-				}, err => {
-				console.log(err);
-				this.loading.hideLoader();this.loading.hideLoader();
-				});
-				
-				// this.router.navigate(['list']);
-				});
-			} else if(this.type == 'edit') {
-				console.log(this.type);
-				this.productosService.updateItem(this.productos._id,values).then((response) => {
-					response.subscribe( () => {
-					if(this.aImages.length > 0)
-						this.uploadImage(this.productos._id);
-
-					this.router.navigate(['home']);
-				}, err => {
-				console.log(err);
-				this.loading.hideLoader();
-				});
-				
-				// this.router.navigate(['list']);
-				}).catch(error=>{console.error(error)});
-			}
+		if(this.type == 'create') {
+			console.log('type', this.type);
+			this.productosService.createItem(values).then((response) => {
+			response.subscribe( (data) => {
+				if(this.aImages.length > 0)
+					this.uploadImage(data._id);
+				this.productoCreado();
+				this.router.navigate(['home']);
+			}, err => {
+			console.log(err);
+			this.loading.hideLoader();this.loading.hideLoader();
+			});
+			
+			// this.router.navigate(['list']);
+			});
+		} else if(this.type == 'edit') {
+			console.log(this.type);
+			this.productosService.updateItem(this.productos._id,values).then((response) => {
+				response.subscribe( () => {
+				if(this.aImages.length > 0)
+					this.uploadImage(this.productos._id);
+				this.productoGuardado();
+				this.router.navigate(['home']);
+			}, err => {
+			console.log(err);
+			this.loading.hideLoader();
+			});
+			
+			// this.router.navigate(['list']);
+			}).catch(error=>{console.error(error)});
+		}
 		
 	}
 
 	uploadImage(id){
 		console.log('uploadimage');
+
+		this.storage.set('tempImagesProduct', { id: id, images : this.aImages });
 		
 		this.productosService.uploadItem(id, this.aImages).then((response) => {
 			response.subscribe(async (data) => {
@@ -354,10 +356,7 @@ export class AgregarproductoPage implements OnInit {
 			console.log(data);
 			// await this.presentPromocion(id);
 			this.loading.hideLoader();
-			if(this.type == 'create')
-				this.productoCreado();
-			else
-				this.productoGuardado();
+			
 			await this.router.navigate(['home']);
 			
 		}, err => {
@@ -404,7 +403,7 @@ export class AgregarproductoPage implements OnInit {
 
 	pickImage(sourceType) {
 		const options: CameraOptions = {
-			quality: 100,
+			quality: 75,
 			sourceType: sourceType,
 			destinationType: this.camera.DestinationType.DATA_URL,
 			encodingType: this.camera.EncodingType.JPEG,

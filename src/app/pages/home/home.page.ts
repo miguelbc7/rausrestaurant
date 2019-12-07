@@ -125,22 +125,15 @@ export class HomePage implements OnInit {
     this.camera.getPicture(options).then((imageData) => {
       // imageData is either a base64 encoded string or a file URI
       // If it's base64 (DATA_URL):
-      let base64Image = 'data:image/jpeg;base64,' + imageData;
-      this.aImages.push(base64Image) ;
-        this.sliderService.create_NewItem({image:base64Image}).then((response) => {
-          response.subscribe((data) => {
-            console.log(data);
-            console.log(this.aImages);
-            this.getSlider();
-            this.aImages = [];
-        }, err => {
-            console.error(err);
-          });
+      let base64Image = 'data:image/jpeg;base64,' + imageData.substring(23);
+      this.aImages.push({image:base64Image}) ;
+        this.sliderService.create_NewItem({image:base64Image}).then(() => {
        });
     
     }, (err) => {
       // Handle error
-    });
+      console.error(err);
+    }).catch(error => console.error(error));
 }
 
   async openHorarios(dia, data) {
@@ -218,21 +211,16 @@ export class HomePage implements OnInit {
        console.log('response list prod')
        response.subscribe((data) => {
          console.log('data', data);
-         this.ngZone.run(() => {
           this.productos = data.products;
-        });
+         let tempImagesProduct:any = this.storage.get('tempImagesProduct');
+         console.log(tempImagesProduct);
          for (let index = 0; index < this.productos.length; index++) {
-           const element = this.productos[index];
-           console.log(element);
-          //  this.productosService.getImagen(element._id).then(res=>{
-          //    console.log(res);
-          //    if(res){
-          //      res.subscribe(data=>{
-          //        this.productos[index].images = data;
-  
-          //      })
-          //    }
-          //  })
+          if(tempImagesProduct.id == this.productos[index]._id)
+          {
+            this.productos[index].tempImages = tempImagesProduct.images;
+            this.storage.remove('tempImagesProduct');
+            console.log(this.productos[index]);
+          }
          }
          this.loading.hideLoader();
         }, err => {
@@ -308,8 +296,10 @@ export class HomePage implements OnInit {
     this.sliderService.read_Items().then(response => {
       response.subscribe((data) => {
         console.log(data);
-        this.slider = data;
-        this.aImages = [];
+        if(data){
+          this.slider = data;
+          this.aImages = [];
+        }
 
      }, err => {
       console.log(err);

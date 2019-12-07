@@ -17,7 +17,7 @@
                   <ion-slides [options]="slideOptsOne">
 
                     <ion-slide class="changeStyle" *ngFor="let img of aImages">
-                      <img class="imgBanner" src="{{img}}"/>
+                      <img class="imgBanner" src="{{img.image}}"/>
                      
                     </ion-slide>
 
@@ -173,6 +173,11 @@
       <ion-col class="px-0" size="6" *ngFor="let product of productos; let i = index">
           <ion-card class="customCard">
               <div class="boxBanner">
+                  <ion-slides *ngIf="product.tempImages && product.tempImages.length > 0">
+                      <ion-slide class="changeStyle"  *ngFor="let img of product.tempImages">
+                        <img class="imgCarta3" src="{{img.img}}"/>
+                      </ion-slide>
+                    </ion-slides>
                 <ion-slides *ngIf="product.images.length > 0; else noimage">
                   <ion-slide class="changeStyle"  *ngFor="let img of product.images">
                     <img class="imgCarta3" src="{{img.img}}"/>

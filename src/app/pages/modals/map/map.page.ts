@@ -66,7 +66,7 @@ export class MapPage implements OnInit {
   await this.platform.ready().then(()=>{
     this.checkGPSPermission();
   });
-   await this.loadMap();
+  //  await this.loadMap();
 
   }
 
@@ -223,7 +223,7 @@ export class MapPage implements OnInit {
 
       this.ngZone.run(() => {
         // changes will be detected because we are in a zone.
-        this.address =  this.direccion.extra.lines.join(' ');// subThoroughfare + ' ' + thoroughfare + ' ' + locality + ' ' + subAdminArea + ' ' + adminArea;
+        this.address =  subThoroughfare + ' ' + thoroughfare + ' ' + locality + ' ' + subAdminArea + ' ' + adminArea;
       });
       console.log('thisAddress', this.address);
       // this.address = this.direccion.extra.lines.join(', ');
@@ -288,7 +288,7 @@ export class MapPage implements OnInit {
     // this.platform.backButton.observers.pop();
   }
 
-  checkGPSPermission() {
+ async checkGPSPermission() {
     this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION).then(
       result => {
         if (result.hasPermission) {
@@ -307,7 +307,7 @@ export class MapPage implements OnInit {
     );
   }
   //////////////// GPS GOOGLE MAP /////////////////////
-  requestGPSPermission() {
+ async requestGPSPermission() {
     this.locationAccuracy.canRequest().then((canRequest: boolean) => {
       if (canRequest) {
         console.log("4");
@@ -327,8 +327,8 @@ export class MapPage implements OnInit {
       }
     });
   }
-  askToTurnOnGPS() {
-    this.locationAccuracy.request(this.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY).then(
+ async askToTurnOnGPS() {
+   await this.locationAccuracy.request(this.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY).then(
       () => {
         // When GPS Turned ON call method to get Accurate location coordinates
         this.loadMap();
