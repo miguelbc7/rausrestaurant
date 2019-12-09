@@ -190,6 +190,7 @@ export class HomePage implements OnInit {
 
 		this.productosService.getList().then(response => {
 			response.subscribe((data) => {
+				console.log('data', data);
 				this.productos = data.products;
 				let tempImagesProduct:any = this.storage.get('tempImagesProduct');
 				for (let index = 0; index < this.productos.length; index++) {

@@ -133,8 +133,8 @@ export class HorarioService {
 
 		let data = {
 			id_restaurant: this.uid,
-			schedules:{ 
-				name: day,
+			name: day,
+			schedules:{
 				status: true,
 				schedules:[/*{
 					start: item.schedules[0].start,

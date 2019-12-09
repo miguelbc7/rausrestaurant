@@ -226,17 +226,14 @@ export class Register1Page implements OnInit {
     await this.storage.get('direction').then( data => {
       console.log('direction data', data);
       if(data){
+        console.log('a');
         data.extra.lines.pop();
         this.direction = data;
         this.address = data.street;
-
-        this.ngZone.run(() => {
-          // changes will be detected because we are in a zone.
-          this.address = data.street;
-        });
         // this.storage.remove('direction');
       }else{
-        /* this.myLocation(); */
+        console.log('b');
+        this.myLocation();
       }
     });
   }
