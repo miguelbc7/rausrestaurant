@@ -40,7 +40,7 @@ export class Register1Page implements OnInit {
   errorMessage:string = "";
   keyboard = false;
   tempCat;
-  address = '';
+  address;
   direction;
 
 
@@ -223,11 +223,12 @@ export class Register1Page implements OnInit {
 
     this.checkGPSPermission();
     
-    await this.storage.get('direction').then((data)=>{
-      console.log(data);
+    await this.storage.get('direction').then( data => {
+      console.log('direction data', data);
       if(data){
         data.extra.lines.pop();
         this.direction = data;
+        this.address = data.street;
 
         this.ngZone.run(() => {
           // changes will be detected because we are in a zone.
@@ -235,7 +236,7 @@ export class Register1Page implements OnInit {
         });
         // this.storage.remove('direction');
       }else{
-        this.myLocation();
+        /* this.myLocation(); */
       }
     });
   }

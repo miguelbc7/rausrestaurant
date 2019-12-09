@@ -228,7 +228,7 @@ pickImage(sourceType) {
   this.camera.getPicture(options).then((imageData) => {
     // imageData is either a base64 encoded string or a file URI
     // If it's base64 (DATA_URL):
-    let base64Image = 'data:image/jpeg;base64,' + imageData.subString(23);
+    let base64Image = 'data:image/jpeg;base64,' + imageData;
     this.aImages = {image:base64Image} ;
     this.avatar = base64Image;
     console.log(this.type);
