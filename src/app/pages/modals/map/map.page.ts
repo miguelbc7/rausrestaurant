@@ -172,8 +172,18 @@ export class MapPage implements OnInit {
 			} else {
 				var adminArea = '';
 			}
+			
+			var add = subThoroughfare + ' ' + thoroughfare + ' ' + locality + ' ' + subAdminArea + ' ' + adminArea;
+			console.log('add', add);
+			var add2 = add.split(' ');
+			console.log('add2', add2);
+			var x = (names) => names.filter((v,i) => names.indexOf(v) === i)
+			var unique = x(add2);
+			console.log('unique', unique);
+			var arr = unique.join(' ');
+			console.log('arr', arr);
 
-			if(results[0].extra) {
+			/* if(results[0].extra) {
 				if(results[0].extra.lines) {
 					console.log('1',results[0].extra.lines);
 					results[0].extra.lines.pop();
@@ -194,11 +204,11 @@ export class MapPage implements OnInit {
 						this.address =  subThoroughfare + ' ' + thoroughfare + ' ' + locality + ' ' + subAdminArea + ' ' + adminArea;
 					});
 				}
-			} else {
+			} else { */
 				this.ngZone.run(() => {
-					this.address =  subThoroughfare + ' ' + thoroughfare + ' ' + locality + ' ' + subAdminArea + ' ' + adminArea;
+					this.address =  arr;
 				});
-			}
+			/* } */
 		}).catch(error =>{
 			this.showToast(error.error_message);
 		})
