@@ -12,7 +12,22 @@
 .marginButtonTop {
     margin-top: 2.5rem;
 }
-
+.minimal[_ngcontent-wki-c2] tag[_ngcontent-wki-c2] {
+    display: flex;
+    flex-direction: row;
+    background: transparent !important;
+    flex-wrap: wrap;
+    border-radius: 0;
+    /* background: #f9f9f9; */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    overflow: hidden;
+    outline: 0;
+    cursor: pointer;
+    position: relative;
+}
 // .ng2-tag-input__text-input {
 
 //     background-color: transparent !important;

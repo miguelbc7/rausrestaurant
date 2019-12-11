@@ -12,7 +12,7 @@ import { CreditCardService } from 'src/app/services/credit-card.service';
 export class AgregarPage implements OnInit {
 
   data:any;
-  value:number;
+  value = '';
   public sum : number = 0;
   // public total(items){
   //   this.sum = 0;
@@ -49,7 +49,7 @@ export class AgregarPage implements OnInit {
 
   async openConfirmarAgregar(cardID) {
     console.log(this.value);
-    if(this.value > 0){
+    if(this.value != '0,00'){
       this.erroMessage = '';
       await this.modalCtrl.dismiss();
       const modal = await this.modalCtrl.create({

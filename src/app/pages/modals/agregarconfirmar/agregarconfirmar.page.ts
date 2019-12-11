@@ -31,10 +31,13 @@ export class AgregarconfirmarPage implements OnInit {
   async openAgregarListo() {
 
     let record = {};
-    record['value'] = this.value;
+    let float = this.value.split('.').join('');
+    let number = float.split(',').join('.');
+    console.log(number);
+    record['value'] = number;
     record['cardID'] = this.cardID;
-
     console.log(record);
+    // return false;
     this.saldoService.create_NewItem(record).then(async resp => {
      
       await this.modalCtrl.dismiss();

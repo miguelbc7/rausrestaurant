@@ -16,6 +16,7 @@ import { AgregarconfirmarPage } from '../modals/agregarconfirmar/agregarconfirma
 import { DineromodalPage } from '../modals/dineromodal/dineromodal.page';
 
 import { CierrePage } from '../cierre/cierre.page';
+import { BrMaskerModule } from 'br-mask';
 
 const routes: Routes = [
   {
@@ -31,7 +32,8 @@ const routes: Routes = [
     IonicModule,
     SharedModule,
     RouterModule.forChild(routes),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrMaskerModule
   ],
   declarations: [
     OpcionesPage,

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, Platform } from '@ionic/angular';
 import { ModalPoliticasPage } from '../modals/modal-politicas/modal-politicas.page';
 import { ModalTerminosPage } from '../modals/modal-terminos/modal-terminos.page';
 import { NewPasswordPage } from '../modals/new-password/new-password.page';
@@ -22,7 +22,7 @@ export class LoginPage implements OnInit {
   passwordType: string  = 'password';
 
   constructor(private modalCtrl: ModalController, public formBuilder: FormBuilder, private router: Router,
-              private authService: AuthService, private storage: Storage) {
+              private authService: AuthService, private storage: Storage, private platform:Platform) {
    }
 
 
@@ -72,6 +72,9 @@ export class LoginPage implements OnInit {
       this.storage.set('_uid', res.user.uid);
       this.authService.getToken(res.user.uid).subscribe(token =>{
         this.storage.set('_token', token);
+        
+        this.platform.backButton.observers.pop();
+
         this.router.navigate(["/home"]);
       });
     },err => {

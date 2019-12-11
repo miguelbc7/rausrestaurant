@@ -28,14 +28,16 @@ export class AgregartarjetaPage implements OnInit {
       ],
       'cvc': [
         { type: 'required', message: 'Debe ingresar el cvc de la tarjeta.' },
-        { type: 'minlength', message: 'Debe ser minimo 3 digitos.' },
+        { type: 'minlength', message: 'Debe ser máximo 3 digitos.' },
+        { type: 'maxlength', message: 'Debe ser máximo 3 digitos.' },
       ],
       'fechExp': [
         { type: 'required', message: 'Debe ingresar la fecha de expiración.' },
       ],
       'numero': [
         { type: 'required', message: 'Debe ingresar el número de la tarjeta.' },
-        { type: 'minlength', message: 'Debe ser mayor a 13 digitos.' },
+        { type: 'minlength', message: 'Debe ser mayor a 16 digitos.' },
+        { type: 'maxlength', message: 'Debe ser menor a 20 digitos.' },
         // { type: 'pattern', message: 'Debe ingresar solo digitos.' },
       ],
     }
@@ -61,7 +63,8 @@ export class AgregartarjetaPage implements OnInit {
       ])],
       numero: ['', Validators.compose([
         Validators.required,
-        Validators.minLength(13),
+        Validators.minLength(16),
+        Validators.maxLength(19),
         // Validators.pattern('/^(?=.*\d)[\d]*$/'),
       ])],
   });
