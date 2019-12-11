@@ -53,7 +53,9 @@ export class AgregarPage implements OnInit {
 
   async openConfirmarAgregar(cardID) {
     console.log(this.value);
-    if(this.value != '0,00'){
+    if(this.value == '0,00' || this.value == '0') {
+      this.erroMessage = 'Debe ingresar el monto a recargar';
+    } else {
       this.erroMessage = '';
       await this.modalCtrl.dismiss();
       const modal = await this.modalCtrl.create({
@@ -69,8 +71,6 @@ export class AgregarPage implements OnInit {
         this.value = null;
       });
       await modal.present();
-    }else{
-      this.erroMessage = 'Debe ingresar el monto a recargar';
     }
   }
 
