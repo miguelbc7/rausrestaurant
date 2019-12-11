@@ -226,7 +226,7 @@ export class Register1Page implements OnInit {
     this.checkGPSPermission();
 
     this.platform.backButton.subscribeWithPriority(1, () => {
-      this.router.navigate(["/home"]);
+      this.router.navigate(["/login"]);
     });
     
     await this.storage.get('direction').then( data => {
