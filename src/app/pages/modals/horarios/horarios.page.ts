@@ -18,20 +18,21 @@ export class HorariosPage implements OnInit {
 	end;
 	start2;
 	end2;
-	status = false;
+	status = true;
 	list:any;
 	errorMessage: any;
 	title = 'Agregar';
 	id;
 	disabled = true;
-	hours: any[] = [ { "Lunes": [ { "start": "", "end": "", "icon": false } ] }, { "Martes": [ { "start": "", "end": "", "icon": false } ] }, { "Miercoles": [ { "start": "", "end": "", "icon": false } ] }, { "Jueves": [ { "start": "", "end": "", "icon": false } ] }, { "Viernes": [ { "start": "", "end": "", "icon": false } ] }, { "Sabado": [ { "start": "", "end": "", "icon": false } ] }, { "Domingo": [ { "start": "", "end": "", "icon": false } ] } ];
+	hh = '0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23';
+	hours: any[] = [ { "Lunes": [ { "start": "", "end": "", "icon": false, "disableStart": false, "disableEnd": true, "hourStart": this.hh } ] }, { "Martes": [ { "start": "", "end": "", "icon": false, "disableStart": false, "disableEnd": true, "hourStart": this.hh } ] }, { "Miercoles": [ { "start": "", "end": "", "icon": false, "disableStart": false, "disableEnd": true, "hourStart": this.hh } ] }, { "Jueves": [ { "start": "", "end": "", "icon": false, "disableStart": false, "disableEnd": true, "hourStart": this.hh } ] }, { "Viernes": [ { "start": "", "end": "", "icon": false, "disableStart": false, "disableEnd": true, "hourStart": this.hh } ] }, { "Sabado": [ { "start": "", "end": "", "icon": false, "disableStart": false, "disableEnd": true, "hourStart": 0-24 } ] }, { "Domingo": [ { "start": "", "end": "", "icon": false, "disableStart": false, "disableEnd": true, "hourStart": this.hh } ] } ];
 	hour: any[];
 
 	constructor(
 		private modalCtrl: ModalController,
 		private horarioService: HorarioService,
 		private router:Router,
-		private zone: NgZone
+		readonly zone: NgZone
 	) {}
 
 	ngOnInit() {
@@ -47,7 +48,18 @@ export class HorariosPage implements OnInit {
 		let arr = this.hour;
 
 		if(arr.length <= 4) {
-			arr.push({ "start": "", "end": "", "icon": true });
+			let length = arr.length - 1;
+			let h = '';
+
+			let hour = moment(this.hour[length].end).format('HH');
+
+			console.log('hour', hour);
+
+			for(let k = (parseInt(hour)); k <= 23; k++) {
+				h = h + ',' + k;
+			}
+
+			arr.push({ "start": "", "end": "", "icon": true, "hourStart": h,  "disableStart": false, "disableEnd": true });
 			this.hour = arr;
 		} else {
 			console.log('error');
@@ -60,9 +72,21 @@ export class HorariosPage implements OnInit {
 		this.hour = arr;
 	}
 
+	async changeStatus() {
+		this.zone.run(() => {
+			if(this.status == true) {
+				this.status = false;
+			} else if(this.status == false) {
+				this.status = true;
+			}
+		});
+
+		console.log(this.status);
+	}
+
 	async createForm() {
 		if(this.title == 'Agregar') {
-			this.horarioService.createItem(this.hour, this.name).then(res => {
+			this.horarioService.createItem(this.hour, this.name, this.status).then(res => {
 				res.subscribe(() => {
 					this.modalCtrl.dismiss();
 					this.errorMessage = '';
@@ -74,7 +98,7 @@ export class HorariosPage implements OnInit {
 			}).catch(err => console.error(err));
 		} else if(this.title == 'Editar') {
 			console.log('schedules', this.hour);
-			this.horarioService.updateItem(this.hour, this.name).then(res =>{
+			this.horarioService.updateItem(this.hour, this.name, this.status).then(res =>{
 				res.subscribe(() =>{
 					this.modalCtrl.dismiss();
 					this.errorMessage = '';
@@ -90,9 +114,11 @@ export class HorariosPage implements OnInit {
 	async getHorario() {
 		await this.horarioService.getItem(this.name).then( res => {
 			res.subscribe( data => {
+				console.log('data', data);
 				if(data.schedules.schedules) {
 					this.title = 'Editar';
 					let schedules = data.schedules.schedules;
+					this.status = data.schedules.status;
 					let arr = [];
 					schedules.forEach( (row, i) => {
 						if( i == 0) {
@@ -101,13 +127,12 @@ export class HorariosPage implements OnInit {
 							var ico = true;
 						}
 
-						let a = { start: row.start, end: row.end, icon: ico, id: row.id };
+						let a = { start: row.start, end: row.end, icon: ico, id: row.id, disabledStart: false, disabledEnd: false };
 						arr.push(a);
 					});
 
 					this.hour = arr;
 					
-					console.log('hour', this.hour);
 					/* this.status = data.schedules.status; */
 					/* this.start = schedules[0].start;
 					this.end = schedules[0].end; */
@@ -138,8 +163,188 @@ export class HorariosPage implements OnInit {
 		}
 	}
 
-	validar() {
-		let start =  moment(this.start).format('HH:mm');
+	validar(i, type) {
+		if(type == 'start') {
+			if(i != 0) {
+				var j = i -1;
+			}
+
+			if(j == undefined) {
+				var h = '';
+				var hou;
+				var minute =  moment(this.hour[i].start).format('mm');
+
+				if(minute == '0' || minute == '00') {
+					hou = parseInt(moment(this.hour[i].start).format('HH'));
+				} else if(minute == '15') {
+					hou = parseInt(moment(this.hour[i].start).format('HH'));
+				} else if(minute == '30') {
+					hou = parseInt(moment(this.hour[i].start).format('HH'));
+				} else if(minute == '45') {
+					hou = parseInt(moment(this.hour[i].start).add(1, 'hours').format('HH'));
+				}
+
+				for(let k = parseInt(hou); k <= 23; k++) {
+					h = h + ',' + k;
+				}
+
+				h = h.replace(/^,*|,(?=,)|,$/g, '');
+	
+				this.hour[i].hourEnd = h;
+				this.hour[i].disableEnd = false;
+			} else {
+				var h = '';
+				var hou;
+				var minute =  moment(this.hour[i].start).format('mm');
+
+				let hour1 = moment(this.hour[j].end).format('HH:mm');
+				let hou1 = moment(this.hour[j].end).format('HH');
+				let minute1 = moment(this.hour[j].end).format('mm');
+				let hour2 = moment(this.hour[i].start).format('HH::mm');
+				let hou2 = moment(this.hour[i].start).format('HH');
+				let minute2 = moment(this.hour[i].start).format('mm');
+
+				if(minute2 == '45') {
+					if(parseInt(hou1) == parseInt(hou2) && parseInt(minute1) >= parseInt(minute2)) {
+						hou2 = moment(hou2 + ':' + 0).add(1, 'hour').format('HH:mm');
+						var date = new Date();
+						var year = date.getFullYear();
+						var month = date.getMonth();
+						var day = date.getDate();
+						var d = year + '-' + month + '-' + day + ' ' + hou2;
+						this.hour[i].start = (new Date(d)).toString();
+						hou = parseInt(moment(this.hour[i].start).format('HH'));
+					} else {
+						hou2 = moment(hou2 + ':' + 0).format('HH:mm');
+						var date = new Date();
+						var year = date.getFullYear();
+						var month = date.getMonth();
+						var day = date.getDate();
+						var d = year + '-' + month + '-' + day + ' ' + hou2;
+						this.hour[i].start = (new Date(d)).toString();
+						hou = parseInt(moment(this.hour[i].start).format('HH'));
+					}
+				} else {
+					if(parseInt(hou1) == parseInt(hou2) && parseInt(minute1) >= parseInt(minute2)) {
+						hou2 = moment(this.hour[i].start).add(15, 'minutes').format('HH:mm');
+						var date = new Date();
+						var year = date.getFullYear();
+						var month = date.getMonth();
+						var day = date.getDate();
+						var d = year + '-' + month + '-' + day + ' ' + hou2;
+						this.hour[i].start = (new Date(d)).toString();
+						hou = parseInt(moment(this.hour[i].start).format('HH'));
+					} else {
+						hou2 = moment(this.hour[i].start).format('HH:mm');
+						var date = new Date();
+						var year = date.getFullYear();
+						var month = date.getMonth();
+						var day = date.getDate();
+						var d = year + '-' + month + '-' + day + ' ' + hou2;
+						this.hour[i].start = (new Date(d)).toString();
+						hou = parseInt(moment(this.hour[i].start).format('HH'));
+					}
+				}
+
+				for(let k = parseInt(hou); k <= 23; k++) {
+					h = h + ',' + k;
+				}
+
+				h = h.replace(/^,*|,(?=,)|,$/g, '');
+
+				this.hour[i].hourEnd = h;
+				this.hour[i].disableEnd = false;
+			}
+		} else if(type == 'end') {
+			let hour1 = moment(this.hour[i].start).format('HH:mm');
+			let hou1 = moment(this.hour[i].start).format('HH');
+			let minute1 = moment(this.hour[i].start).format('mm');
+			let hour2 = moment(this.hour[i].end).format('HH::mm');
+			let hou2 = moment(this.hour[i].end).format('HH');
+			let minute2 = moment(this.hour[i].end).format('mm');
+
+			if(minute1 == '45') {
+				if(parseInt(hou1) == parseInt(hou2)) {
+					if(parseInt(minute1) >= parseInt(minute2)) {
+						hou2 = moment(hou2 + ':' + 0).add(1, 'hour').format('HH:mm');
+						var date = new Date();
+						var year = date.getFullYear();
+						var month = date.getMonth();
+						var day = date.getDate();
+						var d = year + '-' + month + '-' + day + ' ' + hou2;
+						this.hour[i].end = (new Date(d)).toString();
+					}
+				}
+			} else {
+				if(parseInt(hou1) == parseInt(hou2)) {
+					if(parseInt(minute1) >= parseInt(minute2)) {
+						var difference = Math.abs(parseInt(minute1) - parseInt(minute2));
+						console.log('difference', difference);
+	
+						if(difference == 0) {
+							hou2 = moment(this.hour[i].end).add(15, 'minutes').format('HH:mm');
+							var date = new Date();
+							var year = date.getFullYear();
+							var month = date.getMonth();
+							var day = date.getDate();
+							var d = year + '-' + month + '-' + day + ' ' + hou2;
+							this.zone.run(() => {
+								this.hour[i].end = hou2;
+								this.hour[i].end = (new Date(d)).toString();
+							});
+						} else if(difference == 15) {
+							hou2 = moment(this.hour[i].end).add(30, 'minutes').format('HH:mm');
+							var date = new Date();
+							var year = date.getFullYear();
+							var month = date.getMonth();
+							var day = date.getDate();
+							var d = year + '-' + month + '-' + day + ' ' + hou2;
+							this.zone.run(() => {
+								this.hour[i].end = (new Date(d)).toString();
+							});
+						} else if(difference == 30) {
+							hou2 = moment(this.hour[i].end).add(45, 'minutes').format('HH:mm');
+							var date = new Date();
+							var year = date.getFullYear();
+							var month = date.getMonth();
+							var day = date.getDate();
+							var d = year + '-' + month + '-' + day + ' ' + hou2;
+							this.zone.run(() => {
+								this.hour[i].end = (new Date(d)).toString();
+							});
+						} else if(difference == 45) {
+							hou2 = moment(this.hour[i].end).add(60, 'minutes').format('HH:mm');
+							var date = new Date();
+							var year = date.getFullYear();
+							var month = date.getMonth();
+							var day = date.getDate();
+							var d = year + '-' + month + '-' + day + ' ' + hou2;
+							this.zone.run(() => {
+								this.hour[i].end = (new Date(d)).toString();
+							});
+						}
+					}
+				}
+			}
+		}
+
+		/* if(i == 0) {
+			if(type == 'start') {
+				
+			} else if(type == 'end') {
+
+			}
+		} else if(i == 1) {
+
+		} else if(i == 2) {
+			
+		} else if(i == 3) {
+			
+		} else if(i == 4) {
+			
+		} */
+
+		/* let start =  moment(this.start).format('HH:mm');
 		let start2 =  moment(this.start2).format('HH:mm');
 		let end =  moment(this.end).format('HH:mm');
 		let end2 =  moment(this.end2).format('HH:mm');
@@ -170,6 +375,6 @@ export class HorariosPage implements OnInit {
 			this.disabled = false;
 		} else if(this.start2 && this.end2) {
 			this.disabled = false;
-		}
+		} */
 	}
 }

@@ -91,11 +91,11 @@
               <div *ngFor="let ln of martes">
                   <div *ngIf="ln?.schedules?.length == 0 || ln?.status == false">Cerrado</div>
                   <div  *ngIf="ln.status == true">
-                  <div *ngFor="let s of ln.schedules">
-                    <div>{{s.start| date: 'H:mm'}} a {{s.end| date: 'H:mm'}}</div>
-                </div>
-                </div>
-                </div>
+                    <div *ngFor="let s of ln.schedules">
+                      <div>{{s.start| date: 'H:mm'}} a {{s.end| date: 'H:mm'}}</div>
+                    </div>
+                  </div>
+              </div>
             </ion-col>
             <ion-col class="ion-text-center bgHorarios mHorarios" (click)="openHorarios('Miercoles', miercoles)">
               Míe <br>

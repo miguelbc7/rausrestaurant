@@ -2,7 +2,7 @@
 	<ion-row class="ion-margin-top">
 		<ion-col class="">
 			<div class="ml-2 onoffswitch ion-float-right">
-				<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" (click)="statusItem()" [(ngModel)]="status" id="myonoffswitch" [checked]="status">
+				<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox ng-untouched ng-valid ng-dirty" (click)="changeStatus()" [(ngModel)]="status" id="myonoffswitch" [checked]="status">
 				<label class="onoffswitch-label" for="myonoffswitch"></label>
 			</div>
 		</ion-col>
@@ -20,7 +20,7 @@
 			<ion-row *ngFor="let a of hour; let i = index">
 				<ion-col size="5">
 					<ion-item style="width: 100px;" class="ion-float-right">
-						<ion-datetime [(ngModel)]="a.start" [ngModelOptions]="{ standalone: true }" pickerFormat="HH:mm" (ionChange)="validar()" displayFormat="HH:mm" minuteValues="0,15,30,45"></ion-datetime>
+						<ion-datetime [(ngModel)]="a.start" [ngModelOptions]="{ standalone: true }" pickerFormat="HH:mm" (ionChange)="validar(i, 'start')" displayFormat="HH:mm" hourValues="{{ a.hourStart }}" minuteValues="0,15,30,45" [disabled]="a.disableStart"></ion-datetime>
 					</ion-item>
 				</ion-col>
 				<ion-col size="1" class="ion-text-center ion-align-self-center">
@@ -28,7 +28,7 @@
 				</ion-col>
 				<ion-col size="5" class="ion-justify-content-end">
 					<ion-item style="width: 100px;">
-						<ion-datetime [(ngModel)]="a.end" [ngModelOptions]="{ standalone: true }" pickerFormat="HH:mm" (ionChange)="validar()" displayFormat="HH:mm" minuteValues="0,15,30,45"></ion-datetime>
+						<ion-datetime [(ngModel)]="a.end" [ngModelOptions]="{ standalone: true }" pickerFormat="HH:mm" (ionChange)="validar(i, 'end')" displayFormat="HH:mm" hourValues="{{ a.hourEnd }}" minuteValues="0,15,30,45" [disabled]="a.disableEnd"></ion-datetime>
 					</ion-item>
 				</ion-col>
 				<ion-col size="1" class="ion-text-center ion-align-self-center" *ngIf="a.icon">

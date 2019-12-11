@@ -43,7 +43,7 @@ export class HorarioService {
 		'Something bad happened; please try again later.');
 	};
 
-	async createItem(item, day): Promise<any> {
+	async createItem(item, day, estatus): Promise<any> {
 		await this.storage.get('_token').then ( res => {
 			this.token = res.token;
 		});
@@ -56,7 +56,7 @@ export class HorarioService {
 			id_restaurant: this.uid,
 			schedules:{
 				name: day,
-				status: true,
+				status: estatus,
 				schedules: [/* {
 					start: item.schedules[0].start,
 					end:item.schedules[0].end
@@ -122,7 +122,7 @@ export class HorarioService {
       	)
   	}
 
-	async updateItem(item, day): Promise<any>{
+	async updateItem(item, day, estatus): Promise<any>{
 		await this.storage.get('_token').then(res=>{
 			this.token = res.token;
 		});
@@ -134,6 +134,7 @@ export class HorarioService {
 		let data = {
 			id_restaurant: this.uid,
 			name: day,
+			status: estatus,
 			schedules:{
 				status: true,
 				schedules:[/*{

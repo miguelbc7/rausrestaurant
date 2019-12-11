@@ -10,7 +10,6 @@ import { LoadingService } from 'src/app/services/loading.service';
 import { Camera, CameraOptions } from '@ionic-native/Camera/ngx';
 import { ProductoguardadoPage } from '../modals/productoguardado/productoguardado.page';
 
-
 @Component({
   selector: 'app-perfil',
   templateUrl: './perfil.page.html',

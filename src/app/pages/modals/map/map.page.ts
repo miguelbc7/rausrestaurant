@@ -7,6 +7,7 @@ import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';
 import { GoogleMaps, GoogleMap, GoogleMapsEvent, Marker, GoogleMapsAnimation, MyLocation, Geocoder, GeocoderResult, Environment } from '@ionic-native/google-maps';
 import { ToastController, Platform, LoadingController } from '@ionic/angular';
+import { until } from 'protractor';
 
 declare var google;
 
@@ -94,7 +95,6 @@ export class MapPage implements OnInit {
 
 			this.map.on(GoogleMapsEvent.MAP_CLICK)
 			.subscribe((result) => {
-
 			console.log('result', result);
 
 			this.addMarker(result[0]);
@@ -115,7 +115,6 @@ export class MapPage implements OnInit {
 			animation: GoogleMapsAnimation.DROP,
 			}).then(marker =>{
 				marker.on(GoogleMapsEvent.MAP_CLICK).subscribe(() => {
-					alert('map click');
 					this.markerlatlong = marker.getPosition();
 					this.geocoderMap(this.markerlatlong);
 				});
@@ -174,9 +173,32 @@ export class MapPage implements OnInit {
 				var adminArea = '';
 			}
 
-			this.ngZone.run(() => {
-				this.address =  subThoroughfare + ' ' + thoroughfare + ' ' + locality + ' ' + subAdminArea + ' ' + adminArea;
-			});
+			if(results[0].extra) {
+				if(results[0].extra.lines) {
+					console.log('1',results[0].extra.lines);
+					results[0].extra.lines.pop();
+					var add = results[0].extra.lines;
+					console.log('2',add);
+					var x = (names) => names.filter((v,i) => names.indexOf(v) === i)
+					var unique = x(add);
+					console.log('3',unique);
+
+					var arr = unique.join(' ');
+					console.log('4',arr);
+
+					this.ngZone.run(() => {
+						this.address =  arr;
+					});
+				} else {
+					this.ngZone.run(() => {
+						this.address =  subThoroughfare + ' ' + thoroughfare + ' ' + locality + ' ' + subAdminArea + ' ' + adminArea;
+					});
+				}
+			} else {
+				this.ngZone.run(() => {
+					this.address =  subThoroughfare + ' ' + thoroughfare + ' ' + locality + ' ' + subAdminArea + ' ' + adminArea;
+				});
+			}
 		}).catch(error =>{
 			this.showToast(error.error_message);
 		})

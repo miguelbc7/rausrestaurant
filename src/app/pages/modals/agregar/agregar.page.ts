@@ -38,13 +38,17 @@ export class AgregarPage implements OnInit {
   }
 
   async openAgregarTarjeta() {
-    await this.modalCtrl.dismiss();
-    const modal = await this.modalCtrl.create({
-      component: AgregartarjetaPage,
-      cssClass: 'sizeModalAgregarTajerta',
-      backdropDismiss:false,
-    });
-    await modal.present();
+    if(this.value == '0,00' || this.value == '0') {
+      this.erroMessage = 'Debe ingresar el monto a recargar';
+    } else {
+      await this.modalCtrl.dismiss();
+      const modal = await this.modalCtrl.create({
+        component: AgregartarjetaPage,
+        cssClass: 'sizeModalAgregarTajerta',
+        backdropDismiss:false,
+      });
+      await modal.present();
+    }
   }
 
   async openConfirmarAgregar(cardID) {
