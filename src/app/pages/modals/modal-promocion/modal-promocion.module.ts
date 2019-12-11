@@ -20,7 +20,7 @@ const routes: Routes = [
     RouterModule.forChild(routes)
   ],
   declarations: [
-    ModalPromocionPage,
+    // ModalPromocionPage,
   ],
   entryComponents: [
   ]

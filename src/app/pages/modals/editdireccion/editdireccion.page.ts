@@ -1,21 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 
-
 @Component({
-  selector: 'app-editdireccion',
-  templateUrl: './editdireccion.page.html',
-  styleUrls: ['./editdireccion.page.scss'],
+	selector: 'app-editdireccion',
+	templateUrl: './editdireccion.page.html',
+	styleUrls: ['./editdireccion.page.scss'],
 })
+
 export class EditdireccionPage implements OnInit {
 
-  constructor(private modalCtrl: ModalController) { }
+  	constructor(private modalCtrl: ModalController) {}
 
-  ngOnInit() {
-  }
+  	ngOnInit() {}
 
-  async closeModal() {
-    await this.modalCtrl.dismiss();
-  }
-
+  	async closeModal() {
+    	await this.modalCtrl.dismiss();
+  	}
 }

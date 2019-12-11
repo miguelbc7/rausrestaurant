@@ -9,7 +9,7 @@ import { AgregarproductoPage } from './agregarproducto.page';
 import { SharedModule } from '../sharedmodals/shared.module';
 
 // import { ProductocreadoPage } from '../modals/productocreado/productocreado.page';
-
+import { BrMaskerModule } from 'br-mask';
 
 const routes: Routes = [
   {
@@ -25,7 +25,8 @@ const routes: Routes = [
     IonicModule,
     ReactiveFormsModule,
     SharedModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    BrMaskerModule,
   ],
   declarations: [
     AgregarproductoPage,

@@ -10,7 +10,6 @@ import { LoadingService } from 'src/app/services/loading.service';
 import { Camera, CameraOptions } from '@ionic-native/Camera/ngx';
 import { ProductoguardadoPage } from '../modals/productoguardado/productoguardado.page';
 
-
 @Component({
   selector: 'app-perfil',
   templateUrl: './perfil.page.html',
@@ -222,7 +221,8 @@ pickImage(sourceType) {
     sourceType: sourceType,
     destinationType: this.camera.DestinationType.DATA_URL,
     encodingType: this.camera.EncodingType.JPEG,
-    mediaType: this.camera.MediaType.PICTURE
+    mediaType: this.camera.MediaType.PICTURE,
+    correctOrientation: true,
   }
   this.camera.getPicture(options).then((imageData) => {
     // imageData is either a base64 encoded string or a file URI
@@ -232,16 +232,11 @@ pickImage(sourceType) {
     this.avatar = base64Image;
     console.log(this.type);
     if(this.type == 'create'){
-      this.authService.createAvatar(this.aImages).then((response) => {
-        console.log(response);
-        response.subscribe((data) => {
-          console.log(data);
-          this.storage.set('avatar',data);
-          this.getAvatar();
-          this.guardado();
-      }, err => {
-          console.error(err);
-        });
+      this.authService.createAvatar(this.aImages).then(() => {
+        // this.storage.set('avatar',data);
+        this.getAvatar();
+        this.guardado();
+        
      });
     }else{
       this.authService.updateAvatar(this.aImages).then((response) => {

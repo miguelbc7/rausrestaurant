@@ -187,8 +187,8 @@ export class AuthService {
 		)
 	}
 
-	async updateAddress(item){
-		
+	async updateAddress(item): Promise<any>{
+		console.log(item);
 		await this.storage.get('direction').then((data)=>{
 			console.log(data);
 			if(data){
@@ -196,22 +196,30 @@ export class AuthService {
 			  this.direction = data;
 			}else{
 			  console.log('no posee direction');
+			  this.direction = item;
 			}
-		  });
+		});
 
-		  let address = {
-			street: item,
-			lat: this.direction.position.lat.toString(),
-			lng: this.direction.position.lng.toString(),
-			zipcode: this.direction.postalCode,
-			city: this.direction.locality,
-			state: this.direction.adminArea,
-			country: this.direction.country,
-		  };
+		  await this.storage.get('_uid').then(res=>{
+			this.uid = res;
+		});
 
-		  console.log(address);
+		let data = {
+			uid: this.uid,
+			direction : {
+				street: item.street,
+				lat: this.direction.position.lat.toString(),
+				lng: this.direction.position.lng.toString(),
+				zipcode: this.direction.postalCode,
+				city: this.direction.locality,
+				state: this.direction.adminArea,
+				country: this.direction.country,
+			  }
+		};
 
-		return this.http.put<Restaurant>(this.url+'restaurants/update/direction', JSON.stringify(address),{
+		console.log(data);
+
+		return this.http.put<Restaurant>(this.url+'restaurants/update/direction', JSON.stringify(data),{
 			headers: new HttpHeaders({
 			'Content-Type': 'application/json',
 			'Authorization': this.token,
@@ -238,7 +246,8 @@ export class AuthService {
 	createAvatar(record) {
 		return new Promise<any>((resolve, reject) => {
 			let currentUser = firebase.auth().currentUser;
-			this.afs.collection('restaurantes').doc(currentUser.uid).collection('avatar').add(record)
+			console.log(currentUser);
+			this.afs.collection('restaurantes').doc(currentUser.uid).collection('avatar').doc('imagen').set(record)
 			.then(
 				res => resolve(res),
 				err => reject(err)

@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FidelizacionService } from 'src/app/services/fidelizacion.service';
 import { NavParams, ModalController } from '@ionic/angular';
 import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import * as moment from "moment"; 
 
 @Component({
   selector: 'app-modal-planes',
@@ -18,10 +19,14 @@ export class ModalPlanesPage implements OnInit {
   value: number;
   qtyBuy: number;
   buy: number;
+  date = new Date();
+  today = new Date().toISOString();
+  tomorrow = new Date(Date.now() + 1*24*60*60*1000).toISOString();
   status:boolean = false;
   public type = this.navParams.get('type');
   public item = this.navParams.get('data');
   public loyaltyForm: FormGroup;
+  error = '';
   validation_messages = {
     'name': [
         { type: 'required', message: 'Debe ingresar un nombre del plan.' },
@@ -100,21 +105,31 @@ export class ModalPlanesPage implements OnInit {
     record['name'] = this.name;
     record['from'] = this.from;
     record['to'] = this.to;
-    record['qtyValue'] = this.qtyValue;
-    record['value'] = this.value;
-    record['qtyBuy'] = this.qtyBuy;
-    record['buy'] = this.buy;
+    if(this.qtyValue)
+      record['qtyValue'] = this.qtyValue;
+    if(this.value)
+      record['value'] = this.value;
+    if(this.qtyBuy)
+      record['qtyBuy'] = this.qtyBuy;
+    if(this.buy)
+      record['buy'] = this.buy;
     record['status'] = this.status;
+
+    if(this.from > this.to)
+    {
+      this.error = 'La fecha inicial debe ser menor a la fecha final';
+      return false;
+    }
 
     console.log(record);
     this.fidelizacionService.create_NewItem(record).then(async resp => {
       this.name = '';
       this.from = '';
       this.to = '';
-      this.qtyValue = 0;
-      this.value = 0;
-      this.qtyBuy = 0;
-      this.buy = 0;
+      this.qtyValue = null;
+      this.value = null;
+      this.qtyBuy = null;
+      this.buy = null;
       this.status = false;
      await this.modalController.dismiss();
     })
@@ -134,13 +149,23 @@ export class ModalPlanesPage implements OnInit {
     record['name'] = this.name;
     record['from'] = this.from;
     record['to'] = this.to;
-    record['qtyValue'] = this.qtyValue;
-    record['value'] = this.value;
-    record['qtyBuy'] = this.qtyBuy;
-    record['buy'] = this.buy;
+    if(this.qtyValue)
+      record['qtyValue'] = this.qtyValue;
+    if(this.value)
+      record['value'] = this.value;
+    if(this.qtyBuy)
+      record['qtyBuy'] = this.qtyBuy;
+    if(this.buy)
+      record['buy'] = this.buy;
     record['status'] = this.status;
     console.log(record);
     console.log(recordID);
+    
+    if(this.from > this.to)
+    {
+      this.error = 'La fecha inicial debe ser menor a la fecha final';
+      return false;
+    }
     this.fidelizacionService.update_Item(recordID, record);
     // recordRow.isEdit = false;
     await this.modalController.dismiss();

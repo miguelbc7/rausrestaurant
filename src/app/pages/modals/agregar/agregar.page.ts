@@ -38,18 +38,24 @@ export class AgregarPage implements OnInit {
   }
 
   async openAgregarTarjeta() {
-    await this.modalCtrl.dismiss();
-    const modal = await this.modalCtrl.create({
-      component: AgregartarjetaPage,
-      cssClass: 'sizeModalAgregarTajerta',
-      backdropDismiss:false,
-    });
-    await modal.present();
+    if(this.value == '0,00' || this.value == '0') {
+      this.erroMessage = 'Debe ingresar el monto a recargar';
+    } else {
+      await this.modalCtrl.dismiss();
+      const modal = await this.modalCtrl.create({
+        component: AgregartarjetaPage,
+        cssClass: 'sizeModalAgregarTajerta',
+        backdropDismiss:false,
+      });
+      await modal.present();
+    }
   }
 
   async openConfirmarAgregar(cardID) {
     console.log(this.value);
-    if(this.value != '0,00'){
+    if(this.value == '0,00' || this.value == '0') {
+      this.erroMessage = 'Debe ingresar el monto a recargar';
+    } else {
       this.erroMessage = '';
       await this.modalCtrl.dismiss();
       const modal = await this.modalCtrl.create({
@@ -65,8 +71,6 @@ export class AgregarPage implements OnInit {
         this.value = null;
       });
       await modal.present();
-    }else{
-      this.erroMessage = 'Debe ingresar el monto a recargar';
     }
   }
 
@@ -87,6 +91,23 @@ export class AgregarPage implements OnInit {
 
     async closeModal() {
     await this.modalCtrl.dismiss();
+  }
+
+  decimal(event){
+    if(this.value.length == 0){
+      if(event.key == '0') {
+        event.preventDefault();
+        // this.value = '0,00';
+      }
+      // else{
+      //   this.value = '0,0'+this.value;
+      // }
+    }
+    // else if(this.value.length > 4){
+      
+    //   console.log(this.value);
+    // }
+    
   }
 
 }

@@ -1,104 +1,49 @@
 <ion-content>
-  <ion-row class="ion-margin-top">
-    <ion-col class="">
-      <div class="ml-2 onoffswitch ion-float-right">
-        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
-        <label class="onoffswitch-label" for="myonoffswitch"></label>
-      </div>
-    </ion-col>
-  </ion-row>
+	<ion-row class="ion-margin-top">
+		<ion-col class="">
+			<div class="ml-2 onoffswitch ion-float-right">
+				<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox ng-untouched ng-valid ng-dirty" (click)="changeStatus()" [(ngModel)]="status" id="myonoffswitch" [checked]="status">
+				<label class="onoffswitch-label" for="myonoffswitch"></label>
+			</div>
+		</ion-col>
+  	</ion-row>
   
     <div class="ion-margin-horizontal">
-<!--       <ion-buttons slot="primary" class="xModal">
-        <ion-button color="dark" fill="clear" (click)="closeModal()">
-          <ion-icon slot="end" name="close"></ion-icon>
-        </ion-button>
-      </ion-buttons> -->
-      <ion-text color="bluedark">
-        <h3 class="ion-text-center pr-h3 my-0">{{name}}</h3>
-      </ion-text>
+		<ion-text color="bluedark">
+			<h3 class="ion-text-center pr-h3 my-0">{{name}}</h3>
+		</ion-text>
     </div>
     <br>
-    <!-- <ion-text color="bluedark">
-      <h3 class="ion-text-center pr-h3">Horario Lunes</h3>
-    </ion-text> -->
-    <!-- <ion-item>
-        <ion-label>Desabilitar día</ion-label>
-        <ion-toggle color="bluelight" (click)="statusItem()" name="status" [(ngModel)]="status"></ion-toggle>
-      </ion-item> -->
-
-<ion-list>
-    <ion-item-sliding *ngFor="let sc of list">
-      <ion-item>
-        <ion-label>
-            {{sc.start | date: 'H:mm' }}
-                  a
-          {{sc.end | date: 'H:mm' }}
-        </ion-label>
-      </ion-item>
-      <ion-item-options>
-        <ion-item-option color="bluedark">
-          <ion-icon slot="start" (click)="edit(sc)" name="create"></ion-icon>
-        </ion-item-option>
-        <ion-item-option color="danger">
-          <ion-icon slot="start" (click)="remove(sc.id)" name="trash"></ion-icon>
-        </ion-item-option>
-      </ion-item-options>
-    </ion-item-sliding>
-</ion-list>
-
-    <!-- <ion-text color="bluedark">
-        <h3 class="ion-text-center pr-h3">{{title}}</h3>
-      </ion-text> -->
+    
     <ion-grid>
-      <form #form="ngForm" (ngSubmit)="createForm()">
-      <ion-row>
-        <ion-col size="5" >
-          <ion-item style="width: 100px;" class="ion-float-right">
-            <!-- <ion-label class="font14">Hora Inicio</ion-label> -->
-            <ion-datetime  [(ngModel)]="start" name="start" pickerFormat="HH:mm" (ionChange)="validar()" displayFormat="HH:mm" minuteValues="0,15,30,45"></ion-datetime>
-          </ion-item>
-        </ion-col>
-        <ion-col size="2" class="ion-text-center ion-align-self-center">
-          a
-        </ion-col>  
-        <ion-col size="5" class="ion-justify-content-end">
-          <ion-item style="width: 100px;">
-            <!-- <ion-label class="font14">Hora Final</ion-label> -->
-            <ion-datetime   [(ngModel)]="end" name="end" pickerFormat="HH:mm" (ionChange)="validar()" displayFormat="HH:mm" minuteValues="0,15,30,45"></ion-datetime>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-          <ion-col size="5" >
-            <ion-item style="width: 100px;" class="ion-float-right">
-              <!-- <ion-label class="font14">Hora Inicio</ion-label> -->
-              <ion-datetime  [(ngModel)]="start2" name="start2" pickerFormat="HH:mm" (ionChange)="validar()" displayFormat="HH:mm" minuteValues="0,15,30,45"></ion-datetime>
-            </ion-item>
-          </ion-col>
-          <ion-col size="2" class="ion-text-center ion-align-self-center">
-            a
-          </ion-col>
-          <ion-col size="5" class="ion-justify-content-end">
-            <ion-item style="width: 100px;">
-              <!-- <ion-label class="font14">Hora Final</ion-label> -->
-              <ion-datetime   [(ngModel)]="end2" name="end2" pickerFormat="HH:mm" (ionChange)="validar()" displayFormat="HH:mm" minuteValues="0,15,30,45"></ion-datetime>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-        <br>
-      <ion-row class="ion-justify-content-between">
-          <ion-col size="12" class="ion-text-center">
-              <ion-button type="submit"  class="font15 mx-2" color="bluedark" [disabled]="isValid">Guardar</ion-button>
-              <ion-button class="font15 btnVolver mx-2" color="white">Volver</ion-button>
-          </ion-col>
-          <label class="error-message" >{{errorMessage}}</label>
-        </ion-row>
-      </form>
+      	<form #form="ngForm" (ngSubmit)="createForm()">
+			<ion-row *ngFor="let a of hour; let i = index">
+				<ion-col size="5">
+					<ion-item style="width: 100px;" class="ion-float-right">
+						<ion-datetime [(ngModel)]="a.start" [ngModelOptions]="{ standalone: true }" pickerFormat="HH:mm" (ionChange)="validar(i, 'start')" displayFormat="HH:mm" hourValues="{{ a.hourStart }}" minuteValues="0,15,30,45" [disabled]="a.disableStart"></ion-datetime>
+					</ion-item>
+				</ion-col>
+				<ion-col size="1" class="ion-text-center ion-align-self-center">
+					a
+				</ion-col>
+				<ion-col size="5" class="ion-justify-content-end">
+					<ion-item style="width: 100px;">
+						<ion-datetime [(ngModel)]="a.end" [ngModelOptions]="{ standalone: true }" pickerFormat="HH:mm" (ionChange)="validar(i, 'end')" displayFormat="HH:mm" hourValues="{{ a.hourEnd }}" minuteValues="0,15,30,45" [disabled]="a.disableEnd"></ion-datetime>
+					</ion-item>
+				</ion-col>
+				<ion-col size="1" class="ion-text-center ion-align-self-center" *ngIf="a.icon">
+					<ion-icon name="remove" (click)="removeHour(i)"></ion-icon>
+				</ion-col>
+			</ion-row>
+			<ion-icon name="add" (click)="addNewHour()"></ion-icon>
+       		<br>
+			<ion-row class="ion-justify-content-between">
+				<ion-col size="12" class="ion-text-center">
+					<ion-button type="submit"  class="font15 mx-2" color="bluedark">Guardar</ion-button>
+					<ion-button (click)="closeModal()" class="font15 btnVolver mx-2" color="white">Volver</ion-button>
+				</ion-col>
+				<label class="error-message" >{{ errorMessage }}</label>
+			</ion-row>
+     	 </form>
     </ion-grid>
 </ion-content>
-
-
-
-
-

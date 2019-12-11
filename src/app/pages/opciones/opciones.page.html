@@ -8,7 +8,7 @@
             <div style="position: relative;">
               <p class="font16 my-0 ml-10">Balance</p>
               <p class="my-0 text-dorado alinearBalance">
-                <span [class]="fontSize" >{{decimal[0] }}</span>
+                <span [class]="fontSize" >{{decimal[0] | mask: mask }}</span>
                 <span class="font18 decimal">,{{decimal[1]? decimal[1] : 00 }}€</span>
               </p> 
             </div>

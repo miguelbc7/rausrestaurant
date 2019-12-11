@@ -30,19 +30,19 @@ export class AgregarproductoPage implements OnInit {
 	// dingredientes:any = [];
 	no_ingredientes:any = []; 
 	// dno_ingredientes:any = [];
-	nutritional_values:boolean = true;
+	nutritional_values:boolean = false;
 	fat;
 	carbohydrates;
 	protein;
 	total_calories;
 	price_with_iva;
 	iva;
-	eat_in_restaurant:boolean = true;
-	wear:boolean = true;
-	delivery:boolean = true;
-	status:boolean = true;
+	eat_in_restaurant:boolean = false;
+	wear:boolean = false;
+	delivery:boolean = false;
+	status:boolean = false;
 	type;
-	stock;
+	stock = 0;
 	errorMessage = '';
 	slideOptsOne = {
 		initialSlide: 0,
@@ -59,7 +59,7 @@ export class AgregarproductoPage implements OnInit {
 		],
 		'description': [
 			{ type: 'required', message: 'Debe ingresar una descripción.' },
-			{ type: 'minlength', message: 'Debe ser mayor de 10 caracteres.' },
+			{ type: 'minlength', message: 'Debe ser mayor de 15 caracteres.' },
 			{ type: 'maxlength', message: 'Debe ser menor de 300 caracteres.' }
 		],
 		'ingredientes': [
@@ -122,7 +122,7 @@ export class AgregarproductoPage implements OnInit {
 			description: [this.description, Validators.compose([
 				Validators.required,
 				Validators.maxLength(300),
-				Validators.minLength(10)
+				Validators.minLength(15)
 			])],
 			ingredientes: [this.ingredientes, Validators.compose([
 				// Validators.required,
@@ -158,7 +158,7 @@ export class AgregarproductoPage implements OnInit {
 			delivery: [this.delivery],
 			status: [this.status],
 			// images: [],
-			stock: ['', Validators.compose([
+			stock: [this.stock, Validators.compose([
 				Validators.required,
 			])],
       	});
@@ -248,11 +248,11 @@ export class AgregarproductoPage implements OnInit {
 		this.router.navigate(['home']);
 	}
 
-	async presentPromocion(productID:any) {
+	async presentPromocion() {
 		const modal = await this.modalCtrl.create({
 		component: ModalPromocionPage,
 		componentProps:{
-			productID: productID,
+			productID: this.productos._id?this.productos._id:null,
 		},
 		cssClass: 'sizeModalPromocion'
 		});
@@ -298,6 +298,9 @@ export class AgregarproductoPage implements OnInit {
 			
 
 		}
+		let float = this.price_with_iva.split('.').join('');
+		let number = float.split(',').join('.');
+		values.price_with_iva = number;
 		values.fat = values.fat?values.fat:0;
 		values.carbohydrates = values.carbohydrates?values.carbohydrates:0;
 		values.total_calories = values.total_calories?values.total_calories:0;
@@ -306,40 +309,46 @@ export class AgregarproductoPage implements OnInit {
 		console.log('values', values);
 		console.log('type', this.type);
 		console.log(this.productos);
-		if(this.aImages.length > 0){
-			if(this.type == 'create') {
-				console.log('type', this.type);
-				this.productosService.createItem(values).then((response) => {
-				response.subscribe( (data) => {
+		
+		if(this.type == 'create') {
+			console.log('type', this.type);
+			this.productosService.createItem(values).then((response) => {
+			response.subscribe( (data) => {
+				if(this.aImages.length > 0)
 					this.uploadImage(data._id);
-				}, err => {
-				console.log(err);
-				this.loading.hideLoader();this.loading.hideLoader();
-				});
-				
-				// this.router.navigate(['list']);
-				});
-			} else if(this.type == 'edit') {
-				console.log(this.type);
-				this.productosService.updateItem(this.productos._id,values).then((response) => {
-					response.subscribe( () => {
-					 this.uploadImage(this.productos._id);
-				}, err => {
-				console.log(err);
-				this.loading.hideLoader();
-				});
-				
-				// this.router.navigate(['list']);
-				}).catch(error=>{console.error(error)});
-			}
-		}else{
-			this.errorMessage ="Debe adjuntar por lo menos una imagen.";
+				this.productoCreado();
+				this.router.navigate(['home']);
+			}, err => {
+			console.log(err);
+			this.loading.hideLoader();this.loading.hideLoader();
+			});
+			
+			// this.router.navigate(['list']);
+			});
+		} else if(this.type == 'edit') {
+			console.log(this.type);
+			this.productosService.updateItem(this.productos._id,values).then((response) => {
+				response.subscribe( () => {
+				if(this.aImages.length > 0)
+					this.uploadImage(this.productos._id);
+				this.productoGuardado();
+				this.router.navigate(['home']);
+			}, err => {
+			console.log(err);
+			this.loading.hideLoader();
+			});
+			
+			// this.router.navigate(['list']);
+			}).catch(error=>{console.error(error)});
 		}
+		
 	}
 
 	uploadImage(id){
 		console.log('uploadimage');
 
+		this.storage.set('tempImagesProduct', { id: id, images : this.aImages });
+		
 		this.productosService.uploadItem(id, this.aImages).then((response) => {
 			response.subscribe(async (data) => {
 			//  this.productos = data.products;
@@ -347,10 +356,7 @@ export class AgregarproductoPage implements OnInit {
 			console.log(data);
 			// await this.presentPromocion(id);
 			this.loading.hideLoader();
-			if(this.type == 'create')
-				this.productoCreado();
-			else
-				this.productoGuardado();
+			
 			await this.router.navigate(['home']);
 			
 		}, err => {
@@ -397,11 +403,12 @@ export class AgregarproductoPage implements OnInit {
 
 	pickImage(sourceType) {
 		const options: CameraOptions = {
-			quality: 100,
+			quality: 75,
 			sourceType: sourceType,
 			destinationType: this.camera.DestinationType.DATA_URL,
 			encodingType: this.camera.EncodingType.JPEG,
-			mediaType: this.camera.MediaType.PICTURE
+			mediaType: this.camera.MediaType.PICTURE,
+			correctOrientation: true,
 		}
 		this.camera.getPicture(options).then((imageData) => {
 			// imageData is either a base64 encoded string or a file URI
@@ -427,4 +434,21 @@ export class AgregarproductoPage implements OnInit {
 		if(this.stock > 0)
 			this.stock=this.stock- 1;
 	}
+
+	decimal(event){
+		if(this.price_with_iva.length == 0){
+		  if(event.key == '0') {
+			event.preventDefault();
+			// this.value = '0,00';
+		  }
+		  // else{
+		  //   this.value = '0,0'+this.value;
+		  // }
+		}
+		// else if(this.value.length > 4){
+		  
+		//   console.log(this.value);
+		// }
+		
+	  }
 }

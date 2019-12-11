@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, NavParams } from '@ionic/angular';
-import { BuscarfotoPage} from '../buscarfoto/buscarfoto.page';
 import { Storage } from '@ionic/storage';
 import { Camera, CameraOptions } from '@ionic-native/Camera/ngx';
 
@@ -42,7 +41,8 @@ export class AddsliderPage implements OnInit {
       sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE
+      mediaType: this.camera.MediaType.PICTURE,
+      correctOrientation: true,
     }
     this.camera.getPicture(options).then((imageData) => {
       // imageData is either a base64 encoded string or a file URI

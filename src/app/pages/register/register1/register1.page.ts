@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { Validators, FormBuilder, FormGroup, FormControl} from '@angular/forms';
-import { ModalController, ToastController} from '@ionic/angular';
+import { ModalController, ToastController, Platform} from '@ionic/angular';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
 import { Storage } from '@ionic/storage';
+import { Location } from "@angular/common";
 
 // import { MapPage } from '../../modals/map/map.page';
 import {
@@ -40,9 +41,8 @@ export class Register1Page implements OnInit {
   errorMessage:string = "";
   keyboard = false;
   tempCat;
-  address = '';
+  address;
   direction;
-
 
   constructor(
     private modalCtrl: ModalController,
@@ -52,7 +52,10 @@ export class Register1Page implements OnInit {
     private storage: Storage,
     private toastCtrl: ToastController,
     private androidPermissions: AndroidPermissions,
-    private locationAccuracy: LocationAccuracy
+    private locationAccuracy: LocationAccuracy,
+    readonly ngZone: NgZone,
+    private platform: Platform,
+    private location: Location
     ) {
 
     this.register1 = formBuilder.group({
@@ -168,19 +171,19 @@ export class Register1Page implements OnInit {
   async onSubmit(values){
    await this.storage.set('user', values);
 
-   if(this.direction){
-     values.direction = {
-       street: values.address,
-       lat: this.direction.position.lat.toString(),
-       lng: this.direction.position.lng.toString(),
-       zipcode: this.direction.postalCode,
-       city: this.direction.locality,
-       state: this.direction.adminArea,
-       country: this.direction.country,
-     };
-   }else{
-     this.errorMessage = "";
-   }
+   values.direction = {
+     street: values.address,
+     lat: this.direction.position?this.direction.position.lat.toString():'40.000001',
+     lng: this.direction.position?this.direction.position.lng.toString(): '-49.12311122211',
+     zipcode: this.direction.postalCode?this.direction.postalCode:'33150',
+     city: this.direction.locality?this.direction.locality:'barcelona',
+     state: this.direction.adminArea?this.direction.adminArea:'barcelona',
+     country: this.direction.country?this.direction.country:'España',
+   };
+  //  if(this.direction){
+  //  }else{
+  //    this.errorMessage = "";
+  //  }
 
     console.log(values);
 
@@ -214,18 +217,29 @@ export class Register1Page implements OnInit {
     );
   }
 
+  ionViewWillEnter(){
+    this.ngOnInit();
+  }
+
   async ngOnInit() {
 
     this.checkGPSPermission();
+
+    this.platform.backButton.subscribeWithPriority(1, () => {
+      this.router.navigate(["/login"]);
+    });
     
-    await this.storage.get('direction').then((data)=>{
-      console.log(data);
+    await this.storage.get('direction').then( data => {
+      console.log('direction data', data);
       if(data){
+        console.log('a');
         data.extra.lines.pop();
         this.direction = data;
         this.address = data.street;
+        console.log('address1', this.address);
         // this.storage.remove('direction');
       }else{
+        console.log('b');
         this.myLocation();
       }
     });
@@ -284,8 +298,7 @@ export class Register1Page implements OnInit {
   }
 
   getMap() {
-    console.log(this.address);
-    this.storage.set('address', this.address);
+    /* this.storage.set('address', this.address); */
     localStorage.setItem('url','register');
     this.router.navigate(['map']);
   // const modal = await this.modalCtrl.create({
@@ -312,6 +325,7 @@ myLocation(){
     this.direction = results[0];
     this.direction.extra.lines.pop();
     this.address = this.direction.extra.lines.join(', ');
+    console.log('address2', this.address);
   }).catch(error =>{
     console.error(error);
     this.showToast(error.error_message);
@@ -336,7 +350,7 @@ checkGPSPermission() {
       if (result.hasPermission) {
 
         //If having permission show 'Turn On GPS' dialogue
-        this.askToTurnOnGPS();
+        /* this.askToTurnOnGPS(); */
       } else {
 
         //If not having permission ask for permission

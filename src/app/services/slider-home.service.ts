@@ -30,7 +30,9 @@ export class SliderHomeService {
           this.snapshotChangesSubscription = this.afs.collection('restaurantes').doc(currentUser.uid).collection('slider').snapshotChanges();
           resolve(this.snapshotChangesSubscription);
         }
-      })
+      }, 
+      err => reject(err)
+      )
     })
   }
 

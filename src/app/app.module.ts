@@ -12,8 +12,6 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { environment } from 'src/environments/environment';
 import { AuthService } from './services/auth.service';
-import { AngularFireAuthModule } from '@angular/fire/auth';
-import * as firebase from 'firebase';
 import { HttpClientModule } from '@angular/common/http';
 import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
 
@@ -33,15 +31,19 @@ import { File } from '@ionic-native/File/ngx';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { FilePath } from '@ionic-native/file-path/ngx'
 
+import * as firebase from 'firebase';
 import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
 import { LoadingService } from './services/loading.service';
 
 // import { Welcome1Page } from './pages/welcome1/welcome1.page';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';
-import { BrMaskerModule } from 'br-mask';
+import {NgxMaskIonicModule} from 'ngx-mask-ionic';
+import { GoogleMaps } from '@ionic-native/google-maps';
 
 @NgModule({
   declarations: [
@@ -72,7 +74,8 @@ import { BrMaskerModule } from 'br-mask';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireDatabaseModule,
-    BrMaskerModule
+    AngularFireStorageModule,
+    NgxMaskIonicModule.forRoot(),
   ],
   providers: [
     StatusBar,
@@ -87,6 +90,7 @@ import { BrMaskerModule } from 'br-mask';
     LoadingService,
     AndroidPermissions,
     LocationAccuracy,
+    GoogleMaps,
   
   ],
   bootstrap: [AppComponent]
