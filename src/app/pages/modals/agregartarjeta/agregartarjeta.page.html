@@ -1,4 +1,4 @@
-<ion-content>
+<ion-content class="minHeightAdd">
   	<br>
 	<form class="ion-padding-horizontal" [formGroup]="cardForm">
 		<ion-row>
@@ -90,10 +90,7 @@
 
 		<label>{{errorMessage}}</label>
 	</form>
-</ion-content>
-
-<ion-footer class="ion-no-border" no-border>
-	<ion-toolbar>
+	<ion-toolbar class="alwaysBottom">
 		<ion-row class=" ion-no-padding">
 			<ion-col size="6" class="ion-text-center">
 				<ion-button class="font15" color="bluedark" [disabled]="!cardForm.valid" (click)="openAgregarSaldo()">Guardar</ion-button>
@@ -103,4 +100,8 @@
 			</ion-col>
 		</ion-row>
 	</ion-toolbar>
-</ion-footer>
+</ion-content>
+
+<!-- <ion-footer class="ion-no-border" no-border>
+	
+</ion-footer> -->
