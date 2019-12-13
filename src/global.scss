@@ -26,9 +26,9 @@
 @import "~@ionic/angular/css/flex-utils.css";
 
 
-.input-cover {
-  position: static;
-}
+// .input-cover {
+//   position: static;
+// }
 
 .error-message
 {
@@ -222,6 +222,16 @@
     border-radius: 0px !important;
     border: 1px solid #ccc;
 }
+.customCard2 {
+    box-shadow: none !important;
+    border-radius: 0px !important;
+    border-top:0px;
+    border-left:0px;
+    border-right: 0px;
+    max-height: 170px;
+    overflow-y: auto;
+    border-bottom:1px solid #ccc;
+}
 
 .card-content-md {
     padding-left: 5px;
@@ -329,7 +339,7 @@
 
 .iconEditBanner {
     position: relative;
-    left: 1px;
+    left: 0px;
     right: 1px;
     bottom: 1px;
     margin:auto;
@@ -523,8 +533,17 @@ ion-datetime {
     margin-right: 0;
     margin-top: 0px;
     margin-bottom: -5px;
-    padding-bottom: 7px;
+    padding-bottom: 0px;
 }
+
+// .label-floating.sc-ion-label-md-h,
+// .label-stacked.sc-ion-label-md-h {
+//     margin-left: 0;
+//     margin-right: 0;
+//     margin-top: 0px;
+//     margin-bottom: -5px;
+//     padding-bottom: 7px;
+// }
 
 .itemSeparado {
     padding-bottom: 0px !important;

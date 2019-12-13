@@ -102,6 +102,10 @@ ion-content.bgSlide{
     --background: url('/assets/img/fondoslid.jpg') no-repeat center center / cover;
 }
 
+.paddingBody {
+    padding-bottom: 420px !important;
+}
+
 // IPAD
 
 @media (min-width: 768px) and (max-width: 1024px) {

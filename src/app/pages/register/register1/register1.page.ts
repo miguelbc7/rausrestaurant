@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
 import { Storage } from '@ionic/storage';
 import { Location } from "@angular/common";
+import { Keyboard } from '@ionic-native/keyboard/ngx';
+
 
 // import { MapPage } from '../../modals/map/map.page';
 import {
@@ -39,7 +41,7 @@ export class Register1Page implements OnInit {
   // ,{name:'#Viajes Hoteles'} , {name:'#Alimentos'}, {name:'#Transporte'}  ];
   categories;
   errorMessage:string = "";
-  keyboard = false;
+  keyboardHide = "";
   tempCat;
   address;
   direction;
@@ -55,8 +57,17 @@ export class Register1Page implements OnInit {
     private locationAccuracy: LocationAccuracy,
     readonly ngZone: NgZone,
     private platform: Platform,
-    private location: Location
+    private location: Location,
+    private keyboard: Keyboard,
     ) {
+
+    this.keyboard.onKeyboardWillShow().subscribe(()=>{
+      this.keyboardHide = "paddingBody";
+    })
+
+    this.keyboard.onKeyboardWillHide().subscribe(()=>{
+      this.keyboardHide = "";
+    })
 
     this.register1 = formBuilder.group({
       business_name: ['', Validators.compose([
@@ -289,13 +300,13 @@ export class Register1Page implements OnInit {
     }
   }
 
-  textFocus(){
-    this.keyboard = true;
-  }
+  // textFocus(){
+  //   this.keyboard = true;
+  // }
 
-  textBlur(){
-    this.keyboard = false;
-  }
+  // textBlur(){
+  //   this.keyboard = false;
+  // }
 
   getMap() {
     /* this.storage.set('address', this.address); */

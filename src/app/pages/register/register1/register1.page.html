@@ -1,4 +1,4 @@
-<ion-content class="bgSlide">
+<ion-content class="bgSlide paddingBody">
     <div class="ion-text-center boxLogo">
         <img class="logoImg" src="assets/img/logo-raus.png" alt="logotipo">
         <!-- <p class="blue-dark">...the way you like</p> -->
@@ -144,9 +144,9 @@
           [minimumTextLength]="0"
         >
       </tag-input-dropdown>
-          <!-- <ng-template let-item="item" let-index="index">
+          <ng-template let-item="item" let-index="index">
             {{item.display}}
-        </ng-template> -->
+        </ng-template>
       </tag-input>
       </ion-item>
     </div>
@@ -159,10 +159,13 @@
     <label class="error-message" >{{errorMessage}}</label>
   </div>
   </form>
-  <ion-row>
-    <ion-col size="12" [hidden]="keyboard" >
+ <!--  <div [class]="keyboardHide">
+    
+  </div> -->
+<!--   <ion-row>
+    <ion-col size="12" [hidden]="keyboardHide" >
       <div class="keyboard-height">
       </div>
     </ion-col>
-  </ion-row>
+  </ion-row> -->
 </ion-content>

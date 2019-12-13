@@ -28,6 +28,10 @@ const routes: Routes = [
     path: 'showcase',
     loadChildren: () => import('./pages/showcase/showcase.module').then( m => m.ShowcasePageModule)
   },
+  {
+    path: 'notificaciones',
+    loadChildren: () => import('./pages/notificaciones/notificaciones.module').then( m => m.NotificacionesPageModule)
+  },
 
 
 

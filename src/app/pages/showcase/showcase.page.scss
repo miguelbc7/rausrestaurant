@@ -1,8 +1,15 @@
 .mg-top{
 	margin-top: -20px;
 }
-
-
+.addPrdocuto{
+    font-size: 110pt;
+}
+.fontIconosMenu {
+    font-size: 50pt;
+}
+.margin-rt{
+	margin-top: 15pt;
+}
 .addPhotoProducto {
     position: absolute;
     left: 50%;
@@ -35,4 +42,71 @@ ion-slide.changeStyle img {
     z-index: 2;
     width: 100%;
 }
+.boxShowcase1{
+	border: 1px solid #999;
+	margin-top: 10px;
+    height: 120px;
+}
+.textPshowcase1{
+    position: absolute;
+    left: 50%;
+    top: 30%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    width: 100%;
+}
+.addPhotoProductoshowcase1{
+    position: absolute;
+    left: 50%;
+    top: 17%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    border: 3px solid #fff;
+    padding: 2px;
+    border-radius: 30px;
+    z-index: 2;
+}
+.addPrdocuto1{
+    font-size:60pt;
+}
+.addPhotoProductoshowcase2{
+    position: absolute;
+    left: 50%;
+    top: 63%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    border: 3px solid #fff;
+    padding: 2px;
+    border-radius: 30px;
+    z-index: 2;
+}
+.addPrdocuto2{
+    font-size:60pt;
+}
+.textPshowcase2{
+    position: absolute;
+    left: 50%;
+    top: 75%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    width: 100%;
+}
 
+.boxShowcase2{
+	border: 1px solid #999;
+    height: 120px;
+    margin-top: 50px;
+}
+.button-programacion{
+	background-color: #a0a9c0 !important;
+	color: #fff;
+	margin-top: 24pt;
+}
+.button-enviar{
+	width: 100px;
+	background-color: #a0a9c0 !important;
+	color: #fff;
+	margin-top: 24pt;
+}

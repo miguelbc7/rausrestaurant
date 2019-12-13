@@ -1,34 +1,84 @@
 <ion-content>
- <ion-icon class="backHeader ion-text-center" src="assets/img/icon/back.svg" routerLink="/opciones"></ion-icon>
-  <ion-row>
-    <ion-col class="ion-text-center" size="12">
-      <p class="my-0">
-        <ion-icon class="iconHeader" src="assets/img/icon/menu/showcaseazul.svg"></ion-icon>
-      </p>
-      <p class="titleHeader mg-top blue-dark2 my-0">Showcase</p>
-    </ion-col>
-  </ion-row>
-  <ion-row class="my-0">
-        	<ion-col class="ion-no-padding">
-          		<div class="boxBanner">
-              		<ion-slides [options]="slideOptsOne">
-                		<ion-slide class="changeStyle" *ngFor="let img of aImages; let i = index">
-                  			<img class="imgBanner" src="{{img.img}}"/>
-                  			<div class="divEdit" color="bluelight">
-                    			<ion-icon class="iconEditBanner" color="white" src="assets/img/icon/papelera.svg" name="create" (click)="deleteSlider(i)"></ion-icon>
-                 			</div>
-                		</ion-slide>
-						<ion-slide class="changeStyle">
-							<div class="divWhite borderGris"></div>
-							<div class="addPhotoProducto" color="">
-								<ion-icon class="addPrdocuto" color="bluedark" src="assets/img/icon/producto/addAzulProducto.svg" (click)="selectImage()"></ion-icon>
+	<ion-icon class="backHeader ion-text-center" src="assets/img/icon/back.svg" routerLink="/opciones"></ion-icon>
+	<ion-row>
+		<ion-col class="ion-text-center" size="12">
+			<p class="my-0">
+				<ion-icon class="iconHeader" src="assets/img/icon/menu/showcaseazul.svg"></ion-icon>
+			</p>
+			<p class="titleHeader mg-top blue-dark2 my-0">Showcase</p>
+		</ion-col>
+	</ion-row>
+	<ion-row class="margin-rt">
+		<ion-col class="col-12 ion-text-center">
+			<ion-input  class="font14" placeholder="Escribe aquí el titulo"></ion-input>
+		</ion-col>
+	</ion-row>
+	<ion-row class="my-0">
+		<ion-col class="ion-no-padding">
+			<div class="boxBanner">
+				<ion-slides [options]="slideOptsOne">
+					<ion-slide class="changeStyle" *ngFor="let img of aImages; let i = index">
+						<img class="imgBanner" src="{{img.img}}"/>
+						<div class="divEdit" color="bluelight">
+							<ion-icon class="iconEditBanner" color="white" src="assets/img/icon/papelera.svg" name="create" (click)="deleteSlider(i)"></ion-icon>
+						</div>
+					</ion-slide>
+					<ion-slide class="changeStyle">
+						<div class="divWhite borderGris"></div>
+						<div class="addPhotoProducto" color="">
+							<ion-icon class="addPrdocuto" color="bluedark" src="assets/img/icon/producto/addAzulProducto.svg" (click)="selectImage()"></ion-icon>
+						</div>
+						<div class="textP">
+							<p class="ion-text-center my-0 font14">Agregar imagenes al carrusel</p>
+						</div>
+					</ion-slide>
+				</ion-slides>          
+			</div>
+		</ion-col>
+	</ion-row>
+	<ion-row>
+		<ion-col class="col-12 ion-text-center">
+			<ion-input  class="font14" placeholder="Subtitulo"></ion-input>
+		</ion-col>
+	</ion-row>
+	<ion-row>
+		<ion-col size="7">
+			<ion-item class="px-0 itemNoPadding">
+				<ion-textarea   class="font11 ion-no-padding textareaCustom" rows="5" cols="20" placeholder="Texto 1
+No te dejes engañar por su tamaño, son muy sabrosos y versátiles. Añádelos a tus ensaladas o como complemento"></ion-textarea>
+			</ion-item>
+			<ion-item class="px-0 itemNoPadding">
+				<ion-textarea   class="font11" rows="5" cols="20" placeholder="Texto 2
+No te dejes engañar por su tamaño, son muy sabrosos y versátiles. Añádelos a tus ensaladas o como complemento"></ion-textarea>
+			</ion-item>
+			<ion-item class="px-0 itemNoPadding">
+				<ion-textarea   class="font11" rows="5" cols="20"  placeholder="Texto 2
+No te dejes engañar por su tamaño, son muy sabrososy versátiles. Añádelos a tusensaladas o como complemento"></ion-textarea>
+			</ion-item>
+		</ion-col>
+		<ion-col size="5">
+			<div class="boxShowcase1">
+				<div class="addPhotoProductoshowcase1" color="">
+					<ion-icon class="addPrdocuto1" color="bluedark" src="assets/img/icon/producto/addAzulProducto.svg" (click)="selectImage()"></ion-icon>
+				</div>
+				<div class="textPshowcase1">
+					<p class="ion-text-center my-0 font10">Agrega otra imagen</p>
+				</div>
+			</div>
+			<div class="boxShowcase2">
+							<div class="addPhotoProductoshowcase2" color="">
+								<ion-icon class="addPrdocuto2" color="bluedark" src="assets/img/icon/producto/addAzulProducto.svg" (click)="selectImage()"></ion-icon>
 							</div>
-							<div class="textP">
-								<p class="ion-text-center my-0 font14">Agregar imagenes al carrusel</p>
+							<div class="textPshowcase2">
+								<p class="ion-text-center my-0 font10">Agrega otra imagen</p>
 							</div>
-						</ion-slide>
-               		</ion-slides>          
-          		</div>
-        	</ion-col>
-    	</ion-row>
+			</div>    
+			<ion-button class="font12 button-programacion" color="programacion">Programación</ion-button>
+		</ion-col>
+	</ion-row>
+	<ion-row>
+		<ion-col class="col-12 ion-text-center">
+			<ion-button class="font12 button-enviar" color="enviar">Enviar</ion-button>
+		</ion-col>
+	</ion-row>
 </ion-content>

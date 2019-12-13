@@ -100,8 +100,13 @@
   --ion-color-bluedark-contrast-rgb: 255,255,255;
   --ion-color-bluedark-shade: #596c85;
   --ion-color-bluedark-tint: #7488a1;
-
-  
+// Enviar
+--ion-color-enviar: #4e5d6a;
+  --ion-color-enviar-rgb: 78,93,106;
+  --ion-color-enviar-contrast: #ffffff;
+  --ion-color-enviar-contrast-rgb: 255,255,255;
+  --ion-color-enviar-shade: #45525d;
+  --ion-color-enviar-tint: #606d79;
   // blue dark 2
   --ion-color-bluewelcome: #4e5d6a;
   --ion-color-bluewelcome-rgb: 78,93,106;
@@ -109,7 +114,13 @@
   --ion-color-bluewelcome-contrast-rgb: 255,255,255;
   --ion-color-bluewelcome-shade: #45525d;
   --ion-color-bluewelcome-tint: #606d79;
-
+// Programacion
+ --ion-color-programacion: #a0a9c0;
+  --ion-color-programacion-rgb: 78,93,106;
+  --ion-color-programacion-contrast: #ffffff;
+  --ion-color-programacion-contrast-rgb: 255,255,255;
+  --ion-color-programacion-shade: #45525d;
+  --ion-color-programacion-tint: #606d79;
 // yellowpromo
     --ion-color-yellowpromo: #e6a430;
     --ion-color-yellowpromo-rgb: 230,164,48;
@@ -187,8 +198,22 @@
   --ion-color-shade: var(--ion-color-white-shade);
   --ion-color-tint: var(--ion-color-white-tint);
 }
-
-
+.ion-color-programacion{
+  --ion-color-base: var(--ion-color-programacion);
+  --ion-color-base-rgb: var(--ion-color-programacion-rgb);
+  --ion-color-contrast: var(--ion-color-programacion-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-programacion-contrast-rgb);
+  --ion-color-shade: var(--ion-color-programacion-shade);
+  --ion-color-tint: var(--ion-color-programacion-tint);
+}
+.ion-color-enviar{
+  --ion-color-base: var(--ion-color-enviar);
+  --ion-color-base-rgb: var(--ion-color-enviar-rgb);
+  --ion-color-contrast: var(--ion-color-enviar-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-enviar-contrast-rgb);
+  --ion-color-shade: var(--ion-color-enviar-shade);
+  --ion-color-tint: var(--ion-color-enviar-tint);
+}
 .ion-color-bluewelcome {
   --ion-color-base: var(--ion-color-bluewelcome);
   --ion-color-base-rgb: var(--ion-color-bluewelcome-rgb);
