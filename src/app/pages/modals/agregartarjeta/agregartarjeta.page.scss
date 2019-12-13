@@ -1,3 +1,9 @@
+
+.minHeightAdd{
+	height: 100%;
+	overflow-Y: auto;
+}
+
 .mtInputFecha {
 	margin-top: 20px;
 	--padding-bottom:-5px;
@@ -5,4 +11,9 @@
 }
 .select-space{
 	max-width: 100% !important;
+}
+
+.alwaysBottom{
+	position: absolute;
+	bottom: 10px;
 }

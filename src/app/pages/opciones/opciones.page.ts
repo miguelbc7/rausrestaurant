@@ -3,6 +3,7 @@ import { ModalController } from '@ionic/angular';
 import { AgregarPage } from '../modals/agregar/agregar.page';
 import { Router } from '@angular/router';
 
+import { ShowcasePage } from '../showcase/showcase.page';
 import { AgregarconfirmarPage } from '../modals/agregarconfirmar/agregarconfirmar.page';
 import { CierrePage } from '../cierre/cierre.page';
 // import { DineromodalPage } from '../modals/dineromodal/dineromodal.page';
@@ -143,7 +144,7 @@ export class OpcionesPage implements OnInit {
         break;
 
         case (7):
-          // this.router.navigate(['/']);
+          this.router.navigate(['/showcase']);
         break;
         
       case (8):

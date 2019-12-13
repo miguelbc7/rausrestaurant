@@ -1,3 +1,12 @@
+
+.minHeight{
+    height: 100vh;
+    min-height: 520px;
+    display: flex;
+    overflow-y: auto;
+    flex-direction: column;
+}
+
 .logoImg {
     width: 60%;
     height: auto;
@@ -33,6 +42,13 @@
 
 .mb-0 {
     margin-bottom: 0px;
+}
+
+.footerBottom{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
 
 // IPAD

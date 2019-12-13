@@ -16,7 +16,7 @@
     		<ion-col class="ion-justify-center ion-align-self-center ion-text-center">
             	<!-- <ion-icon class="font20" name="megaphone" (click)="presentPromocion()"></ion-icon> -->
             	<ion-icon  class="promo-icon" src="assets/img/icon/parlantepromo.svg" (click)="presentPromocion()"></ion-icon>
-            	<div class="font8 promo-mg">Promoción</div>  
+            	<div class="font8 promo-mg">Promocionar</div>  
        		</ion-col>
       	</ion-row>
       	<ion-row>
@@ -102,7 +102,7 @@
 					</ion-row>
 					<ion-row [hidden]="!nutritional_values">
 						<ion-col size="9" class="ion-align-self-center">
-							<p class="my-0 font10">Proteínas:</p>
+							<p class="my-0 font10">Proteína:</p>
 							<!-- <span>Exento</span> -->
 						</ion-col>
 						<ion-col size="3" class="ion-align-self-center">
@@ -137,8 +137,8 @@
 							Precio con Iva
 						</p>
 						<p class="my-0 boxP"> 
-							<!-- <span class="font40">10</span> <span class="font12 decimal">,50€</span> -->
-							<ion-input class="intest" aria-placeholder="10,50" type="tel" (keypress)="decimal($event)" [brmasker]="{money: true, thousand: '.',  decimalCaracter: ',', decimal: '2'}" formControlName="price_with_iva" [(ngModel)]="price_with_iva"> </ion-input> 
+							<span class="font40" (click)="hide()" [hidden]="!hideMe">{{decimals.entero}}</span> <span class="font12 decimal" (click)="hide()" [hidden]="!hideMe">,{{decimals.decimal}}€</span>
+							<ion-input class="intest"  (focusout)="show2()" [hidden]="hideMe" aria-placeholder="10,50" type="tel" (keypress)="decimal($event)" [brmasker]="{money: true, thousand: '.',  decimalCaracter: ',', decimal: '2'}" formControlName="price_with_iva" [(ngModel)]="price_with_iva"> </ion-input> 
 						</p>
 					</ion-text>
 				</ion-item>
@@ -154,8 +154,13 @@
 						</ion-col>
 					</ion-row>
 					<ion-row>
+						<ion-col size="12" class="">
+							<span>Iva</span>
+						</ion-col>
+					</ion-row>
+					<ion-row>
 						<ion-col size="8" class="ion-align-self-center">
-							<span>Iva 4%</span>
+							<span>4%</span>
 						</ion-col>
 						<ion-col size="4">
 							<input type="radio" class="radio1" value="4" formControlName="iva" name="iva" [(ngModel)]="iva" [checked]="iva == 4"  />
@@ -163,7 +168,7 @@
 					</ion-row>
 					<ion-row>
 						<ion-col size="8" class="ion-align-self-center">
-							<span>Iva 10%</span>
+							<span>10%</span>
 						</ion-col>
 						<ion-col size="4">
 							<input type="radio" class="radio1" value="10" formControlName="iva" name="iva" [(ngModel)]="iva" [checked]="iva == 10" />
@@ -171,7 +176,7 @@
 					</ion-row>
 					<ion-row>
 						<ion-col size="8" class="ion-align-self-center">
-							<span>Iva 21%</span>
+							<span>21%</span>
 						</ion-col>
 						<ion-col size="4">
 							<input type="radio" class="radio1" value="21" formControlName="iva" name="iva" [(ngModel)]="iva" [checked]="iva == 21" />

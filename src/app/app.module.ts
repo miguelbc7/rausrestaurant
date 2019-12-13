@@ -44,6 +44,7 @@ import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';
 import {NgxMaskIonicModule} from 'ngx-mask-ionic';
 import { GoogleMaps } from '@ionic-native/google-maps';
+import { Keyboard } from '@ionic-native/keyboard/ngx';
 
 @NgModule({
   declarations: [
@@ -91,6 +92,7 @@ import { GoogleMaps } from '@ionic-native/google-maps';
     AndroidPermissions,
     LocationAccuracy,
     GoogleMaps,
+    Keyboard,
   
   ],
   bootstrap: [AppComponent]

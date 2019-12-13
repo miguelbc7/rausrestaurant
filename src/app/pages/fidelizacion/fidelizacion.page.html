@@ -5,7 +5,7 @@
       <p class="my-0">
         <ion-icon class="iconHeader2" src="assets/img/icon/menu/fidelizacion.svg"></ion-icon>
       </p>
-      <p class="titleHeader blue-dark2 my-0">Fidelización</p>
+      <p class="titleHeader upTitle blue-dark2 my-0">Fidelización</p>
     </ion-col>
   </ion-row>
   <ion-button class="blue-dark2 font12" fill="clear" (click)="createplan()"><ion-icon name="add"></ion-icon>Crear plan de fidelización
@@ -22,8 +22,8 @@
           <ion-label class="font12 font-color label-mg" (click)="EditRecord(d.payload.doc.data(),d.payload.doc.id )">
             {{d.payload.doc.data().name}}
           </ion-label>
-          <ion-icon name="create" slot="end" (click)="EditRecord(d.payload.doc.data(),d.payload.doc.id)"></ion-icon>
-          <ion-icon name="trash" slot="end" (click)="RemoveRecord(d.payload.doc.id)"></ion-icon>
+          <ion-icon class="font25" src="assets/img/icon/lapiz.svg" slot="end" (click)="EditRecord(d.payload.doc.data(),d.payload.doc.id)"></ion-icon>
+          <ion-icon class="font25" src="assets/img/icon/papelera.svg" slot="end" (click)="RemoveRecord(d.payload.doc.id)"></ion-icon>
         </ion-item>
       </app-expandable>
     </ion-card-content>

@@ -1,0 +1,34 @@
+<ion-content>
+ <ion-icon class="backHeader ion-text-center" src="assets/img/icon/back.svg" routerLink="/opciones"></ion-icon>
+  <ion-row>
+    <ion-col class="ion-text-center" size="12">
+      <p class="my-0">
+        <ion-icon class="iconHeader" src="assets/img/icon/menu/showcaseazul.svg"></ion-icon>
+      </p>
+      <p class="titleHeader mg-top blue-dark2 my-0">Showcase</p>
+    </ion-col>
+  </ion-row>
+  <ion-row class="my-0">
+        	<ion-col class="ion-no-padding">
+          		<div class="boxBanner">
+              		<ion-slides [options]="slideOptsOne">
+                		<ion-slide class="changeStyle" *ngFor="let img of aImages; let i = index">
+                  			<img class="imgBanner" src="{{img.img}}"/>
+                  			<div class="divEdit" color="bluelight">
+                    			<ion-icon class="iconEditBanner" color="white" src="assets/img/icon/papelera.svg" name="create" (click)="deleteSlider(i)"></ion-icon>
+                 			</div>
+                		</ion-slide>
+						<ion-slide class="changeStyle">
+							<div class="divWhite borderGris"></div>
+							<div class="addPhotoProducto" color="">
+								<ion-icon class="addPrdocuto" color="bluedark" src="assets/img/icon/producto/addAzulProducto.svg" (click)="selectImage()"></ion-icon>
+							</div>
+							<div class="textP">
+								<p class="ion-text-center my-0 font14">Agregar imagenes al carrusel</p>
+							</div>
+						</ion-slide>
+               		</ion-slides>          
+          		</div>
+        	</ion-col>
+    	</ion-row>
+</ion-content>

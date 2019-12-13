@@ -26,6 +26,10 @@
 @import "~@ionic/angular/css/flex-utils.css";
 
 
+.input-cover {
+  position: static;
+}
+
 .error-message
 {
   color:#c70000;
@@ -36,7 +40,7 @@
 
 .titleHeader {
     font-size: 18pt;
-    color:#657b9f;
+    color:#4e5d6a;
 }
 
 .iconHeader {
@@ -99,12 +103,20 @@
 
 // Colores
 
+
+.blue-light2 {
+    color: #a0a9c0;
+}
+
 .blue-light {
     color: #89acdb;
 }
 
 .blue-dark {
     color:#657b9f;
+}
+.text-historial {
+    color:#494947;
 }
 
 .text-dorado {
@@ -510,7 +522,7 @@ ion-datetime {
     margin-left: 0;
     margin-right: 0;
     margin-top: 0px;
-    margin-bottom: -10px;
+    margin-bottom: -5px;
     padding-bottom: 7px;
 }
 
@@ -789,8 +801,9 @@ ion-textarea.textareaCustom{
 
  .sizeModalCierreModal .modal-wrapper {
     height: auto;
-    max-height: 80%;
-    width: 310px;
+    max-height: 90%;
+    width: 90%;
+    min-width: 310px;
     top: 0%;
     bottom: 0;
     left: 0;
@@ -798,7 +811,7 @@ ion-textarea.textareaCustom{
     margin: auto;
     position: absolute; 
     display: block;  
-    overflow: hidden;
+    overflow-y: auto;
  }
 
  .sizeModalProductoCreado .modal-wrapper {

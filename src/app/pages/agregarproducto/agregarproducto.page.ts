@@ -19,7 +19,7 @@ import { ProductoguardadoPage } from '../modals/productoguardado/productoguardad
 })
 
 export class AgregarproductoPage implements OnInit {
-
+hideMe=true;
 	public productoForm: FormGroup;
 
 	productos:any = [];
@@ -36,6 +36,7 @@ export class AgregarproductoPage implements OnInit {
 	protein;
 	total_calories;
 	price_with_iva;
+	decimals:any= {"entero":'0',"decimal":'00'};
 	iva;
 	eat_in_restaurant:boolean = false;
 	wear:boolean = false;
@@ -231,7 +232,12 @@ export class AgregarproductoPage implements OnInit {
 		   }
 		 });
 	}
-	
+	hide() {
+  this.hideMe = false;
+}
+	show2() {
+  this.hideMe = true;
+}
   	ngOnInit() {
 	  }
 	  

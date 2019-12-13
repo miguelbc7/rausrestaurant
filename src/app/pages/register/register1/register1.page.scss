@@ -1,3 +1,54 @@
+@import "~node_modules/ngx-chips/core/styles/core/_core.scss";
+
+$minimal: (
+    container-border-bottom: 1px solid red
+);
+
+// this is the container's theme
+$foundation-theme: (
+    background: transparent !important,
+    background-focused: transparent !important,
+    background-active: transparent !important,
+    background-hover: transparent !important,
+);
+
+$foundation-tag-theme: (
+    background: #657b9f !important,
+    background-focused: #657b9f !important,
+    background-active: #657b9f !important,
+    background-hover: #657b9f !important,
+    color: #fff !important,
+    color-hover: #fff !important,
+    border-radius: 2px
+);
+
+$foundation-icon-theme: (
+    fill: #fff !important,
+    fill-focus: #eee !important,
+    transition: all 0.35s
+);
+
+// apply theme to the container
+::ng-deep tag-input.minimal {
+    @include tag-input-theme($foundation-theme);
+}
+
+
+//  Botonsito 
+::ng-deep tag-input .ng2-tag-input.minimal tag {
+    @include tag-theme($foundation-tag-theme);
+}
+
+
+// apply theme to the delete icon =======> Icono delete
+::ng-deep tag-input .ng2-tag-input.minimal tag delete-icon {
+    @include icon-theme($foundation-icon-theme);
+}
+
+
+
+
+
 .logoImg {
     width: 65%;
     height: auto;
@@ -12,22 +63,7 @@
 .marginButtonTop {
     margin-top: 2.5rem;
 }
-.minimal[_ngcontent-wki-c2] tag[_ngcontent-wki-c2] {
-    display: flex;
-    flex-direction: row;
-    background: transparent !important;
-    flex-wrap: wrap;
-    border-radius: 0;
-    /* background: #f9f9f9; */
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    overflow: hidden;
-    outline: 0;
-    cursor: pointer;
-    position: relative;
-}
+
 // .ng2-tag-input__text-input {
 
 //     background-color: transparent !important;
@@ -40,13 +76,18 @@
 //     font-family: 'SEGUIHIS' !important;
 // }
 
-
-tag-input.inputTag {
+ tag-input.inputTag {
     font-family: 'SEGUIHIS' !important;
     --background: transparent !important;
     background-color: transparent !important; 
-}
 
+}
+.ng2-tag-input__text-input{
+    background: transparent !important;
+}
+.ng2-tag-input__text-input.ng-pristine.ng-valid.ng-touched{
+    --background: transparent !important;
+}
 .itemTransparent  {
     --background: transparent !important;
 }

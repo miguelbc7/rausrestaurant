@@ -24,7 +24,11 @@ const routes: Routes = [
   { path: 'productocreado', loadChildren: './pages/modals/productocreado/productocreado.module#ProductocreadoPageModule' },
   { path: 'productoguardado', loadChildren: './pages/modals/productoguardado/productoguardado.module#ProductoguardadoPageModule' },
   { path: 'welcome1', loadChildren: './pages/welcome1/welcome1.module#Welcome1PageModule' },
-  { path: 'map', loadChildren: './pages/modals/map/map.module#MapPageModule' },
+  { path: 'map', loadChildren: './pages/modals/map/map.module#MapPageModule' },  {
+    path: 'showcase',
+    loadChildren: () => import('./pages/showcase/showcase.module').then( m => m.ShowcasePageModule)
+  },
+
 
 
 ];

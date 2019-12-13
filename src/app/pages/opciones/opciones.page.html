@@ -6,7 +6,7 @@
         <ion-col size="7" class="hgLine  px-0">
             <ion-icon class="iconBack" src="assets/img/icon/back.svg" routerLink="/home"></ion-icon>
             <div style="position: relative;">
-              <p class="font16 my-0 ml-10">Balance</p>
+              <p class="font16 my-0 ml-10 blue-dark">Balance</p>
               <p class="my-0 text-dorado alinearBalance">
                 <span [class]="fontSize" >{{decimal[0] | mask: mask }}</span>
                 <span class="font18 decimal">,{{decimal[1]? decimal[1] : 00 }}€</span>

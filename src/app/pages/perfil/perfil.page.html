@@ -16,7 +16,7 @@
       <ion-list>
         <ion-item>
           <ion-input class="font14" formControlName="business_name" value="{{profile.business_name}}" autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" color="blue-dark2" inputmode="text" placeholder="Vegetalia" required="true"></ion-input>
-          <ion-icon class="iconn" name="create"  slot="end" align-self-center></ion-icon>
+          <ion-icon class="iconn font20" src="assets/img/icon/lapiz.svg"  slot="end" align-self-center></ion-icon>
         </ion-item>
         <div class="validation-errors">
           <ng-container *ngFor="let validation of validation_messages.business_name">
@@ -27,7 +27,7 @@
         </div>
         <ion-item>
           <ion-input class="font14" formControlName="email" value="{{email}}" autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" color="blue-dark2" inputmode="text" placeholder="vegetalia@bliss.com" required="true"></ion-input>
-          <ion-icon class="iconn" name="create"  slot="end" align-self-center></ion-icon>
+          <ion-icon class="iconn font20" src="assets/img/icon/lapiz.svg"  slot="end" align-self-center></ion-icon>
         </ion-item>
         <div class="validation-errors">
           <ng-container *ngFor="let validation of validation_messages.email">
@@ -38,7 +38,7 @@
         </div>
         <ion-item>
           <ion-input class="font14" autocorrect="on" formControlName="phone" value="{{profile.phone}}" autofocus="on" clearInput="true" clearOnEdit="true" color="blue-dark2" inputmode="number" placeholder="+346399636" required="true"></ion-input>
-          <ion-icon class="iconn" name="create"  slot="end" align-self-center></ion-icon>
+          <ion-icon class="iconn font20" src="assets/img/icon/lapiz.svg"  slot="end" align-self-center></ion-icon>
         </ion-item>
         <div class="validation-errors">
           <ng-container *ngFor="let validation of validation_messages.phone">
@@ -47,7 +47,7 @@
             </div>
           </ng-container>
         </div>
-        <!-- <ion-item>
+       <!--  <ion-item>
           <ion-input class="font14" formControlName="direction" value="{{profile.address}}" autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" color="blue-dark2" inputmode="text" placeholder="Carrer de Aribau 355" required="true"></ion-input>
           <ion-icon class="iconn" name="pin"  slot="end" align-self-center></ion-icon>
         </ion-item>
@@ -60,7 +60,7 @@
         </div> -->
         <ion-item>
           <ion-input class="font14" formControlName="password" autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" color="blue-dark2" inputmode="text" placeholder="Cambiar contraseña" [type]="passwordType"></ion-input>
-          <ion-icon align-self-end style="margin-top: 5px;" [name]="passwordShown === true ? 'eye-off' : 'eye'" [color]="passwordShown === true ? 'bluelight' : 'bluedark' " slot="end" (click)="togglePassword()"></ion-icon>
+          <ion-icon class="font20 ion-align-self-end" style="margin-top: 5px;" [name]="passwordShown === true ? 'eye-off' : 'eye'" [color]="passwordShown === true ? 'bluelight' : 'bluedark' " slot="end" (click)="togglePassword()"></ion-icon>
         </ion-item>
         <div class="validation-errors">
           <ng-container *ngFor="let validation of validation_messages.password">
@@ -71,7 +71,7 @@
         </div>
         <ion-item>
           <ion-input class="font14" autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" color="blue-dark2" inputmode="text" placeholder="Subir documentos" required="true"></ion-input>
-          <ion-icon class="iconn" name="add"  slot="end" align-self-center></ion-icon>
+          <ion-icon class="iconn ion-align-self-center" name="add"  slot="end"></ion-icon>
         </ion-item>
       </ion-list>
       <ion-row class="mt-save">

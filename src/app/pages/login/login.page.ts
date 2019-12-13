@@ -46,6 +46,18 @@ export class LoginPage implements OnInit {
           ]
     }
 
+    // ionViewDidEnter() {
+    //   this.platform.ready().then(() => {
+    //     Keyboard.disableScroll(true);
+    //   });
+    // }
+
+    // ionViewWillLeave() {
+    //   this.platform.ready().then(() => {
+    //     Keyboard.disableScroll(false);
+    //   });
+    // }
+
   ngOnInit() {
 
       this.loginForm = this.formBuilder.group({
