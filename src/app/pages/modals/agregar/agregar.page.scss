@@ -2,7 +2,10 @@ ion-content{
     --ion-background-color: #a0a9c0;
     --color:#fff;
 }
-
+.list-tarjetas{
+    max-height: 143px;
+    overflow: auto;
+}
 .saldoModal {
     font-size: 50pt;
     color: #fff;

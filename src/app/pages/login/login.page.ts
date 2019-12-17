@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { ModalController, Platform } from '@ionic/angular';
 import { ModalPoliticasPage } from '../modals/modal-politicas/modal-politicas.page';
 import { ModalTerminosPage } from '../modals/modal-terminos/modal-terminos.page';
@@ -7,6 +7,7 @@ import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms'
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { Storage } from '@ionic/storage';
+import { Keyboard } from '@ionic-native/keyboard/ngx';
 
 
 @Component({
@@ -20,9 +21,31 @@ export class LoginPage implements OnInit {
   errorMessage = '';
   passwordShown: any;
   passwordType: string  = 'password';
+  keyboardPadding = "margin1";
 
-  constructor(private modalCtrl: ModalController, public formBuilder: FormBuilder, private router: Router,
-              private authService: AuthService, private storage: Storage, private platform:Platform) {
+  constructor(private modalCtrl: ModalController, 
+    public formBuilder: FormBuilder, 
+    private router: Router,
+    private authService: AuthService, 
+    private storage: Storage, 
+    private platform:Platform,
+    private keyboard: Keyboard,
+    private ngZone: NgZone,
+
+              ) 
+  {
+    this.ngZone.run(()=>{
+      this.keyboard.onKeyboardShow().subscribe(()=>{
+        this.keyboardPadding = "margin2";
+         console.log(this.keyboardPadding)
+      })
+
+      this.keyboard.onKeyboardHide().subscribe(()=>{
+        this.keyboardPadding = "margin1";
+         console.log(this.keyboardPadding)
+      })
+      console.log(this.keyboardPadding)
+    })
    }
 
 

@@ -3,10 +3,23 @@
 // position: fixed;
 // overflow-y: 
 // }
+.paddingBody {
+    padding-bottom: 500px !important;
+}
+
+.margin1{
+    margin: 0;
+}
+
+.margin2{
+    margin: 200px;
+}
+
 
 .minHeight{
     height: 100vh;
-    min-height: 520px;
+    min-height: 100%;
+    max-height: 100vh;
     display: flex;
     flex-direction: column;
 }
@@ -49,9 +62,10 @@
 }
 
 .footerBottom{
-    position: absolute;
     bottom: 0;
+    position: relative;
     left: 0;
+    top: 16%;
     right: 0;
 }
 

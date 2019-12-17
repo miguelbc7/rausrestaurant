@@ -4,7 +4,7 @@
   </ion-toolbar>
 </ion-header> -->
 
-<ion-content class="bgAzul">
+<ion-content>
     <ion-row class="my-0">
       <ion-col class="ion-text-end" size="12">
         <!-- <ion-icon class="modalAgregar" src="assets/img/icon/back.svg" (click)="closeModal()"></ion-icon> -->
@@ -25,8 +25,8 @@
   <p class="ion-text-center my-0">
       Seleccionar tarjeta o cuenta
   </p>
-  <ion-list class="ion-padding font14 " *ngFor="let d of data">
-    <ion-row >
+  <ion-list class="ion-padding font14 list-tarjetas">
+    <ion-row *ngFor="let d of data">
           <ion-col class="ion-text-start" (click)="openConfirmarAgregar(d.payload.doc.id)">
               <ion-label class="iconWhite">Visa</ion-label>
           </ion-col>

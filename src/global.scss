@@ -42,7 +42,25 @@
     font-size: 18pt;
     color:#4e5d6a;
 }
+ion-modal.auto-height {
+    &.bottom {
+        align-items: flex-end;
+    }
 
+    --height: auto;
+
+    .ion-page {
+        position: relative;
+        display: block;
+        contain: content;
+
+        .inner-content {
+            max-height: 80vh;
+            overflow: auto;
+            padding: 10px;
+        }
+    }
+}
 .iconHeader {
     font-size: 50pt;
     color:#4e5d6a;
@@ -750,7 +768,20 @@ ion-textarea.textareaCustom{
 
  .sizeModalAgregarProducto .modal-wrapper {
     height: auto;
-    max-height: 56%;
+    max-height: 60%;
+    width: 310px;
+    top: 0%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    position: absolute; 
+    display: block;  
+    overflow: hidden;
+ }
+ .sizeModalSearch .modal-wrapper {
+    height: auto;
+    max-height: 50%;
     width: 310px;
     top: 0%;
     bottom: 0;

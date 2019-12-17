@@ -16,17 +16,17 @@
 	<ion-row class="my-0">
 		<ion-col class="ion-no-padding">
 			<div class="boxBanner">
-				<ion-slides [options]="slideOptsOne">
-					<ion-slide class="changeStyle" *ngFor="let img of aImages; let i = index">
-						<img class="imgBanner" src="{{img.img}}"/>
+				<ion-slides>
+					<ion-slide class="changeStyle">
+						<img class="imgBanner" src="assets/img/pollo.jpg"/>
 						<div class="divEdit" color="bluelight">
-							<ion-icon class="iconEditBanner" color="white" src="assets/img/icon/papelera.svg" name="create" (click)="deleteSlider(i)"></ion-icon>
+							<ion-icon class="iconEditBanner" color="white" src="assets/img/icon/papelera.svg" name="create"></ion-icon>
 						</div>
 					</ion-slide>
 					<ion-slide class="changeStyle">
 						<div class="divWhite borderGris"></div>
 						<div class="addPhotoProducto" color="">
-							<ion-icon class="addPrdocuto" color="bluedark" src="assets/img/icon/producto/addAzulProducto.svg" (click)="selectImage()"></ion-icon>
+							<ion-icon class="addPrdocuto" color="bluedark" src="assets/img/icon/producto/addAzulProducto.svg"></ion-icon>
 						</div>
 						<div class="textP">
 							<p class="ion-text-center my-0 font14">Agregar imagenes al carrusel</p>
@@ -59,7 +59,7 @@ No te dejes engañar por su tamaño, son muy sabrososy versátiles. Añádelos a
 		<ion-col size="5">
 			<div class="boxShowcase1">
 				<div class="addPhotoProductoshowcase1" color="">
-					<ion-icon class="addPrdocuto1" color="bluedark" src="assets/img/icon/producto/addAzulProducto.svg" (click)="selectImage()"></ion-icon>
+					<ion-icon class="addPrdocuto1" color="bluedark" src="assets/img/icon/producto/addAzulProducto.svg"></ion-icon>
 				</div>
 				<div class="textPshowcase1">
 					<p class="ion-text-center my-0 font10">Agrega otra imagen</p>
@@ -67,7 +67,7 @@ No te dejes engañar por su tamaño, son muy sabrososy versátiles. Añádelos a
 			</div>
 			<div class="boxShowcase2">
 							<div class="addPhotoProductoshowcase2" color="">
-								<ion-icon class="addPrdocuto2" color="bluedark" src="assets/img/icon/producto/addAzulProducto.svg" (click)="selectImage()"></ion-icon>
+								<ion-icon class="addPrdocuto2" color="bluedark" src="assets/img/icon/producto/addAzulProducto.svg"></ion-icon>
 							</div>
 							<div class="textPshowcase2">
 								<p class="ion-text-center my-0 font10">Agrega otra imagen</p>

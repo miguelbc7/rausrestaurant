@@ -61,13 +61,7 @@ export class Register1Page implements OnInit {
     private keyboard: Keyboard,
     ) {
 
-    this.keyboard.onKeyboardWillShow().subscribe(()=>{
-      this.keyboardHide = "paddingBody";
-    })
-
-    this.keyboard.onKeyboardWillHide().subscribe(()=>{
-      this.keyboardHide = "";
-    })
+  
 
     this.register1 = formBuilder.group({
       business_name: ['', Validators.compose([
