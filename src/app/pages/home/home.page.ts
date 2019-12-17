@@ -69,7 +69,7 @@ export class HomePage implements OnInit {
 		this.getSlider();
 		this.getListHorario();
 		this.getListProductos();
-		this.getAvatar();
+		/* this.getAvatar(); */
 	}
 
 	ngOnInit() {}
@@ -83,6 +83,7 @@ export class HomePage implements OnInit {
 				this.profile.business_name = data.business_name;
 				this.profile.direction = data.direction;
 				this.storage.set('profile',data);
+				this.avatar = data.photo;
 			});
 		});
 	}

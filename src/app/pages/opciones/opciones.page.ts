@@ -103,7 +103,7 @@ export class OpcionesPage implements OnInit {
   ionViewWillEnter(){
     this.loading.showLoader(5000);
     this.getProfile();
-    this.getAvatar();
+    /* this.getAvatar(); */
    }
 
   changeIcon(index: number){
@@ -236,6 +236,7 @@ export class OpcionesPage implements OnInit {
       res.subscribe(data =>{
         this.profile.business_name = data.business_name;
         this.profile.direction = data.direction;
+        this.avatar = data.photo;
         this.loading.hideLoader();
       })
     });

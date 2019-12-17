@@ -92,8 +92,7 @@ import { Keyboard } from '@ionic-native/keyboard/ngx';
     AndroidPermissions,
     LocationAccuracy,
     GoogleMaps,
-    Keyboard,
-  
+    Keyboard
   ],
   bootstrap: [AppComponent]
 })

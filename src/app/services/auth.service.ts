@@ -18,7 +18,7 @@ export class AuthService {
   	private snapshotChangesSubscription: any;
 
 	url = environment.url;
-	token:string;
+	token: string;
 	uid;
 	direction;
   
@@ -47,7 +47,13 @@ export class AuthService {
 	};
 
 
-  	constructor(private http: HttpClient, private storage: Storage,public loading: LoadingService, private afs: AngularFirestore,public afAuth: AngularFireAuth ) { }
+  	constructor(
+		private http: HttpClient,
+		private storage: Storage,
+		public loading: LoadingService,
+		private afs: AngularFirestore,
+		public afAuth: AngularFireAuth,
+	) {}
 
 	registerUser(value): Observable<Restaurant>{
 		this.loading.showLoader();
@@ -230,29 +236,61 @@ export class AuthService {
 	}
 
     updateAvatar(record): Promise<any> {
-    	console.log('record', record);
 		return new Promise<any>((resolve, reject) => {
-			console.log(firebase.auth());
 			let currentUser = firebase.auth().currentUser.uid;
-			console.log('currentUser', currentUser);
-			this.afs.collection('restaurantes').doc(currentUser).collection('avatar').doc('imagen').set(record)
+			console.log(this.token);
+
+			let data = {
+				uid: currentUser,
+				img: record.image
+			}
+
+			this.http.put(this.url + 'users/photo', JSON.stringify(data),{
+				headers: new HttpHeaders({
+					'Content-Type': 'application/json',
+					'Authorization': this.token,
+				})
+			}).subscribe( 
+				res => resolve(res),
+				err => reject(err)
+			);
+
+			/* this.afs.collection('restaurantes').doc(currentUser).collection('avatar').doc('imagen').set(record)
 			.then(
 				res => resolve(res),
 				err => reject(err)
-			)
+			) */
     	})
  	}
 
 	createAvatar(record) {
-		return new Promise<any>((resolve, reject) => {
+		 return new Promise<any>((resolve, reject) => {
 			let currentUser = firebase.auth().currentUser;
+
+			let data = {
+				uid: currentUser,
+				img: record
+			}
+
+			this.http.put(this.url + 'users/photo', JSON.stringify(data),{
+				headers: new HttpHeaders({
+					'Content-Type': 'application/json',
+					'Authorization': this.token,
+				})
+			}).subscribe( 
+				res => resolve(res),
+				err => reject(err)
+			);
+
+			/*let currentUser = firebase.auth().currentUser;
 			console.log(currentUser);
+
 			this.afs.collection('restaurantes').doc(currentUser.uid).collection('avatar').doc('imagen').set(record)
 			.then(
 				res => resolve(res),
 				err => reject(err)
-			)
-		})
+			) */
+		});
 	}
 	
 	readAvatar() {

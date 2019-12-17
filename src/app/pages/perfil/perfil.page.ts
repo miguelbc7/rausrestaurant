@@ -72,7 +72,7 @@ export class PerfilPage implements OnInit {
   ngOnInit() {
     this.getMe();
    this.getUserDetail();
-   this.getAvatar();
+   /* this.getAvatar(); */
   }
   validation_messages = {
     'business_name': [
@@ -137,6 +137,7 @@ export class PerfilPage implements OnInit {
       //       })
       //     .catch((error: any) => console.log(error));
       this.profile = data;
+      this.avatar = data.photo;
       // this.profile.address = data.direction.street;
       // console.log(this.profile.direction.street);
       this.loading.hideLoader();
@@ -228,22 +229,18 @@ pickImage(sourceType) {
     // imageData is either a base64 encoded string or a file URI
     // If it's base64 (DATA_URL):
     let base64Image = 'data:image/jpeg;base64,' + imageData;
-    this.aImages = {image:base64Image} ;
+    this.aImages = { image: base64Image } ;
     this.avatar = base64Image;
-    console.log(this.type);
+   /*  console.log(this.type);
     if(this.type == 'create'){
       this.authService.createAvatar(this.aImages).then(() => {
-        // this.storage.set('avatar',data);
-        this.getAvatar();
         this.guardado();
-        
      });
-    }else{
+    }else{ */
       this.authService.updateAvatar(this.aImages).then((response) => {
-        this.getAvatar();
         this.guardado();
      });
-    }
+    /* } */
   
   }, (err) => {
     // Handle error
