@@ -127,8 +127,8 @@ export class HomePage implements OnInit {
 		this.camera.getPicture(options).then( imageData => {
 			let base64Image = 'data:image/jpeg;base64,' + imageData;
 
-			this.aImages.push({ image: base64Image });
-			this.sliderService.create_NewItem({ image:base64Image }).then( () => { console.log('success'); });
+			/* this.aImages.push({ image: base64Image }); */
+			this.sliderService.create_NewItem(base64Image).then( (response) => { console.log('response', response); this.aImages.push({ image: response[0].photo }) });
 		}, (err) => {
 			console.error(err);
 		}).catch( error => { 
@@ -190,10 +190,12 @@ export class HomePage implements OnInit {
 		this.loading.present(6000);
 
 		this.productosService.getList().then(response => {
+			console.log('response', response);
 			response.subscribe((data) => {
 				console.log('data', data);
 				this.productos = data.products;
 				let tempImagesProduct:any = this.storage.get('tempImagesProduct');
+
 				for (let index = 0; index < this.productos.length; index++) {
 					if(tempImagesProduct.id == this.productos[index]._id)
 					{
@@ -290,8 +292,8 @@ export class HomePage implements OnInit {
 		});
 	}
 
-	deleteSlider(id) {
-		this.sliderService.delete_Item(id);
+	deleteSlider(id, url) {
+		this.sliderService.delete_Item(id, url);
 	}
 
 	deleteTempSlider(index) {
