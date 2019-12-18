@@ -4,6 +4,7 @@ import { environment } from '../../environments/environment';
 import { Storage } from '@ionic/storage';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFireDatabase } from '@angular/fire/database';
 import * as firebase from 'firebase';
 import 'firebase/storage';
 
@@ -20,7 +21,8 @@ export class SliderHomeService {
 		private afs: AngularFirestore,
 		public afAuth: AngularFireAuth,
 		private http: HttpClient,
-		private storage: Storage
+		private storage: Storage,
+		private db: AngularFireDatabase
 	) {}
    
   	async create_NewItem(record) {
@@ -58,11 +60,25 @@ export class SliderHomeService {
 		return new Promise<any>((resolve, reject) => {
 			this.afAuth.user.subscribe(currentUser => {
 				if(currentUser){
+					const promise = this.db.object('restaurantes/' + currentUser.uid + '/slider');
+					promise.valueChanges().subscribe( snasphots => {
+						console.log(snasphots)
+						resolve(snasphots);
+					}, error => {
+						reject(error);
+					});
+				}
+			});
+		});
+
+		/* return new Promise<any>((resolve, reject) => {
+			this.afAuth.user.subscribe(currentUser => {
+				if(currentUser){
 					this.snapshotChangesSubscription = this.afs.collection('restaurantes').doc(currentUser.uid).collection('slider').snapshotChanges();
 					resolve(this.snapshotChangesSubscription);
 				}
 			}, err => reject(err))
-		});
+		}); */
 	}
 
 	getItem(itemID){
@@ -88,7 +104,11 @@ export class SliderHomeService {
 		});
 	}
  
-	delete_Item(record_id, url) {
+	async delete_Item(record_id, url) {
+		await this.storage.get('_token').then(res=>{
+			this.token = res.token;
+		});
+
 		return new Promise<any>((resolve, reject) => {
 			let currentUser = firebase.auth().currentUser.uid;
 

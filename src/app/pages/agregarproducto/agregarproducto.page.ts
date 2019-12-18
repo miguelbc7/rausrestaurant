@@ -4,7 +4,7 @@ import { AddsliderPage } from '../modals/addslider/addslider.page';
 import { ModalPromocionPage } from '../modals/modal-promocion/modal-promocion.page';
 import { ExcelentePage } from '../modals/excelente/excelente.page';
 import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductosService } from '../../services/productos.service';
 import { Camera, CameraOptions } from '@ionic-native/Camera/ngx';
 import { Storage } from '@ionic/storage';
@@ -24,6 +24,7 @@ export class AgregarproductoPage implements OnInit {
 	productos:any = [];
 	aImages: any = [];
 	aImages2: any = [];
+	sub;
 	name;
 	description;
 	ingredientes:any = [];
@@ -102,7 +103,8 @@ export class AgregarproductoPage implements OnInit {
 
   	constructor(
 		private modalCtrl: ModalController, 
-		public formBuilder: FormBuilder, 
+		public formBuilder: FormBuilder,
+		private route: ActivatedRoute,
 		private router: Router,
 		private productosService: ProductosService, 
 		private camera: Camera,
@@ -147,6 +149,10 @@ export class AgregarproductoPage implements OnInit {
 	ngOnInit() {}
 	
     ionViewWillEnter(){
+		/* this.sub = this.route.queryParams.subscribe(params => {
+			this.type = +params['type'] || 'create';
+		}); */
+
 		this.storage.get('typeProduct').then(res =>{
 			this.type = res;
 			console.log(this.type);
@@ -161,8 +167,6 @@ export class AgregarproductoPage implements OnInit {
 	   	});
 	
 		this.storage.get('product').then(res =>{
-		   	console.log(res);
-		   
 		   	if(res){
 				this.productos = res;
 				this.ingredientes = [];
@@ -213,6 +217,10 @@ export class AgregarproductoPage implements OnInit {
 				}).catch(error => console.error(error));
 		   	}
 		});
+	}
+
+	ngOnDestroy() {
+		this.sub.unsubscribe();
 	}
 
 	hide() {
@@ -271,7 +279,6 @@ export class AgregarproductoPage implements OnInit {
 		values.ingredients = [];
 
 		if(values.ingredientes != '') {
-			console.log(values.ingredientes);
 			aIngredients = values.ingredientes.split(',');
 			
 			for (let index = 0; index < aIngredients.length; index++) {
@@ -305,7 +312,7 @@ export class AgregarproductoPage implements OnInit {
 		
 		if(this.type == 'create') {
 			console.log('type', this.type);
-			this.productosService.createItem(values, this.aImages2).then((response) => {
+			this.productosService.createItem(values, this.aImages).then((response) => {
 				response.subscribe( data => {
 					this.productoCreado();
 					this.router.navigate(['home']);
@@ -316,7 +323,7 @@ export class AgregarproductoPage implements OnInit {
 			});
 		} else if(this.type == 'edit') {
 			console.log(this.type);
-			this.productosService.updateItem(this.productos._id, values, this.aImages2).then((response) => {
+			this.productosService.updateItem(this.productos._id, values, this.aImages).then((response) => {
 				response.subscribe( () => {
 					this.productoGuardado();
 					this.router.navigate(['home']);

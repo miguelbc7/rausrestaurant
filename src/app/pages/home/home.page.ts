@@ -128,7 +128,12 @@ export class HomePage implements OnInit {
 			let base64Image = 'data:image/jpeg;base64,' + imageData;
 
 			/* this.aImages.push({ image: base64Image }); */
-			this.sliderService.create_NewItem(base64Image).then( (response) => { console.log('response', response); this.aImages.push({ image: response[0].photo }) });
+			this.sliderService.create_NewItem(base64Image).then( (response) => { 
+				/* this.aImages.push({ image: response[0].photo });
+				this.slider.push({ image: response[0].photo }); */
+				this.getSlider();
+				console.log('images', this.aImages);
+			});
 		}, (err) => {
 			console.error(err);
 		}).catch( error => { 
@@ -260,27 +265,29 @@ export class HomePage implements OnInit {
 		this.storage.set('typeProduct', 'edit');
 
 		this.storage.set('product', product).then(()=>{
-			this.router.navigate(['/agregarproducto']);
+			this.router.navigate(['/agregarproducto'], { queryParams: { type: 'edit', product: product } });
 		}).catch(error => console.error(error));
 	}
 
 	addProduct() {
 		this.storage.remove('product');
 		this.storage.set('typeProduct', 'create');
-		this.router.navigate(['/agregarproducto']);
+		this.router.navigate(['/agregarproducto'], { queryParams: { type: 'create' } });
 	}
 
 	getSlider() {
 		this.sliderService.read_Items().then(response => {
-			response.subscribe((data) => {
+			console.log('getSlider', response);
+			this.slider = response;
+			this.aImages = [];
+			/* response.then( data => {
 				if(data){
 					this.slider = data;
 					this.aImages = [];
 				}
-
 			}, err => {
 				console.log(err);
-			});
+			}); */
 		}).catch(err => console.error(err));
 	}
 
@@ -306,7 +313,12 @@ export class HomePage implements OnInit {
 		this.router.navigate(['map']);
 	}
 
+	isEmptyObject(obj) {
+		return (obj && (Object.keys(obj).length === 0));
+	}
+
 	ngOnDestroy(){}
+	
 }
 
 
