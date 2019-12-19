@@ -24,6 +24,7 @@ export class AgregarproductoPage implements OnInit {
 	productos:any = [];
 	aImages: any = [];
 	aImages2: any = [];
+	aImages3: any = [];
 	sub;
 	name;
 	description;
@@ -207,7 +208,7 @@ export class AgregarproductoPage implements OnInit {
 					data.subscribe(res=>{
 						console.log(res.product[0].images);
 						if(res.product[0].images.length > 0){
-							console.log('img');
+							console.log('img', res.product[0].images);
 							res.product[0].images.forEach(key=>{
 								console.log(key);
 								this.aImages.push(key);
@@ -268,9 +269,14 @@ export class AgregarproductoPage implements OnInit {
 		await modal.present();
 	}
 
-	deleteSlider(index) {
-		console.log(index);
-		this.aImages.splice(index, 1);
+	deleteSlider(index, img_id) {
+		let id = this.productos._id;
+		
+		this.productosService.deleteImagen(id, img_id).then( response => {
+			console.log('response', response);
+			console.log(index);
+			this.aImages.splice(index, 1);
+		});
 	}
 
 	onSubmit(values) {
@@ -323,7 +329,7 @@ export class AgregarproductoPage implements OnInit {
 			});
 		} else if(this.type == 'edit') {
 			console.log(this.type);
-			this.productosService.updateItem(this.productos._id, values, this.aImages).then((response) => {
+			this.productosService.updateItem(this.productos._id, values, this.aImages3).then((response) => {
 				response.subscribe( () => {
 					this.productoGuardado();
 					this.router.navigate(['home']);
@@ -404,6 +410,7 @@ export class AgregarproductoPage implements OnInit {
 			let base64Image = 'data:image/jpeg;base64,' + imageData;
 			this.aImages.push({img : base64Image});
 			this.aImages2.push({ img: imageData });
+			this.aImages3.push({ img: imageData });
 			console.log(this.aImages);
 		}, err => {});
   	}

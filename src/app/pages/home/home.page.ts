@@ -128,7 +128,7 @@ export class HomePage implements OnInit {
 			let base64Image = 'data:image/jpeg;base64,' + imageData;
 
 			/* this.aImages.push({ image: base64Image }); */
-			this.sliderService.create_NewItem(base64Image).then( (response) => { 
+			this.sliderService.create_NewItem(base64Image).then( response => { 
 				/* this.aImages.push({ image: response[0].photo });
 				this.slider.push({ image: response[0].photo }); */
 				this.getSlider();
@@ -300,7 +300,11 @@ export class HomePage implements OnInit {
 	}
 
 	deleteSlider(id, url) {
-		this.sliderService.delete_Item(id, url);
+		this.sliderService.delete_Item(id, url).then( response => {
+			console.log('response', response);
+			this.aImages = response.slider;
+			this.slider = response.slider;
+		});
 	}
 
 	deleteTempSlider(index) {

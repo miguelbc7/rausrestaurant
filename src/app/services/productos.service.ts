@@ -185,6 +185,40 @@ export class ProductosService {
 		})
 	}
 
+	async deleteImagen(id, image_id): Promise<any> {
+		await this.storage.get('_token').then(res=>{
+			this.token = res.token;
+		});
+
+		return new Promise<any>((resolve, reject) => {
+			let currentUser = firebase.auth().currentUser.uid;
+
+			let data = {
+				_id: id,
+				id_imagen: image_id
+			};
+
+			return this.http.put(this.base_path + 'products/deleteimage', JSON.stringify(data), {
+				headers: new HttpHeaders({
+					'Content-Type': 'application/json',
+				}), params: {
+					token: this.token,
+				}
+			}).subscribe( 
+				res => resolve(res),
+				err => reject(err)
+			);
+
+			/* return new Promise<any>((resolve, reject) => {
+				let currentUser = firebase.auth().currentUser;
+				this.afs.collection('restaurantes').doc(currentUser.uid).collection('productos').doc(id).set(record).then(
+					res => resolve(res),
+					err => reject(err)
+				)
+			}) */
+		});
+	}
+
 	getImagen(id){
 		return new Promise<any>((resolve, reject) => {
 			this.afAuth.user.subscribe(currentUser => {

@@ -43,7 +43,7 @@
                 		<ion-slide class="changeStyle" *ngFor="let img of aImages; let i = index">
                   			<img class="imgBanner" src="{{img.img}}"/>
                   			<div class="divEdit" color="bluelight">
-                    			<ion-icon class="iconEditBanner" color="white" src="assets/img/icon/papelera.svg" name="create" (click)="deleteSlider(i)"></ion-icon>
+                    			<ion-icon class="iconEditBanner" color="white" src="assets/img/icon/papelera.svg" name="create" (click)="deleteSlider(i, img.id)"></ion-icon>
                  			</div>
                 		</ion-slide>
 						<ion-slide class="changeStyle">

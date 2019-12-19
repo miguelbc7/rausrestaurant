@@ -104,7 +104,7 @@ export class SliderHomeService {
 		});
 	}
  
-	async delete_Item(record_id, url) {
+	async delete_Item(record_id, img_id) {
 		await this.storage.get('_token').then(res=>{
 			this.token = res.token;
 		});
@@ -114,7 +114,7 @@ export class SliderHomeService {
 
 			let data = {
 				id_restaurant: currentUser,
-				img: url
+				id_imagen: img_id
 			};
 
 			return this.http.put(this.base_path + 'restaurants/delete/slider', JSON.stringify(data), {
