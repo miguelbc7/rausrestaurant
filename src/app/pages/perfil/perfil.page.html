@@ -47,11 +47,11 @@
             </div>
           </ng-container>
         </div>
-       <!--  <ion-item>
-          <ion-input class="font14" formControlName="direction" value="{{profile.address}}" autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" color="blue-dark2" inputmode="text" placeholder="Carrer de Aribau 355" required="true"></ion-input>
-          <ion-icon class="iconn" name="pin"  slot="end" align-self-center></ion-icon>
+        <ion-item>
+          <ion-input class="font14" value="" autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" color="blue-dark2" inputmode="text" placeholder="Carrer de Aribau 355" required="true"></ion-input>
+          <ion-icon class="iconn ion-align-self-center" name="pin"  slot="end"></ion-icon>
         </ion-item>
-        <div class="validation-errors">
+        <!-- <div class="validation-errors">
           <ng-container *ngFor="let validation of validation_messages.direction">
             <div class="error-message" *ngIf="profileForm.get('direction').hasError(validation.type) && (profileForm.get('direction').dirty || profileForm.get('direction').touched)">
               {{ validation.message }}
