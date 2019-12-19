@@ -4,7 +4,7 @@ import { AddsliderPage } from '../modals/addslider/addslider.page';
 import { ModalPromocionPage } from '../modals/modal-promocion/modal-promocion.page';
 import { ExcelentePage } from '../modals/excelente/excelente.page';
 import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductosService } from '../../services/productos.service';
 import { Camera, CameraOptions } from '@ionic-native/Camera/ngx';
 import { Storage } from '@ionic/storage';
@@ -19,17 +19,17 @@ import { ProductoguardadoPage } from '../modals/productoguardado/productoguardad
 })
 
 export class AgregarproductoPage implements OnInit {
-hideMe=true;
+	hideMe=true;
 	public productoForm: FormGroup;
-
 	productos:any = [];
 	aImages: any = [];
+	aImages2: any = [];
+	aImages3: any = [];
+	sub;
 	name;
 	description;
 	ingredientes:any = [];
-	// dingredientes:any = [];
 	no_ingredientes:any = []; 
-	// dno_ingredientes:any = [];
 	nutritional_values:boolean = false;
 	fat;
 	carbohydrates;
@@ -48,9 +48,7 @@ hideMe=true;
 	slideOptsOne = {
 		initialSlide: 0,
 		slidesPerView: 1
-		// autoplay:true
 	};
-
 	profile:any = {};
 	validation_messages = {
 		'name': [
@@ -106,7 +104,8 @@ hideMe=true;
 
   	constructor(
 		private modalCtrl: ModalController, 
-		public formBuilder: FormBuilder, 
+		public formBuilder: FormBuilder,
+		private route: ActivatedRoute,
 		private router: Router,
 		private productosService: ProductosService, 
 		private camera: Camera,
@@ -125,29 +124,13 @@ hideMe=true;
 				Validators.maxLength(300),
 				Validators.minLength(15)
 			])],
-			ingredientes: [this.ingredientes, Validators.compose([
-				// Validators.required,
-				// Validators.maxLength(300),
-				// Validators.minLength(5)
-			])],
-			no_ingredientes: [this.no_ingredientes, Validators.compose([
-				// Validators.required,
-				// Validators.maxLength(300),
-				// Validators.minLength(5)
-			])],
+			ingredientes: [this.ingredientes, Validators.compose([])],
+			no_ingredientes: [this.no_ingredientes, Validators.compose([])],
 			nutritional_values: [this.nutritional_values],
-			fat: [this.name, Validators.compose([
-				// Validators.required,
-			])],
-			carbohydrates: [this.carbohydrates, Validators.compose([
-				// Validators.required,
-			])],
-			protein: [this.protein, Validators.compose([
-				// Validators.required,
-			])],
-			total_calories: [this.total_calories, Validators.compose([
-				// Validators.required,
-			])],
+			fat: [this.name, Validators.compose([])],
+			carbohydrates: [this.carbohydrates, Validators.compose([])],
+			protein: [this.protein, Validators.compose([])],
+			total_calories: [this.total_calories, Validators.compose([])],
 			price_with_iva: [this.price_with_iva, Validators.compose([
 				Validators.required,
 			])],
@@ -158,95 +141,104 @@ hideMe=true;
 			wear: [this.wear],
 			delivery: [this.delivery],
 			status: [this.status],
-			// images: [],
 			stock: [this.stock, Validators.compose([
 				Validators.required,
 			])],
       	});
-   	}
+	}
+	   
+	ngOnInit() {}
 	
     ionViewWillEnter(){
+		/* this.sub = this.route.queryParams.subscribe(params => {
+			this.type = +params['type'] || 'create';
+		}); */
+
 		this.storage.get('typeProduct').then(res =>{
-			 this.type = res;
-			 console.log(this.type);
-		   if(res == 'create'){
-			   this.storage.remove('product');
-		   }
+			this.type = res;
+			console.log(this.type);
+			   
+			if(res == 'create'){
+				this.storage.remove('product');
+		   	}
 	   });
 	   
 		this.storage.get('profile').then(res =>{
-		   this.profile = res;
-	   });
+		   	this.profile = res;
+	   	});
 	
 		this.storage.get('product').then(res =>{
-		   console.log(res);
-		   
-		   if(res){
-			   this.productos = res;
-			   this.ingredientes = [];
-			   if(res.ingredients.length > 0){
-				   res.ingredients.forEach(key => {
-					   console.log(key);
-				   this.ingredientes.push(key.name);
-				   });
-			   }
-			   this.no_ingredientes = [];
-			   if(res.no_ingredients.length > 0){
-				   res.no_ingredients.forEach(key => {
-				   this.no_ingredientes.push(key.name);
-				   });
-			   }
-			   this.name = res.name;
-			   this.description = res.description;
-			   this.ingredientes = this.ingredientes.toString();
-			   this.no_ingredientes = this.no_ingredientes.toString();
-			   this.nutritional_values = res.nutritional_values;
-			   this.carbohydrates = res.carbohydrates;
-			   this.fat = res.fat;
-			   this.protein = res.protein;
-			   this.total_calories = res.total_calories;
-			   this.price_with_iva = res.price_with_iva;
-			   this.iva = res.iva;
-			   this.eat_in_restaurant = res.eat_in_restaurant;
-			   this.wear = res.wear;
-			   this.delivery = res.delivery;
-			   this.status = res.status;
-			   // if(res.images.length >0){
-			   // 	res.images.forEach(key => {
-			   // 		this.aImages.push(key.img);
-			   // 	});
-			   // }
-			   this.aImages = [];
-			   this.productosService.getItem(res._id).then((data) =>{
-				   data.subscribe(res=>{
-					   console.log(res.product[0].images);
-					   if(res.product[0].images.length > 0){
-						   console.log('img');
-						   res.product[0].images.forEach(key=>{
-							   console.log(key);
-							   this.aImages.push(key);
-						   })
-					   }
-				   })
-			   }).catch(error => console.error(error));
-		   }
-		 });
+		   	if(res){
+				this.productos = res;
+				this.ingredientes = [];
+
+				if(res.ingredients.length > 0){
+					res.ingredients.forEach(key => {
+						console.log(key);
+					this.ingredientes.push(key.name);
+					});
+				}
+
+				this.no_ingredientes = [];
+
+				if(res.no_ingredients.length > 0){
+					res.no_ingredients.forEach(key => {
+					this.no_ingredientes.push(key.name);
+					});
+				}
+
+				this.name = res.name;
+				this.description = res.description;
+				this.ingredientes = this.ingredientes.toString();
+				this.no_ingredientes = this.no_ingredientes.toString();
+				this.nutritional_values = res.nutritional_values;
+				this.carbohydrates = res.carbohydrates;
+				this.fat = res.fat;
+				this.protein = res.protein;
+				this.total_calories = res.total_calories;
+				this.price_with_iva = res.price_with_iva;
+				this.iva = res.iva;
+				this.eat_in_restaurant = res.eat_in_restaurant;
+				this.wear = res.wear;
+				this.delivery = res.delivery;
+				this.status = res.status;
+				this.aImages = [];
+
+				this.productosService.getItem(res._id).then((data) =>{
+					data.subscribe(res=>{
+						console.log(res.product[0].images);
+						if(res.product[0].images.length > 0){
+							console.log('img', res.product[0].images);
+							res.product[0].images.forEach(key=>{
+								console.log(key);
+								this.aImages.push(key);
+							})
+						}
+					})
+				}).catch(error => console.error(error));
+		   	}
+		});
 	}
+
+	ngOnDestroy() {
+		this.sub.unsubscribe();
+	}
+
 	hide() {
-  this.hideMe = false;
-}
+  		this.hideMe = false;
+	}
+
 	show2() {
-  this.hideMe = true;
-}
-  	ngOnInit() {
-	  }
+		this.hideMe = true;
+	}
 	  
 	async productoCreado() {
   		const modal = await this.modalCtrl.create({
-    	component: ProductocreadoPage,
-    	cssClass: 'sizeModalProductoCreado'
-  	});
-  		await modal.present();
+			component: ProductocreadoPage,
+			cssClass: 'sizeModalProductoCreado'
+		});
+		  
+		await modal.present();
 	}
 
 	back(){
@@ -256,11 +248,11 @@ hideMe=true;
 
 	async presentPromocion() {
 		const modal = await this.modalCtrl.create({
-		component: ModalPromocionPage,
-		componentProps:{
-			productID: this.productos._id?this.productos._id:null,
-		},
-		cssClass: 'sizeModalPromocion'
+			component: ModalPromocionPage,
+			componentProps:{
+				productID: this.productos._id?this.productos._id:null,
+			},
+			cssClass: 'sizeModalPromocion'
 		});
 
 		await modal.present();
@@ -268,42 +260,50 @@ hideMe=true;
 	
 	async addprom() {
 		await this.modalCtrl.dismiss();
+		
 		const modal = await this.modalCtrl.create({
-		component: ExcelentePage,
-		cssClass: 'sizeModalPromocion'
+			component: ExcelentePage,
+			cssClass: 'sizeModalPromocion'
 		});
+
 		await modal.present();
 	}
 
-	deleteSlider(index) {
-		console.log(index);
-		this.aImages.splice(index, 1);
+	deleteSlider(index, img_id) {
+		let id = this.productos._id;
+		
+		this.productosService.deleteImagen(id, img_id).then( response => {
+			console.log('response', response);
+			console.log(index);
+			this.aImages.splice(index, 1);
+		});
 	}
 
 	onSubmit(values) {
 		this.loading.showLoader();
 		let aIngredients;
 		values.ingredients = [];
-		if(values.ingredientes != ''){
-			console.log(values.ingredientes);
+
+		if(values.ingredientes != '') {
 			aIngredients = values.ingredientes.split(',');
+			
 			for (let index = 0; index < aIngredients.length; index++) {
 				values.ingredients.push ({ 'name' : aIngredients[index] } ) ;
 			}
-
 		}
 		
 		let aNoIngredients;
 		values.no_ingredients = [];
+		
 		if(values.no_ingredientes != ''){
 			aNoIngredients = values.no_ingredientes.split(',');
+
 			for (let index = 0; index < aNoIngredients.length; index++) {
 				console.log(aNoIngredients[index]);
 				values.no_ingredients.push( { 'name' : aNoIngredients[index]} ) ;
 			}
-			
-
 		}
+
 		let float = this.price_with_iva.split('.').join('');
 		let number = float.split(',').join('.');
 		values.price_with_iva = number;
@@ -311,64 +311,54 @@ hideMe=true;
 		values.carbohydrates = values.carbohydrates?values.carbohydrates:0;
 		values.total_calories = values.total_calories?values.total_calories:0;
 		values.protein = values.protein?values.protein:0;
-		// console.log(aIngredients);
+
 		console.log('values', values);
 		console.log('type', this.type);
 		console.log(this.productos);
 		
 		if(this.type == 'create') {
 			console.log('type', this.type);
-			this.productosService.createItem(values).then((response) => {
-			response.subscribe( (data) => {
-				if(this.aImages.length > 0)
-					this.uploadImage(data._id);
-				this.productoCreado();
-				this.router.navigate(['home']);
-			}, err => {
-			console.log(err);
-			this.loading.hideLoader();this.loading.hideLoader();
-			});
-			
-			// this.router.navigate(['list']);
+			this.productosService.createItem(values, this.aImages).then((response) => {
+				response.subscribe( data => {
+					this.productoCreado();
+					this.router.navigate(['home']);
+				}, err => {
+					console.log(err);
+					this.loading.hideLoader();this.loading.hideLoader();
+				});
 			});
 		} else if(this.type == 'edit') {
 			console.log(this.type);
-			this.productosService.updateItem(this.productos._id,values).then((response) => {
+			this.productosService.updateItem(this.productos._id, values, this.aImages3).then((response) => {
 				response.subscribe( () => {
-				if(this.aImages.length > 0)
-					this.uploadImage(this.productos._id);
-				this.productoGuardado();
-				this.router.navigate(['home']);
-			}, err => {
-			console.log(err);
-			this.loading.hideLoader();
-			});
+					this.productoGuardado();
+					this.router.navigate(['home']);
+				}, err => {
+					console.log(err);
+					this.loading.hideLoader();
+				});
 			
-			// this.router.navigate(['list']);
-			}).catch(error=>{console.error(error)});
+				// this.router.navigate(['list']);
+			}).catch(error => { console.error(error) });
 		}
-		
 	}
 
 	uploadImage(id){
-		console.log('uploadimage');
-
 		this.storage.set('tempImagesProduct', { id: id, images : this.aImages });
 		
 		this.productosService.uploadItem(id, this.aImages).then((response) => {
 			response.subscribe(async (data) => {
-			//  this.productos = data.products;
-			console.log('uploadimage data');
-			console.log(data);
-			// await this.presentPromocion(id);
-			this.loading.hideLoader();
+				//  this.productos = data.products;
+				console.log('uploadimage data');
+				console.log(data);
+				// await this.presentPromocion(id);
+				this.loading.hideLoader();
 			
-			await this.router.navigate(['home']);
-			
-		}, err => {
-			console.error(err.error.error);
-			this.errorMessage  = err.error.error;
-			this.loading.hideLoader();
+				await this.router.navigate(['home']);
+			}, err => {
+				console.error(err.error.error);
+				this.errorMessage  = err.error.error;
+				this.loading.hideLoader();
 			});
 		}).catch(error => console.error(error));
 	}
@@ -377,16 +367,15 @@ hideMe=true;
 		const modal = await this.modalCtrl.create({
 			component: ProductoguardadoPage,
 			cssClass: 'sizeModalProductoCreado'
-		  });
-			  await modal.present();
+		});
+		
+		await modal.present();
 	}
 
- //////////////////// Imagen //////////////////////
-
- async selectImage() {
-    const actionSheet = await this.actionSheetController.create({
-        header: "Select Image source",
-        buttons: [{
+	async selectImage() {
+    	const actionSheet = await this.actionSheetController.create({
+    	    header: "Select Image source",
+        	buttons: [{
                 text: 'Cargar imagen',
                 handler: () => {
                     this.pickImage(this.camera.PictureSourceType.PHOTOLIBRARY);
@@ -401,11 +390,11 @@ hideMe=true;
             {
                 text: 'Cancelar',
                 role: 'cancel'
-            }
-        ]
-    });
-    await actionSheet.present();
-  }
+            }]
+    	});
+	
+		await actionSheet.present();
+  	}
 
 	pickImage(sourceType) {
 		const options: CameraOptions = {
@@ -416,15 +405,14 @@ hideMe=true;
 			mediaType: this.camera.MediaType.PICTURE,
 			correctOrientation: true,
 		}
+
 		this.camera.getPicture(options).then((imageData) => {
-			// imageData is either a base64 encoded string or a file URI
-			// If it's base64 (DATA_URL):
 			let base64Image = 'data:image/jpeg;base64,' + imageData;
-			this.aImages.push({img : base64Image}) ;
+			this.aImages.push({img : base64Image});
+			this.aImages2.push({ img: imageData });
+			this.aImages3.push({ img: imageData });
 			console.log(this.aImages);
-		}, (err) => {
-			// Handle error
-		});
+		}, err => {});
   	}
 
 	add(){
@@ -443,18 +431,9 @@ hideMe=true;
 
 	decimal(event){
 		if(this.price_with_iva.length == 0){
-		  if(event.key == '0') {
-			event.preventDefault();
-			// this.value = '0,00';
-		  }
-		  // else{
-		  //   this.value = '0,0'+this.value;
-		  // }
+			if(event.key == '0') {
+				event.preventDefault();
+		  	}
 		}
-		// else if(this.value.length > 4){
-		  
-		//   console.log(this.value);
-		// }
-		
-	  }
+	}
 }
