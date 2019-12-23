@@ -4,13 +4,17 @@
         <ion-icon class="modalBack" src="assets/img/icon/back.svg" (click)="closeModal()"></ion-icon>
       </ion-col>
   </ion-row>
-  <div class="text-promocion ion-text-center font14 blue-dark2">Máximo 1 promoción</div>
-      <p class="text-promo1 ion-text-center font14 blue-dark2">Gana más visibilidad y ventas<br>  
+  <div *ngIf="price">
+    <div class="text-promocion ion-text-center font14 blue-dark2">Máximo 1 promoción</div>
+    <p class="text-promo1 ion-text-center font14 blue-dark2">Gana más visibilidad y ventas<br>  
       activando más promociones por el<br>  
-      ligero precio de 0,50€ al día cada<br>  
+      ligero precio de {{ price }}€ al día cada<br>  
       una. Se debitará automáticamente<br>  
       de tu saldo Raus. Recibiras la <br> 
       factura a tu inbox y a tu e-mail.</p>
+  </div>
+  
+      
       <form (ngSubmit)="createForm()">
       <ion-row class="select-section">
           <ion-col size="12">

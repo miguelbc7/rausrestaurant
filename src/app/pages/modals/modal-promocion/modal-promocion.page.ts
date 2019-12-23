@@ -16,6 +16,7 @@ export class ModalPromocionPage implements OnInit {
 
 	name:any = 1;
 	promotions: any[];
+	price;
 	@Input() productID: any;
 
 	constructor(
@@ -57,7 +58,13 @@ export class ModalPromocionPage implements OnInit {
 
  	radioVal(value){
   		this.name = value;
-  		console.log(value);
+		  console.log(value);
+		  
+		  this.promotions.forEach( row => {
+			if(row._id == value) {
+				this.price = row.price;
+			}
+		});
 	 }
 	 
 	promote() {
