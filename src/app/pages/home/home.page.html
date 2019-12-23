@@ -3,58 +3,55 @@
 	<ion-grid class="px-0">
 		<ion-row class="my-0 py-0">
 			<ion-col class="py-0 ion-align-self-center ion-text-center" size="2">
-					<ion-icon color="bluedark" class="font16" name="menu" routerLink="/opciones"></ion-icon>
+				<ion-icon color="bluedark" class="font16" name="menu" routerLink="/opciones"></ion-icon>
 			</ion-col>
 			<ion-col size="8" class="ion-text-center">
 				<p class="my-0 font14 ">
 					{{profile.business_name}}
 				</p>
 			</ion-col>
-			</ion-row>
-			<ion-row class="my-0">
-				<ion-col class="ion-no-padding">
+		</ion-row>
+		<ion-row class="my-0">
+			<ion-col class="ion-no-padding">
 				<div class="boxBanner">
 					<ion-slides [options]="slideOptsOne">
-
 						<ion-slide class="changeStyle" *ngFor="let img of aImages">
-						<img class="imgBanner" src="{{img.image}}"/>
+							<img class="imgBanner" src="{{img.image}}"/>
 						</ion-slide>
-
 						<ion-slide class="changeStyle" *ngFor="let img of slider">
-						<img class="imgBanner" src="{{ img.photo }}"/>
-						<div class="divEdit" color="bluelight">
-							<ion-icon class="iconEditBanner" color="white" src="assets/img/icon/papelera.svg" name="create" (click)="deleteSlider('', img.id)"></ion-icon>
-						</div>
+							<img class="imgBanner" src="{{ img.photo }}"/>
+							<div class="divEdit" color="bluelight">
+								<ion-icon class="iconEditBanner" color="white" src="assets/img/icon/papelera.svg" name="create" (click)="deleteSlider('', img.id)"></ion-icon>
+							</div>
 						</ion-slide>
-				
 						<ion-slide class="changeStyle">
 							<div class="divWhite">
 							</div>
-								<div class="addPhoto" color="">
-									<ion-icon class="addIcon" color="bluedark" src="assets/img/icon/producto/addAzulProducto.svg" (click)="selectImage()"></ion-icon>
-								</div>
+							<div class="addPhoto" color="">
+								<ion-icon class="addIcon" color="bluedark" src="assets/img/icon/producto/addAzulProducto.svg" (click)="selectImage()"></ion-icon>
+							</div>
 						</ion-slide>
 						
-						</ion-slides>
+					</ion-slides>
 					<ion-avatar class="avatar" routerLink="/perfil">
 						<img class="imgAvatar" src="{{avatar}}" alt="avatar perfil">
 					</ion-avatar>    
 					
 				</div>
-				</ion-col>
-			</ion-row>
-			<ion-row class="ion-no-padding">
-				<ion-col class="ion-no-padding">
-					<img class="imgMap" src="assets/img/map.png" alt="map">
-				</ion-col>
-			</ion-row>
-			<ion-row class="ion-no-padding">
-				<ion-col size="12" class="font12 ion-text-center blue-dark2">
-					<ion-button fill="clear" color="bluedark" class="blue-dark bold ion-text-center ion-text-wrap" (click)="getMap()">
-						{{profile.direction.street}}
-						<ion-icon color="bluedark" class="iconLapiz " slot="end" src="assets/img/icon/lapiz.svg"></ion-icon>
-					</ion-button>
-				</ion-col>
+			</ion-col>
+		</ion-row>
+		<ion-row class="ion-no-padding">
+			<ion-col class="ion-no-padding">
+				<img class="imgMap" src="assets/img/map.png" alt="map">
+			</ion-col>
+		</ion-row>
+		<ion-row class="ion-no-padding">
+			<ion-col size="12" class="font12 ion-text-center blue-dark2">
+				<ion-button fill="clear" color="bluedark" class="blue-dark bold ion-text-center ion-text-wrap" (click)="getMap()">
+					{{profile.direction.street}}
+					<ion-icon color="bluedark" class="iconLapiz " slot="end" src="assets/img/icon/lapiz.svg"></ion-icon>
+				</ion-button>
+			</ion-col>
 				<!-- <ion-col size="12">
 					<p class="ion-text-center ion-no-margin font11 pDirection">
 						{{profile.direction}} 
@@ -72,106 +69,106 @@
 			</ion-row>
 			<ion-row class="ion-no-padding font8">
 				<ion-col class="ion-text-center bgHorarios mHorarios" (click)="openHorarios('Lunes', lunes)">
-				Lun <br>
-				<div *ngIf="lunes == false">Cerrado</div>
-				<div *ngFor="let ln of lunes">
-					<div *ngIf="ln?.schedules?.length == 0 || ln?.status == false">Cerrado</div>
-					<div *ngIf="ln.status == true">
-					<div *ngFor="let s of ln.schedules">
-					<div>{{s.start| date: 'H:mm'}} a {{s.end| date: 'H:mm'}}</div>
-				</div>
-				</div>
-				</div>
-				
-				</ion-col>
-				<ion-col class="ion-text-center bgHorarios mHorarios" (click)="openHorarios('Martes', martes)">
-				Mar <br>
-				<div *ngIf="martes == false">Cerrado</div>
-				<div *ngFor="let ln of martes">
-					<div *ngIf="ln?.schedules?.length == 0 || ln?.status == false">Cerrado</div>
-					<div  *ngIf="ln.status == true">
-						<div *ngFor="let s of ln.schedules">
-						<div>{{s.start| date: 'H:mm'}} a {{s.end| date: 'H:mm'}}</div>
+					Lun <br>
+					<div *ngIf="lunes == false">Cerrado</div>
+					<div *ngFor="let ln of lunes">
+						<div *ngIf="ln?.schedules?.length == 0 || ln?.status == false">Cerrado</div>
+						<div *ngIf="ln.status == true">
+							<div *ngFor="let s of ln.schedules">
+								<div>{{s.start| date: 'H:mm'}} a {{s.end| date: 'H:mm'}}</div>
+							</div>
 						</div>
 					</div>
-				</div>
+
+				</ion-col>
+				<ion-col class="ion-text-center bgHorarios mHorarios" (click)="openHorarios('Martes', martes)">
+					Mar <br>
+					<div *ngIf="martes == false">Cerrado</div>
+					<div *ngFor="let ln of martes">
+						<div *ngIf="ln?.schedules?.length == 0 || ln?.status == false">Cerrado</div>
+						<div  *ngIf="ln.status == true">
+							<div *ngFor="let s of ln.schedules">
+								<div>{{s.start| date: 'H:mm'}} a {{s.end| date: 'H:mm'}}</div>
+							</div>
+						</div>
+					</div>
 				</ion-col>
 				<ion-col class="ion-text-center bgHorarios mHorarios" (click)="openHorarios('Miercoles', miercoles)">
-				Míe <br>
-				<div *ngIf="miercoles == false">Cerrado</div>
-				<div *ngFor="let ln of miercoles">
-					<div *ngIf="ln?.schedules?.length == 0 || ln?.status == false">Cerrado</div>
-					<div  *ngIf="ln.status == true">
-					<div *ngFor="let s of ln.schedules">
-						<div>{{s.start| date: 'H:mm'}} a {{s.end| date: 'H:mm'}}</div>
-					</div>
-					</div>
+					Míe <br>
+					<div *ngIf="miercoles == false">Cerrado</div>
+					<div *ngFor="let ln of miercoles">
+						<div *ngIf="ln?.schedules?.length == 0 || ln?.status == false">Cerrado</div>
+						<div  *ngIf="ln.status == true">
+							<div *ngFor="let s of ln.schedules">
+								<div>{{s.start| date: 'H:mm'}} a {{s.end| date: 'H:mm'}}</div>
+							</div>
+						</div>
 					</div>
 				</ion-col>
 				<ion-col class="ion-text-center bgHorarios mHorarios" (click)="openHorarios('Jueves', jueves)">
-				Jue <br>
-				<div *ngIf="jueves == false">Cerrado</div>
-				<div *ngFor="let ln of jueves">
-					<div *ngIf="ln?.schedules?.length == 0 || ln?.status == false">Cerrado</div>
-					<div  *ngIf="ln.status == true">
-					<div *ngFor="let s of ln.schedules">
-						<div>{{s.start| date: 'H:mm'}} a {{s.end| date: 'H:mm'}}</div>
-					</div>
-					</div>
+					Jue <br>
+					<div *ngIf="jueves == false">Cerrado</div>
+					<div *ngFor="let ln of jueves">
+						<div *ngIf="ln?.schedules?.length == 0 || ln?.status == false">Cerrado</div>
+						<div  *ngIf="ln.status == true">
+							<div *ngFor="let s of ln.schedules">
+								<div>{{s.start| date: 'H:mm'}} a {{s.end| date: 'H:mm'}}</div>
+							</div>
+						</div>
 					</div>
 				</ion-col>
 				<ion-col class="ion-text-center bgHorarios mHorarios" (click)="openHorarios('Viernes', viernes)">
-				Vie <br>
-				<div *ngIf="viernes == false">Cerrado</div>
-				<div *ngFor="let ln of viernes">
-					<div *ngIf="ln?.schedules?.length == 0 || ln?.status == false">Cerrado</div>
-					<div  *ngIf="ln.status == true">
-					<div *ngFor="let s of ln.schedules">
-						<div>{{s.start| date: 'H:mm'}} a {{s.end| date: 'H:mm'}}</div>
+					Vie <br>
+					<div *ngIf="viernes == false">Cerrado</div>
+					<div *ngFor="let ln of viernes">
+						<div *ngIf="ln?.schedules?.length == 0 || ln?.status == false">Cerrado</div>
+						<div  *ngIf="ln.status == true">
+							<div *ngFor="let s of ln.schedules">
+								<div>{{s.start| date: 'H:mm'}} a {{s.end| date: 'H:mm'}}</div>
+							</div>
+						</div>
 					</div>
-					</div>
-				</div>
 				</ion-col>
 				<ion-col class="ion-text-center bgHorarios mHorarios" (click)="openHorarios('Sabado', sabado)">
-				Sáb<br>
-				<div *ngIf="sabado == false"> Cerrado </div>
-				<div *ngFor="let ln of sabado">
-					<div *ngIf="ln?.schedules?.length == 0 || ln?.status == false">Cerrado</div>
-					<div  *ngIf="ln.status == true">
-					<div *ngFor="let s of ln.schedules">
-						<div>{{s.start| date: 'H:mm'}} a {{s.end| date: 'H:mm'}}</div>
-					</div>
-					</div>
+					Sáb<br>
+					<div *ngIf="sabado == false"> Cerrado </div>
+					<div *ngFor="let ln of sabado">
+						<div *ngIf="ln?.schedules?.length == 0 || ln?.status == false">Cerrado</div>
+						<div  *ngIf="ln.status == true">
+							<div *ngFor="let s of ln.schedules">
+								<div>{{s.start| date: 'H:mm'}} a {{s.end| date: 'H:mm'}}</div>
+							</div>
+						</div>
 					</div>
 				</ion-col>
 				<ion-col class="ion-text-center bgHorarios mHorarios" (click)="openHorarios('Domingo', domingo)">
-				Dom <br>
-				<div *ngIf="domingo == false">Cerrado</div>
-				<div *ngFor="let ln of domingo">
-					<div *ngIf="ln?.schedules?.length == 0 || ln?.status == false">Cerrado</div>
-					<div  *ngIf="ln.status == true">
-					<div *ngFor="let s of ln.schedules">
-						<div>{{s.start| date: 'H:mm'}} a {{s.end| date: 'H:mm'}}</div>
-					</div>
-					</div>
+					Dom <br>
+					<div *ngIf="domingo == false">Cerrado</div>
+					<div *ngFor="let ln of domingo">
+						<div *ngIf="ln?.schedules?.length == 0 || ln?.status == false">Cerrado</div>
+						<div  *ngIf="ln.status == true">
+							<div *ngFor="let s of ln.schedules">
+								<div>{{s.start| date: 'H:mm'}} a {{s.end| date: 'H:mm'}}</div>
+							</div>
+						</div>
 					</div>
 				</ion-col>
 			</ion-row>
 			<ion-row class="ion-align-items-center">
 				<ion-col class="font12 ion-text-center blue-dark2"  (click)="addProduct()">
-				<ion-button fill="clear" color="bluedark" class="blue-dark bold">
-					<ion-icon color="bluedark" class="font25 " slot="start" name="add-circle-outline"></ion-icon>
-					<!-- <ion-icon color="bluedark" class="font25 " slot="start" src="assets/img/icon/agregarProducto.svg"></ion-icon> -->
-					Agregar productos
-				</ion-button>
+					<ion-button fill="clear" color="bluedark" class="blue-dark bold">
+						<ion-icon color="bluedark" class="font25 " slot="start" name="add-circle-outline"></ion-icon>
+						<!-- <ion-icon color="bluedark" class="font25 " slot="start" src="assets/img/icon/agregarProducto.svg"></ion-icon> -->
+						Agregar productos
+					</ion-button>
 				</ion-col>
 			</ion-row>
-	</ion-grid>
-	<ion-grid class="px-0">
-		<ion-row >
-			<ion-col class="px-0" size="6" *ngFor="let product of productos; let i = index">
-				<ion-card class="customCard">
-					<div class="boxBanner">
+		</ion-grid>
+		<ion-grid class="px-0">
+			<ion-row >
+				<ion-col class="px-0" size="6" *ngFor="let product of productos; let i = index">
+					<ion-card class="customCard">
+						<div class="boxBanner">
 						<!-- <ion-slides *ngIf="product.tempImages && product.tempImages.length > 0">
 							<ion-slide class="changeStyle"  *ngFor="let img of product.tempImages">
 								<img class="imgCarta3" src="{{img.img}}"/>

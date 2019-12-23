@@ -13,7 +13,7 @@
 				<div style="position: relative;">
 					<p class="font16 my-0 ml-10 blue-dark">Balance</p>
 					<p class="my-0 text-dorado alinearBalance">
-						<span [class]="fontSize" >0</span>
+						<span [class]="fontSize" >1920</span>
 						<span class="font18 decimal">,00€</span>
 					</p> 
 				</div>
@@ -45,13 +45,13 @@
 					<ion-card-content>
 						<ion-row>
 							<ion-col class="ion-no-padding ion-align-self-center " size="7">
-								<p class="hgPCarta my-0 customDarkText font12">
+								<p class="hgPCarta truncate my-0 customDarkText font12">
 									{{ promotion.name }}
 								</p> 
 							</ion-col>
 							<ion-col class="ion-no-padding" size="5">
 								<div style="position: relative;">
-									<p class="my-0 hgPCarta ion-text-center  customDarkText">
+									<p class="my-0 hgPCarta ion-text-center font10 customDarkText">
 										{{ promotion.price_with_iva }}
 										<!-- <span class="font12">10</span>
 										<span class="font8 decimalPCarta">,50€</span> -->
@@ -61,7 +61,7 @@
 						</ion-row>
 						<ion-row>
 							<ion-col class="ion-no-padding ion-align-self-center ">
-								<p class="hgPCarta my-0 customDarkText font12">
+								<p class="hgPCarta truncate my-0 customDarkText font12">
 									{{ promotion.description }}
 								</p> 
 							</ion-col>
@@ -154,7 +154,7 @@
 	<ion-grid class="px-0">
 		<ion-card class="customCard" *ngFor="let restaurant of restaurants">
 			<ion-row>
-				<ion-col class="px-0">
+				<ion-col class="px-0 py-0">
 					<img class="imgCarta2" src="{{ restaurant.slider }}" alt="avatar perfil"> 
 				</ion-col>
 				<ion-col class="px-0">

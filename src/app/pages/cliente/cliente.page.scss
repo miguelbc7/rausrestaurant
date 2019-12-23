@@ -13,7 +13,11 @@
  .absolute {
      position: absolute;
  }
-
+.truncate{
+    white-space: nowrap;
+    overflow:hidden;
+    text-overflow: ellipsis;
+}
 .imgAvatar {
     border: 1px solid #bfdcf5;
     padding: 1px;
