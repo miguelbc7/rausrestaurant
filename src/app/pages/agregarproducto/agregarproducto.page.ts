@@ -1,5 +1,5 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { ModalController, Platform, ActionSheetController } from '@ionic/angular';
+import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
+import { ModalController, Platform, ActionSheetController, IonContent } from '@ionic/angular';
 import { AddsliderPage } from '../modals/addslider/addslider.page';
 import { ModalPromocionPage } from '../modals/modal-promocion/modal-promocion.page';
 import { ExcelentePage } from '../modals/excelente/excelente.page';
@@ -19,12 +19,14 @@ import { ProductoguardadoPage } from '../modals/productoguardado/productoguardad
 })
 
 export class AgregarproductoPage implements OnInit {
+	@ViewChild(IonContent, { static: false }) content: IonContent;
 	hideMe=true;
 	public productoForm: FormGroup;
 	productos:any = [];
 	aImages: any = [];
 	aImages2: any = [];
 	aImages3: any = [];
+	idProm;
 	sub;
 	name;
 	description;
@@ -250,7 +252,7 @@ export class AgregarproductoPage implements OnInit {
 		const modal = await this.modalCtrl.create({
 			component: ModalPromocionPage,
 			componentProps:{
-				productID: this.productos._id?this.productos._id:null,
+				productID: this.productos._id ? this.productos._id : null,
 			},
 			cssClass: 'sizeModalPromocion'
 		});
@@ -320,8 +322,13 @@ export class AgregarproductoPage implements OnInit {
 			console.log('type', this.type);
 			this.productosService.createItem(values, this.aImages).then((response) => {
 				response.subscribe( data => {
+					console.log('data', data);
 					this.productoCreado();
-					this.router.navigate(['home']);
+					this.idProm = data._id;
+					this.productos = data;
+					this.type = 'edit';
+					this.ScrollToTop();
+					/* this.router.navigate(['home']); */
 				}, err => {
 					console.log(err);
 					this.loading.hideLoader();this.loading.hideLoader();
@@ -435,5 +442,9 @@ export class AgregarproductoPage implements OnInit {
 				event.preventDefault();
 		  	}
 		}
+	}
+
+	ScrollToTop(){
+		this.content.scrollToTop(0);
 	}
 }
