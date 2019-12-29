@@ -14,6 +14,7 @@ import { environment } from 'src/environments/environment';
 import { AuthService } from './services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
 import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
+import { Crop } from '@ionic-native/crop/ngx';
 
 firebase.initializeApp(environment.firebase);
 
@@ -92,7 +93,8 @@ import { Keyboard } from '@ionic-native/keyboard/ngx';
     AndroidPermissions,
     LocationAccuracy,
     GoogleMaps,
-    Keyboard
+    Keyboard,
+    Crop
   ],
   bootstrap: [AppComponent]
 })
