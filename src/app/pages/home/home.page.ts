@@ -279,15 +279,7 @@ export class HomePage implements OnInit {
 		this.sliderService.read_Items().then(response => {
 			console.log('getSlider', response);
 			this.slider = response;
-			this.aImages = [];
-			/* response.then( data => {
-				if(data){
-					this.slider = data;
-					this.aImages = [];
-				}
-			}, err => {
-				console.log(err);
-			}); */
+			this.aImages = response;
 		}).catch(err => console.error(err));
 	}
 
