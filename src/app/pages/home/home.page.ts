@@ -14,6 +14,8 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { Camera, CameraOptions } from '@ionic-native/Camera/ngx';
 import { LoadingService } from 'src/app/services/loading.service';
+import { Crop } from '@ionic-native/crop/ngx';
+import { File } from '@ionic-native/file/ngx';
 
 @Component({
 	selector: 'app-home',
@@ -56,7 +58,9 @@ export class HomePage implements OnInit {
 		public loading: LoadingService,
 		private actionSheetController: ActionSheetController,
 		readonly ngZone: NgZone,
-		public router:Router
+		public router:Router,
+		private crop: Crop,
+		private file: File
 	) {
 		this.productos = [];
 		this.storage.get('_token').then(val =>{
@@ -116,28 +120,60 @@ export class HomePage implements OnInit {
 
 	addslider(sourceType) {
 		const options: CameraOptions = {
+			allowEdit: true,
 			quality: 100,
 			sourceType: sourceType,
-			destinationType: this.camera.DestinationType.DATA_URL,
+			/* destinationType: this.camera.DestinationType.DATA_URL, */
+			destinationType: this.camera.DestinationType.FILE_URI,
 			encodingType: this.camera.EncodingType.JPEG,
 			mediaType: this.camera.MediaType.PICTURE,
 			correctOrientation: true,
 		}
 
 		this.camera.getPicture(options).then( imageData => {
-			let base64Image = 'data:image/jpeg;base64,' + imageData;
-
-			/* this.aImages.push({ image: base64Image }); */
-			this.sliderService.create_NewItem(base64Image).then( response => { 
-				/* this.aImages.push({ image: response[0].photo });
-				this.slider.push({ image: response[0].photo }); */
-				this.getSlider();
-				console.log('images', this.aImages);
+			this.cropImage(imageData).then( newImage => {
+				this.imageToBase64(newImage.split('?')[0]).then( base64 => {
+					let base64Image = 'data:image/jpeg;base64,' + base64;
+					
+					this.sliderService.create_NewItem(base64Image).then( response => { 
+						this.getSlider();
+					});
+				});
 			});
 		}, (err) => {
 			console.error(err);
 		}).catch( error => { 
 			console.error(error);
+		});
+	}
+
+	async cropImage(imageData) {
+		return new Promise<any>((resolve, reject) => {
+			this.crop.crop(imageData, { quality: 100 }).then( newImage => { 
+				console.log('new image path is: ' + newImage);
+				resolve(newImage);
+			}, error => { 
+				console.error('Error cropping image', error);
+				reject(error);
+			});
+		});
+	}
+
+	async imageToBase64(newImage) {
+		return new Promise<any>((resolve, reject) => {
+			var copyPath = newImage;
+			var splitPath = copyPath.split('/');
+			var imageName = splitPath[splitPath.length-1];
+			var filePath = copyPath.split(imageName)[0];
+
+			this.file.readAsDataURL(filePath,imageName).then (base64=>{
+				console.log('base64 is: ' + base64);
+				var base = base64.split(';base64,')[1];
+				resolve(base);
+			}, error=>{
+				console.log('Error in showing image' + error);
+				reject(error);
+			});
 		});
 	}
 
@@ -280,6 +316,14 @@ export class HomePage implements OnInit {
 			console.log('getSlider', response);
 			this.slider = response;
 			this.aImages = response;
+			/* response.then( data => {
+				if(data){
+					this.slider = data;
+					this.aImages = [];
+				}
+			}, err => {
+				console.log(err);
+			}); */
 		}).catch(err => console.error(err));
 	}
 

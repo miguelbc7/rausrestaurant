@@ -8,8 +8,9 @@ import { Storage } from '@ionic/storage';
 import { NativeGeocoder, NativeGeocoderResult } from '@ionic-native/native-geocoder/ngx';
 import { LoadingService } from 'src/app/services/loading.service';
 import { Camera, CameraOptions } from '@ionic-native/Camera/ngx';
-import { Crop } from '@ionic-native/crop/ngx';
 import { ProductoguardadoPage } from '../modals/productoguardado/productoguardado.page';
+import { Crop } from '@ionic-native/crop/ngx';
+import { File } from '@ionic-native/file/ngx';
 
 @Component({
   selector: 'app-perfil',
@@ -63,7 +64,8 @@ export class PerfilPage implements OnInit {
 		public loading: LoadingService,
 		private camera: Camera,
 		private actionSheetController: ActionSheetController,
-		private crop: Crop
+		private crop: Crop,
+		private file: File
 	) { 
       	this.profileForm = this.formBuilder.group({
 			business_name: ['', Validators.compose([
@@ -208,21 +210,53 @@ export class PerfilPage implements OnInit {
 		}
 
 		this.camera.getPicture(options).then( imageData => {
-			/* let base64Image = 'data:image/jpeg;base64,' + imageData; */
-			/* this.aImages = { image: base64Image } ; */
-			/* this.avatar = base64Image; */
+			this.cropImage(imageData).then( newImage => {
+				this.imageToBase64(newImage.split('?')[0]).then( base64 => {
+					let base64Image = 'data:image/jpeg;base64,' + base64;
+					this.aImages = { image: base64Image } ;
+					this.avatar = base64Image;
 
-			this.crop.crop(imageData, { quality: 100 }).then( newImage => { 
-				console.log('new image path is: ' + newImage);
-			}, error => { 
-				console.error('Error cropping image', error);
-			});
-
-			/* this.authService.updateAvatar(this.aImages).then((response) => {
-				this.guardado();
-			}); */
+					this.authService.updateAvatar(this.aImages).then( response => {
+						this.guardado();
+					});
+				}, error => {
+					console.log('error');
+				})
+			}, error => {
+				console.log('error');
+			})
 		}, err => {
 			console.log('error', err)
+		});
+	}
+
+	async cropImage(imageData) {
+		return new Promise<any>((resolve, reject) => {
+			this.crop.crop(imageData, { quality: 100 }).then( newImage => { 
+				console.log('new image path is: ' + newImage);
+				resolve(newImage);
+			}, error => { 
+				console.error('Error cropping image', error);
+				reject(error);
+			});
+		});
+	}
+
+	async imageToBase64(newImage) {
+		return new Promise<any>((resolve, reject) => {
+			var copyPath = newImage;
+			var splitPath = copyPath.split('/');
+			var imageName = splitPath[splitPath.length-1];
+			var filePath = copyPath.split(imageName)[0];
+
+			this.file.readAsDataURL(filePath,imageName).then (base64=>{
+				console.log('base64 is: ' + base64);
+				var base = base64.split(';base64,')[1];
+				resolve(base);
+			}, error=>{
+				console.log('Error in showing image' + error);
+				reject(error);
+			});
 		});
 	}
 

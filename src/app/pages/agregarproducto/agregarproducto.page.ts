@@ -11,6 +11,8 @@ import { Storage } from '@ionic/storage';
 import { LoadingService } from 'src/app/services/loading.service';
 import { ProductocreadoPage } from '../modals/productocreado/productocreado.page';
 import { ProductoguardadoPage } from '../modals/productoguardado/productoguardado.page';
+import { Crop } from '@ionic-native/crop/ngx';
+import { File } from '@ionic-native/file/ngx';
 
 @Component({
 	selector: 'app-agregarproducto',
@@ -43,7 +45,7 @@ export class AgregarproductoPage implements OnInit {
 	eat_in_restaurant:boolean = false;
 	wear:boolean = false;
 	delivery:boolean = false;
-	status:boolean = false;
+	status:boolean = true;
 	type;
 	stock = 0;
 	errorMessage = '';
@@ -114,6 +116,8 @@ export class AgregarproductoPage implements OnInit {
 		private storage:Storage,
 		public loading: LoadingService,
 		private actionSheetController: ActionSheetController,
+		private crop: Crop,
+		private file: File
     ) {
         this.productoForm = this.formBuilder.group({
         	name: [this.name , Validators.compose([
@@ -277,8 +281,6 @@ export class AgregarproductoPage implements OnInit {
 		let id = this.productos._id;
 		
 		this.productosService.deleteImagen(id, img_id).then( response => {
-			console.log('response', response);
-			console.log(index);
 			this.aImages.splice(index, 1);
 		});
 	}
@@ -303,7 +305,6 @@ export class AgregarproductoPage implements OnInit {
 			aNoIngredients = values.no_ingredientes.split(',');
 
 			for (let index = 0; index < aNoIngredients.length; index++) {
-				console.log(aNoIngredients[index]);
 				values.no_ingredients.push( { 'name' : aNoIngredients[index]} ) ;
 			}
 		}
@@ -315,40 +316,30 @@ export class AgregarproductoPage implements OnInit {
 		values.carbohydrates = values.carbohydrates?values.carbohydrates:0;
 		values.total_calories = values.total_calories?values.total_calories:0;
 		values.protein = values.protein?values.protein:0;
-
-		console.log('values', values);
-		console.log('type', this.type);
-		console.log(this.productos);
 		
 		if(this.type == 'create') {
-			console.log('type', this.type);
 			this.productosService.createItem(values, this.aImages).then((response) => {
 				response.subscribe( data => {
-					console.log('data', data);
 					this.productoCreado();
 					this.idProm = data._id;
 					this.productos = data;
 					this.type = 'edit';
 					this.ScrollToTop();
-					/* this.router.navigate(['home']); */
 				}, err => {
-					console.log(err);
 					this.loading.hideLoader();this.loading.hideLoader();
 				});
 			});
 		} else if(this.type == 'edit') {
-			console.log(this.type);
 			this.productosService.updateItem(this.productos._id, values, this.aImages3).then((response) => {
 				response.subscribe( () => {
 					this.productoGuardado();
 					this.router.navigate(['home']);
 				}, err => {
-					console.log(err);
 					this.loading.hideLoader();
 				});
-			
-				// this.router.navigate(['list']);
-			}).catch(error => { console.error(error) });
+			}).catch( error => { 
+				console.error(error);
+			});
 		}
 	}
 
@@ -407,22 +398,58 @@ export class AgregarproductoPage implements OnInit {
 
 	pickImage(sourceType) {
 		const options: CameraOptions = {
+			allowEdit: true,
 			quality: 75,
 			sourceType: sourceType,
-			destinationType: this.camera.DestinationType.DATA_URL,
+			/* destinationType: this.camera.DestinationType.DATA_URL, */
+			destinationType: this.camera.DestinationType.FILE_URI,
 			encodingType: this.camera.EncodingType.JPEG,
 			mediaType: this.camera.MediaType.PICTURE,
 			correctOrientation: true,
 		}
 
 		this.camera.getPicture(options).then((imageData) => {
-			let base64Image = 'data:image/jpeg;base64,' + imageData;
-			this.aImages.push({img : base64Image});
-			this.aImages2.push({ img: imageData });
-			this.aImages3.push({ img: imageData });
-			console.log(this.aImages);
+			this.cropImage(imageData).then( newImage => {
+				this.imageToBase64(newImage.split('?')[0]).then( base64 => {
+					let base64Image = 'data:image/jpeg;base64,' + base64;
+					this.aImages.push({img : base64Image});
+					this.aImages2.push({ img: imageData });
+					this.aImages3.push({ img: imageData });
+					console.log(this.aImages);
+				});
+			});
 		}, err => {});
-  	}
+	}
+	  
+	async cropImage(imageData) {
+		return new Promise<any>((resolve, reject) => {
+			this.crop.crop(imageData, { quality: 100 }).then( newImage => { 
+				console.log('new image path is: ' + newImage);
+				resolve(newImage);
+			}, error => { 
+				console.error('Error cropping image', error);
+				reject(error);
+			});
+		});
+	}
+
+	async imageToBase64(newImage) {
+		return new Promise<any>((resolve, reject) => {
+			var copyPath = newImage;
+			var splitPath = copyPath.split('/');
+			var imageName = splitPath[splitPath.length-1];
+			var filePath = copyPath.split(imageName)[0];
+
+			this.file.readAsDataURL(filePath,imageName).then (base64=>{
+				console.log('base64 is: ' + base64);
+				var base = base64.split(';base64,')[1];
+				resolve(base);
+			}, error=>{
+				console.log('Error in showing image' + error);
+				reject(error);
+			});
+		});
+	}
 
 	add(){
 		if(!this.stock)
