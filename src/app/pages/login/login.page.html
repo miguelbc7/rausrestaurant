@@ -1,4 +1,4 @@
-<ion-content class="minHeight">
+<ion-content class="minHeight containLogin">
   <div class="ion-text-center boxLogo">
     <img class="logoImg" src="assets/img/logo-raus.png" alt="logotipo">
     <p class="blue-dark">...the way you like</p>
@@ -33,19 +33,18 @@
             <ion-button class="font14 blue-dark" fill="clear" (click)="newPassword()">Nueva contraseña</ion-button>
           </div>
       </div>
-  
-  <ion-row class="marginButtonTop">
-    <ion-col size="12" class="ion-text-center">
-      <ion-button type="submit" [disabled]="!loginForm.valid" class="font15" color="bluelight" >Entrar</ion-button>
-    </ion-col>
-    <label class="error-message">{{errorMessage}}</label>
-  </ion-row>
-  <ion-row class="btnNuevo">
+    <ion-row class="marginButtonTop">
       <ion-col size="12" class="ion-text-center">
-          <ion-button type="button" class="font15" color="bluedark"   routerLink="/register1">Primera Vez</ion-button>
+        <ion-button type="submit" [disabled]="!loginForm.valid" class="font15 btnLogin init" color="bluelight" >Entrar</ion-button>
       </ion-col>
-   </ion-row>
-</form>
+      <label class="error-message">{{errorMessage}}</label>
+    </ion-row>
+    <ion-row class="btnNuevo">
+        <ion-col size="12" class="ion-text-center">
+            <ion-button type="button" class="font15 btnLogin register" color="bluedark"   routerLink="/register1">Primera Vez</ion-button>
+        </ion-col>
+    </ion-row>
+  </form>
    <!-- <div class="footerLogin">
      <ion-grid no-padding>
       <ion-row  style="margin:0px 2px">
@@ -62,10 +61,10 @@
     <ion-grid class="ion-no-padding">
       <ion-row  style="margin:0px 2px">
           <ion-col size="6">
-              <p class="font11 blue-dark  ion-text-wrap mb-0" fill="cler" (click)="presentPoliticas()">Políticas <br> de privacidad</p>
+              <p class="font11 blue-dark sizeFont ion-text-wrap mb-0" fill="cler" (click)="presentPoliticas()">Políticas <br> de privacidad</p>
           </ion-col>
           <ion-col size="6">
-              <p class="font11 blue-dark  ion-text-wrap mb-0" fill="cler" (click)="presentTerminos()">Terminos y condiciones<br class="displayLg"> del servicio</p>
+              <p class="font11 blue-dark sizeFont ion-text-wrap mb-0" fill="cler" (click)="presentTerminos()">Terminos y condiciones<br class="displayLg"> del servicio</p>
           </ion-col>
         </ion-row>
       </ion-grid>

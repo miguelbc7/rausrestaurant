@@ -11,6 +11,7 @@
     <img class="imgAvatar" src="{{avatar}}" alt="avatar perfil">
     <ion-icon class="edit-img" name="create" (click)="selectImage()"></ion-icon>
   </ion-avatar>
+  <!-- <input style="border: 1px solid #000;" [(colorPicker)]="color" [style.background]="color" (colorPickerChange)="changeColor($event)" id="canvaimg" /> -->
   <ion-grid>
     <form [formGroup]="profileForm" (ngSubmit)="onSubmit(profileForm.value)" class="ion-margin-horizontal">
       <ion-list>

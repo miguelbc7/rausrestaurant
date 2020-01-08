@@ -54,6 +54,8 @@
     "ionic-native": "^2.9.0",
     "moment": "^2.24.0",
     "ngx-chips": "^2.1.0",
+    "ngx-color": "^4.1.0",
+    "ngx-color-picker": "^8.2.0",
     "ngx-mask-ionic": "^1.1.2",
     "rxjs": "~6.5.1",
     "save": "^2.4.0",

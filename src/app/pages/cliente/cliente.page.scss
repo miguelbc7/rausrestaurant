@@ -4,9 +4,6 @@
 
 .avatar{
     margin: auto;
-    margin-top: -20px;
-    width: 120px;
-    height: 120px;
     border-radius: 50%;
  }
 
@@ -159,6 +156,134 @@ ion-slide.changeStyle img {
 
 ion-button.btnNoPadding {
     padding: 0 !important;
+}
+
+.barMenu{
+    padding: 15px 10px;
+    display: flex;
+    align-items: center;
+    background-color: #657b9f;
+    .box{
+        width: 33.3%;
+        display: flex;
+        align-items: center;
+    }
+    .box.a{
+        .colorBlack{
+            font-size: 22px;
+            color: #fff;
+        }
+        .avatar{
+            width: 60px;
+            height: 60px;
+            .imgAvatar{
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+
+            }
+        }
+    }
+
+    .box.b{
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: top;
+        .title{
+            color: #fff;
+            font-size: 18px;
+            margin-bottom: 0px;
+            margin-top: -10px;
+        }
+        .alinearBalance{
+            display: flex;
+            align-items: flex-start;
+            color: #fff;
+            .price2{
+                font-size: 52px;
+                color: #fff;
+                line-height: 0.8;
+            }   
+            .decimal2{
+                color: #fff;
+            }
+        }
+    }
+    .box.c{
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        button{
+            background-color: transparent;
+            color: #fff;
+            border: none;
+            box-shadow: none;
+            &:hover, &:focus, &:active{
+                background-color: transparent;
+                border: none;
+            }
+            i{
+                font-size: 38px;
+            }
+            p{
+                text-align: center;
+                margin: 0;
+            }
+        }
+    }
+}
+.contentClient{
+    .titlePromociones{
+        margin: 10px auto;
+    }
+
+    .customCard{
+        margin: auto 10px;
+        .imgCarta3{
+            
+        }
+        .newPrice{
+            color: #494947;
+            display: flex;
+            justify-content: flex-end;
+            .a{
+                font-size: 36px;
+                 line-height: .85;
+            }
+            .b{
+                font-size: 16px;
+                margin-left: 3px;
+            }
+        }
+        .p-10{
+            padding: 10px;
+        }
+        .customDarkText{
+            text-align: left;
+        }
+        .description-text{
+            margin-top: 5px;
+        }
+    }
+}
+.cardRestaurant{
+    height: 125px;
+    &__title{
+        text-align: left !important;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical; 
+    }
+    &__go{
+        text-align: center !important;
+    }
+    .imgCarta2{
+        object-fit: cover;
+        height: 125px;
+    }
 }
 
 :root {

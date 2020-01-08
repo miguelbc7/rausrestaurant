@@ -30,6 +30,21 @@
 //   position: static;
 // }
 
+// Global fonts 
+
+@font-face {
+    font-family:"Segoe";
+    src: url('assets/fonts/Segoeuihistoric.ttf')
+}
+
+*{
+    font-family: "Segoe", serif !important;
+}
+.fa, .far, .fas{
+    font-family: Font Awesome\ 5 Free !important;
+}
+
+
 .error-message
 {
   color:#c70000;

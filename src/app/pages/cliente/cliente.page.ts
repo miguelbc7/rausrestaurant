@@ -31,6 +31,12 @@ export class ClientePage implements OnInit {
 		private showcaseService: ShowcaseService,
 	) {}
 
+	// Slider Promotions 
+
+	slideOpts = {
+		slidesPerView: 2,
+	  };
+
 	ngOnInit() {
 		console.log('a');
 

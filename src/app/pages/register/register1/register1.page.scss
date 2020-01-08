@@ -45,141 +45,155 @@ $foundation-icon-theme: (
     @include icon-theme($foundation-icon-theme);
 }
 
-
-
-
-
-.logoImg {
-    width: 65%;
-    height: auto;
-    text-align: center;
-    margin-top: 15%;
+ng2-dropdown-menu{
+    .ng2-dropdown-menu{
+        width: 95% !important;
+        left: 2.5% !important;
+        text-align: center !important;
+    }
 }
-
-.boxLogo p {
-    font-size: 1.6em;
-}
-
-.marginButtonTop {
-    margin-top: 2.5rem;
-}
-
-// .ng2-tag-input__text-input {
-
-//     background-color: transparent !important;
-//     display: inline;
-//     vertical-align: middle;
-//     border: none;
-//     padding: 0 .5rem;
-//     height: 38px;
-//     font-size: 1em;
-//     font-family: 'SEGUIHIS' !important;
-// }
-
- tag-input.inputTag {
-    font-family: 'SEGUIHIS' !important;
-    --background: transparent !important;
-    background-color: transparent !important; 
-
-}
-.ng2-tag-input__text-input{
-    background: transparent !important;
-}
-.ng2-tag-input__text-input.ng-pristine.ng-valid.ng-touched{
-    --background: transparent !important;
-}
-.itemTransparent  {
-    --background: transparent !important;
-}
-
-
-:ng-deep .ng2-tag-input__text-input.minimal {
-    background-color: transparent !important;
-}
-
 
 ion-content.bgSlide{
-    --background: url('/assets/img/fondoslid.jpg') no-repeat center center / cover;
+    background-image: url('/assets/img/fondoslid.jpg') no-repeat center center / cover;
 }
 
-.paddingBody {
-    // padding-bottom: 420px !important;
-    // position: relative;
+.minimal{
+    tag{
+        margin: auto;
+    }
+}
+
+.containerRegister{
+
+    .market{
+        color: #bfdcf5 !important;
+    }
+    .logoImg {
+        width: 65%;
+        height: auto;
+        text-align: center;
+        margin-top: 15%;
+    }
+    
+    .boxLogo p {
+        font-size: 1.6em;
+    }
+    
+    .marginButtonTop {
+        margin-top: 2.5rem;
+    }
+    
+     tag-input.inputTag {
+        font-family: 'SEGUIHIS' !important;
+        --background: transparent !important;
+        background-color: transparent !important; 
+    }
+    tag-input,  tag-input-form, input{
+        text-align: center;
+        width: 100%;
+    }
+    .ng2-tag-input__text-input{
+        background: transparent !important;
+    }
+    .ng2-tag-input__text-input.ng-pristine.ng-valid.ng-touched{
+        --background: transparent !important;
+    }
+    .itemTransparent  {
+        --background: transparent !important;
+    }
+    
+    
+    :ng-deep .ng2-tag-input__text-input.minimal {
+        background-color: transparent !important;
+    }
+    
+    .btnCreate{
+        font-size: 15pt;
+        background-color: #657b9f;
+    }
+    
+    
+   
+    
+    .paddingBody {
+        // padding-bottom: 420px !important;
+        // position: relative;
+    }
+    @media (min-width: 768px) and (max-width: 1024px) {
+  
+        .logoImg {
+            width: 55%;
+            height: auto;
+            text-align: center;
+            margin-top: 10%;
+        }
+    
+        .boxLogo p {
+            font-size: 2.8em;
+        }
+        
+      }
+    
+    @media (min-width: 481px) and (max-width: 767px) {
+      
+        .logoImg {
+            width: 45%;
+            height: auto;
+            text-align: center;
+            margin-top: 5%;
+        }
+    
+        .boxLogo p {
+            font-size: 1.3em;
+        }
+    
+        
+      }
+    
+    @media (min-width: 481px) and (max-width: 767px) and (min-height: 700px) and (max-height: 991px) {
+      
+        .logoImg {
+            width: 55%;
+            height: auto;
+            text-align: center;
+            margin-top: 10%;
+        }
+    
+        .boxLogo p {
+            font-size: 1.5em;
+        }
+        
+      }
+    
+    @media only screen and (min-width: 320px) and (max-width: 480px) and (max-height: 700px) {
+        .logoImg {
+            width: 55%;
+            height: auto;
+            text-align: center;
+            margin-top: 10%;
+        }
+    
+        .boxLogo p {
+            font-size: 1.5em;
+        }
+        
+    }
+    
+    
+    @media only screen and (min-width: 320px) and (max-width: 400px) and (max-height: 600px) {
+        .logoImg {
+            width: 45%;
+            height: auto;
+            text-align: center;
+            margin-top: 5%;
+        }
+    
+        .boxLogo p {
+            font-size: 1.3em;
+        }
+        
+    }
 }
 
 // IPAD
 
-@media (min-width: 768px) and (max-width: 1024px) {
-  
-    .logoImg {
-        width: 55%;
-        height: auto;
-        text-align: center;
-        margin-top: 10%;
-    }
-
-    .boxLogo p {
-        font-size: 2.8em;
-    }
-    
-  }
-
-@media (min-width: 481px) and (max-width: 767px) {
-  
-    .logoImg {
-        width: 45%;
-        height: auto;
-        text-align: center;
-        margin-top: 5%;
-    }
-
-    .boxLogo p {
-        font-size: 1.3em;
-    }
-
-    
-  }
-
-@media (min-width: 481px) and (max-width: 767px) and (min-height: 700px) and (max-height: 991px) {
-  
-    .logoImg {
-        width: 55%;
-        height: auto;
-        text-align: center;
-        margin-top: 10%;
-    }
-
-    .boxLogo p {
-        font-size: 1.5em;
-    }
-    
-  }
-
-@media only screen and (min-width: 320px) and (max-width: 480px) and (max-height: 700px) {
-    .logoImg {
-        width: 55%;
-        height: auto;
-        text-align: center;
-        margin-top: 10%;
-    }
-
-    .boxLogo p {
-        font-size: 1.5em;
-    }
-    
-}
-
-
-@media only screen and (min-width: 320px) and (max-width: 400px) and (max-height: 600px) {
-    .logoImg {
-        width: 45%;
-        height: auto;
-        text-align: center;
-        margin-top: 5%;
-    }
-
-    .boxLogo p {
-        font-size: 1.3em;
-    }
-    
-}

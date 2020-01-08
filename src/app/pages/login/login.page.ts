@@ -1,4 +1,4 @@
-import { Component, OnInit, NgZone } from '@angular/core';
+import { Component, OnInit, NgZone, ViewEncapsulation } from '@angular/core';
 import { ModalController, Platform } from '@ionic/angular';
 import { ModalPoliticasPage } from '../modals/modal-politicas/modal-politicas.page';
 import { ModalTerminosPage } from '../modals/modal-terminos/modal-terminos.page';
@@ -14,6 +14,7 @@ import { Keyboard } from '@ionic-native/keyboard/ngx';
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class LoginPage implements OnInit {
 
@@ -32,7 +33,7 @@ export class LoginPage implements OnInit {
     private keyboard: Keyboard,
     private ngZone: NgZone,
 
-              ) 
+)   
   {
     this.ngZone.run(()=>{
       this.keyboard.onKeyboardShow().subscribe(()=>{

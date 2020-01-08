@@ -15,6 +15,8 @@ import { AuthService } from './services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
 import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
 import { Crop } from '@ionic-native/crop/ngx';
+import { ColorChromeModule } from 'ngx-color/chrome'; // <color-chrome></color-chrome>
+import { ColorPickerModule } from 'ngx-color-picker';
 
 firebase.initializeApp(environment.firebase);
 
@@ -43,7 +45,7 @@ import { LoadingService } from './services/loading.service';
 // import { Welcome1Page } from './pages/welcome1/welcome1.page';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';
-import {NgxMaskIonicModule} from 'ngx-mask-ionic';
+import { NgxMaskIonicModule } from 'ngx-mask-ionic';
 import { GoogleMaps } from '@ionic-native/google-maps';
 import { Keyboard } from '@ionic-native/keyboard/ngx';
 
@@ -78,6 +80,10 @@ import { Keyboard } from '@ionic-native/keyboard/ngx';
     AngularFireDatabaseModule,
     AngularFireStorageModule,
     NgxMaskIonicModule.forRoot(),
+    ColorPickerModule
+  ],
+  exports: [
+    ColorPickerModule
   ],
   providers: [
     StatusBar,
@@ -98,4 +104,5 @@ import { Keyboard } from '@ionic-native/keyboard/ngx';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+
+export class AppModule { ColorPickerModule }

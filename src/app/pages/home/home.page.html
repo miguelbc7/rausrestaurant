@@ -1,12 +1,15 @@
 <app-navbar></app-navbar>
-<ion-content>
+<ion-content class="align-top">
+	<ion-avatar class="avatar" routerLink="/perfil">
+		<img class="imgAvatar" src="{{avatar}}" alt="avatar perfil">
+	</ion-avatar> 
 	<ion-grid class="px-0">
 		<ion-row class="my-0 py-0">
 			<ion-col class="py-0 ion-align-self-center ion-text-center" size="2">
-				<ion-icon color="bluedark" class="font16" name="menu" routerLink="/opciones"></ion-icon>
+				<ion-icon color="bluedark" class="colorBlack" name="menu" routerLink="/opciones"></ion-icon>
 			</ion-col>
 			<ion-col size="8" class="ion-text-center">
-				<p class="my-0 font14 ">
+				<p class="my-0 font14 truncate">
 					{{profile.business_name}}
 				</p>
 			</ion-col>
@@ -32,11 +35,7 @@
 							</div>
 						</ion-slide>
 						
-					</ion-slides>
-					<ion-avatar class="avatar" routerLink="/perfil">
-						<img class="imgAvatar" src="{{avatar}}" alt="avatar perfil">
-					</ion-avatar>    
-					
+					</ion-slides>   
 				</div>
 			</ion-col>
 		</ion-row>
@@ -47,7 +46,7 @@
 		</ion-row>
 		<ion-row class="ion-no-padding">
 			<ion-col size="12" class="font12 ion-text-center blue-dark2">
-				<ion-button fill="clear" color="bluedark" class="blue-dark bold ion-text-center ion-text-wrap" (click)="getMap()">
+				<ion-button fill="clear" color="bluedark" class="directionText bold ion-text-center ion-text-wrap" (click)="getMap()">
 					{{profile.direction.street}}
 					<ion-icon color="bluedark" class="iconLapiz " slot="end" src="assets/img/icon/lapiz.svg"></ion-icon>
 				</ion-button>
@@ -60,7 +59,7 @@
 				</ion-col> -->
 				<ion-col size="12">
 					<p class="ion-text-center ion-no-margin">
-						<ion-icon class="font24" color="bluedark" name="time"></ion-icon>
+						<ion-icon class="font24 time" color="bluedark" name="time"></ion-icon>
 					</p>
 					<p class="ion-text-center ion-no-margin font12 blue-dark2">
 						Presiona para modificar los horarios
@@ -193,13 +192,17 @@
 					<ion-card-content>
 						<ion-row>
 							<ion-col class="ion-no-padding ion-align-self-center " size="7">
-								<p class="hgPCarta my-0 customDarkText font12">
+								<p class="hgPCarta my-0 customDarkText font12 truncateCard fontSize">
 									{{product.name | slice: 0:15 }}
 								</p> 
 							</ion-col>
 							<ion-col class="ion-no-padding" size="5">
-								<p class="my-0 hgPCarta  customDarkText">
+								<!-- <p class="my-0 hgPCarta  customDarkText">
 									<span class="font12">{{product.price_with_iva| currency:'EUR':true:'1.2-2'}}</span>
+								</p> -->
+								<p class="newPrice">
+									<span class="a">9</span>
+									<span class="b">,50€</span>
 								</p>
 							</ion-col>
 						</ion-row>
@@ -208,13 +211,13 @@
 								<!-- <p class="hgPCarta my-0 customDarkText font9" *ngFor="let ingredientes of product.ingredients">
 									{{ ingredientes.name }},
 								</p>  -->
-								<p  class="hgPCarta my-0 customDarkText font9"> {{product.description | slice: 0:30}} </p>
+								<p  class="hgPCarta my-0 customDarkText font9 truncateCard fontSize"> {{product.description | slice: 0:30}} </p>
 							</ion-col>
 							<ion-col class="ion-no-padding ion-align-self-center ion-text-right" size="2">
-								<ion-icon class="font24" color="bluedark" src="assets/img/icon/compartir.svg"></ion-icon>
+								<ion-icon class="font24 scale" color="bluedark" src="assets/img/icon/compartir.svg"></ion-icon>
 							</ion-col>
 							<ion-col class="ion-no-padding ion-align-self-center ion-text-right" size="2" (click)="addpromocion(product._id)">
-								<ion-icon class="font24" color="bluedark" src="assets/img/icon/parlantepromo.svg"></ion-icon>
+								<ion-icon class="font24 scale2" color="bluedark" src="assets/img/icon/parlantepromo.svg"></ion-icon>
 							</ion-col>
 						</ion-row>
 					</ion-card-content>

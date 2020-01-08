@@ -1,4 +1,4 @@
-import { Component, OnInit, NgZone } from '@angular/core';
+import { Component, OnInit, NgZone, ViewEncapsulation } from '@angular/core';
 import { HorariosPage } from '../modals/horarios/horarios.page';
 import { AddsliderPage } from '../modals/addslider/addslider.page';
 import { EditavatarPage } from '../modals/editavatar/editavatar.page';
@@ -21,6 +21,7 @@ import { File } from '@ionic-native/file/ngx';
 	selector: 'app-home',
 	templateUrl: './home.page.html',
 	styleUrls: ['./home.page.scss'],
+	encapsulation: ViewEncapsulation.None
 })
 
 export class HomePage implements OnInit {

@@ -1,4 +1,4 @@
-<ion-content class="bgSlide paddingBody">
+<ion-content class="bgSlide paddingBody containerRegister">
     <div class="ion-text-center boxLogo">
         <img class="logoImg" src="assets/img/logo-raus.png" alt="logotipo">
         <!-- <p class="blue-dark">...the way you like</p> -->
@@ -47,7 +47,7 @@
               <ion-item class="ion-no-padding itemTransparent">
                   <ion-label class="font14" position="floating">Dirección</ion-label>
                   <ion-input type="text" formControlName="address" [(ngModel)]="address"  required></ion-input>
-                  <ion-icon class="ion-align-self-end" name="pin" color="bluedark" slot="end"  (click)="getMap()"></ion-icon>
+                  <ion-icon class="ion-align-self-end market" name="pin" slot="end"  (click)="getMap()"></ion-icon>
                 </ion-item>
           </div>
           <div class="validation-errors">
@@ -96,11 +96,13 @@
         </div>
       </ng-container>
     </div>
-    <ion-item class="ion-no-padding itemTransparent">
-      <ion-label class="font14" position="floating">Contraseña</ion-label>
-      <ion-input [(ngModel)]="pass" formControlName="password"  [type]="passwordType"></ion-input>
-      <ion-icon class="ion-align-self-end" [name]="passwordShown === true ? 'eye-off' : 'eye'" [color]="passwordShown === true ? 'bluelight' : 'bluedark' " slot="end" (click)="togglePassword()"></ion-icon>
-    </ion-item>
+    <div class="ion-margin-vertical">
+      <ion-item class="ion-no-padding itemTransparent">
+        <ion-label class="font14" position="floating">Contraseña</ion-label>
+        <ion-input [(ngModel)]="pass" formControlName="password"  [type]="passwordType"></ion-input>
+        <ion-icon class="ion-align-self-end" [name]="passwordShown === true ? 'eye-off' : 'eye'" [color]="passwordShown === true ? 'bluelight' : 'bluedark' " slot="end" (click)="togglePassword()"></ion-icon>
+      </ion-item>
+    </div>
     <div class="validation-errors">
       <ng-container *ngFor="let validation of validation_messages.password">
         <div class="error-message" *ngIf="register1.get('password').hasError(validation.type) && (register1.get('password').dirty || register1.get('password').touched)">
@@ -109,11 +111,13 @@
         </div>
       </ng-container>
     </div>
-    <ion-item class="ion-margin-bottom ion-no-padding itemTransparent">
-      <ion-label class="font14" position="floating">Confirmar contraseña</ion-label>
-      <ion-input [(ngModel)]="cpass" formControlName="repeat_password"  [type]="passwordType2"></ion-input>
-      <ion-icon class="ion-align-self-end" [name]="passwordShown2 === true ? 'eye-off' : 'eye'" [color]="passwordShown2 === true ? 'bluelight' : 'bluedark' " slot="end" (click)="revelarConfirmacion()"></ion-icon>
-    </ion-item>
+    <div class="ion-margin-vertical">
+      <ion-item class="ion-margin-bottom ion-no-padding itemTransparent">
+        <ion-label class="font14" position="floating">Confirmar contraseña</ion-label>
+        <ion-input [(ngModel)]="cpass" formControlName="repeat_password"  [type]="passwordType2"></ion-input>
+        <ion-icon class="ion-align-self-end" [name]="passwordShown2 === true ? 'eye-off' : 'eye'" [color]="passwordShown2 === true ? 'bluelight' : 'bluedark' " slot="end" (click)="revelarConfirmacion()"></ion-icon>
+      </ion-item>
+    </div>
     <div class="validation-errors">
       <ng-container *ngFor="let validation of validation_messages.repeat_password">
         <div class="error-message" *ngIf="register1.get('repeat_password').hasError(validation.type) && (register1.get('repeat_password').dirty || register1.get('repeat_password').touched)">
@@ -152,7 +156,7 @@
     </div>
   <br>
   <div class="ion-text-center">
-    <ion-button type="submit" class="font15"  color="bluedark">
+    <ion-button type="submit" class="font15 btnCreate"  color="bluedark">
       Listo
     </ion-button>
     <br>

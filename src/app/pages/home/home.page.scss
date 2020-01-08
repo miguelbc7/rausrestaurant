@@ -1,140 +1,221 @@
-.bgWhite {
-    background-color: #fff;
-}
+.align-top{
 
-.imgAvatar {
-    border: 3px solid #e1e1e1;
-    // padding: 3px;
-}
-
-.pDirection {
-    color: #494947;
-    font-size: 12pt;
-}
-
-.iconLapiz {
-    font-size: 2.5rem;
-}
-
-.avatar{
-    margin: auto;
-    position: absolute;
-    top: -30px;
-    right: 3.5%;
-    width: 80px;
-    height: 80px;
-    z-index: 2;
- }
-
- ion-slide.changeStyle img {
-    max-width: 100% !important;
-    height: 100%;
-    max-height: 230px !important;
-    min-height: 230px !important;
-    margin:0 auto !important;
-} 
-
-.decimal {
-    position: absolute;
-    top: 30%;
-    right: 10px;
-}
-
-.customDarkText{
-    color:#494947
-}
-
-.hgLine {
-    line-height: 0.8;
-}
-
-.logoNav {
-    width: 90px;
-    height: auto;
-    margin-left: 10px;
-    padding:3px;
-}
-
-.iconPlay {
-    font-size: 2.5rem;
-}
-
-
-.mHorarios{
-    margin:1px;
-}
- 
- .IconNav {
-     font-size: 23pt;
- }
-
- .imgCarta3 {
-    width: 100%;
-    height: 135px;
-    object-fit: cover !important;
-}
-
-.addPhotoProducto {
-    position: absolute;
-    left: 50%;
-    top: 48%;
-    transform: translate(-50%, -50%);
-    // width: 300px;
-    // height: 300px;
-    border:3px solid #fff;
-    padding: 2px;
-    border-radius: 30px;
-    z-index: 2;
-}
- 
- ion-button {
-	ion-badge {
-        position: absolute;
-        top: 0.3rem;
-        right: 0.4rem;
-        opacity: 0.9;
-        font-size: 6px;
-        padding: 2px;
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-		& ~ ion-icon {
-			margin-right: 1.2rem;
-		}
+    .bgWhite {
+        background-color: #fff;
     }
     
-    ion-badge.email {
+    .align-top{
+        position: relative;
+        top: -15px;
+    }
+    
+    .imgAvatar {
+        border: 3px solid #e1e1e1;
+        object-fit: cover;
+        object-position: center;
+    }
+    .truncate{
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: calc(100% - 50px);
+        text-align: center;
+        font-size: 16px !important;
+    }
+    
+    .colorBlack{
+        color: #494947;
+        --ion-color-base: #494947;
+        font-size: 26px !important;
+        margin-top: 3px;
+    }
+    
+    .pDirection {
+        color: #494947;
+        font-size: 12pt;
+    }
+    
+    .truncateCard{
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 100%;
+    }
+    
+    .fontSize{
+        font-size: 14px !important;
+    }
+    
+    .customCard{
+        margin: auto 5px !important;
+    }
+    
+    .divEditCard{
+        top: 45%;
+    }
+    
+    .newPrice{
+        color: #494947;
+        display: flex;
+        justify-content: flex-end;
+        .a{
+            font-size: 36px;
+             line-height: .85;
+        }
+        .b{
+            font-size: 16px;
+            margin-left: 3px;
+        }
+    }
+    
+    .font24.scale{
+        transform: scale(0.85);
+    }
+    .font24.scale2{
+        transform: scale(1.4);
+    }
+    ion-button.directionText{
+        padding: 5px 0;
+        font-size: 11px;
+        color: #494947;
+        margin-top: -15px;
+        --ion-color-base: #494947;
+        width: 100%;
+        min-height: 20px;
+        --padding-start: 0px !important;
+        --padding-end: 0px !important;
+        --padding-top: 0px !important;
+        --padding-bottom: 0px !important
+    }
+    
+    .iconLapiz {
+        font-size: 2rem;
+    }
+    
+    .time{
+        margin-top: -20px;
+    }
+    
+    .avatar{
+        margin: auto;
         position: absolute;
-        top: .3rem;
-        right: .2rem;
-        opacity: 0.9;
-        font-size: 6px;
+        right: 3.5%;
+        width: 100px;
+        height: 100px;
+        z-index: 999;
+     }
+    
+     ion-slide.changeStyle img {
+        max-width: 100% !important;
+        height: 100%;
+        max-height: 110px !important;
+        min-height: 110px !important;
+        margin:0 auto !important;
+    } 
+    
+    .decimal {
+        position: absolute;
+        top: 30%;
+        right: 10px;
+    }
+    
+    .customDarkText{
+        color:#494947
+    }
+    
+    .hgLine {
+        line-height: 0.8;
+    }
+    
+    .logoNav {
+        width: 90px;
+        height: auto;
+        margin-left: 10px;
+        padding:3px;
+    }
+    
+    .iconPlay {
+        font-size: 2.5rem;
+    }
+    
+    
+    .mHorarios{
+        margin:1px;
+    }
+     
+     .IconNav {
+         font-size: 23pt;
+     }
+    
+     .imgCarta3 {
+        width: 100%;
+        height: 135px;
+        object-fit: cover !important;
+    }
+    
+    .addPhotoProducto {
+        position: absolute;
+        left: 50%;
+        top: 48%;
+        transform: translate(-50%, -50%);
+        // width: 300px;
+        // height: 300px;
+        border:3px solid #fff;
         padding: 2px;
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-		& ~ ion-icon {
-			margin-right: 1.2rem;
-		}
-	}
+        border-radius: 30px;
+        z-index: 2;
+    }
+     
+     ion-button {
+        ion-badge {
+            position: absolute;
+            top: 0.3rem;
+            right: 0.4rem;
+            opacity: 0.9;
+            font-size: 6px;
+            padding: 2px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            & ~ ion-icon {
+                margin-right: 1.2rem;
+            }
+        }
+        
+        ion-badge.email {
+            position: absolute;
+            top: .3rem;
+            right: .2rem;
+            opacity: 0.9;
+            font-size: 6px;
+            padding: 2px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            & ~ ion-icon {
+                margin-right: 1.2rem;
+            }
+        }
+    }
+    
+    ion-button.btnNoPadding {
+        padding: 0 !important;
+    }
+    
+    :root {
+        --ion-safe-area-top: 20px;
+        --ion-safe-area-bottom: 22px;
+      }
+      .swiper-slide {
+        display: block;
+      }
+      ion-slide > h2 {
+        margin-top: 2.8rem;
+      }
+      ion-slide > img {
+        max-height: 50%;
+        max-width: 60%;
+        margin: 36px 0;
+      }
+      
 }
-
-ion-button.btnNoPadding {
-    padding: 0 !important;
-}
-
-:root {
-    --ion-safe-area-top: 20px;
-    --ion-safe-area-bottom: 22px;
-  }
-  .swiper-slide {
-    display: block;
-  }
-  ion-slide > h2 {
-    margin-top: 2.8rem;
-  }
-  ion-slide > img {
-    max-height: 50%;
-    max-width: 60%;
-    margin: 36px 0;
-  }

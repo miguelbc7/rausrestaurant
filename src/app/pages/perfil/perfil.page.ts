@@ -268,4 +268,31 @@ export class PerfilPage implements OnInit {
 		
 		await modal.present();
 	}
+
+	async changeColor(color) {
+		var img = this.avatar;
+		
+		this.getBase64Image(img, color, (base64Image) => {
+			console.log(base64Image);
+	   	});
+	}
+
+	async getBase64Image(imgUrl, color, callback) {
+
+		var img = new Image();
+		// set attributes and src 
+		img.setAttribute('crossOrigin', 'anonymous'); //
+		img.src = imgUrl;
+
+		img.onload = () => {
+		  var canvas: any = document.createElement("canvas");
+		  canvas.width = img.width;
+		  canvas.height = img.height;
+		  var ctx = canvas.getContext("2d");
+		  ctx.fillStyle = color;
+		  ctx.drawImage(img, 0, 0);
+		  var dataURL = canvas.toDataURL("image/png");
+		  callback(dataURL); // the base64 string
+		};
+	}
 }

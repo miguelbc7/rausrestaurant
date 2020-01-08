@@ -1,4 +1,4 @@
-import { Component, OnInit, NgZone } from '@angular/core';
+import { Component, OnInit, NgZone, ViewEncapsulation } from '@angular/core';
 import { Validators, FormBuilder, FormGroup, FormControl} from '@angular/forms';
 import { ModalController, ToastController, Platform} from '@ionic/angular';
 import { Router } from '@angular/router';
@@ -24,6 +24,7 @@ import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';
   selector: 'app-register1',
   templateUrl: './register1.page.html',
   styleUrls: ['./register1.page.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class Register1Page implements OnInit {
   
