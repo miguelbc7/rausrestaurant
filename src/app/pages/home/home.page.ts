@@ -74,7 +74,6 @@ export class HomePage implements OnInit {
 		this.getSlider();
 		this.getListHorario();
 		this.getListProductos();
-		/* this.getAvatar(); */
 	}
 
 	ngOnInit() {}
@@ -121,10 +120,9 @@ export class HomePage implements OnInit {
 
 	addslider(sourceType) {
 		const options: CameraOptions = {
-			allowEdit: true,
+			allowEdit: false,
 			quality: 100,
 			sourceType: sourceType,
-			/* destinationType: this.camera.DestinationType.DATA_URL, */
 			destinationType: this.camera.DestinationType.FILE_URI,
 			encodingType: this.camera.EncodingType.JPEG,
 			mediaType: this.camera.MediaType.PICTURE,
@@ -151,10 +149,8 @@ export class HomePage implements OnInit {
 	async cropImage(imageData) {
 		return new Promise<any>((resolve, reject) => {
 			this.crop.crop(imageData, { quality: 100 }).then( newImage => { 
-				console.log('new image path is: ' + newImage);
 				resolve(newImage);
 			}, error => { 
-				console.error('Error cropping image', error);
 				reject(error);
 			});
 		});
@@ -168,11 +164,9 @@ export class HomePage implements OnInit {
 			var filePath = copyPath.split(imageName)[0];
 
 			this.file.readAsDataURL(filePath,imageName).then (base64=>{
-				console.log('base64 is: ' + base64);
 				var base = base64.split(';base64,')[1];
 				resolve(base);
 			}, error=>{
-				console.log('Error in showing image' + error);
 				reject(error);
 			});
 		});
@@ -232,9 +226,7 @@ export class HomePage implements OnInit {
 		this.loading.present(6000);
 
 		this.productosService.getList().then(response => {
-			console.log('response', response);
 			response.subscribe((data) => {
-				console.log('data', data);
 				this.productos = data.products;
 				let tempImagesProduct:any = this.storage.get('tempImagesProduct');
 
@@ -263,7 +255,6 @@ export class HomePage implements OnInit {
 
 		this.horarioService.getList().then(response => {
 			response.subscribe((data) => {
-				console.log('data', data);
 				if(data.schedules.schedules) {
 					for(let index = 0 ; index < data.schedules.schedules.length; index++) {
 						switch(data.schedules.schedules[index].name) {
@@ -317,14 +308,6 @@ export class HomePage implements OnInit {
 			console.log('getSlider', response);
 			this.slider = response;
 			this.aImages = response;
-			/* response.then( data => {
-				if(data){
-					this.slider = data;
-					this.aImages = [];
-				}
-			}, err => {
-				console.log(err);
-			}); */
 		}).catch(err => console.error(err));
 	}
 
@@ -350,7 +333,7 @@ export class HomePage implements OnInit {
 
 	getMap() {
 		localStorage.setItem('url','home');
-		localStorage.setItem('street',this.profile.direction.street);
+		localStorage.setItem('street', this.profile.direction.street);
 		this.router.navigate(['map']);
 	}
 

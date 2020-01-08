@@ -46,11 +46,20 @@ ion-slide.changeStyle img {
 	border: 1px solid #999;
 	margin-top: 10px;
     height: 120px;
+    position: relative;
+}
+ion-textarea{
+    padding-bottom: 10px;
+    font-size: 12px;
+}
+
+.boxShowcase1.mt{
+    margin-top: 20px;
 }
 .textPshowcase1{
     position: absolute;
     left: 50%;
-    top: 30%;
+    bottom: 5%;
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     z-index: 2;
@@ -59,7 +68,7 @@ ion-slide.changeStyle img {
 .addPhotoProductoshowcase1{
     position: absolute;
     left: 50%;
-    top: 17%;
+    top: 50%;
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     border: 3px solid #fff;
@@ -102,11 +111,20 @@ ion-slide.changeStyle img {
 .button-programacion{
 	background-color: #a0a9c0 !important;
 	color: #fff;
-	margin-top: 24pt;
+    margin-top: 24pt;
+    width: 100%;
 }
 .button-enviar{
 	width: 100px;
 	background-color: #a0a9c0 !important;
 	color: #fff;
 	margin-top: 24pt;
+}
+
+.bodyShowCase{
+    /* ion-textarea {
+        padding-bottom: 20px;
+    } */
+
+
 }

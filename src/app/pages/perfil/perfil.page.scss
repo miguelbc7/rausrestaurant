@@ -1,39 +1,51 @@
-.imgAvatar {
-    border: 3px solid #e1e1e1;
-    // padding: 3px;
-}
-.mt-0 {
-    margin-top:0px;
-    margin-bottom: 10px;
-}
-.iconBack {
-    margin-top: -15px;
-    font-size: 25pt;
-    margin-left: 20px;
-}
-.avatar{
-    margin: auto;
-    width: 130px;
-    margin-top: -25px;
-    height: 130px;
-    z-index: 2;
- }
- .edit-img{
-    position: absolute;
-    top: 105pt;
-    color: white;
-    font-size: 24pt;
-    right: 123pt;
- }
- 
-.iconn{
-    color: #4e5d6a;
-}
-.mt-save{
-    margin-top:30px;
-}
+.bodyPerfil{
+    .imgAvatar {
+        border: 3px solid #e1e1e1;
+        // padding: 3px;
+    }
+    .mt-0 {
+        margin-top:0px;
+        margin-bottom: 10px;
+    }
+    .iconBack {
+        margin-top: -15px;
+        font-size: 25pt;
+        margin-left: 20px;
+    }
+    .avatar{
+        margin: auto;
+        width: 130px;
+        margin-top: -25px;
+        height: 130px;
+        z-index: 2;
+        position: relative;
+     }
+     .edit-img{
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        color: white;
+        font-size: 24pt;
+        background-color: #657b97;
+        padding: 7px;
+        border-radius: 50%;
+        box-shadow: 2px 2px 2px #c1c1c1;
+        font-size: 24px;
+     }
+     
+    .iconn{
+        color: #4e5d6a;
+    }
+    .mt-save{
+        margin-top:30px;
+    }
+    
+    .text-perfil {
+        color:#4e5d6a;
+        font-weight: bold;
+    }
 
-.text-perfil {
-    color:#4e5d6a;
-    font-weight: bold;
+    .font14{
+        font-size: 14px !important;
+    }
 }

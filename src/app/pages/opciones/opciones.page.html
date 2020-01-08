@@ -4,21 +4,20 @@
   <ion-grid class="px-0 marginTopGrid">
     <ion-row>
         <ion-col size="7" class="hgLine  px-0">
-            <ion-icon class="iconBack" src="assets/img/icon/back.svg" routerLink="/home"></ion-icon>
-            <div style="position: relative;">
+            <div style="position: relative; margin-left: 10px;">
               <p class="font16 my-0 ml-10 blue-dark">Balance</p>
               <p class="my-0 text-dorado alinearBalance">
                 <span [class]="fontSize" >{{decimal[0] | mask: mask }}</span>
                 <span class="font18 decimal">,{{decimal[1]? decimal[1] : 00 }}€</span>
               </p> 
             </div>
-            
+            <ion-icon class="iconBack" src="assets/img/icon/back.svg" routerLink="/home"></ion-icon>
         </ion-col>
         <ion-col size="5">
           <ion-avatar class="avatar">
             <img class="imgAvatar" src="{{avatar}}" alt="avatar perfil">
           </ion-avatar>
-          <p class="text-dorado ion-text-center">
+          <p class="text-dorado b ion-text-center">
             {{profile.business_name}}
           </p>
         </ion-col>

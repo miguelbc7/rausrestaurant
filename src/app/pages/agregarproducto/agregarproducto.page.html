@@ -1,4 +1,4 @@
-<ion-content>
+<ion-content class="contentAdd">
 	<form [formGroup]="productoForm" (ngSubmit)="onSubmit(productoForm.value)" class="ion-margin-horizontal">
     	<!-- <form [formGroup]="productoForm" (ngSubmit)="onUpdate(productoForm.value)" *ngIf="type == edit"  class="ion-margin-horizontal"> -->
     	<ion-row>
@@ -24,7 +24,7 @@
           		<ion-icon (click)="back()" class="iconBack" src="assets/img/icon/back.svg"></ion-icon>
         	</ion-col>
         	<ion-col class="ion-text-center">
-          	<ion-input class="font13" color="custondark" formControlName="name" clearInput  [(ngModel)]="name" placeholder="Escribe aqui el nombre del producto"></ion-input> 
+          	<ion-input class="font13 font-size" color="custondark" formControlName="name" clearInput  [(ngModel)]="name" placeholder="Escribe aqui el nombre del producto"></ion-input> 
         	</ion-col>
       	</ion-row>
 		

@@ -174,46 +174,17 @@ export class MapPage implements OnInit {
 			}
 			
 			var add = subThoroughfare + ' ' + thoroughfare + ' ' + locality + ' ' + subAdminArea + ' ' + adminArea;
-			console.log('add', add);
 			var add2 = add.split(' ');
-			console.log('add2', add2);
 			var x = (names) => names.filter((v,i) => names.indexOf(v) === i)
 			var unique = x(add2);
-			console.log('unique', unique);
 			var arr = unique.join(' ');
-			console.log('arr', arr);
 
-			/* if(results[0].extra) {
-				if(results[0].extra.lines) {
-					console.log('1',results[0].extra.lines);
-					results[0].extra.lines.pop();
-					var add = results[0].extra.lines;
-					console.log('2',add);
-					var x = (names) => names.filter((v,i) => names.indexOf(v) === i)
-					var unique = x(add);
-					console.log('3',unique);
-
-					var arr = unique.join(' ');
-					console.log('4',arr);
-
-					this.ngZone.run(() => {
-						this.address =  arr;
-					});
-				} else {
-					this.ngZone.run(() => {
-						this.address =  subThoroughfare + ' ' + thoroughfare + ' ' + locality + ' ' + subAdminArea + ' ' + adminArea;
-					});
-				}
-			} else { */
-				this.ngZone.run(() => {
-					this.address =  arr;
-				});
-			/* } */
+			this.ngZone.run(() => {
+				this.address =  arr;
+			});
 		}).catch(error =>{
 			this.showToast(error.error_message);
 		})
-
-		// await this.loading.dismiss();
 	}
 
 	save() {
@@ -245,6 +216,8 @@ export class MapPage implements OnInit {
 			this.router.navigate(['register1']);
 		} else if (this.url == 'home') {
 			this.router.navigate(['home']);
+		} else if(this.url == 'perfil') {
+			this.router.navigate(['perfil']);
 		}
 	}
 
@@ -276,10 +249,6 @@ export class MapPage implements OnInit {
 	}
 	
 	async askToTurnOnGPS() {
-		/* await this.locationAccuracy.request(this.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY).then( () => { */
-			this.loadMap();
-		/* }, error => { 
-			console.error('Error requesting location permissions 2' + JSON.stringify(error))
-		}); */
+		this.loadMap();
 	}
 }

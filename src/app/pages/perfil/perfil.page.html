@@ -1,5 +1,5 @@
 <app-navbar></app-navbar>
-<ion-content>
+<ion-content class="bodyPerfil">
   <ion-icon class="backHeader ion-text-center" src="assets/img/icon/back.svg" routerLink="/opciones"></ion-icon>
   <ion-row>
     <ion-col class="ion-text-center" size="12">
@@ -11,10 +11,9 @@
     <img class="imgAvatar" src="{{avatar}}" alt="avatar perfil">
     <ion-icon class="edit-img" name="create" (click)="selectImage()"></ion-icon>
   </ion-avatar>
-  <!-- <input style="border: 1px solid #000;" [(colorPicker)]="color" [style.background]="color" (colorPickerChange)="changeColor($event)" id="canvaimg" /> -->
   <ion-grid>
     <form [formGroup]="profileForm" (ngSubmit)="onSubmit(profileForm.value)" class="ion-margin-horizontal">
-      <ion-list>
+      <ion-list >
         <ion-item>
           <ion-input class="font14" formControlName="business_name" value="{{profile.business_name}}" autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" color="blue-dark2" inputmode="text" placeholder="Vegetalia" required="true"></ion-input>
           <ion-icon class="iconn font20" src="assets/img/icon/lapiz.svg"  slot="end" align-self-center></ion-icon>
@@ -49,7 +48,7 @@
           </ng-container>
         </div>
         <ion-item>
-          <ion-input class="font14" value="" autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" color="blue-dark2" inputmode="text" placeholder="Carrer de Aribau 355" required="true"></ion-input>
+          <ion-input class="font14" value="" value="{{ profile.address }}" autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" color="blue-dark2" inputmode="text" placeholder="Carrer de Aribau 355" required="true"></ion-input>
           <ion-icon class="iconn ion-align-self-center" name="pin"  slot="end"></ion-icon>
         </ion-item>
         <!-- <div class="validation-errors">

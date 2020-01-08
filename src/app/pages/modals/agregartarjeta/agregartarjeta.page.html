@@ -1,7 +1,7 @@
 <ion-content class="minHeightAdd">
   	<br>
 	<form class="ion-padding-horizontal" [formGroup]="cardForm">
-		<ion-row>
+		<ion-row class="minHeight">
 			<ion-col size="12">
 				<ion-item class="ion-no-padding ">
 					<ion-label class="font14 itemSeparado" position="floating">Tarjeta número</ion-label>
@@ -16,10 +16,10 @@
 				</div>
 			</ng-container>
 		</div>
-		<ion-row>
-			<ion-col size="7" class="ion-no-padding">
+		<ion-row class="minHeight">
+			<ion-col size="7" class="mr-0">
 				<ion-item class="ion-no-padding">
-					<ion-label class="ion-no-padding">mes</ion-label>
+					<ion-label class="ion-no-padding">Fecha exp.</ion-label>
 					<ion-select class="ion-text-center ion-no-padding select-space" value="notifications" [(ngModel)]="month" formControlName="month"  interface="action-sheet" cancelText="Cerrar">
 						<ion-select-option class="ion-text-center" value="Enero">Enero</ion-select-option>
 						<ion-select-option class="ion-text-center" value="Febrero">Febrero</ion-select-option>
@@ -36,9 +36,9 @@
 					</ion-select>
 				</ion-item>
 			</ion-col>
-			<ion-col size="5" class="ion-no-padding">
+			<ion-col size="5" class="ml-0">
 				<ion-item class="ion-no-padding">
-					<ion-label class="ion-no-padding">año</ion-label>
+					<ion-label class="ion-no-padding">Año</ion-label>
 					<ion-select class="ion-text-center ion-no-padding select-space" value="notifications" [(ngModel)]="year" formControlName="year" interface="action-sheet" cancelText="Cerrar">
 						<ion-select-option value="2020">2020</ion-select-option>
 						<ion-select-option value="2021">2021</ion-select-option>
@@ -58,14 +58,14 @@
 				</ion-item>
 			</ion-col>
 		</ion-row>
-		<ion-row>
-			<ion-col size="9">
+		<ion-row class="minHeight">
+			<ion-col size="9" class="mr-0">
 				<ion-item class="ion-no-padding">
 				<ion-label class="font14 itemSeparado" position="floating">Nombre en tarjeta</ion-label>
 				<ion-input clearInput="true" type="text" formControlName="nombre" [(ngModel)]="nombre"></ion-input>
 				</ion-item>
 			</ion-col>
-			<ion-col size="3">
+			<ion-col size="3" class="ml-0">
 				<ion-item class="ion-no-padding">
 				<ion-label class="font14 ion-no-padding itemSeparado" position="floating">CVC</ion-label>
 				<ion-input clearInput="false" type="password" formControlName="cvc" maxlength="3" [(ngModel)]="cvc"></ion-input>
@@ -91,14 +91,10 @@
 		<label>{{errorMessage}}</label>
 	</form>
 	<ion-toolbar class="alwaysBottom">
-		<ion-row class=" ion-no-padding">
-			<ion-col size="6" class="ion-text-center">
-				<ion-button class="font15" color="bluedark" [disabled]="!cardForm.valid" (click)="openAgregarSaldo()">Guardar</ion-button>
-			</ion-col>
-			<ion-col size="6" class="ion-text-center">
-				<ion-button class="font15" color="bluelight" (click)="closeModal()">Volver</ion-button>
-			</ion-col>
-		</ion-row>
+		<div class="centere">
+			<ion-button class="font15 btnBack" color="bluelight" (click)="closeModal()">Volver</ion-button>
+			<ion-button class="font15 btnAccept" color="bluedark" [disabled]="!cardForm.valid" (click)="openAgregarSaldo()">Agregar</ion-button>
+		</div>
 	</ion-toolbar>
 </ion-content>
 

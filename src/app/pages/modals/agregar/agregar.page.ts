@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { AgregartarjetaPage } from '../agregartarjeta/agregartarjeta.page';
 import { AgregarconfirmarPage } from '../agregarconfirmar/agregarconfirmar.page';
@@ -8,6 +8,7 @@ import { CreditCardService } from 'src/app/services/credit-card.service';
   selector: 'app-agregar',
   templateUrl: './agregar.page.html',
   styleUrls: ['./agregar.page.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class AgregarPage implements OnInit {
 

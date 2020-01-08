@@ -4,11 +4,11 @@
   </ion-toolbar>
 </ion-header> -->
 
-<ion-content>
+<ion-content class="addCard">
     <ion-row class="my-0">
       <ion-col class="ion-text-end" size="12">
         <!-- <ion-icon class="modalAgregar" src="assets/img/icon/back.svg" (click)="closeModal()"></ion-icon> -->
-        <ion-button color="white" fill="clear" (click)="closeModal()">
+        <ion-button class="colorBlue" fill="clear" (click)="closeModal()">
           <ion-icon slot="end" name="close"></ion-icon>
         </ion-button>
       </ion-col>
@@ -34,7 +34,7 @@
               <ion-label class="iconWhite">*******{{d.payload.doc.data().numero.substr(-4)}} </ion-label>
           </ion-col>
           <ion-col class="ion-text-center" (click)="RemoveRecord(d.payload.doc.id)" size="2">
-            <ion-icon class="mx-0 iconWhite" name="close" color=""></ion-icon>
+            <ion-icon class="mx-0 iconWhite iconclose" name="close" color=""></ion-icon>
           </ion-col>
     </ion-row>
       <!-- <ion-item class="noBorderItem">
@@ -51,10 +51,9 @@
       </ion-item> -->
     </ion-list>
     <div class="ion-text-center">
-      <ion-button class="font14 iconWhite" fill="clear" (click)="openAgregarTarjeta()">
-        <ion-icon slot="start" class="sizeicard" src="assets/img/icon/iconotarjetab.svg"></ion-icon>
+      <ion-button class="font14 iconWhite btnAdd" fill="clear" (click)="openAgregarTarjeta()">
+        <ion-icon slot="start" class="sizeicard" src="assets/img/icon/iconotarjetag.svg"></ion-icon>
         Agregar tarjeta o cuenta
       </ion-button>
     </div>
-
 </ion-content>

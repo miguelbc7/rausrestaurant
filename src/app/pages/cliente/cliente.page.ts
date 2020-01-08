@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { SaldoService } from 'src/app/services/saldo.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { SearchPage } from '../modals/search/search.page';
 import { ShowcaseService } from '../../services/showcase.service';
 
@@ -14,32 +15,32 @@ export class ClientePage implements OnInit {
 
    	value:any = 0.00;
   	decimal = this.value.toFixed(2).toString().split('.'); 
-  	data;
+	data;
+	  
   	profile:any = {
     	business_name: '',
     	direction: '',
-  	};
+	};
+	  
 	avatar = 'assets/img/avatar.png';
+	business_name;
   	fontSize = 'font60';
 	mask = '000';
 	promotions;
 	restaurants;
 
+	slideOpts = {
+		slidesPerView: 2,
+	};
+
   	constructor(
 		private modalCtrl: ModalController,
 		private saldoService:SaldoService,
 		private showcaseService: ShowcaseService,
+		private authService: AuthService,
 	) {}
 
-	// Slider Promotions 
-
-	slideOpts = {
-		slidesPerView: 2,
-	  };
-
 	ngOnInit() {
-		console.log('a');
-
 		this.saldoService.read_Items().then(data => {
 			data.subscribe(e => {
 				this.data = e;
@@ -51,7 +52,6 @@ export class ClientePage implements OnInit {
 				
 				this.value = valor;
 				this.decimal = this.value.toFixed(2).toString().split('.'); 
-				console.log(this.decimal[0]);
 				
 				if(this.decimal[0].length >= 5){
 					this.fontSize = 'font27';
@@ -75,6 +75,7 @@ export class ClientePage implements OnInit {
 			})
 		});
 
+		this.getProfile();
 		this.getPromotions();
 		this.getRestaurants();
 	}
@@ -93,7 +94,6 @@ export class ClientePage implements OnInit {
   	async getPromotions() {
 		this.showcaseService.getPromotions().then( response => {
 			response.subscribe( data => {
-				console.log('promotions', data);
 				this.promotions = data.product;
 			});
 		});
@@ -102,17 +102,12 @@ export class ClientePage implements OnInit {
 	async getRestaurants() {
 		this.showcaseService.getRestaurants().then( response => {
 			response.subscribe( data => {
-				console.log('restaurants', data);
 				var res = [];
 
 				for(let i of Object.keys(data)) {
 					var slider;
 
 					if(data[i].slider) {
-						/* data[i].slider.forEach( (row, j) => {
-							if(j == 0) {
-							}
-						}); */
 						slider = data[i].slider[0].photo
 					} else {
 						slider = "";
@@ -122,9 +117,17 @@ export class ClientePage implements OnInit {
 					res.push(a);
 				}
 				
-				console.log('restaurants2', res);
 				this.restaurants = res;
 			});
 		});
 	}
+
+	getProfile(){
+    	this.authService.getProfile().then( res =>{
+      		res.subscribe(data =>{
+        		this.business_name = data.business_name;
+        		this.avatar = data.photo;
+      		})
+    	});
+  	}
 }

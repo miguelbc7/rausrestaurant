@@ -45,6 +45,15 @@
 
 .text-dorado {
     color: #958659;
+    
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;  
+}
+
+.text-dorado.b{
+    margin: 0;
 }
 
 .text-blueDark {
@@ -75,9 +84,9 @@
 }
 
 .iconBack {
-    margin-top: -15px;
     font-size: 30pt;
     margin-left: 20px;
+    margin-top: 20px;
 }
 
 .buttonDiv {

@@ -19,7 +19,6 @@ export class LoadingService {
 			duration: duration?duration:5000,
 		}).then(a => {
 			a.present().then(() => {
-				console.log('presented');
 				if (!this.isLoading) {
 					a.dismiss().then(() => console.log('abort presenting'));
 				}
@@ -33,12 +32,10 @@ export class LoadingService {
 	}
 
 	async showLoader(duration:number = 5000) {
-		console.log(duration);
 		return await this.loadingController.create({
 			duration: duration,
 		}).then((res) => {
 			res.present().then(()=>{
-				console.log('present');
 			});
 	
 			res.onDidDismiss().then((dis) => {
@@ -51,7 +48,6 @@ export class LoadingService {
 	async hideLoader() {
 		console.log('hide');
 		return await setTimeout(() => {
-			console.log('dismmiss');
 			this.loadingController.dismiss();
 		}, 1000);
 	}

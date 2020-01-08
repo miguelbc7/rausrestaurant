@@ -21,15 +21,16 @@ export class PerfilPage implements OnInit {
 
 	public profileForm: FormGroup;
 	errorMessage = '';
-	profile:any ={};
-	address:any = 'Carrer de Aribau 655. 08021. Barcelona';
+	profile: any = {};
+	address: any = 'Carrer de Aribau 655. 08021. Barcelona';
 	email;
-	passwordType: string  = 'password';
+	passwordType: string = 'password';
 	passwordShown: any;
 	avatar = 'assets/img/avatar.png';
 	type = 'create';
 	idAvatar;
-	aImages: any = [{image: 'assets/img/avatar.png'}];
+	aImages: any = [{ image: 'assets/img/avatar.png' }];
+	
 	validation_messages = {
 		'business_name': [
 			{ type: 'required', message: 'Debe ingresar un nombre comercial.' },
@@ -117,25 +118,27 @@ export class PerfilPage implements OnInit {
 		await modal.present();
 	}
 
-	getUserDetail(){
-		this.authService.getProfile().then(res=>{
+	getUserDetail() {
+		this.authService.getProfile().then( res => {
 			res.subscribe( data => {
+				console.log('street', data.direction.street);
 				this.profile = data;
+				this.profile.address = data.direction.street + ', ' + data.direction.city + ', ' + data.direction.country;
 				this.avatar = data.photo;
 				this.loading.hideLoader();
 			})
 		});
 	}
  
-	getMe(){
+	getMe() {
 		this.authService.me().then( res => {
-			res.subscribe(data =>{
+			res.subscribe( data => {
 				this.email = data.user.email;
 			})
 		});
 	}
 
-	getAvatar(){
+	getAvatar() {
 		this.authService.getAvatar().then(response => {
 			if(response) {
 				this.avatar = response.image;
@@ -146,15 +149,12 @@ export class PerfilPage implements OnInit {
 
 	onSubmit(values) {
 		this.authService.updateProfile(values).then( res => {
-			console.log(res);
-			res.subscribe(data =>{
-			console.log(data);
-			this.router.navigate(["/home"]);
-			},err=>{
-			console.error(err);
-
+			res.subscribe( data => {
+				this.router.navigate(["/home"]);
+			}, err => {
+				console.error(err);
 			})
-		}).catch(error =>{
+		}).catch( error => {
 			console.error(error);
 		});
 	}
@@ -197,12 +197,10 @@ export class PerfilPage implements OnInit {
 	}
 
 	pickImage(sourceType) {
-	
 		const options: CameraOptions = {
-			allowEdit: true,
+			allowEdit: false,
 			quality: 100,
 			sourceType: sourceType,
-			/* destinationType: this.camera.DestinationType.DATA_URL, */
 			destinationType: this.camera.DestinationType.FILE_URI,
 			encodingType: this.camera.EncodingType.JPEG,
 			mediaType: this.camera.MediaType.PICTURE,
@@ -280,7 +278,6 @@ export class PerfilPage implements OnInit {
 	async getBase64Image(imgUrl, color, callback) {
 
 		var img = new Image();
-		// set attributes and src 
 		img.setAttribute('crossOrigin', 'anonymous'); //
 		img.src = imgUrl;
 
@@ -294,5 +291,11 @@ export class PerfilPage implements OnInit {
 		  var dataURL = canvas.toDataURL("image/png");
 		  callback(dataURL); // the base64 string
 		};
+	}
+
+	async getMap() {
+		localStorage.setItem('url','perfil');
+		localStorage.setItem('street', this.profile.direction.street);
+		this.router.navigate(['map']);
 	}
 }

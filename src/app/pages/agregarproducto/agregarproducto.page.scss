@@ -114,6 +114,10 @@
 
 .padding-section{
     padding-top: 15px;
+    ion-icon{
+        margin-left: -10px;
+        margin-bottom: -10px;
+    }
 }
 .save-button{
     margin-right: 10px;
@@ -161,6 +165,15 @@ ion-slide.changeStyle img {
 
 .itemNoPadding{
     --padding-start: 0px !important;
+    ion-textarea{
+        font-size: 12px;
+    }
+}
+
+.contentAdd{
+    font-size{
+        font-size: 12px;
+    }
 }
 
 .inline {

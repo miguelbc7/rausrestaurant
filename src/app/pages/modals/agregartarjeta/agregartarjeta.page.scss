@@ -2,18 +2,58 @@
 .minHeightAdd{
 	height: 100%;
 	overflow-Y: auto;
-}
 
-.mtInputFecha {
-	margin-top: 20px;
-	--padding-bottom:-5px;
-	--padding-start: 0px;
-}
-.select-space{
-	max-width: 100% !important;
-}
+	.minHeight{
+		min-height: 70px;
+		ion-item{
+			--min-height: 55px;
+			ion-label{
+				font-size: 16px !important;
+			}
+		}
+	}
 
-.alwaysBottom{
-	position: absolute;
-	bottom: 10px;
+	.mr-0{
+		padding-right: 0;
+	}
+	.ml-0{
+		padding-left: 0;
+	}
+	.mtInputFecha {
+		margin-top: 20px;
+		--padding-bottom:-5px;
+		--padding-start: 0px;
+	}
+	.select-space{
+		max-width: 100% !important;
+	}
+
+	.alwaysBottom{
+		position: absolute;
+		bottom: 10px;
+	}
+
+	.centere{
+		display: flex;
+		justify-content: space-between;
+		padding: 0 16px;
+		.btnBack{
+			font-size: 16px !important;
+			width: 35%;
+			--padding-top: 10px !important;
+			--padding-bottom: 10px !important;
+		}
+		.btnAccept{
+			font-size: 16px !important;
+			width: 35%;
+			--padding-top: 10px !important;
+			--padding-bottom: 10px !important;
+		}
+	}
+
+	.error-message{
+		padding: 0 5px;
+		font-size: 12px;
+		margin: 0;
+	}
 }

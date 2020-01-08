@@ -1,32 +1,31 @@
 <app-navbar></app-navbar>
 <ion-content class="contentClient">
-	<div class="ion-text-center">
+	<!-- <div class="ion-text-center">
 		<ion-button class="font12 button-search" fill="clear" (click)="openSearch()">
 			Buscar
 			<ion-icon class="font20 search-icon" slot="end" name="search"></ion-icon>
 		</ion-button>
-	</div>
+	</div> -->
 	<div class="barMenu">
 		<div class="box a">
 			<ion-icon class="colorBlack" name="menu" routerLink="/opciones"></ion-icon>
 			<ion-avatar class="avatar">
-				<img class="imgAvatar" src="assets/img/avatar.png" alt="avatar perfil">
+				<img class="imgAvatar" src="{{ avatar }}" alt="avatar perfil">
 			</ion-avatar>
+		</div>
+		<div class="box c">
+			<h5>{{ business_name }}</h5>
 		</div>
 		<div class="box b ">
 			<div style="position: relative;">
 				<p class="font16 my-0 title">Balance</p>
 				<p class="my-0 text-dorado alinearBalance">
-					<span class="price2" >83</span>
-					<span class="decimal2">,00€</span>
+					<!-- <span class="price2" >83</span>
+					<span class="decimal2">,00€</span> -->
+					<span class="price2" >{{ decimal[0] }}</span>
+                	<span class="decimal2">,{{ decimal[1]? decimal[1] : 00 }}€</span>
 				</p> 
 			</div>
-		</div>
-		<div class="box c">
-			<button class="solicitar">
-				<i class="fas fa-caret-right"></i>
-				<p>Solicitar</p>
-			</button>
 		</div>
 	</div>
 		<!-- 	<ion-grid class="px-0 marginTopGrid">
@@ -133,7 +132,7 @@
 		</ion-row>
 	</ion-grid> -->
 	<div class="ion-text-center">
-		<ion-icon class="font24" color="bluelight" name="pin"></ion-icon>
+		<ion-icon class="font24 space" color="bluelight" name="pin"></ion-icon>
 	</div>
 
 	<ion-grid class="px-0">
@@ -142,7 +141,7 @@
 				<ion-col class="px-0 py-0">
 					<img class="imgCarta2" src="{{ restaurant.slider }}" alt="avatar perfil"> 
 				</ion-col>
-				<ion-col class="px-0">
+				<ion-col class="flexRef">
 					<ion-row class="pt-2">
 						<ion-col size="7">
 							<p class="my-0 ion-text-center font10 cardRestaurant__title">
@@ -150,27 +149,27 @@
 							</p>
 						</ion-col>
 						<ion-col class="ion-align-self-center ion-justify-content-center cardRestaurant__go" size="5">
-							Ir <ion-icon class="" name="play"></ion-icon>
+							Ir <ion-icon class="arrow" name="play"></ion-icon>
 						</ion-col>
 					</ion-row>
-					<ion-row>
+					<ion-row class="mt-auto">
 						<ion-col class="px-0 ion-text-center" >
-							<ion-icon color="bluelight" name="star"></ion-icon>
+							<ion-icon name="star"></ion-icon>
 							<p class="my-0 font10">4/5</p>
 							<p class="my-0 font8">Sabor</p>
 						</ion-col>
 						<ion-col class="px-0 ion-text-center">
-							<ion-icon color="bluelight" name="star"></ion-icon>
+							<ion-icon name="star"></ion-icon>
 							<p class="my-0 font10">4/5</p>
 							<p class="my-0 font8">Atención</p>
 						</ion-col>
 						<ion-col class="px-0 ion-text-center">
-							<ion-icon color="bluelight" name="star"></ion-icon>
+							<ion-icon name="star"></ion-icon>
 							<p class="my-0 font10">4/5</p>
 							<p class="my-0 font8">Lugar</p>
 						</ion-col>
 						<ion-col class="px-0 ion-text-center">
-							<ion-icon color="bluelight" name="star"></ion-icon>
+							<ion-icon name="star"></ion-icon>
 							<p class="my-0 font10">4/5</p>
 							<p class="my-0 font8">Tiempo</p>
 						</ion-col>
@@ -191,7 +190,7 @@
 							</p>
 						</ion-col>
 						<ion-col class="ion-align-self-center ion-justify-content-center" size="5">
-							Ir <ion-icon class="" name="play"></ion-icon>
+							Ir <ion-icon class="arrow" name="play"></ion-icon>
 						</ion-col>
 					</ion-row>
 					<ion-row>
@@ -232,7 +231,7 @@
 							</p>
 						</ion-col>
 						<ion-col class="ion-align-self-center ion-justify-content-center ion-text-center" size="5">
-							Ir <ion-icon class="" name="play"></ion-icon>
+							Ir <ion-icon class="arrow" name="play"></ion-icon>
 						</ion-col>
 					</ion-row>
 					<ion-row>
@@ -273,7 +272,7 @@
 							</p>
 						</ion-col>
 						<ion-col class="ion-align-self-center ion-justify-content-center" size="5">
-							Ir <ion-icon class="" name="play"></ion-icon>
+							Ir <ion-icon class="arrow" name="play"></ion-icon>
 						</ion-col>
 					</ion-row>
 					<ion-row>
@@ -318,7 +317,7 @@
 							</p>
 						</ion-col>
 						<ion-col class="ion-align-self-center ion-justify-content-center" size="5">
-							Ir <ion-icon class="" name="play"></ion-icon>
+							Ir <ion-icon class="arrow" name="play"></ion-icon>
 						</ion-col>
 					</ion-row>
 					<ion-row>
@@ -359,7 +358,7 @@
 							</p>
 						</ion-col>
 						<ion-col class="ion-align-self-center ion-justify-content-center ion-text-center" size="5">
-							Ir <ion-icon class="" name="play"></ion-icon>
+							Ir <ion-icon class="arrow" name="play"></ion-icon>
 						</ion-col>
 					</ion-row>
 					<ion-row>
@@ -400,7 +399,7 @@
 							</p>
 						</ion-col>
 						<ion-col class="ion-align-self-center ion-justify-content-center" size="5">
-							Ir <ion-icon class="" name="play"></ion-icon>
+							Ir <ion-icon class="arrow" name="play"></ion-icon>
 						</ion-col>
 					</ion-row>
 					<ion-row>
@@ -445,7 +444,7 @@
 							</p>
 						</ion-col>
 						<ion-col class="ion-align-self-center ion-justify-content-center" size="5">
-							Ir <ion-icon class="" name="play"></ion-icon>
+							Ir <ion-icon class="arrow" name="play"></ion-icon>
 						</ion-col>
 					</ion-row>
 					<ion-row>
@@ -486,7 +485,7 @@
 							</p>
 						</ion-col>
 						<ion-col class="ion-align-self-center ion-justify-content-center ion-text-center" size="5">
-							Ir <ion-icon class="" name="play"></ion-icon>
+							Ir <ion-icon class="arrow" name="play"></ion-icon>
 						</ion-col>
 					</ion-row>
 					<ion-row>
@@ -527,7 +526,7 @@
 							</p>
 						</ion-col>
 						<ion-col class="ion-align-self-center ion-justify-content-center" size="5">
-							Ir <ion-icon class="" name="play"></ion-icon>
+							Ir <ion-icon class="arrow" name="play"></ion-icon>
 						</ion-col>
 					</ion-row>
 					<ion-row>
@@ -572,7 +571,7 @@
 							</p>
 						</ion-col>
 						<ion-col class="ion-align-self-center ion-justify-content-center" size="5">
-							Ir <ion-icon class="" name="play"></ion-icon>
+							Ir <ion-icon class="arrow" name="play"></ion-icon>
 						</ion-col>
 					</ion-row>
 					<ion-row>
@@ -613,7 +612,7 @@
 							</p>
 						</ion-col>
 						<ion-col class="ion-align-self-center ion-justify-content-center ion-text-center" size="5">
-							Ir <ion-icon class="" name="play"></ion-icon>
+							Ir <ion-icon class="arrow" name="play"></ion-icon>
 						</ion-col>
 					</ion-row>
 					<ion-row>
@@ -654,7 +653,7 @@
 							</p>
 						</ion-col>
 						<ion-col class="ion-align-self-center ion-justify-content-center" size="5">
-							Ir <ion-icon class="" name="play"></ion-icon>
+							Ir <ion-icon class="arrow" name="play"></ion-icon>
 						</ion-col>
 					</ion-row>
 					<ion-row>

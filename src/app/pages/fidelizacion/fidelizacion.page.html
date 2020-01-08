@@ -18,7 +18,7 @@
     </ion-card-header>
     <ion-card-content class="content-expandable" *ngFor="let d of data">
       <app-expandable expandHeight="120px" [expanded]="item.expanded" >
-        <ion-item >
+        <ion-item class="refFidelizacion">
           <ion-label class="font12 font-color label-mg" (click)="EditRecord(d.payload.doc.data(),d.payload.doc.id )">
             {{d.payload.doc.data().name}}
           </ion-label>

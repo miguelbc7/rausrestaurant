@@ -398,7 +398,7 @@ export class AgregarproductoPage implements OnInit {
 
 	pickImage(sourceType) {
 		const options: CameraOptions = {
-			allowEdit: true,
+			allowEdit: false,
 			quality: 100,
 			sourceType: sourceType,
 			/* destinationType: this.camera.DestinationType.DATA_URL, */
