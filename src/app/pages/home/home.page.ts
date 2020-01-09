@@ -134,8 +134,10 @@ export class HomePage implements OnInit {
 				this.imageToBase64(newImage.split('?')[0]).then( base64 => {
 					let base64Image = 'data:image/jpeg;base64,' + base64;
 					
-					this.sliderService.create_NewItem(base64Image).then( response => { 
-						this.getSlider();
+					this.sliderService.create_NewItem(base64Image).then( response => {
+						setTimeout( () => {
+							this.getSlider();
+						}, 2000);
 					});
 				});
 			});
@@ -227,7 +229,22 @@ export class HomePage implements OnInit {
 
 		this.productosService.getList().then(response => {
 			response.subscribe((data) => {
-				this.productos = data.products;
+				console.log('productos', data.products);
+				var array = [];
+				data.products.forEach( row => {
+					var price = row.price_with_iva + "";
+					if(price.indexOf('.') > -1) {
+						var price1: any = price.split('.')[0];
+						var price2: any = price.split('.')[1];
+					} else {
+						var price1: any = row.price_with_iva;
+						var price2: any = '00';
+					}
+
+					var a = { ingredients: row.ingredients, no_ingredients: row.no_ingredients, images: row.images, _id: row._id, name: row.name, description: row.description, nutritional_values: row.nutritional_values, fat: row.fat, carbohydrates: row.carbohydrates, protein: row.protein, total_calories: row.total_calories, iva: row.iva, eat_in_restaurant: row.eat_in_restaurant, wear: row.wear, delivery: row.delivery, status: row.status, stock: row.stock, id_restaurant: row.id_restaurant, id_promotion: row.id_promotion, __v: row.__v, price1: price1, price2: price2, price_with_iva: row.price_with_iva }
+					array.push(a);
+				});
+				this.productos = array;
 				let tempImagesProduct:any = this.storage.get('tempImagesProduct');
 
 				for (let index = 0; index < this.productos.length; index++) {
@@ -304,6 +321,7 @@ export class HomePage implements OnInit {
 	}
 
 	getSlider() {
+		console.log('call getSlider');
 		this.sliderService.read_Items().then(response => {
 			console.log('getSlider', response);
 			this.slider = response;

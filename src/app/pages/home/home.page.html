@@ -173,7 +173,7 @@
 							</ion-slide>
 						</ion-slides> -->
 						<ion-slides *ngIf="!isEmptyObject(product.images); else noimage">
-							<ion-slide class=""  *ngFor="let img of product.images">
+							<ion-slide class="" *ngFor="let img of product.images">
 								<img class="imgCarta3" src="{{ img.img }}"/>
 							</ion-slide>
 						</ion-slides>
@@ -200,8 +200,10 @@
 									<span class="font12">{{product.price_with_iva| currency:'EUR':true:'1.2-2'}}</span>
 								</p> -->
 								<p class="newPrice">
-									<span class="a">9</span>
-									<span class="b">,50€</span>
+									<!-- <span class="a">9</span>
+									<span class="b">,50€</span> -->
+									<span class="a">{{ product.price1 }}</span>
+									<span class="b">,{{ product.price2 }}€</span>
 								</p>
 							</ion-col>
 						</ion-row>

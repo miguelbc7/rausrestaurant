@@ -175,6 +175,7 @@ export class AgregarproductoPage implements OnInit {
 	
 		this.storage.get('product').then(res =>{
 		   	if(res){
+				console.log('res', res);
 				this.productos = res;
 				this.ingredientes = [];
 

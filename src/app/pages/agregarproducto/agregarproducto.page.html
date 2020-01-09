@@ -137,8 +137,8 @@
 							Precio con Iva
 						</p>
 						<p class="my-0 boxP"> 
-							<span class="font40" (click)="hide()" [hidden]="!hideMe">{{decimals.entero}}</span> <span class="font12 decimal" (click)="hide()" [hidden]="!hideMe">,{{decimals.decimal}}€</span>
-							<ion-input class="intest"  (focusout)="show2()" [hidden]="hideMe" aria-placeholder="10,50" type="tel" (keypress)="decimal($event)" [brmasker]="{money: true, thousand: '.',  decimalCaracter: ',', decimal: '2'}" formControlName="price_with_iva" [(ngModel)]="price_with_iva"> </ion-input> 
+							<!-- <span class="font40">{{decimals.entero}}</span> <span class="font12 decimal">,{{decimals.decimal}}€</span> -->
+							<ion-input class="intest" aria-placeholder="10,50" type="tel" [brmasker]="{money: true, thousand: '.',  decimalCaracter: ',', decimal: '2'}" formControlName="price_with_iva" [(ngModel)]="price_with_iva"> </ion-input> 
 						</p>
 					</ion-text>
 				</ion-item>
