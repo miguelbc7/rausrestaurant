@@ -41,6 +41,14 @@ const routes: Routes = [
     path: 'search',
     loadChildren: () => import('./pages/modals/search/search.module').then( m => m.SearchPageModule)
   },
+  {
+    path: 'detailsnotifications',
+    loadChildren: () => import('./pages/detailsnotifications/detailsnotifications.module').then( m => m.DetailsnotificationsPageModule)
+  },
+  {
+    path: 'detailsnotifications/:id',
+    loadChildren: () => import('./pages/detailsnotifications/detailsnotifications.module').then( m => m.DetailsnotificationsPageModule)
+  },
 ];
 
 @NgModule({

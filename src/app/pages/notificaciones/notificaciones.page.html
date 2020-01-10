@@ -25,17 +25,17 @@
 		<ion-slide class="slide-1">
 			<div class="body">
 				<ion-item class="item-edit" mode="md" lines="none" *ngFor="let notification of notifications">
-					<ion-thumbnail slot="start">
+					<ion-thumbnail slot="start" (click)="read(notification.id_showcase)">
 					  <img src="{{ notification.img }}">
 					</ion-thumbnail>
-					<div class="text">
+					<div class="text" (click)="read(notification.id_showcase)">
 						<ion-label>{{ notification.content }}</ion-label>
-						<p *ngIf="notification.read">Nueva Notificación</p>
+						<p *ngIf="!notification.read">Nueva Notificación</p>
 					</div>
 					<div slot="end" class="option">
 						<button>
-							<ion-icon *ngIf="!notification.like" src="assets/img/icon/heartgray.svg"></ion-icon>
-							<ion-icon *ngIf="notification.like" src="assets/img/icon/heartred.svg"></ion-icon>
+							<ion-icon *ngIf="!notification.like" src="assets/img/icon/heartgray.svg" (click)="like(notification.key, true, 1)"></ion-icon>
+							<ion-icon *ngIf="notification.like" src="assets/img/icon/heartred.svg" (click)="like(notification.key, false, 1)"></ion-icon>
 						</button>
 						<button><ion-icon mode="ios" name="more"></ion-icon></button>
 					</div>
@@ -45,16 +45,17 @@
 		<ion-slide class="slide-2">
 			<div class="body">
 				<ion-item class="item-edit" lines="none" *ngFor="let favorite of favorites">
-					<ion-thumbnail slot="start">
+					<ion-thumbnail slot="start" (click)="read(favorite.id_showcase)">
 					  <img src="{{ favorite.img}}">
 					</ion-thumbnail>
-					<div class="text">
+					<div class="text" (click)="read(favorite.id_showcase)">
 						<ion-label>{{ favorite.content }}</ion-label>
+						<p *ngIf="!favorite.read">Nueva Notificación</p>
 					</div>
 					<div slot="end" class="option">
 						<button>
-							<ion-icon *ngIf="!favorite.like" src="assets/img/icon/heartgray.svg"></ion-icon>
-							<ion-icon *ngIf="favorite.like" src="assets/img/icon/heartred.svg"></ion-icon>
+							<ion-icon *ngIf="!favorite.like" src="assets/img/icon/heartgray.svg" (click)="like(favorite.key, true, 2)"></ion-icon>
+							<ion-icon *ngIf="favorite.like" src="assets/img/icon/heartred.svg" (click)="like(favorite.key, false, 2)"></ion-icon>
 						</button>
 						<button><ion-icon mode="ios" name="more"></ion-icon></button>
 					</div>
