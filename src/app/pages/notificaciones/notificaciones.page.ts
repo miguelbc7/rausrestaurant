@@ -1,6 +1,7 @@
 import { Component, OnInit,ViewEncapsulation } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Storage } from '@ionic/storage';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 
 @Component({
 	selector: 'app-notificaciones',
@@ -14,10 +15,12 @@ export class NotificacionesPage implements OnInit {
 	title = "Notificaciones";
 	imgStatus = 1;
 	notifications: any[];
+	favorites: any[];
 
 	constructor(
 		private db: AngularFireDatabase,
-		private storage: Storage
+		private storage: Storage,
+		private http: HttpClient
 	) {}
 
   	ngOnInit() {
@@ -28,7 +31,6 @@ export class NotificacionesPage implements OnInit {
     	segment.addEventListener('ionChange', (ev) => onSegmentChange(ev));
     	slides.addEventListener('ionSlideDidChange', (ev) => onSlideDidChange(ev));
 
-    	// On Segment change slide to the matching slide
     	function onSegmentChange(ev) {
       		slideTo(ev.detail.value);
     	}
@@ -37,7 +39,6 @@ export class NotificacionesPage implements OnInit {
       		slides.slideTo(index);
     	}
 
-    	// On Slide change update segment to the matching value
     	async function onSlideDidChange(ev) {
       		var index = await slides.getActiveIndex();
       		clickSegment(index);
@@ -45,7 +46,6 @@ export class NotificacionesPage implements OnInit {
 
 	    function clickSegment(index) {
     		status = index;
-      		console.log(status);
 		}
 		
 		this.getNotifications();
@@ -62,32 +62,53 @@ export class NotificacionesPage implements OnInit {
 	}
 
 	async getNotifications() {
-
 		await this.storage.get('_uid').then(res=>{
 			var uid = res;
 
 			var itemsRef = this.db.list('notifications/' + uid);
+			var itemsRef2 = this.db.list('notifications/' + uid);
 		
 			itemsRef.snapshotChanges(['child_added']).subscribe(actions => {
 				var array = [];
+
+				actions.forEach((action, i) => {
+					array.push(action.payload.val());
+				});
+
+				this.notifications = array;
+			});
+
+			this.db.list('notifications/' + uid, ref => ref.orderByChild('like').equalTo(true)).snapshotChanges(['child_added']).subscribe(actions => {
 				var array2 = [];
 
 				actions.forEach((action, i) => {
-				/* 	console.log(action.type);
-					console.log(action.key);
-					console.log(action.payload.val()); */
-					array.push(action.payload.val());
-					console.log('payload', action.payload.val());
-					console.log('payload', action.payload.val()[i].like);
-
-					/* if(action.payload.val()) {
-
-					} */
+					array2.push(action.payload.val());
 				});
 
-				console.log('array', array);
-				this.notifications = array;
+				this.favorites = array2;
 			});
 		});
+	}
+
+	like(id, value) {
+		/* await this.storage.get('_uid').then(res=>{
+			var uid = res;
+
+			let data = {
+				id_restaurant: currentUser,
+				img: record
+			};
+
+			return this.http.put(this.base_path + 'restaurants/update/slider', JSON.stringify(data), {
+				headers: new HttpHeaders({
+					'Content-Type': 'application/json',
+				}), params: {
+					token: this.token,
+				}
+			}).subscribe( 
+				res => (res),
+				err => (err)
+			);
+		}); */
 	}
 }

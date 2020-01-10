@@ -40,102 +40,25 @@
 						<button><ion-icon mode="ios" name="more"></ion-icon></button>
 					</div>
 				</ion-item>
-				<!-- <ion-item class="item-edit" lines="none">
-					<ion-thumbnail slot="start">
-					  <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
-					</ion-thumbnail>
-					<div class="text">
-						<ion-label>El restaurant Raus web ha realizado una nueva publicación</ion-label>
-						<p>Nueva Notificación</p>
-					</div>
-					<div slot="end" class="option">
-						<button><ion-icon src="assets/img/icon/heartgray.svg"></ion-icon></button>
-						<button><ion-icon mode="ios" name="more"></ion-icon></button>
-					</div>
-				</ion-item>
-				<ion-item class="item-edit" lines="none">
-					<ion-thumbnail slot="start">
-					  <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
-					</ion-thumbnail>
-					<div class="text">
-						<ion-label>El restaurant Raus web ha realizado una nueva publicación</ion-label>
-						<p>Nueva Notificación</p>
-					</div>
-					<div slot="end" class="option">
-						<button><ion-icon src="assets/img/icon/heartgray.svg"></ion-icon></button>
-						<button><ion-icon mode="ios" name="more"></ion-icon></button>
-					</div>
-				</ion-item> -->
 			</div>
 		</ion-slide>
 		<ion-slide class="slide-2">
 			<div class="body">
-				<ion-item class="item-edit" lines="none">
+				<ion-item class="item-edit" lines="none" *ngFor="let favorite of favorites">
 					<ion-thumbnail slot="start">
-					  <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+					  <img src="{{ favorite.img}}">
 					</ion-thumbnail>
 					<div class="text">
-						<ion-label>El restaurant Raus web ha realizado una nueva publicación</ion-label>
-						<p>Nueva Notificación</p>
+						<ion-label>{{ favorite.content }}</ion-label>
 					</div>
 					<div slot="end" class="option">
-						<button><ion-icon src="assets/img/icon/heartgray.svg"></ion-icon></button>
+						<button>
+							<ion-icon *ngIf="!favorite.like" src="assets/img/icon/heartgray.svg"></ion-icon>
+							<ion-icon *ngIf="favorite.like" src="assets/img/icon/heartred.svg"></ion-icon>
+						</button>
 						<button><ion-icon mode="ios" name="more"></ion-icon></button>
 					</div>
 				</ion-item>
-				<!-- <ion-item class="item-edit" lines="none">
-					<ion-thumbnail slot="start">
-					  <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
-					</ion-thumbnail>
-					<div class="text">
-						<ion-label>El restaurant Raus web ha realizado una nueva publicación</ion-label>
-						<p>Nueva Notificación</p>
-					</div>
-					<div slot="end" class="option">
-						<button><ion-icon src="assets/img/icon/heartgray.svg"></ion-icon></button>
-						<button><ion-icon mode="ios" name="more"></ion-icon></button>
-					</div>
-				</ion-item> -->
-				<!-- <ion-item class="item-edit" lines="none">
-					<ion-thumbnail slot="start">
-					  <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
-					</ion-thumbnail>
-					<div class="text">
-						<ion-label>El restaurant Raus web ha realizado una nueva publicación</ion-label>
-						<p>Nueva Notificación</p>
-					</div>
-					<div slot="end" class="option">
-						<button><ion-icon src="assets/img/icon/heartgray.svg"></ion-icon></button>
-						<button><ion-icon mode="ios" name="more"></ion-icon></button>
-					</div>
-				</ion-item>
-				<ion-item class="item-edit" lines="none">
-					<ion-thumbnail slot="start">
-					  <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
-					</ion-thumbnail>
-					<div class="text">
-						<ion-label>El restaurant Raus web ha realizado una nueva publicación</ion-label>
-						<p>Nueva Notificación</p>
-					</div>
-					<div slot="end" class="option">
-						<button><ion-icon src="assets/img/icon/heartgray.svg"></ion-icon></button>
-						<button><ion-icon mode="ios" name="more"></ion-icon></button>
-					</div>
-				</ion-item>
-
-				<ion-item class="item-edit" lines="none">
-					<ion-thumbnail slot="start">
-					  <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
-					</ion-thumbnail>
-					<div class="text">
-						<ion-label>El restaurant Raus web ha realizado una nueva publicación</ion-label>
-						<p>Nueva Notificación</p>
-					</div>
-					<div slot="end" class="option">
-						<button><ion-icon src="assets/img/icon/heartgray.svg"></ion-icon></button>
-						<button><ion-icon mode="ios" name="more"></ion-icon></button>
-					</div>
-				</ion-item> -->
 			</div>
 		</ion-slide>
 	  </ion-slides>
