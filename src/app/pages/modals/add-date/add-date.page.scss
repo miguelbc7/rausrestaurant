@@ -1,0 +1,23 @@
+.bodyTime{
+    .backHeader{
+        top: 5%;
+    }
+    .padding{
+        padding:15px !important;
+
+        .body{
+            ion-item{
+                margin-top: 25px;
+                ion-label{
+                    color: #4e5d6a !important;
+                }
+                ion-datetime{
+                    color: #666;
+                }
+            }
+        }
+        .btnAceptar{
+            margin-top: 40px;
+        }
+    }
+}

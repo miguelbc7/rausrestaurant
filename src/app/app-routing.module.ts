@@ -42,13 +42,64 @@ const routes: Routes = [
     loadChildren: () => import('./pages/modals/search/search.module').then( m => m.SearchPageModule)
   },
   {
-    path: 'detailsnotifications',
-    loadChildren: () => import('./pages/detailsnotifications/detailsnotifications.module').then( m => m.DetailsnotificationsPageModule)
+    path: 'programation',
+    loadChildren: () => import('./pages/programation/programation.module').then( m => m.ProgramationPageModule)
   },
   {
-    path: 'detailsnotifications/:id',
-    loadChildren: () => import('./pages/detailsnotifications/detailsnotifications.module').then( m => m.DetailsnotificationsPageModule)
+    path: 'add-date',
+    loadChildren: () => import('./pages/modals/add-date/add-date.module').then( m => m.AddDatePageModule)
   },
+  {
+    path: 'chart-client',
+    loadChildren: () => import('./pages/chart-client/chart-client.module').then( m => m.ChartClientPageModule)
+  },
+  {
+    path: 'chart-ingresos',
+    loadChildren: () => import('./pages/chart-ingresos/chart-ingresos.module').then( m => m.ChartIngresosPageModule)
+  },
+  {
+    path: 'chart-venta',
+    loadChildren: () => import('./pages/chart-venta/chart-venta.module').then( m => m.ChartVentaPageModule)
+  },
+  {
+    path: 'success-modal',
+    loadChildren: () => import('./pages/modals/success-modal/success-modal.module').then( m => m.SuccessModalPageModule)
+  },
+  {
+    path: 'chart-puntos',
+    loadChildren: () => import('./pages/chart-puntos/chart-puntos.module').then( m => m.ChartPuntosPageModule)
+  },
+  {
+    path: 'chart-operaciones',
+    loadChildren: () => import('./pages/chart-operaciones/chart-operaciones.module').then( m => m.ChartOperacionesPageModule)
+  },
+  {
+    path: 'chart-productos-vendidos',
+    loadChildren: () => import('./pages/chart-productos-vendidos/chart-productos-vendidos.module').then( m => m.ChartProductosVendidosPageModule)
+  },
+  {
+    path: 'chart-tipo-servicio',
+    loadChildren: () => import('./pages/chart-tipo-servicio/chart-tipo-servicio.module').then( m => m.ChartTipoServicioPageModule)
+  },
+  {
+    path: 'message',
+    loadChildren: () => import('./pages/message/message.module').then( m => m.MessagePageModule)
+  },
+  {
+    path: 'chat',
+    loadChildren: () => import('./pages/chat/chat.module').then( m => m.ChatPageModule)
+  },
+
+
+
+
+
+
+
+
+
+
+
 ];
 
 @NgModule({

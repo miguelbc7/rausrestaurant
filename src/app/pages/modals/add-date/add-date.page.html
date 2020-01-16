@@ -1,0 +1,25 @@
+<ion-content class="bodyTime">
+  <div class="padding">
+    <ion-icon class="backHeader ion-text-center" src="assets/img/icon/back.svg" (click)="back"></ion-icon>
+    <ion-row>
+      <ion-col class="ion-text-center" size="12">
+        <p class="titleHeader mg-top blue-dark2 my-0 margin-top">Elije una fecha</p>
+      </ion-col>
+    </ion-row>
+    <div class="body">
+      <ion-item mode="md">
+        <ion-label>Fecha</ion-label>
+        <ion-datetime displayFormat="YYYY-MM-DD" name="date" (ionChange)="getDate($event)"></ion-datetime>
+      </ion-item>
+      <ion-item mode="md">
+        <ion-label>Hora</ion-label>
+        <ion-datetime display-format="h:mm A" picker-format="h:mm A" name="time" (ionChange)="getTime($event)"></ion-datetime>
+      </ion-item>
+    </div>
+    <div class="ion-text-center">
+      <ion-button type="submit"  class="font15 btnAceptar" color="bluedark" (click)="send()">
+        Aceptar
+      </ion-button>
+    </div>
+  </div>
+</ion-content>

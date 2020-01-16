@@ -1,0 +1,133 @@
+<ion-content class="bodyProgramation">
+	<ion-icon class="backHeader ion-text-center" src="assets/img/icon/back.svg" (click)="back()"></ion-icon>
+	<ion-row>
+		<ion-col class="ion-text-center" size="12">
+			<p class="titleHeader mg-top blue-dark2 my-0 margin-top">Foods of Tomorrow</p>
+		</ion-col>
+	</ion-row>
+  	<div class="body">
+   	 	<h4 class="title">Programa Tu Raus Showcase</h4>
+    	<h5 class="subtitle">Precio base: {{ baseprice }}€</h5>
+
+    	<!-- Add timer -->
+    	<ion-item class="addTime" lines="none" (click)="modalDate()">
+      		<ion-label>Dias de envío</ion-label>
+        	<button class="btnAdd" slot="end" >
+          		<ion-icon src="assets/img/icon/producto/addAzulProducto.svg"></ion-icon>
+        	</button>
+    	</ion-item>
+    	<div class="boxSlide">
+      		<ion-slides class="sliderContent" pager="true" [options]="slideOpts">
+        		<ion-slide *ngFor="let day of days">
+          			<div class="item">
+            			<p>{{ day.day }}</p>
+            			<p>{{ day.date }}</p>
+            			<p>{{ day.time }}</p>
+          			</div>
+        		</ion-slide>
+				<!-- <ion-slide>
+					<div class="item">
+						<p>Martes</p>
+						<p>27/05/2019</p>
+						<p>7:30</p>
+					</div>
+				</ion-slide>
+				<ion-slide>
+					<div class="item">
+						<p>Miercoles</p>
+						<p>27/05/2019</p>
+						<p>22:30</p>
+					</div>
+				</ion-slide>
+				<ion-slide>
+					<div class="item">
+						<p>Jueves</p>
+						<p>3/05/2019</p>
+						<p>2:30</p>
+					</div>
+				</ion-slide> -->
+    		</ion-slides>
+    		<!-- <p class="msgOpc">*0,50€ por día</p> -->
+      		<p class="msgOpc2">*Solo por hoy {{ priceperday }}€ por cada dia adicional!</p>
+    	</div>
+    	<div class="body2">
+      	<ion-card-content>
+        	<form [formGroup]="programation1" (ngSubmit)="onSubmit(programation.value)" class="ion-margin-horizontal">
+          		<ion-item class="itemEdit">
+            		<ion-label position="floating">Ciudad</ion-label>
+					<!-- <ion-input formControlName="cit" type="text"></ion-input> -->
+					<tag-input class="ion-text-center inputTag itemTransparent"
+						formControlName="cit"
+						[placeholder]="'Agregar Tag'"
+						[secondaryPlaceholder]="'#Madrid #Paris'"
+						[maxItems]="10"
+						[separatorKeyCodes]="[32, 138]"
+						[onlyFromAutocomplete]="true"
+						[theme]="'minimal'" style="background-color: transparent !important;">
+						<tag-input-dropdown 
+							[autocompleteItems]="citiesarr"
+							[showDropdownIfEmpty]="false"
+							[minimumTextLength]="0">
+						</tag-input-dropdown>
+						<ng-template let-item="item" let-index="index">
+							{{ item.display }}
+						</ng-template>
+					</tag-input>
+		        </ion-item>
+          		<div class="newPrice">
+            		<p>Precio:</p>
+            		<span class="a">{{ pricecity1 }}</span>
+            		<span class="b">,{{ pricecity2 }}€</span>
+          		</div>
+				<ion-item class="itemTags ion-no-padding itemTransparent">
+            		<ion-label position="floating">Segmentación</ion-label>
+					<!-- <ion-input type="text"></ion-input> -->
+					<tag-input class="ion-text-center inputTag itemTransparent"
+						formControlName="cat"
+						[placeholder]="'Agregar Tag'"
+						[secondaryPlaceholder]="'#Comer #Salud'" 
+						[maxItems]="10"
+						[separatorKeyCodes]="[32, 138]"
+						[onlyFromAutocomplete]="true"
+						[theme]="'minimal'" style="background-color: transparent !important;">
+						<tag-input-dropdown 
+							[autocompleteItems]="categories"
+							[showDropdownIfEmpty]="false"
+							[minimumTextLength]="0">
+						</tag-input-dropdown>
+						<ng-template let-item="item" let-index="index">
+							{{ item.display }}
+						</ng-template>
+					</tag-input>
+          		</ion-item>
+          		<div class="newPrice" *ngIf="catStatus">
+            		<p>Precio:</p>
+            		<span class="a">63</span>
+            		<span class="b">,50€</span>
+				</div>
+        	</form>
+      	</ion-card-content>
+      	<hr>
+      	<div class="table">
+        	<table>
+          		<tr>
+					<td>Precio: </td>
+					<td>{{ subtotal }}€</td>
+				</tr>
+				<tr>
+					<td>Total: </td>
+					<td>{{ total }}€</td>
+				</tr>
+				<tr>
+					<td>Iva: </td>
+					<td>{{ iva }}</td>
+				</tr>
+        	</table>
+      	</div>
+      	<div class="bodybutton">
+        	<ion-button ion-button (click)="pay()">Pagar con Raus</ion-button>
+        	<ion-button ion-button>Pagar con tarjeta</ion-button>
+      	</div>
+    	</div>
+  	</div>
+</ion-content>

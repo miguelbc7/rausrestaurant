@@ -49,7 +49,7 @@ export class HomePage implements OnInit {
 	avatar = 'assets/img/avatar.png';
 
 	constructor(
-		private modalCtrl: ModalController, 
+		private modalCtrl: ModalController,
 		public productosService: ProductosService, 
 		private storage: Storage, 
 		private sliderService: SliderHomeService, 

@@ -1,0 +1,84 @@
+<ion-header class="msgheader">
+  <ion-icon class="backHeader ion-text-center" src="assets/img/icon/back.svg" routerLink="/opciones"></ion-icon>
+  <ion-row>
+    <ion-col class="ion-text-center" size="12">
+      <p class="my-0">
+        <ion-icon class="iconHeader" src="assets/img/icon/inbox1.svg"></ion-icon>
+      </p>
+      <p class="titleHeader">Inbox</p>
+    </ion-col>
+    <ion-col size="12">
+      <ion-item lines="none" mode="md" class="item-thumbnail-chat">
+        <ion-thumbnail  slot="start">
+          <img src="https://media-cdn.tripadvisor.com/media/photo-s/14/72/39/d1/una-imagen-del-restaurante.jpg">
+        </ion-thumbnail>
+        <ion-label>
+          <h3>Juan Gonzalez</h3>
+        </ion-label>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+</ion-header>
+<ion-content>
+  <div class="message-wrap">
+
+    <div class="message left">
+      <div class="msg-detail">
+        <div class="msg-content">
+          <p class="line-breaker ">qloq Habla claro</p>
+          <span>12:02</span>
+        </div>
+      </div>
+    </div>
+    <div class="message right">
+      <div class="msg-detail">
+        <div class="msg-content">
+          <p class="line-breaker ">qloq Habla claro</p>
+          <span>12:02</span>
+        </div>
+      </div>
+    </div>
+    <div class="message left">
+      <div class="msg-detail">
+        <div class="msg-content">
+          <p class="line-breaker ">qloq Habla claro</p>
+          <span>12:02</span>
+        </div>
+      </div>
+    </div>
+    <div class="message right">
+      <div class="msg-detail">
+        <div class="msg-content">
+          <p class="line-breaker ">qloq Habla claro</p>
+          <span>12:02</span>
+        </div>
+      </div>
+    </div>
+    <div class="message left">
+      <div class="msg-detail">
+        <div class="msg-content">
+          <p class="line-breaker ">qloq Habla claro</p>
+          <span>12:02</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</ion-content>
+
+<ion-footer no-border > <!-- [style.height]="showEmojiPicker ? '255px' : '55px'" -->
+  <div class="input-wrap inputSend">
+    <textarea placeholder="Mensaje">
+    </textarea>
+    <label for="typeFile" icon-only item-right>
+      <ion-icon src="/assets/img/icon/chatclip.svg"></ion-icon>
+      <input type="file" id="typeFile">
+    </label>
+    <button ion-button clear icon-only item-right ><!-- (click)="sendMsg()" -->
+      <ion-icon src="/assets/img/icon/chatcamara.svg"></ion-icon>
+    </button>
+    <button ion-button clear icon-only item-right ><!-- (click)="sendMsg()" -->
+      <ion-icon src="/assets/img/icon/chatsend.svg"></ion-icon>
+    </button>
+  </div>
+ <!--  <emoji-picker [(ngModel)]="editorMsg"></emoji-picker> -->

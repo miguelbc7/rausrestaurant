@@ -53,9 +53,6 @@ ion-textarea{
     font-size: 12px;
 }
 
-.boxShowcase1.mt{
-    margin-top: 20px;
-}
 .textPshowcase1{
     position: absolute;
     left: 50%;
@@ -109,16 +106,81 @@ ion-textarea{
     margin-top: 50px;
 }
 .button-programacion{
-	background-color: #a0a9c0 !important;
-	color: #fff;
+    background-color: #5b7aa2 !important;
+    --ion-color-base: #5b7aa2;
+    --background-activated: #5b7aa2;
+    --background: #5b7aa2;
+    --background-focused: #5b7aa2;
+    --background-hover: #5b7aa2;
+    --background: #5b7aa2;
+    color: #fff;
     margin-top: 24pt;
-    width: 100%;
+    width: 140px;
+    padding: 0 5px;
+    margin: auto;
+    display: block;
 }
 .button-enviar{
 	width: 100px;
-	background-color: #a0a9c0 !important;
-	color: #fff;
+    --background-activated: #5b7aa2;
+    --ion-color-base: #5b7aa2;
+    --background: #5b7aa2;
+    --background-focused: #5b7aa2;
+    --background-hover: #5b7aa2;
+    --background: #5b7aa2;
+    color: #fff;
+    padding:0 5px;
 	margin-top: 24pt;
+}
+
+.d-flex{
+    display: flex;
+    margin: 20px 10px;
+    border-bottom: 1px solid #495057;
+    padding-bottom: 20px;
+    ion-textarea{
+        width: 60%;
+        margin: auto 10px;
+    }
+    .boxShowcase1{
+        width: 40%;
+        margin: auto 10px;
+    }
+}
+
+.buttonAddPay{
+    --background-activated: #495057;
+    --ion-color-base: #495057;
+    --background: #495057;
+    --background-focused: #495057;
+    --background-hover: #495057;
+    --background: #495057;
+    width: 90px;
+    margin: auto;
+    display: block;
+    background: transparent;
+    --background: transparent;
+    ion-icon{
+        color: #495057;
+    }
+}
+
+.itemEdit{
+    margin-top: 20px;
+    max-width: 80%;
+    margin: auto;
+    margin-top: 25px;
+    .item-inner{
+        padding: 0;
+    }
+    ion-input{
+        border-bottom: 1px solid #495057;
+        font-size: 32px;
+        text-align: center;
+    }
+    ion-icon{
+        color: #495057;
+    }
 }
 
 .bodyShowCase{

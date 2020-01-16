@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalPlanesPage } from '../modals/modal-planes/modal-planes.page';
-
 import { ModalController } from '@ionic/angular';
 import { FidelizacionService } from 'src/app/services/fidelizacion.service';
-
 
 @Component({
   selector: 'app-fidelizacion',

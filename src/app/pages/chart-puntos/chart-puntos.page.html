@@ -1,0 +1,53 @@
+<ion-header class="nobg">
+  <div class="NavbarChart">
+    <ion-icon class="backHeader ion-text-center" src="assets/img/icon/back.svg" routerLink="/analiticas"></ion-icon>
+    <ion-row>
+      <ion-col class="ion-text-center" size="12">
+        <p class="titleHeader mg-top blue-dark2 my-0 margin-top">Puntos otorgados / Puntos reclamados
+        </p>
+      </ion-col>
+      <ion-col size="12">
+        <div class="d-flex">
+          <ion-item>
+            <ion-label>Del</ion-label>
+            <ion-datetime value="1990-02-20" placeholder="Select Date"></ion-datetime>
+          </ion-item>
+          <ion-item>
+            <ion-label>Hasta</ion-label>
+            <ion-datetime value="1990-02-20" placeholder="Select Date"></ion-datetime>
+          </ion-item>
+          <ion-button ion-button >Ir</ion-button>
+        </div>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-header>
+<ion-content>
+  <ion-grid >
+    <ion-row>
+      <ion-col size="12">
+        <h5 class="bodyChart__title">Chart</h5>
+      </ion-col>
+      <ion-col size="12">
+        <div class="bodyChart__itemSelect">
+          <p>Tipos de gráfico</p>
+          <ion-select value="pastel" okText="Okay" cancelText="Dismiss">
+            <ion-select-option value="pastel">Pastel</ion-select-option>
+            <ion-select-option value="barras">Barras</ion-select-option>
+            <ion-select-option value="lineas">Lineas</ion-select-option>
+          </ion-select>
+        </div>
+      </ion-col>
+      <ion-col size="12">
+        <img src="/assets/img/chart.png" alt="">
+      </ion-col>
+      <ion-col size="12" class="text-center">
+        <div class="bodyChart__dflex">
+          <ion-button><ion-icon class="a" src="/assets/img/icon/compartir.svg"></ion-icon></ion-button>
+          <ion-button><ion-icon class="b" src="/assets/img/icon/icono_descarga.svg"></ion-icon></ion-button>
+        </div>
+        <ion-button class="bodyChart__btnBack">Volver</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

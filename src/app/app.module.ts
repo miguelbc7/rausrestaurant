@@ -28,6 +28,8 @@ import { ExcelentePage } from './pages/modals/excelente/excelente.page';
 import { ModalPromocionPage } from './pages/modals/modal-promocion/modal-promocion.page';
 import { ProductocreadoPage } from './pages/modals/productocreado/productocreado.page';
 import { ProductoguardadoPage } from './pages/modals/productoguardado/productoguardado.page';
+import { AddDatePage } from './pages/modals/add-date/add-date.page';
+import { ProgramationPage } from './pages/programation/programation.page';
 import { IonicStorageModule } from '@ionic/storage';
 import { Camera } from '@ionic-native/Camera/ngx';
 import { File } from '@ionic-native/file/ngx';
@@ -48,6 +50,8 @@ import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';
 import { NgxMaskIonicModule } from 'ngx-mask-ionic';
 import { GoogleMaps } from '@ionic-native/google-maps';
 import { Keyboard } from '@ionic-native/keyboard/ngx';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TagInputModule } from 'ngx-chips';
 
 @NgModule({
   declarations: [
@@ -57,6 +61,8 @@ import { Keyboard } from '@ionic-native/keyboard/ngx';
     ProductocreadoPage,
     ModalPromocionPage,
     ProductoguardadoPage,
+    AddDatePage,
+    ProgramationPage
     // Welcome1Page
   ],
   entryComponents: [
@@ -65,6 +71,8 @@ import { Keyboard } from '@ionic-native/keyboard/ngx';
     ModalPromocionPage,
     ProductocreadoPage,
     ProductoguardadoPage,
+    AddDatePage,
+    ProgramationPage
     // Welcome1Page
   ],
   imports: [
@@ -80,10 +88,15 @@ import { Keyboard } from '@ionic-native/keyboard/ngx';
     AngularFireDatabaseModule,
     AngularFireStorageModule,
     NgxMaskIonicModule.forRoot(),
-    ColorPickerModule
+    ColorPickerModule,
+    FormsModule,
+    ReactiveFormsModule,
+    TagInputModule
   ],
   exports: [
-    ColorPickerModule
+    ColorPickerModule,
+    ReactiveFormsModule,
+    TagInputModule
   ],
   providers: [
     StatusBar,

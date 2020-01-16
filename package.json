@@ -38,6 +38,7 @@
     "@ionic/angular": "^4.7.1",
     "@ionic/storage": "^2.2.0",
     "br-mask": "0.0.8",
+    "cities.json": "^1.1.5",
     "cordova-android": "^8.1.0",
     "cordova-browser": "^6.0.0",
     "cordova-plugin-advanced-http": "^2.3.1",

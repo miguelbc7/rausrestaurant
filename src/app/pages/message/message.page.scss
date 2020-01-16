@@ -1,0 +1,45 @@
+.msgheader{
+    &:after{
+        background-image: none;
+    }
+    .iconHeader{
+        
+    }
+    .titleHeader{
+        font-size: 18pt;
+        color: #4e5d6a;
+        margin: 0;
+        margin-top: -20px;
+    }
+    .backHeader{
+        top: 15%;
+    }
+}
+.boxMessage{
+
+    .item-thumbnail{
+        border-bottom: 1px solid #657b9f;
+        margin: auto 20px;
+        padding: 5px 0px;
+        ion-thumbnail{
+            width: 40px;
+            height: 40px;
+            img{
+                border-radius: 50%;
+                object-fit: cover;
+                object-position: center;
+            }
+        }
+        h3{
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+            color: #4e5d6a;
+        }
+        .btn{
+            background-color: transparent;
+            color: #4e5d6a;
+            font-size: 26px;
+        }
+    }
+}

@@ -185,7 +185,7 @@ export class OpcionesPage implements OnInit {
 				break;
 
 				case (7):
-				this.router.navigate(['/cliente']);
+				this.router.navigate(['/showcase']);
 				break;
 				
 			case (8):
