@@ -44,19 +44,27 @@
 	<ion-row>
 		<ion-col size="12" *ngFor="let row of rows; let j = index">
 			<div class="d-flex">
-				<ion-textarea class="font11 ion-no-padding textareaCustom" [(ngModel)]="rows[j].ingredients" rows="5" cols="20" placeholder="Texto {{ j + 1}} <br>No te dejes engañar por su tamaño, son muy sabrosos y versátiles. Añádelos a tus ensaladas o como complemento"></ion-textarea>
+				<ion-textarea class="font11 ion-no-padding textareaCustom" [(ngModel)]="rows[j].ingredients" rows="5" cols="20" placeholder="Texto {{ j + 1}} No te dejes engañar por su tamaño, son muy sabrosos y versátiles. Añádelos a tus ensaladas o como complemento"></ion-textarea>
 				<div class="boxShowcase1 mt">
-					<ion-item *ngIf="!row.img" (click)="selectImage(j)">
-						<div class="addPhotoProductoshowcase1" color="">
-							<ion-icon class="addPrdocuto1" color="bluedark" src="assets/img/icon/producto/addAzulProducto.svg"></ion-icon>
+					<div class="position" *ngIf="!row.img">
+						<div  (click)="selectImage(j)" class="dflex">
+							<div class="" color="">
+								<ion-icon class="" color="bluedark" src="assets/img/icon/producto/addAzulProducto.svg"></ion-icon>
+							</div>
+							<div class="">
+								<p class="ion-text-center my-0 textFont">Agrega una imagen</p>
+							</div>
 						</div>
-						<div class="textPshowcase1">
-							<p class="ion-text-center my-0 font10">Agrega una imagen</p>
-						</div>
-					</ion-item>
-					<ion-item *ngIf="row.img">
-						<ion-icon class="addPrdocuto1" color="bluedark" src="{{ row.img }}"></ion-icon>
-					</ion-item>
+					</div>
+					<div class="boxImagen" *ngIf="row.img">
+						<img class="" src="{{ row.img }}">
+					</div>
+					<!-- <div class="boxImagen" *ngIf="row.img">
+						<ion-icon class="" color="bluedark" src="{{ row.img }}"></ion-icon>
+					</div> -->
+					<!-- <div class="boxImagen">
+						<img class="" color="bluedark" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png">
+					</div> -->
 				</div>
 			</div>
 		</ion-col>

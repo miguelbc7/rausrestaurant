@@ -47,6 +47,42 @@ ion-slide.changeStyle img {
 	margin-top: 10px;
     height: 120px;
     position: relative;
+    @media (max-width: 320px){
+        height: 110px;
+    }
+    .position{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100%;
+        .dflex{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            ion-icon{
+                font-size: 60px;
+                text-align: center;
+                margin-bottom: -10px;
+            }
+            .textFont{
+                font-size: 11px;
+                @media (max-width: 320px){
+                    font-size: 10px;
+                }
+            }
+        }
+    }
+    .boxImagen{
+        height: 100%;
+        width: 100%;
+       img{
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+       }
+    }
 }
 ion-textarea{
     padding-bottom: 10px;
@@ -181,6 +217,11 @@ ion-textarea{
     ion-icon{
         color: #495057;
     }
+}
+
+.imgBanner{
+    object-fit: cover;
+    max-height: 260px;
 }
 
 .bodyShowCase{
