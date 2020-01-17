@@ -236,7 +236,7 @@ export class ProgramationPage implements OnInit {
 		});
 
 		category.forEach( row => {
-			categories.push({ category: row, price: 1, quantity: 1});
+			categories.push({ category: row.display, price: 1, quantity: 1});
 		});
 
 		await this.storage.get('_token').then(res=>{
@@ -252,9 +252,8 @@ export class ProgramationPage implements OnInit {
 				days: this.days,
 				cities: cities,
 				categories: categories,
-				imagesarray: this.slider,
-				items: this.rows,
-				price_with_iva: 10
+				images: this.slider,
+				items: this.rows
 			};
 
 			return this.http.post(this.base_path + 'showcase', JSON.stringify(data), {

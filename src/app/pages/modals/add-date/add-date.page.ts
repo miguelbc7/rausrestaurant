@@ -59,6 +59,6 @@ export class AddDatePage implements OnInit {
 	async send() {
 		console.log('date', this.date);
 		console.log('time', this.time);
-		this.modal.dismiss({ date: this.date, time: this.time, day: this.day });
+		this.modal.dismiss({ day: this.date, hours: [ "" + this.time + "" ], dayweek: this.day });
 	}
 }
