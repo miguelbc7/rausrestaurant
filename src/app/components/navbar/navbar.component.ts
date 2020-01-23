@@ -21,6 +21,10 @@ export class NavbarComponent implements OnInit {
   	this.router.navigate(['/notificaciones']);
   }
 
+  chat() {
+  	this.router.navigate(['/chat']);
+  }
+
   async openTimeline() {
 		this.router.navigate(['/cliente']);
 		/* const modal = await this.modalCtrl.create({
