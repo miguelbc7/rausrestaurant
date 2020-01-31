@@ -88,8 +88,6 @@ export class ProgramationPage implements OnInit {
 		});
 
 		this.citiesarr = arr;
-
-		console.log('title', this.title);
 	}
 
  	async modalDate() {
@@ -104,6 +102,8 @@ export class ProgramationPage implements OnInit {
 			var array = this.days;
 			array.push(data.data);
 			this.days = array;
+			var value = this.priceperday;
+			this.subtotal = parseFloat(this.subtotal) + parseFloat(value);
 		});
 
 		await modal.present();
@@ -161,6 +161,10 @@ export class ProgramationPage implements OnInit {
 					this.pricecity = res['pricepercity'];
 					this.subtotal = this.baseprice + this.priceday + this.pricecity + this.pricecategory;
 					this.total = this.subtotal + this.iva;
+
+					console.log('priceperday', this.priceperday);
+					console.log('pricepercategory', this.pricepercategory);
+					console.log('pricepercity', this.pricepercity);
 				},
 				err => { 
 					console.log('err', err);
@@ -271,6 +275,41 @@ export class ProgramationPage implements OnInit {
 				}
 			)
 		});
+	}
+
+	async addCat(category) {
+		console.log('category', category.value);
+
+		/* await this.storage.get('_token').then(res=>{
+			this.token = res.token;
+		});
+
+		await this.storage.get('_uid').then(res=>{
+			var uid = res;
+
+			var data = {
+				category: category.value
+			};
+
+			return this.http.post(this.base_path + 'programacion/category', JSON.stringify(data), {
+				headers: new HttpHeaders({
+					'Content-Type': 'application/json',
+				}), params: {
+					token: this.token,
+				}
+			}).subscribe( res => {
+				console.log('res', res)
+			}, error => {
+				console.log('error', error);
+			});
+		}); */
+
+		this.subtotal = parseFloat(this.subtotal) + parseFloat(this.pricepercategory);
+	}
+
+	async addCit(city) {
+		console.log('city', city.value);
+		this.subtotal = parseFloat(this.subtotal) + parseFloat(this.pricepercity);
 	}
 
 	async back() {

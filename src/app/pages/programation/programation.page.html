@@ -52,7 +52,7 @@
     	</div>
     	<div class="body2">
       	<ion-card-content>
-        	<form [formGroup]="programation1" (ngSubmit)="onSubmit(programation.value)" class="ion-margin-horizontal">
+        	<form [formGroup]="programation1" (ngSubmit)="onSubmit(programation1.value)" class="ion-margin-horizontal">
           		<ion-item class="itemEdit">
             		<ion-label position="floating">Ciudad</ion-label>
 					<!-- <ion-input formControlName="cit" type="text"></ion-input> -->
@@ -63,7 +63,8 @@
 						[maxItems]="10"
 						[separatorKeyCodes]="[32, 138]"
 						[onlyFromAutocomplete]="true"
-						[theme]="'minimal'" style="background-color: transparent !important;">
+						[theme]="'minimal'" style="background-color: transparent !important;"
+						(onAdd)="addCit($event)">
 						<tag-input-dropdown 
 							[autocompleteItems]="citiesarr"
 							[showDropdownIfEmpty]="false"
@@ -89,7 +90,8 @@
 						[maxItems]="10"
 						[separatorKeyCodes]="[32, 138]"
 						[onlyFromAutocomplete]="true"
-						[theme]="'minimal'" style="background-color: transparent !important;">
+						[theme]="'minimal'" style="background-color: transparent !important;"
+						(onAdd)="addCat($event)">
 						<tag-input-dropdown 
 							[autocompleteItems]="categories"
 							[showDropdownIfEmpty]="false"
