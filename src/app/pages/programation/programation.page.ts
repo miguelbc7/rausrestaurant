@@ -280,18 +280,14 @@ export class ProgramationPage implements OnInit {
 	async addCat(category) {
 		console.log('category', category.value);
 
-		/* await this.storage.get('_token').then(res=>{
+		await this.storage.get('_token').then(res=>{
 			this.token = res.token;
 		});
 
 		await this.storage.get('_uid').then(res=>{
 			var uid = res;
 
-			var data = {
-				category: category.value
-			};
-
-			return this.http.post(this.base_path + 'programacion/category', JSON.stringify(data), {
+			return this.http.get(this.base_path + 'programacion/category/' + category.value, {
 				headers: new HttpHeaders({
 					'Content-Type': 'application/json',
 				}), params: {
@@ -302,7 +298,7 @@ export class ProgramationPage implements OnInit {
 			}, error => {
 				console.log('error', error);
 			});
-		}); */
+		});
 
 		this.subtotal = parseFloat(this.subtotal) + parseFloat(this.pricepercategory);
 	}

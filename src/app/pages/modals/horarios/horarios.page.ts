@@ -3,7 +3,7 @@ import { ModalController } from '@ionic/angular';
 import { HorarioService } from '../../../services/horario.service';
 import { ThrowStmt } from '@angular/compiler';
 import { Router } from '@angular/router';
-import * as moment from "moment"; 
+import * as moment from "moment";
 import { scheduled } from 'rxjs';
 
 @Component({
@@ -52,8 +52,6 @@ export class HorariosPage implements OnInit {
 			let h = '';
 
 			let hour = moment(this.hour[length].end).format('HH');
-
-			console.log('hour', hour);
 
 			for(let k = (parseInt(hour)); k <= 23; k++) {
 				h = h + ',' + k;

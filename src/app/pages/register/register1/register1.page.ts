@@ -145,13 +145,13 @@ export class Register1Page implements OnInit {
 				Validators.required,
 				Validators.maxLength(15),
 				Validators.minLength(8),
-				Validators.pattern('(?=.*[a-zñ])(?=.*[A-ZÑ])(?=.*[0-9])(?=.*[$@$!%*?&#.$($)-_])[A-Za-zñÑ\d$@$!%*?&#.$($)-_].{7,15}')
+				Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$.@$!%*?&])[A-Za-z0-9\d$@$.!%*?&].{8,15}')
 			])],
 			repeat_password: ['', Validators.compose([
 				Validators.required,
 				Validators.maxLength(15),
 				Validators.minLength(8),
-				Validators.pattern('(?=.*[a-zñ])(?=.*[A-ZÑ])(?=.*[0-9])(?=.*[$@$!%*?&#.$($)-_])[A-Za-zñÑ\d$@$!%*?&#.$($)-_].{7,15}')
+				Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$.@$!%*?&])[A-Za-z0-9\d$@$.!%*?&].{8,15}')
 			])],
 		});
   	}
