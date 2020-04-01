@@ -9,6 +9,9 @@ import { Keyboard } from '@ionic-native/keyboard/ngx';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';
 import { MyLocation, Geocoder, GoogleMap, GoogleMaps, GeocoderResult, LocationService } from '@ionic-native/google-maps';
+import { MapService } from "../../../services/map.service";
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+declare let google: any;
 
 @Component({
   	selector: 'app-register1',
@@ -30,9 +33,15 @@ export class Register1Page implements OnInit {
   	data: { username: any; password: any; };
   	categories;
   	errorMessage:string = "";
-  	keyboardHide = "";
+	keyboardHide = "";
+	showlist = false;
+	test = false;
+	private autoComplete = new google.maps.places.AutocompleteService();
+	public resultado = new Array<any>();
+	addreslength: string;
   	tempCat;
   	address;
+	address2 = 'a';
 	direction;
 	validation_messages = {
 		'business_name': [
@@ -99,7 +108,9 @@ export class Register1Page implements OnInit {
     	readonly ngZone: NgZone,
     	private platform: Platform,
     	private location: Location,
-    	private keyboard: Keyboard,
+		private keyboard: Keyboard,
+		private geolocation: Geolocation,
+		private mapita: MapService
     ) {
 
 		this.register1 = formBuilder.group({
@@ -329,4 +340,58 @@ export class Register1Page implements OnInit {
 		);
 	}
 
+	busqueda() {
+		this.test = true;
+
+		if (!this.address.trim().length) return;
+
+		this.autoComplete.getPlacePredictions({ input: this.address }, predictions => {
+			let gas = [];
+			for (let index = 0; index < predictions.length; index++) {
+				const element = predictions[index];
+				gas.push(element.description);
+				this.showlist = true;
+				this.resultado = gas;
+			}
+		})
+	}
+
+	busqueda2(e) {
+		if (this.test) {
+			this.test = false;
+		}
+	}
+
+	seleccionarDireccion(trae) {
+		this.resultado = [];
+		this.address2 = '';
+		this.showlist = false;
+		this.address = trae.description;
+
+		this.geolocation.getCurrentPosition().then((resp) => {
+			var latLng = {
+				lat: resp.coords.latitude,
+				lng: resp.coords.longitude
+			}
+			var key = "AIzaSyBUhsxeoY9tYVFFD31lLygBdRROqHU7s6k";
+			this.mapita.getDireccion2(trae, key).subscribe((trae) => {
+				let lat = trae.results[0].geometry.location.lat;
+				let lng = trae.results[0].geometry.location.lng;
+
+				this.mapita.getDireccion(lat, lng, key).subscribe((trae) => {
+					let conteo = trae.results[0].address_components.length
+					let zi = trae.results[0].address_components[conteo - 1].long_name;
+
+				});
+			});
+		});
+
+		let vale = trae.split(',');
+		if (trae.split(',').length == 3) {
+			this.address = vale[0];
+		}
+		if (trae.split(',').length == 4) {
+			this.address = vale[0] + vale[1];
+		}
+	}
 }

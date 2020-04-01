@@ -46,7 +46,10 @@
 			<div class="ion-margin-vertical">
 				<ion-item class="ion-no-padding itemTransparent">
 					<ion-label class="font14" position="floating">Dirección</ion-label>
-					<ion-input type="text" formControlName="address" [(ngModel)]="address"  required></ion-input>
+					<ion-input (ionInput)="busqueda($event)" (ionChange)="busqueda2($event)" [(ngModel)]="address" type="text" formControlName="address" [(ngModel)]="address"  required></ion-input>
+					<ion-list class="ion-margin-horizontal" [hidden]="!showlist">
+						<ion-item (click)="seleccionarDireccion(resultados)"  *ngFor="let resultados of resultado" > {{resultados}}</ion-item>
+					</ion-list>
 					<ion-icon class="ion-align-self-end market" name="pin" slot="end"  (click)="getMap()"></ion-icon>
 				</ion-item>
 			</div>
